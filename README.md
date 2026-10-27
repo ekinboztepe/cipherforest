@@ -24,6 +24,21 @@ model = quantize_model(student, tables, quantizer, output_bits=8)
 export(compile_model(model), model, Path("artifacts"))  # server.zip + client.json
 ```
 
+A CatBoost model with symmetric trees, one output and numeric features can be
+served directly, no distillation:
+
+```python
+cb_model.save_model("model.json", format="json")
+padding = FeatureQuantizer.fit(x_train, n_bins=32)
+ensemble, quantizer = load_catboost_json(Path("model.json").read_text(), extra_edges=padding)
+```
+
+The JSON only keeps the borders the trees use. Without `extra_edges` they become
+the quantiser edges, and `client.json` then lists every threshold of the model.
+Imported SHAP values match brute-force Shapley values computed from CatBoost's
+own predictions to 1e-9, and `shap.TreeExplainer` to 1e-6 (shap works in
+float32 there).
+
 ## Numbers
 
 Random forest teacher (100 trees) distilled to 3 oblivious trees of depth 6.
@@ -77,11 +92,12 @@ Treat the deployed model as extractable by its clients for now.
 
 ```
 src/cipherforest/
-  oblivious.py    oblivious trees
-  shap_table.py   per-leaf exact SHAP tables
-  distill.py      greedy distillation into oblivious ensembles
-  quantize.py     exact input encoding, sum-preserving output rounding
-  circuit.py      Concrete circuit
-  deploy.py       client/server artifacts and byte protocol
-experiments/      benchmarks and the end-to-end demo
+  oblivious.py      oblivious trees
+  shap_table.py     per-leaf exact SHAP tables
+  distill.py        greedy distillation into oblivious ensembles
+  catboost_json.py  CatBoost import
+  quantize.py       exact input encoding, sum-preserving output rounding
+  circuit.py        Concrete circuit
+  deploy.py         client/server artifacts and byte protocol
+experiments/        benchmarks and the end-to-end demo
 ```
