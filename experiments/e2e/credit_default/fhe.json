@@ -1,0 +1,17 @@
+{
+  "samples": 20,
+  "all_match_integer_reference": true,
+  "pbs_count": 36,
+  "compile_s": 0.7536183780000556,
+  "keygen_s": 2.360995385000024,
+  "evaluation_keys_mb": 334.70367431640625,
+  "ciphertext_kb": 368.421875,
+  "result_kb": 416.34375,
+  "server_zip_kb": 19.966796875,
+  "encrypt_s_median": 0.006985482499999307,
+  "server_run_s_median": 0.609784105000017,
+  "server_run_s_max": 1.3564716710000084,
+  "decrypt_s_median": 0.002018087999999807,
+  "max_pred_error_vs_float_student": 0.003821725080905697,
+  "max_shap_error_vs_float_student": 0.004320760434418758
+}

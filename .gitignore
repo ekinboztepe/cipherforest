@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.hypothesis/
+catboost_info/
+*.log
+NOTES.md
+
+experiments/.data/
+experiments/e2e/*/model.json
+experiments/e2e/*/samples.npz
+experiments/e2e/*/deploy/

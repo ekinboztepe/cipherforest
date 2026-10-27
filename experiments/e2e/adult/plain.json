@@ -1,0 +1,13 @@
+{
+  "n_test": 12211,
+  "n_features": 14,
+  "features_used": 7,
+  "input_bits": 5,
+  "scale": 142.65989773569135,
+  "auc_teacher": 0.9175082816744157,
+  "auc_student_float": 0.896426513766734,
+  "auc_student_quantized": 0.8966032295232804,
+  "max_pred_error_quantized": 0.009681236597759074,
+  "max_shap_error_quantized": 0.01064097533392587,
+  "max_abs_shap": 0.7534783509750774
+}
