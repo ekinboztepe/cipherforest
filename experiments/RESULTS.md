@@ -50,3 +50,22 @@ Desktop on a memory-constrained WSL2 VM.
 
 For scale only (different model and scheme, vendor numbers): CipherExplain lists
 about 70 s per encrypted explanation for a 100-tree, depth-4 XGBoost under CKKS.
+
+## Extraction, step 1: thresholds (`extraction_bench.py`)
+
+A client with only `client.json` sweeps each feature through all its input codes
+from a few random points and records where the output changes. This can only
+hit true thresholds; the question is how many queries finding all of them takes.
+Same e2e models, 5 seeds.
+
+| | Adult (14 thresholds) | Taiwan (16 thresholds) |
+|---|---|---|
+| queries per starting point | 153 | 432 |
+| recall, prediction + SHAP, 1 point | 1.00 every seed | 1.00 every seed |
+| recall, prediction only, 1 point | 0.86 to 1.00 | 0.75 to 1.00 |
+| recall, prediction only, 2 points | 1.00 every seed | 1.00 every seed |
+
+Every threshold of the deployed model leaks in a few hundred queries, with or
+without explanations. SHAP only halves the cost here, because in an oblivious
+tree every split changes the leaf of every input. Recovering the leaf values
+is the next step.

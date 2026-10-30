@@ -1,0 +1,802 @@
+[
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 0,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 1,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 2,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 3,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 4,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 0,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 1,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 2,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 3,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 4,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 0,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 1,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 2,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 3,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 4,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 0,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 1,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 2,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 3,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 4,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 0,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 0.8571428571428571,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 1,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 2,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 0.8571428571428571,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 3,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 4,
+  "queries": 153,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 0,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 1,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 2,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 3,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 4,
+  "queries": 306,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 0,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 1,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 2,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 3,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 4,
+  "queries": 459,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 0,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 1,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 2,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 3,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "adult",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 4,
+  "queries": 765,
+  "thresholds": 14,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 0,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 1,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 2,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 3,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 1,
+  "seed": 4,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 0,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 1,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 2,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 3,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 2,
+  "seed": 4,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 0,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 1,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 2,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 3,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 3,
+  "seed": 4,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 0,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 1,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 2,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 3,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred+shap",
+  "starts": 5,
+  "seed": 4,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 0,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 1,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 0.75,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 2,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 3,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 1,
+  "seed": 4,
+  "queries": 432,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 0,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 1,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 2,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 3,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 2,
+  "seed": 4,
+  "queries": 864,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 0,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 1,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 2,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 3,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 3,
+  "seed": 4,
+  "queries": 1296,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 0,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 1,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 2,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 3,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ },
+ {
+  "dataset": "credit_default",
+  "oracle": "pred",
+  "starts": 5,
+  "seed": 4,
+  "queries": 2160,
+  "thresholds": 16,
+  "recall": 1.0,
+  "false_positives": 0
+ }
+]
