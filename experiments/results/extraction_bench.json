@@ -1,802 +1,482 @@
 [
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 1,
+  "attacker": "pred, full grid",
   "seed": 0,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 2068,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 1,
+  "attacker": "pred, full grid",
   "seed": 1,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 2840,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 1,
+  "attacker": "pred, full grid",
   "seed": 2,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 2068,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 1,
+  "attacker": "pred, full grid",
   "seed": 3,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 4,
+  "queries": 3088,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 1,
+  "attacker": "pred, full grid",
   "seed": 4,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 2840,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 2,
+  "attacker": "pred, full grid",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 2408,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 2984,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 2068,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 2068,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 9,
+  "rounds": 2,
+  "queries": 2984,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
   "seed": 0,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 757,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 2,
+  "attacker": "pred, graph",
   "seed": 1,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 1244,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 2,
+  "attacker": "pred, graph",
   "seed": 2,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 694,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 2,
+  "attacker": "pred, graph",
   "seed": 3,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 1176,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 2,
+  "attacker": "pred, graph",
   "seed": 4,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 3,
+  "queries": 1670,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 3,
+  "attacker": "pred, graph",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 1163,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 1406,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 757,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 751,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 9,
+  "rounds": 2,
+  "queries": 1292,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
   "seed": 0,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 3,
+  "attacker": "pred+shap, graph",
   "seed": 1,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 3,
+  "attacker": "pred+shap, graph",
   "seed": 2,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 1027,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 3,
+  "attacker": "pred+shap, graph",
   "seed": 3,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 688,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 3,
+  "attacker": "pred+shap, graph",
   "seed": 4,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
  },
  {
   "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 5,
+  "attacker": "pred+shap, graph",
+  "seed": 5,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 6,
+  "rounds": 1,
+  "queries": 686,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 686,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 9,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
   "seed": 0,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 30020,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 5,
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
   "seed": 1,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 5,
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
   "seed": 2,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 5,
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
   "seed": 3,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 28868,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred+shap",
-  "starts": 5,
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
   "seed": 4,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 30404,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 1,
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 28868,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 6,
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 8,
+  "rounds": 3,
+  "queries": 31014,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 9,
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
   "seed": 0,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 0.8571428571428571,
-  "false_positives": 0
+  "rounds": 8,
+  "queries": 6483,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 1,
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
   "seed": 1,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 7,
+  "queries": 5661,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 1,
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
   "seed": 2,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 0.8571428571428571,
-  "false_positives": 0
+  "rounds": 4,
+  "queries": 3441,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 1,
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
   "seed": 3,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 1941,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 1,
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
   "seed": 4,
-  "queries": 153,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 3,
+  "queries": 2668,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 2,
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 1941,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 1955,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 7,
+  "rounds": 3,
+  "queries": 2681,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 8,
+  "rounds": 6,
+  "queries": 4967,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 9,
+  "rounds": 3,
+  "queries": 2688,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
   "seed": 0,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 1722,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 2,
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
   "seed": 1,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 1,
+  "queries": 1095,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 2,
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
   "seed": 2,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 1722,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 2,
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
   "seed": 3,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 1722,
+  "exact_rows": 1.0
  },
  {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 2,
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
   "seed": 4,
-  "queries": 306,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 0,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 1,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 2,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 3,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 4,
-  "queries": 459,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 0,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 1,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 2,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 3,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "adult",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 4,
-  "queries": 765,
-  "thresholds": 14,
-  "recall": 1.0,
-  "false_positives": 0
+  "rounds": 2,
+  "queries": 1720,
+  "exact_rows": 1.0
  },
  {
   "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 1,
-  "seed": 0,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
+  "attacker": "pred+shap, graph",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 1722,
+  "exact_rows": 1.0
  },
  {
   "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 1,
-  "seed": 1,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
+  "attacker": "pred+shap, graph",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 1722,
+  "exact_rows": 1.0
  },
  {
   "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 1,
-  "seed": 2,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
+  "attacker": "pred+shap, graph",
+  "seed": 7,
+  "rounds": 2,
+  "queries": 1722,
+  "exact_rows": 1.0
  },
  {
   "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 1,
-  "seed": 3,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
+  "attacker": "pred+shap, graph",
+  "seed": 8,
+  "rounds": 3,
+  "queries": 2348,
+  "exact_rows": 1.0
  },
  {
   "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 1,
-  "seed": 4,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 2,
-  "seed": 0,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 2,
-  "seed": 1,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 2,
-  "seed": 2,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 2,
-  "seed": 3,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 2,
-  "seed": 4,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 3,
-  "seed": 0,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 3,
-  "seed": 1,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 3,
-  "seed": 2,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 3,
-  "seed": 3,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 3,
-  "seed": 4,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 5,
-  "seed": 0,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 5,
-  "seed": 1,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 5,
-  "seed": 2,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 5,
-  "seed": 3,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred+shap",
-  "starts": 5,
-  "seed": 4,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 1,
-  "seed": 0,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 1,
-  "seed": 1,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 0.75,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 1,
-  "seed": 2,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 1,
-  "seed": 3,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 1,
-  "seed": 4,
-  "queries": 432,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 2,
-  "seed": 0,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 2,
-  "seed": 1,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 2,
-  "seed": 2,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 2,
-  "seed": 3,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 2,
-  "seed": 4,
-  "queries": 864,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 0,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 1,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 2,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 3,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 3,
-  "seed": 4,
-  "queries": 1296,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 0,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 1,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 2,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 3,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
- },
- {
-  "dataset": "credit_default",
-  "oracle": "pred",
-  "starts": 5,
-  "seed": 4,
-  "queries": 2160,
-  "thresholds": 16,
-  "recall": 1.0,
-  "false_positives": 0
+  "attacker": "pred+shap, graph",
+  "seed": 9,
+  "rounds": 1,
+  "queries": 1095,
+  "exact_rows": 1.0
  }
 ]

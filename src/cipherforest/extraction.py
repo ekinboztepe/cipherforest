@@ -6,20 +6,40 @@ the last edge. Every threshold is one of these edges and the model is constant
 between thresholds, so sweeping one feature while the others stay put changes
 the output exactly at thresholds the current point makes visible. No false
 positives are possible, only misses, which more starting points reduce.
+
+Once the thresholds are known the model is a table over cells (one interval per
+feature between found thresholds). It is also a sum of trees, and each tree is
+a clique in the graph of interacting features. With the maximal cliques S_j and
+an anchor cell a, inclusion-exclusion gives the model exactly:
+
+    f(x) = sum over nonempty J of (-1)^(|J|+1) f(x on S_J, a elsewhere),  S_J = intersection of S_j, j in J
+
+(for a term inside S_1, J and J + {1} cancel unless J = {1}). So querying a grid
+over each maximal clique is enough, and the same holds for every SHAP component.
+The graph comes from SHAP sweeps (phi_f moves when g moves) or, without SHAP,
+from 2-d sweeps that test each pair for non-additivity. Neither can produce a
+false edge.
+
+Outputs are compared with a small tolerance: the client sums the SHAP values
+into the prediction in floating point, so equal integer sums can differ in the
+last bits. Real changes are multiples of 1 / scale.
 """
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
+from itertools import combinations
 
 import numpy as np
 
-from cipherforest.oblivious import FloatArray
+from cipherforest.oblivious import FloatArray, IntArray
 from cipherforest.quantize import FeatureQuantizer, QuantizedModel
 
 # (n, d) inputs -> (n,) predictions and (n, d) SHAP values
 Oracle = Callable[[FloatArray], tuple[FloatArray, FloatArray]]
+
+TOLERANCE = 1e-9
 
 
 def plaintext_oracle(model: QuantizedModel) -> Oracle:
@@ -31,14 +51,34 @@ def plaintext_oracle(model: QuantizedModel) -> Oracle:
     return query
 
 
+def prediction_only(oracle: Oracle) -> Oracle:
+    """An API without explanations: SHAP comes back as zeros."""
+
+    def query(x: FloatArray) -> tuple[FloatArray, FloatArray]:
+        pred, shap = oracle(x)
+        return pred, np.zeros_like(shap)
+
+    return query
+
+
 @dataclass
 class CountingOracle:
+    """Counts distinct inputs; a repeated one is answered from the attacker's own cache."""
+
     oracle: Oracle
     queries: int = field(default=0, init=False)
+    _cache: dict[bytes, tuple[float, FloatArray]] = field(default_factory=dict, init=False, repr=False)
 
     def __call__(self, x: FloatArray) -> tuple[FloatArray, FloatArray]:
-        self.queries += x.shape[0]
-        return self.oracle(x)
+        x = np.ascontiguousarray(x, dtype=np.float64)
+        keys = [row.tobytes() for row in x]
+        first = {k: i for i, k in reversed(list(enumerate(keys))) if k not in self._cache}
+        if first:
+            pred, shap = self.oracle(x[list(first.values())])
+            self._cache.update(zip(first, zip(pred, shap, strict=True), strict=True))
+            self.queries += len(first)
+        answers = [self._cache[k] for k in keys]
+        return np.array([a[0] for a in answers]), np.array([a[1] for a in answers])
 
 
 def code_values(edges: FloatArray) -> FloatArray:
@@ -52,16 +92,11 @@ def true_thresholds(model: QuantizedModel) -> set[tuple[int, int]]:
 
 
 def find_thresholds(
-    oracle: Oracle,
-    quantizer: FeatureQuantizer,
-    n_starts: int,
-    rng: np.random.Generator,
-    use_shap: bool = True,
+    oracle: Oracle, quantizer: FeatureQuantizer, n_starts: int, rng: np.random.Generator
 ) -> set[tuple[int, int]]:
     """Sweeps every feature through all its codes from n_starts random points.
 
-    Costs n_starts * sum(len(edges) + 1) queries. With use_shap=False only the
-    prediction is compared, as against an API without explanations.
+    Costs at most n_starts * sum(len(edges) + 1) queries.
     """
     values = [code_values(e) for e in quantizer.edges]
     found: set[tuple[int, int]] = set()
@@ -72,9 +107,8 @@ def find_thresholds(
                 continue
             rows = np.tile(start, (v.size, 1))
             rows[:, f] = v
-            pred, shap = oracle(rows)
-            out = np.column_stack([pred, shap]) if use_shap else pred[:, None]
-            changed = np.any(out[1:] != out[:-1], axis=1)
+            out = np.column_stack(oracle(rows))
+            changed = np.any(np.abs(out[1:] - out[:-1]) > TOLERANCE, axis=1)
             # codes k and k+1 differ only in the bit of x > e_k
             found.update((f, int(k)) for k in np.flatnonzero(changed))
     return found
@@ -82,3 +116,171 @@ def find_thresholds(
 
 def recall(found: set[tuple[int, int]], truth: set[tuple[int, int]]) -> float:
     return len(found & truth) / len(truth) if truth else 1.0
+
+
+class CellGrid:
+    """Cells between found thresholds, and one input per cell."""
+
+    def __init__(self, quantizer: FeatureQuantizer, thresholds: set[tuple[int, int]]) -> None:
+        self.cuts: list[FloatArray] = []
+        self.values: list[FloatArray] = []
+        for f, edges in enumerate(quantizer.edges):
+            ks = sorted(k for g, k in thresholds if g == f)
+            codes = code_values(edges)
+            self.cuts.append(edges[ks])
+            # a cell's input is its top code: e_k for the cell ending at k, then anything above the last cut
+            self.values.append(np.array([codes[k] for k in ks] + [codes[ks[-1] + 1]]) if ks else codes[:1])
+
+    @property
+    def sizes(self) -> IntArray:
+        return np.array([v.size for v in self.values], dtype=np.int64)
+
+    def index(self, x: FloatArray) -> IntArray:
+        return np.column_stack([(x[:, [f]] > c).sum(axis=1) for f, c in enumerate(self.cuts)])
+
+    def inputs(self, cells: IntArray) -> FloatArray:
+        return np.column_stack([v[cells[:, f]] for f, v in enumerate(self.values)])
+
+    def random_cell(self, rng: np.random.Generator) -> IntArray:
+        return rng.integers(0, self.sizes)
+
+
+def _outputs(oracle: Oracle, grid: CellGrid, cells: IntArray) -> FloatArray:
+    pred, shap = oracle(grid.inputs(cells))
+    return np.column_stack([pred, shap])
+
+
+def shap_interactions(oracle: Oracle, grid: CellGrid, n_starts: int, rng: np.random.Generator) -> set[tuple[int, int]]:
+    """f ~ g when phi_f changes as g moves across its cells."""
+    edges: set[tuple[int, int]] = set()
+    for _ in range(n_starts):
+        start = grid.random_cell(rng)
+        for g, size in enumerate(grid.sizes):
+            if size < 2:
+                continue
+            cells = np.tile(start, (size, 1))
+            cells[:, g] = np.arange(size)
+            shap = _outputs(oracle, grid, cells)[:, 1:]
+            moved = np.flatnonzero(np.any(np.abs(shap - shap[0]) > TOLERANCE, axis=0))
+            edges.update((min(f, g), max(f, g)) for f in moved if f != g)
+    return edges
+
+
+def prediction_interactions(
+    oracle: Oracle, grid: CellGrid, n_starts: int, rng: np.random.Generator
+) -> set[tuple[int, int]]:
+    """f ~ g when the prediction over a 2-d sweep of (f, g) is not additive."""
+    active = [f for f, size in enumerate(grid.sizes) if size > 1]
+    edges: set[tuple[int, int]] = set()
+    for _ in range(n_starts):
+        start = grid.random_cell(rng)
+        for f, g in combinations(active, 2):
+            a, b = np.meshgrid(np.arange(grid.sizes[f]), np.arange(grid.sizes[g]), indexing="ij")
+            cells = np.tile(start, (a.size, 1))
+            cells[:, f], cells[:, g] = a.ravel(), b.ravel()
+            p = _outputs(oracle, grid, cells)[:, 0].reshape(a.shape)
+            if np.any(np.abs(p - p[:, :1] - p[:1, :] + p[0, 0]) > TOLERANCE):
+                edges.add((f, g))
+    return edges
+
+
+def maximal_cliques(vertices: Iterable[int], edges: set[tuple[int, int]]) -> list[frozenset[int]]:
+    """Bron-Kerbosch with pivoting; the graphs here have a few dozen vertices at most."""
+    adj: dict[int, set[int]] = {v: set() for v in vertices}
+    for f, g in edges:
+        adj[f].add(g)
+        adj[g].add(f)
+    out: list[frozenset[int]] = []
+
+    def grow(r: set[int], p: set[int], x: set[int]) -> None:
+        if not p and not x:
+            out.append(frozenset(r))
+            return
+        pivot = max(p | x, key=lambda v: len(adj[v] & p))
+        for v in list(p - adj[pivot]):
+            grow(r | {v}, p & adj[v], x & adj[v])
+            p.remove(v)
+            x.add(v)
+
+    grow(set(), set(adj), set())
+    return out
+
+
+@dataclass(frozen=True)
+class ExtractedModel:
+    """Sum of coefficient * table over the cells of a feature subset."""
+
+    grid: CellGrid
+    terms: tuple[tuple[tuple[int, ...], int, FloatArray], ...]
+
+    def __call__(self, x: FloatArray) -> tuple[FloatArray, FloatArray]:
+        cells = self.grid.index(x)
+        out = np.zeros((x.shape[0], self.grid.sizes.size + 1))
+        for features, coef, table in self.terms:
+            out += coef * table[tuple(cells[:, f] for f in features)]
+        return out[:, 0], out[:, 1:]
+
+
+def reconstruct(
+    oracle: Oracle, grid: CellGrid, cliques: list[frozenset[int]], anchor: IntArray
+) -> ExtractedModel:
+    """Queries a grid over every clique intersection, each distinct cell once."""
+    coef: dict[frozenset[int], int] = {}
+    for size in range(1, len(cliques) + 1):
+        for subset in combinations(cliques, size):
+            u = frozenset.intersection(*subset)
+            coef[u] = coef.get(u, 0) + (-1) ** (size + 1)
+
+    plans = []
+    for u, c in coef.items():
+        if c == 0:
+            continue
+        features = tuple(sorted(u))
+        shape = tuple(int(grid.sizes[f]) for f in features)
+        cells = np.tile(anchor, (int(np.prod(shape)), 1))
+        if features:  # the empty intersection is just the anchor
+            for f, axis in zip(features, np.indices(shape).reshape(len(shape), -1), strict=True):
+                cells[:, f] = axis
+        plans.append((features, c, shape, cells))
+
+    unique, inverse = np.unique(np.vstack([p[3] for p in plans]), axis=0, return_inverse=True)
+    answers = _outputs(oracle, grid, unique)[inverse.ravel()]
+    terms, at = [], 0
+    for features, c, shape, cells in plans:
+        terms.append((features, c, answers[at : at + len(cells)].reshape(*shape, -1)))
+        at += len(cells)
+    return ExtractedModel(grid=grid, terms=tuple(terms))
+
+
+def extract(
+    oracle: Oracle,
+    quantizer: FeatureQuantizer,
+    rng: np.random.Generator,
+    graph: Callable[[Oracle, CellGrid, int, np.random.Generator], set[tuple[int, int]]] | None,
+    check: int = 200,
+    max_rounds: int = 20,
+) -> tuple[ExtractedModel, int]:
+    """Adds a starting point per round until the copy matches `check` fresh random queries.
+
+    graph=None skips the decomposition and queries the full cell grid.
+    Returns the copy and the number of rounds.
+    """
+    values = [code_values(e) for e in quantizer.edges]
+    anchor_x = np.array([[rng.choice(v) for v in values]])
+    found: set[tuple[int, int]] = set()
+    edges: set[tuple[int, int]] = set()
+    for round_ in range(1, max_rounds + 1):
+        found |= find_thresholds(oracle, quantizer, 1, rng)
+        grid = CellGrid(quantizer, found)
+        active = [f for f, size in enumerate(grid.sizes) if size > 1]
+        if graph is None:
+            cliques = [frozenset(active)]
+        else:
+            edges |= graph(oracle, grid, 1, rng)
+            cliques = maximal_cliques(active, edges)
+        copy = reconstruct(oracle, grid, cliques, grid.index(anchor_x)[0])
+
+        x = np.column_stack([rng.choice(v, size=check) for v in values])
+        if all(np.all(np.abs(a - b) <= TOLERANCE) for a, b in zip(copy(x), oracle(x), strict=True)):
+            break
+    return copy, round_

@@ -51,21 +51,35 @@ Desktop on a memory-constrained WSL2 VM.
 For scale only (different model and scheme, vendor numbers): CipherExplain lists
 about 70 s per encrypted explanation for a 100-tree, depth-4 XGBoost under CKKS.
 
-## Extraction, step 1: thresholds (`extraction_bench.py`)
+## Extraction (`extraction_bench.py`)
 
-A client with only `client.json` sweeps each feature through all its input codes
-from a few random points and records where the output changes. This can only
-hit true thresholds; the question is how many queries finding all of them takes.
-Same e2e models, 5 seeds.
+A client with only `client.json` and a query budget copies the deployed model
+exactly: same prediction and SHAP vector on every input. Same e2e models,
+10 seeds; the copy is then compared with the server on 5000 random inputs.
 
-| | Adult (14 thresholds) | Taiwan (16 thresholds) |
+1. Thresholds. The client knows the edges, so it sweeps one feature through all
+   its codes and sees where the output changes. That only happens at true
+   thresholds.
+2. Interaction graph: which features share a tree. With SHAP, phi_f moves when
+   g moves. Without, a 2-d sweep of (f, g) is not additive.
+3. Cells. The model is a sum over the maximal cliques of that graph, so a grid
+   over each clique plus inclusion-exclusion gives it exactly. Without the
+   graph, the client queries every cell.
+
+Each round adds one random starting point; the client stops once its copy
+agrees with the server on 200 fresh queries, which count towards the total.
+
+| attacker | Adult queries, median (max) | Taiwan queries, median (max) |
 |---|---|---|
-| queries per starting point | 153 | 432 |
-| recall, prediction + SHAP, 1 point | 1.00 every seed | 1.00 every seed |
-| recall, prediction only, 1 point | 0.86 to 1.00 | 0.75 to 1.00 |
-| recall, prediction only, 2 points | 1.00 every seed | 1.00 every seed |
+| prediction only, every cell | 2624 (3088) | 28563 (31014) |
+| prediction only, graph | 1169 (1670) | 2684 (6483) |
+| prediction + SHAP, graph | 687 (1027) | 1722 (2348) |
 
-Every threshold of the deployed model leaks in a few hundred queries, with or
-without explanations. SHAP only halves the cost here, because in an oblivious
-tree every split changes the leaf of every input. Recovering the leaf values
-is the next step.
+Every copy matched the server on all 5000 inputs.
+
+- A few thousand queries copy the model exactly even without explanations. The
+  leak comes from the small model and the public edges, not from SHAP.
+- Against an attacker that also exploits structure, SHAP saves about 1.6x. The
+  naive comparison (every cell) would suggest 4x to 17x, which overstates it.
+- Defences that only touch the SHAP output cannot stop this; the prediction
+  alone suffices. Hiding the edges and coarsening the output are the candidates.

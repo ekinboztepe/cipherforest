@@ -71,14 +71,15 @@ Concrete has no Windows wheels, hence the image.
 - Client, from `client.json`: the quantiser edges, which features the model uses,
   and the base value. The edges are per-feature quantiles of the training data,
   so they reveal its marginal distributions.
-- Client, from queries: a per-feature SHAP vector for every request. Every
-  threshold is one of the known edges and the model is a few trees with 2^D
-  leaves each, so a client can likely rebuild the whole model with relatively
-  few queries. This is not measured yet. Measuring it, and what top-k outputs,
-  noise, coarser outputs and data-independent edges cost in explanation quality,
-  is the next experiment.
+- Client, from queries: the whole model. Every threshold is one of the known
+  edges and the model is a few trees with 2^D leaves each, so a client copies
+  it exactly, prediction and SHAP, in about 700 to 1700 queries on the
+  benchmarks here; about 1200 to 2700 without SHAP outputs
+  ([experiments/RESULTS.md](experiments/RESULTS.md)). What hiding the edges,
+  coarser outputs and noise cost an attacker and the explanations is the next
+  experiment.
 
-Treat the deployed model as extractable by its clients for now.
+Treat the deployed model as extractable by its clients.
 
 ## Limits
 
