@@ -83,3 +83,39 @@ Every copy matched the server on all 5000 inputs.
   naive comparison (every cell) would suggest 4x to 17x, which overstates it.
 - Defences that only touch the SHAP output cannot stop this; the prediction
   alone suffices. Hiding the edges and coarsening the output are the candidates.
+
+## Noise on the outputs (`defense_bench.py`)
+
+The server adds rounded Laplace(b) noise, in output units, to every integer
+SHAP output, and so to the prediction. In the circuit this is a clear integer
+added to a ciphertext, no bootstrapping. The honest client asks once. The
+attacker asks every input r times and rounds the means back onto the grid,
+doubling r until its copy passes the 200-query check; all attempts count.
+2 seeds; honest-client numbers on the e2e test split.
+
+| data | b | AUC (clean) | SHAP cosine | top-3 overlap | repeats | attacker queries, median |
+|---|---|---|---|---|---|---|
+| Adult | 0 | 0.897 (0.897) | 1.000 | 1.00 | 1 | 687 |
+| Adult | 0.5 | 0.896 | 0.996 | 0.95 | 128–256 | 8.5M |
+| Adult | 1 | 0.894 | 0.987 | 0.89 | 512 | 21M |
+| Adult | 2 | 0.889 | 0.953 | 0.81 | 2048 | 115M |
+| Adult | 4 | 0.871 | 0.850 | 0.71 | 8192 | 382M |
+| Taiwan | 0 | 0.763 (0.763) | 1.000 | 1.00 | 1 | 1408 |
+| Taiwan | 0.5 | 0.762 | 0.994 | 0.89 | 256 | 24M |
+| Taiwan | 1 | 0.760 | 0.977 | 0.83 | 1024 | 121M |
+| Taiwan | 2 | 0.753 | 0.920 | 0.71 | 4096 | 452M |
+| Taiwan | 4 | 0.738 | 0.773 | 0.57 | 16384 | 1.9G |
+
+Copies matched the clean model on at least 99.6% of 5000 random inputs; a few
+cells were rounded the wrong way and the 200-query check missed them.
+
+- b = 0.5 costs the honest client almost nothing (AUC -0.001, cosine 0.99) and
+  this attacker 10^4 times more queries. r grows like b^2, as expected.
+- The server cannot spot repeats: every query is a fresh ciphertext, and it
+  cannot key the noise to an input it never sees. So averaging is always
+  possible and the noise only works together with a per-client query limit.
+- Not differential privacy: there is no budget across queries.
+- This attacker is naive. It wants an exact copy and repeats every input
+  equally. One that fits an approximate model to noisy answers, or repeats only
+  where it is unsure, will need far fewer queries. Until that is measured, these
+  numbers are an upper bound on the protection, not a claim that noise works.
