@@ -55,3 +55,39 @@ def test_encrypted_circuit_matches_reference() -> None:
     for row, want in zip(codes, model.simulate(codes), strict=True):
         got = compiled.expand(np.asarray(compiled.circuit.encrypt_run_decrypt(row)))[0]
         np.testing.assert_array_equal(got, want)
+
+
+
+def extreme_rows(model: QuantizedModel) -> tuple[np.ndarray, np.ndarray]:
+    """For each output, the codes reaching its largest value, then its smallest. Enumerates every cell."""
+    upper = np.array([e.size for e in model.quantizer.edges])
+    grid = np.array(np.meshgrid(*[np.arange(u + 1) for u in upper], indexing="ij")).reshape(upper.size, -1).T
+    out = model.simulate(grid)
+    return grid[np.argmax(out, axis=0)], grid[np.argmin(out, axis=0)]
+
+
+@pytest.mark.parametrize("bound", [1, 8])
+def test_noise_is_added_without_overflow(bound: int) -> None:
+    model = small_model(seed=4, depth=4, n_trees=2, n_features=3)
+    compiled = compile_model(model, noise_bound=bound)
+    active = compiled.active_features
+    rng = np.random.default_rng(5)
+    codes = np.vstack([*extreme_rows(model), edge_cases(model, rng, n_random=50)])
+    for row, want in zip(codes, model.simulate(codes), strict=True):
+        for noise in (np.full(active.size, bound), np.full(active.size, -bound), rng.integers(-bound, bound + 1, size=active.size)):
+            got = compiled.expand(np.asarray(compiled.circuit.simulate(row, noise)))[0]
+            np.testing.assert_array_equal(got[active], want[active] + noise)
+
+
+def test_encrypted_noise_at_the_bound() -> None:
+    model = small_model(seed=4, depth=4, n_trees=2, n_features=3)
+    bound = 8
+    compiled = compile_model(model, noise_bound=bound)
+    compiled.circuit.keygen()
+    active = compiled.active_features
+    highest, lowest = extreme_rows(model)
+    for rows, sign in ((highest, 1), (lowest, -1)):
+        noise = np.full(active.size, sign * bound)
+        for row, want in zip(rows, model.simulate(rows), strict=True):
+            got = compiled.expand(np.asarray(compiled.circuit.encrypt_run_decrypt(row, noise)))[0]
+            np.testing.assert_array_equal(got[active], want[active] + noise)
