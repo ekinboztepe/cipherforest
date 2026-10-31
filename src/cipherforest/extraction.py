@@ -374,3 +374,82 @@ def fit_tables(grid: CellGrid, cliques: list[frozenset[int]], x: FloatArray, out
         (k, 1, theta[o : o + prod(s)].reshape(*s, -1)) for k, s, o in zip(keys, shapes, offsets, strict=False)
     )
     return ExtractedModel(grid=grid, terms=terms)
+
+
+def _differ(a: FloatArray, b: FloatArray) -> np.ndarray:
+    return np.any(np.abs(a - b) > TOLERANCE, axis=1)
+
+
+def bisect_edges(
+    oracle: Oracle, low: FloatArray, high: FloatArray, starts: FloatArray, known: list[FloatArray], n_grid: int = 16
+) -> list[FloatArray]:
+    """Thresholds when the edges are hidden and the server quantises raw inputs.
+
+    From each start, sweeps every feature over n_grid points in [low, high] and
+    bisects each interval whose ends answer differently, down to adjacent
+    floats. Then lo answers like below and nextafter(lo) like above, and since
+    code = number of edges < x, the edge is lo exactly. Known edges and their
+    next floats join the sweep, so they cost nothing to find again. Two
+    thresholds whose effects cancel inside one interval are missed.
+    """
+    found = [set(e.tolist()) for e in known]
+    lo_rows, hi_rows, feats = [], [], []
+    for start in starts:
+        for f, k in enumerate(known):
+            points = np.unique(np.concatenate([np.linspace(low[f], high[f], n_grid), k, np.nextafter(k, np.inf)]))
+            points = points[(points >= low[f]) & (points <= high[f])]
+            sweep = np.tile(start, (points.size, 1))
+            sweep[:, f] = points
+            lo_rows.append(sweep[:-1])
+            hi_rows.append(sweep[1:])
+            feats += [f] * (sweep.shape[0] - 1)
+    lo, hi, feat = np.vstack(lo_rows), np.vstack(hi_rows), np.array(feats)
+    out_lo, out_hi = np.column_stack(oracle(lo)), np.column_stack(oracle(hi))
+
+    keep = _differ(out_lo, out_hi)
+    lo, hi, feat, out_lo, out_hi = lo[keep], hi[keep], feat[keep], out_lo[keep], out_hi[keep]
+    while lo.shape[0]:
+        rows = np.arange(lo.shape[0])
+        mid = lo.copy()
+        mid[rows, feat] = lo[rows, feat] + (hi[rows, feat] - lo[rows, feat]) / 2
+        done = (mid[rows, feat] == lo[rows, feat]) | (mid[rows, feat] == hi[rows, feat])
+        for f, edge in zip(feat[done], lo[done, feat[done]], strict=True):
+            found[f].add(float(edge))
+        lo, hi, mid, feat, out_lo, out_hi = lo[~done], hi[~done], mid[~done], feat[~done], out_lo[~done], out_hi[~done]
+        if not lo.shape[0]:
+            break
+        out_mid = np.column_stack(oracle(mid))
+        left, right = _differ(out_lo, out_mid), _differ(out_mid, out_hi)
+        lo = np.vstack([lo[left], mid[right]])
+        hi = np.vstack([mid[left], hi[right]])
+        feat = np.concatenate([feat[left], feat[right]])
+        out_lo, out_hi = np.vstack([out_lo[left], out_mid[right]]), np.vstack([out_mid[left], out_hi[right]])
+    return [np.array(sorted(e)) for e in found]
+
+
+def extract_hidden(
+    oracle: Oracle,
+    low: FloatArray,
+    high: FloatArray,
+    rng: np.random.Generator,
+    graph: Callable[[Oracle, CellGrid, int, np.random.Generator], set[tuple[int, int]]] | None,
+    check: int = 200,
+    max_rounds: int = 10,
+) -> tuple[ExtractedModel | None, list[FloatArray]]:
+    """extract() for a client that only knows a plausible range of each feature.
+
+    Each round bisects from one more random start, then runs extract() on the
+    edges found so far. extract() only checks inputs on those edges, so the copy
+    must also match `check` random inputs from the range, which a missed
+    threshold would break. Returns the copy and the edges it found.
+    """
+    known = [np.zeros(0) for _ in range(low.size)]
+    for _ in range(max_rounds):
+        known = bisect_edges(oracle, low, high, rng.uniform(low, high)[None], known)
+        copy, _ = extract(oracle, FeatureQuantizer(tuple(known)), rng, graph)
+        if copy is None:
+            continue
+        x = rng.uniform(low, high, size=(check, low.size))
+        if all(np.all(np.abs(a - b) <= TOLERANCE) for a, b in zip(copy(x), oracle(x), strict=True)):
+            return copy, known
+    return None, known

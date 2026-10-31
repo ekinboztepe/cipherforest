@@ -5,12 +5,14 @@ import pytest
 
 from cipherforest.distill import distill_ensemble
 from cipherforest.extraction import (
+    bisect_edges,
     Cached,
     CellGrid,
     Counted,
     code_values,
     denoised,
     extract,
+    extract_hidden,
     fit_tables,
     find_thresholds,
     maximal_cliques,
@@ -231,3 +233,52 @@ def test_fitted_tables_round_back_to_the_model_through_noise() -> None:
     x = random_rows(model, 2000, np.random.default_rng(1))
     _, shap = copy(x)
     np.testing.assert_allclose(np.rint(shap * model.scale) / model.scale, plaintext_oracle(model)(x)[1], atol=1e-9)
+
+
+def used_edges(model: QuantizedModel) -> set[tuple[int, float]]:
+    return {(f, float(model.quantizer.edges[f][k])) for f, k in true_thresholds(model)}
+
+
+def feature_range(model: QuantizedModel) -> tuple[np.ndarray, np.ndarray]:
+    edges = model.quantizer.edges
+    return np.array([e[0] - 1 for e in edges]), np.array([e[-1] + 1 for e in edges])
+
+
+@pytest.mark.parametrize(("depth", "n_trees"), [(2, 1), (4, 2), (6, 3)])
+def test_bisection_recovers_used_edges_bit_for_bit(depth: int, n_trees: int) -> None:
+    model = small_model(depth + 60, depth, n_trees)
+    low, high = feature_range(model)
+    starts = np.random.default_rng(0).uniform(low, high, size=(3, low.size))
+    empty = [np.zeros(0) for _ in low]
+    for oracle in (plaintext_oracle(model), prediction_only(plaintext_oracle(model))):
+        found = bisect_edges(oracle, low, high, starts, empty)
+        assert {(f, float(e)) for f, es in enumerate(found) for e in es} <= used_edges(model)
+    found = bisect_edges(plaintext_oracle(model), low, high, starts, empty)
+    assert {(f, float(e)) for f, es in enumerate(found) for e in es} == used_edges(model)
+
+
+def test_known_edges_are_not_bisected_again() -> None:
+    model = small_model(64, 4, 2)
+    low, high = feature_range(model)
+    start = np.random.default_rng(0).uniform(low, high, size=(1, low.size))
+    first = bisect_edges(plaintext_oracle(model), low, high, start, [np.zeros(0) for _ in low])
+    counter = Counted(plaintext_oracle(model))
+    again = bisect_edges(counter, low, high, start, first)
+    assert all(np.array_equal(a, b) for a, b in zip(first, again, strict=True))
+    sweep = sum(np.unique(np.concatenate([np.linspace(lo, hi, 16), e, np.nextafter(e, np.inf)])).size - 1
+                for lo, hi, e in zip(low, high, first, strict=True))
+    assert counter.queries == 2 * sweep  # both ends of each interval, no bisection
+
+
+@pytest.mark.parametrize("use_shap", [True, False])
+def test_extraction_with_hidden_edges_is_exact(use_shap: bool) -> None:
+    model = small_model(65, 4, 3)
+    low, high = feature_range(model)
+    view = plaintext_oracle(model) if use_shap else prediction_only(plaintext_oracle(model))
+    graph = shap_interactions if use_shap else prediction_interactions
+    copy, _ = extract_hidden(Cached(view), low, high, np.random.default_rng(0), graph)
+    assert copy is not None
+    rng = np.random.default_rng(1)
+    for x in (rng.uniform(low, high, size=(2000, low.size)), random_rows(model, 2000, rng)):
+        for got, want in zip(copy(x), view(x), strict=True):
+            np.testing.assert_allclose(got, want, atol=1e-9)
