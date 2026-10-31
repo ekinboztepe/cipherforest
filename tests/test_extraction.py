@@ -11,6 +11,7 @@ from cipherforest.extraction import (
     code_values,
     denoised,
     extract,
+    fit_tables,
     find_thresholds,
     maximal_cliques,
     noisy_oracle,
@@ -206,3 +207,27 @@ def test_cell_budget_does_not_overflow() -> None:
     grid = CellGrid(quantizer, {(f, k) for f in range(8) for k in range(39)})
     with pytest.raises(ValueError, match="budget"):
         reconstruct(plaintext_oracle, grid, [frozenset(range(8))], np.zeros(8, dtype=np.int64), max_cells=1000)
+
+
+def fitted_copy(model: QuantizedModel, oracle, n: int, rng: np.random.Generator):
+    grid = CellGrid(model.quantizer, true_thresholds(model))
+    cliques = maximal_cliques(range(grid.sizes.size), tree_graph(model))
+    # uniform over cells, not codes, so that no cell is rare
+    x = grid.inputs(np.column_stack([rng.integers(0, s, size=n) for s in grid.sizes]))
+    return fit_tables(grid, cliques, x, np.column_stack(oracle(x)))
+
+
+def test_fitted_tables_are_exact_without_noise() -> None:
+    model = small_model(50, 4, 3)
+    copy = fitted_copy(model, plaintext_oracle(model), 3000, np.random.default_rng(0))
+    x = random_rows(model, 2000, np.random.default_rng(1))
+    for got, want in zip(copy(x), plaintext_oracle(model)(x), strict=True):
+        np.testing.assert_allclose(got, want, atol=1e-9)
+
+
+def test_fitted_tables_round_back_to_the_model_through_noise() -> None:
+    model = small_model(51, 3, 2)
+    copy = fitted_copy(model, noisy_oracle(model, 0.5, np.random.default_rng(2)), 200_000, np.random.default_rng(0))
+    x = random_rows(model, 2000, np.random.default_rng(1))
+    _, shap = copy(x)
+    np.testing.assert_allclose(np.rint(shap * model.scale) / model.scale, plaintext_oracle(model)(x)[1], atol=1e-9)

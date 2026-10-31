@@ -345,3 +345,32 @@ def extract(
         if all(np.all(np.abs(a - b) <= TOLERANCE) for a, b in zip(copy(x), oracle(x), strict=True)):
             return copy, round_
     return None, max_rounds
+
+
+def fit_tables(grid: CellGrid, cliques: list[frozenset[int]], x: FloatArray, outputs: FloatArray) -> ExtractedModel:
+    """Least-squares tables over each clique's cells, from answers to any inputs.
+
+    The model is one table per clique summed, so this is linear regression on
+    cell indicators, and every query helps every table instead of one cell.
+    With noisy answers that is far cheaper than repeating each input. Tables
+    of overlapping cliques are not unique; lstsq picks one, only the sum
+    matters. outputs is n x (1 + n_features): prediction, then SHAP.
+    """
+    cells = grid.index(x)
+    keys = [tuple(sorted(c)) for c in cliques]
+    shapes = [tuple(int(grid.sizes[f]) for f in k) for k in keys]
+    offsets = np.cumsum([0] + [prod(s) for s in shapes])
+    p = int(offsets[-1])
+    ids = [np.ravel_multi_index(tuple(cells[:, f] for f in k), s) + o for k, s, o in zip(keys, shapes, offsets, strict=False)]
+
+    gram = np.zeros((p, p))
+    for a in ids:
+        for b in ids:
+            gram += np.bincount(a * p + b, minlength=p * p).reshape(p, p)
+    rhs = np.column_stack([sum(np.bincount(a, weights=y, minlength=p) for a in ids) for y in outputs.T])
+    theta = np.linalg.lstsq(gram, rhs, rcond=None)[0]
+
+    terms = tuple(
+        (k, 1, theta[o : o + prod(s)].reshape(*s, -1)) for k, s, o in zip(keys, shapes, offsets, strict=False)
+    )
+    return ExtractedModel(grid=grid, terms=terms)
