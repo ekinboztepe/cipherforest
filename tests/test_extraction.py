@@ -17,6 +17,7 @@ from cipherforest.extraction import (
     find_thresholds,
     maximal_cliques,
     noisy_oracle,
+    pair_interactions,
     plaintext_oracle,
     prediction_interactions,
     prediction_only,
@@ -28,14 +29,14 @@ from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_mod
 from cipherforest.shap_table import build_shap_table
 
 
-def small_model(seed: int, depth: int, n_trees: int, n_features: int = 6) -> QuantizedModel:
+def small_model(seed: int, depth: int, n_trees: int, n_features: int = 6, output_bits: int = 8) -> QuantizedModel:
     rng = np.random.default_rng(seed)
     x = rng.normal(size=(500, n_features))
     y = np.tanh(x[:, 0] * x[:, 1]) + (x[:, 2] > 0.3) + 0.5 * x[:, 3] + 0.1 * rng.normal(size=500)
     quantizer = FeatureQuantizer.fit(x, n_bins=16)
     ensemble = distill_ensemble(x, y, depth, n_trees, quantizer.edges)
     tables = [build_shap_table(tree, x[:30]) for tree in ensemble.trees]
-    return quantize_model(ensemble, tables, quantizer, output_bits=8)
+    return quantize_model(ensemble, tables, quantizer, output_bits)
 
 
 def test_code_values_hit_every_code() -> None:
@@ -132,6 +133,8 @@ def test_interaction_graphs_are_subsets_of_the_tree_graph(depth: int, n_trees: i
     assert shap_interactions(oracle, grid, 1, np.random.default_rng(0)) <= truth
     assert prediction_interactions(prediction_only(oracle), grid, 1, np.random.default_rng(0)) <= truth
     assert shap_interactions(oracle, grid, 3, np.random.default_rng(0)) == truth
+    starts = np.array([grid.random_cell(np.random.default_rng(i)) for i in range(3)])
+    assert pair_interactions(oracle, grid, starts) <= truth
 
 
 @pytest.mark.parametrize("use_shap", [True, False])
@@ -282,3 +285,23 @@ def test_extraction_with_hidden_edges_is_exact(use_shap: bool) -> None:
     for x in (rng.uniform(low, high, size=(2000, low.size)), random_rows(model, 2000, rng)):
         for got, want in zip(copy(x), view(x), strict=True):
             np.testing.assert_allclose(got, want, atol=1e-9)
+
+
+@pytest.mark.parametrize("seed", range(6))
+def test_extraction_is_exact_on_coarse_outputs(seed: int) -> None:
+    model = small_model(seed + 70, 6, 3, output_bits=4)
+    copy, _ = extract(Cached(plaintext_oracle(model)), model.quantizer, np.random.default_rng(0), shap_interactions)
+    assert copy is not None
+    x = random_rows(model, 2000, np.random.default_rng(1))
+    for got, want in zip(copy(x), plaintext_oracle(model)(x), strict=True):
+        np.testing.assert_allclose(got, want, atol=1e-9)
+
+
+def test_pair_tests_see_joint_effects_that_shap_sweeps_miss() -> None:
+    # tree {0, 1, 2, 3, 5}: at 4 bits phi_0 almost never moves with feature 2, but some output is not additive in (0, 2)
+    model = small_model(72, 6, 3, output_bits=4)
+    grid = CellGrid(model.quantizer, true_thresholds(model))
+    oracle = plaintext_oracle(model)
+    starts = np.array([grid.random_cell(np.random.default_rng(i)) for i in range(20)])
+    assert (0, 2) in pair_interactions(oracle, grid, starts)
+    assert (0, 2) not in shap_interactions(oracle, grid, 20, np.random.default_rng(0))

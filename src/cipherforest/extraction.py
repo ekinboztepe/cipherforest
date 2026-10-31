@@ -139,16 +139,20 @@ def true_thresholds(model: QuantizedModel) -> set[tuple[int, int]]:
 
 
 def find_thresholds(
-    oracle: Oracle, quantizer: FeatureQuantizer, n_starts: int, rng: np.random.Generator
+    oracle: Oracle,
+    quantizer: FeatureQuantizer,
+    n_starts: int,
+    rng: np.random.Generator,
+    starts: FloatArray | None = None,
 ) -> set[tuple[int, int]]:
-    """Sweeps every feature through all its codes from n_starts random points.
+    """Sweeps every feature through all its codes from n_starts random points, plus `starts`.
 
-    Costs at most n_starts * sum(len(edges) + 1) queries.
+    Costs at most (n_starts + len(starts)) * sum(len(edges) + 1) queries.
     """
     values = [code_values(e) for e in quantizer.edges]
+    random = [np.array([rng.choice(v) for v in values]) for _ in range(n_starts)]
     found: set[tuple[int, int]] = set()
-    for _ in range(n_starts):
-        start = np.array([rng.choice(v) for v in values])
+    for start in random + list(starts if starts is not None else []):
         for f, v in enumerate(values):
             if v.size < 2:
                 continue
@@ -197,11 +201,21 @@ def _outputs(oracle: Oracle, grid: CellGrid, cells: IntArray) -> FloatArray:
     return np.column_stack([pred, shap])
 
 
-def shap_interactions(oracle: Oracle, grid: CellGrid, n_starts: int, rng: np.random.Generator) -> set[tuple[int, int]]:
-    """f ~ g when phi_f changes as g moves across its cells."""
+def _starts(grid: CellGrid, n_starts: int, rng: np.random.Generator, starts: IntArray | None) -> IntArray:
+    random = [grid.random_cell(rng) for _ in range(n_starts)]
+    return np.array(random + list(starts if starts is not None else []), dtype=np.int64).reshape(-1, grid.sizes.size)
+
+
+def shap_interactions(
+    oracle: Oracle, grid: CellGrid, n_starts: int, rng: np.random.Generator, starts: IntArray | None = None
+) -> set[tuple[int, int]]:
+    """f ~ g when phi_f changes as g moves across its cells, from n_starts random cells plus `starts`.
+
+    Cheap but not complete: f and g can share a tree while only some phi_h
+    depends on them jointly. pair_interactions catches that.
+    """
     edges: set[tuple[int, int]] = set()
-    for _ in range(n_starts):
-        start = grid.random_cell(rng)
+    for start in _starts(grid, n_starts, rng, starts):
         for g, size in enumerate(grid.sizes):
             if size < 2:
                 continue
@@ -213,22 +227,37 @@ def shap_interactions(oracle: Oracle, grid: CellGrid, n_starts: int, rng: np.ran
     return edges
 
 
-def prediction_interactions(
-    oracle: Oracle, grid: CellGrid, n_starts: int, rng: np.random.Generator
+def pair_interactions(
+    oracle: Oracle,
+    grid: CellGrid,
+    starts: IntArray,
+    columns: slice = slice(None),
+    known: set[tuple[int, int]] = frozenset(),  # type: ignore[assignment]
 ) -> set[tuple[int, int]]:
-    """f ~ g when the prediction over a 2-d sweep of (f, g) is not additive."""
+    """f ~ g when some output over a 2-d sweep of (f, g) from one of the start cells is not additive.
+
+    Pairs in `known` are not tested again.
+    """
     active = [f for f, size in enumerate(grid.sizes) if size > 1]
     edges: set[tuple[int, int]] = set()
-    for _ in range(n_starts):
-        start = grid.random_cell(rng)
+    for start in starts:
         for f, g in combinations(active, 2):
+            if (f, g) in known:
+                continue
             a, b = np.meshgrid(np.arange(grid.sizes[f]), np.arange(grid.sizes[g]), indexing="ij")
             cells = np.tile(start, (a.size, 1))
             cells[:, f], cells[:, g] = a.ravel(), b.ravel()
-            p = _outputs(oracle, grid, cells)[:, 0].reshape(a.shape)
-            if np.any(np.abs(p - p[:, :1] - p[:1, :] + p[0, 0]) > TOLERANCE):
+            out = _outputs(oracle, grid, cells)[:, columns].reshape(*a.shape, -1)
+            if np.any(np.abs(out - out[:, :1] - out[:1, :] + out[:1, :1]) > TOLERANCE):
                 edges.add((f, g))
     return edges
+
+
+def prediction_interactions(
+    oracle: Oracle, grid: CellGrid, n_starts: int, rng: np.random.Generator, starts: IntArray | None = None
+) -> set[tuple[int, int]]:
+    """f ~ g when the prediction over a 2-d sweep of (f, g) is not additive."""
+    return pair_interactions(oracle, grid, _starts(grid, n_starts, rng, starts), columns=slice(0, 1))
 
 
 def maximal_cliques(vertices: Iterable[int], edges: set[tuple[int, int]]) -> list[frozenset[int]]:
@@ -308,7 +337,7 @@ def extract(
     oracle: Oracle,
     quantizer: FeatureQuantizer,
     rng: np.random.Generator,
-    graph: Callable[[Oracle, CellGrid, int, np.random.Generator], set[tuple[int, int]]] | None,
+    graph: Callable[..., set[tuple[int, int]]] | None,
     check: int = 200,
     max_rounds: int = 20,
     max_cells: int = 1 << 17,
@@ -316,7 +345,10 @@ def extract(
 ) -> tuple[ExtractedModel | None, int]:
     """Adds a starting point per round until the copy matches `check` fresh random queries.
 
-    graph=None skips the decomposition and queries the full cell grid. Gives up,
+    An input the copy got wrong is a start of the next round too: what only
+    shows in a few cells (common with coarse outputs) is visible from there.
+    If a round found nothing new, the next one also runs the costlier 2-d tests
+    on every output from that input, which see joint effects sweeps miss. graph=None skips the decomposition and queries the full cell grid. Gives up,
     returning None, after max_rounds or once the structure it found is too big to
     query, which is what unremoved noise looks like: changes everywhere.
     Returns the copy and the number of rounds.
@@ -325,15 +357,22 @@ def extract(
     anchor_x = np.array([[rng.choice(v) for v in values]])
     found: set[tuple[int, int]] = set()
     edges: set[tuple[int, int]] = set()
+    missed = np.zeros((0, len(values)))
+    stalled = False
     for round_ in range(1, max_rounds + 1):
-        found |= find_thresholds(oracle, quantizer, 1, rng)
+        before = (len(found), len(edges))
+        found |= find_thresholds(oracle, quantizer, 1, rng, starts=missed)
         grid = CellGrid(quantizer, found)
         active = [f for f, size in enumerate(grid.sizes) if size > 1]
         if graph is None:
             cliques = [frozenset(active)]
         else:
-            edges |= graph(oracle, grid, 1, rng)
-            cliques = maximal_cliques(active, edges)
+            edges |= graph(oracle, grid, 1, rng, starts=grid.index(missed))
+            if stalled:
+                edges |= pair_interactions(oracle, grid, grid.index(missed), known=edges)
+            # with coarse outputs phi_g can move with f while g's own thresholds all round away;
+            # g then has one cell and the edge says nothing
+            cliques = maximal_cliques(active, {(f, g) for f, g in edges if f in active and g in active})
         if len(cliques) > max_cliques:
             return None, round_
         try:
@@ -342,8 +381,11 @@ def extract(
             return None, round_
 
         x = np.column_stack([rng.choice(v, size=check) for v in values])
-        if all(np.all(np.abs(a - b) <= TOLERANCE) for a, b in zip(copy(x), oracle(x), strict=True)):
+        wrong = np.any(np.abs(np.column_stack(copy(x)) - np.column_stack(oracle(x))) > TOLERANCE, axis=1)
+        if not wrong.any():
             return copy, round_
+        missed = x[np.flatnonzero(wrong)[:1]]
+        stalled = (len(found), len(edges)) == before
     return None, max_rounds
 
 
