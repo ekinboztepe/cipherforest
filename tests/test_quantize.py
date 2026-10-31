@@ -128,6 +128,8 @@ def test_grid_model_routes_on_the_next_grid_edge_up(params: Params, bits: int) -
     step = (high - low) / (1 << bits)
     for tree, moved in zip(model.trees, grid.trees, strict=True):
         before = np.array([model.quantizer.edges[f][t] for f, t in zip(tree.features, tree.thresholds, strict=True)])
-        after = np.array([grid.quantizer.edges[f][t] for f, t in zip(moved.features, moved.thresholds, strict=True)])
-        assert np.all((after >= before) & (after - before <= step[tree.features] + 1e-12))
+        # past the last grid edge the comparison is never true
+        after = np.array([np.append(grid.quantizer.edges[f], np.inf)[t] for f, t in zip(moved.features, moved.thresholds, strict=True)])
+        top = np.array([np.append(grid.quantizer.edges[f], -np.inf)[-1] for f in tree.features])
+        assert np.all((after >= before) & ((after - before <= step[tree.features] + 1e-12) | (before > top)))
         np.testing.assert_array_equal(moved.leaf_index(codes), bits_to_index(x_eval[:, tree.features] > after))
