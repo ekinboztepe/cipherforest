@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 import numpy as np
 
@@ -125,6 +125,24 @@ class QuantizedModel:
             base_value=float(doc["base_value"]),
             output_bits=int(doc["output_bits"]),
         )
+
+
+def to_grid(model: QuantizedModel, low: FloatArray, high: FloatArray, bits: int) -> QuantizedModel:
+    """The same model on a public grid of 2**bits even cells per feature, edges hidden.
+
+    The client only learns the range and the bit width. Each threshold moves up
+    to the next grid edge, so the model changes for inputs between the two.
+    Up, not to the nearest: data often sit exactly on an edge (discrete
+    features), and x = e must stay below the threshold.
+    """
+    inner = np.arange(1, 1 << bits) / (1 << bits)
+    grid = FeatureQuantizer(tuple(np.unique(a + inner * (b - a)) if b > a else np.zeros(0) for a, b in zip(low, high, strict=True)))
+    trees = []
+    for tree in model.trees:
+        edges = [model.quantizer.edges[f][t] for f, t in zip(tree.features, tree.thresholds, strict=True)]
+        thresholds = [min(int(np.searchsorted(grid.edges[f], e)), grid.edges[f].size - 1) for f, e in zip(tree.features, edges, strict=True)]
+        trees.append(replace(tree, thresholds=np.array(thresholds, dtype=np.int64)))
+    return replace(model, quantizer=grid, trees=tuple(trees))
 
 
 def _sum_preserving_round(values: FloatArray, totals: IntArray) -> IntArray:
