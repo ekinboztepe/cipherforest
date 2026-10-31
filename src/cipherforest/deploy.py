@@ -11,6 +11,9 @@ quantiser edges and what is needed to decode (scale, base value, active features
 
 The server never holds the secret key. The client never sees thresholds or tables,
 only the quantiser edges (training-data quantiles per feature).
+
+A circuit compiled with noise_bound also takes clear noise from the server, which
+the server draws per request with laplace_noise.
 """
 
 from __future__ import annotations
@@ -38,6 +41,7 @@ class ClientBundle:
     scale: float
     base_value: float
     active_features: IntArray
+    server_noise: bool = False
 
     def to_json(self) -> str:
         return json.dumps(
@@ -47,6 +51,7 @@ class ClientBundle:
                 "scale": self.scale,
                 "base_value": self.base_value,
                 "active_features": self.active_features.tolist(),
+                "server_noise": self.server_noise,
             }
         )
 
@@ -59,6 +64,7 @@ class ClientBundle:
             scale=float(doc["scale"]),
             base_value=float(doc["base_value"]),
             active_features=np.asarray(doc["active_features"], dtype=np.int64),
+            server_noise=bool(doc.get("server_noise", False)),
         )
 
 
@@ -71,6 +77,7 @@ def export(compiled: CompiledModel, model: QuantizedModel, directory: Path) -> N
         scale=model.scale,
         base_value=model.base_value,
         active_features=compiled.active_features,
+        server_noise=compiled.noise_bound > 0,
     )
     (directory / CLIENT_FILE).write_text(bundle.to_json())
 
@@ -84,8 +91,16 @@ class Server:
         # hundreds of MB: deserialise once per client, not per request
         return fhe.EvaluationKeys.deserialize(evaluation_keys)
 
-    def run(self, ciphertext: bytes, evaluation_keys: fhe.EvaluationKeys) -> bytes:
-        return self._server.run(fhe.Value.deserialize(ciphertext), evaluation_keys=evaluation_keys).serialize()
+    def run(self, ciphertext: bytes, evaluation_keys: fhe.EvaluationKeys, noise: IntArray | None = None) -> bytes:
+        args: list[object] = [fhe.Value.deserialize(ciphertext)]
+        if noise is not None:
+            args.append(np.asarray(noise, dtype=np.int64))  # clear, no Value needed
+        return self._server.run(*args, evaluation_keys=evaluation_keys).serialize()
+
+
+def laplace_noise(b: float, bound: int, size: int, rng: np.random.Generator) -> IntArray:
+    """Rounded Laplace(b), clipped to the bound the circuit was compiled for."""
+    return np.clip(np.rint(rng.laplace(0.0, b, size=size)), -bound, bound).astype(np.int64)
 
 
 class Client:
@@ -104,6 +119,8 @@ class Client:
 
     def encrypt(self, x: FloatArray) -> bytes:
         codes = self._bundle.quantizer.transform(np.atleast_2d(x))[0]
+        if self._bundle.server_noise:
+            return self._client.encrypt(codes, None)[0].serialize()
         return self._client.encrypt(codes).serialize()
 
     def decrypt(self, result: bytes) -> tuple[float, FloatArray]:

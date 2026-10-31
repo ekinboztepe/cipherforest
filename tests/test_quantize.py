@@ -4,8 +4,8 @@ from hypothesis import given, settings
 from hypothesis import strategies as st
 
 from cipherforest.distill import distill_ensemble
-from cipherforest.oblivious import ObliviousEnsemble
-from cipherforest.quantize import FeatureQuantizer, QuantizedModel, _sum_preserving_round, quantize_model
+from cipherforest.oblivious import ObliviousEnsemble, bits_to_index
+from cipherforest.quantize import FeatureQuantizer, QuantizedModel, _sum_preserving_round, quantize_model, to_grid
 from cipherforest.shap_table import ShapTable, build_shap_table, explain_ensemble
 
 scenario = st.tuples(
@@ -113,3 +113,23 @@ def test_codes_count_edges_strictly_below() -> None:
     x = np.array([[-1.0], [0.0], [0.5], [1.0], [2.0], [3.0]])
     np.testing.assert_array_equal(quantizer.transform(x)[:, 0], [0, 0, 1, 1, 2, 3])
     assert quantizer.input_bits == 2
+
+
+@settings(max_examples=30, deadline=None)
+@given(scenario, st.integers(min_value=3, max_value=10))
+def test_grid_model_routes_on_the_next_grid_edge_up(params: Params, bits: int) -> None:
+    x_eval, _, _, model = build(params)
+    # the owner's range covers the training data, so every edge
+    low = np.array([min(x_eval[:, f].min(), *e) for f, e in enumerate(model.quantizer.edges)])
+    high = np.array([max(x_eval[:, f].max(), *e) for f, e in enumerate(model.quantizer.edges)])
+    grid = to_grid(model, low, high, bits)
+    assert grid.quantizer.input_bits <= bits
+    codes = grid.quantizer.transform(x_eval)
+    step = (high - low) / (1 << bits)
+    for tree, moved in zip(model.trees, grid.trees, strict=True):
+        before = np.array([model.quantizer.edges[f][t] for f, t in zip(tree.features, tree.thresholds, strict=True)])
+        # past the last grid edge the comparison is never true
+        after = np.array([np.append(grid.quantizer.edges[f], np.inf)[t] for f, t in zip(moved.features, moved.thresholds, strict=True)])
+        top = np.array([np.append(grid.quantizer.edges[f], -np.inf)[-1] for f in tree.features])
+        assert np.all((after >= before) & ((after - before <= step[tree.features] + 1e-12) | (before > top)))
+        np.testing.assert_array_equal(moved.leaf_index(codes), bits_to_index(x_eval[:, tree.features] > after))

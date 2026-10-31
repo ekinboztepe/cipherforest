@@ -1,0 +1,2882 @@
+[
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9950863975104414,
+  "pred_error": 5.961018753582835,
+  "exact_rows": 0.8155761198919007
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9950863975104414,
+  "pred_error": 5.940472847101651,
+  "exact_rows": 0.8155761198919007
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9288346572762264,
+  "pred_error": 8.575110180061571,
+  "exact_rows": 0.07124723609859962
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.0789577284091665e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9818196707886332,
+  "pred_error": 3.444862679683429,
+  "exact_rows": 0.17738104987306527
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.2565470605874468e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9870608467774957,
+  "pred_error": 1.906651289670129,
+  "exact_rows": 0.45958561952338056
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.725938726438668e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9871427401523217,
+  "pred_error": 1.722899457853992,
+  "exact_rows": 0.5146998607812628
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 8.829253346878728e-12,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9870608467774957,
+  "pred_error": 1.5936087950168432,
+  "exact_rows": 0.6631725493407583
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.5454106721569165e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9869789534026697,
+  "pred_error": 1.5638038962307275,
+  "exact_rows": 0.6910162967815904
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9996724265006961,
+  "pred_error": 0.038735566292686915,
+  "exact_rows": 0.9992629596265662
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996724265006961,
+  "pred_error": 0.039128044737852224,
+  "exact_rows": 0.9992629596265662
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9095078208172959,
+  "pred_error": 9.011011747909446,
+  "exact_rows": 0.05216607976414708
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 2.247033281978643e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9740398001801654,
+  "pred_error": 3.339088207635193,
+  "exact_rows": 0.24240438948489068
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.0807815361118175e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9833756449103268,
+  "pred_error": 1.9349320597092414,
+  "exact_rows": 0.489476701334862
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 2.281689065544666e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9868970600278437,
+  "pred_error": 1.727531616965691,
+  "exact_rows": 0.6097780689542216
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.0237003605100049e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9871427401523217,
+  "pred_error": 1.638244771364669,
+  "exact_rows": 0.6324625337810171
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.827399665968014e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9872246335271476,
+  "pred_error": 1.5840506357088433,
+  "exact_rows": 0.7141921218573417
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9938579968880518,
+  "pred_error": 7.169109819015642,
+  "exact_rows": 0.08246662844975841
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9938579968880518,
+  "pred_error": 7.131547572485915,
+  "exact_rows": 0.15223978380149045
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9168782245516338,
+  "pred_error": 9.40640734234239,
+  "exact_rows": 0.0534763737613627
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.18696257472770456,
+  "exact_rows": 0.8327737286053558
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.48071073973269424,
+  "exact_rows": 0.6143640979444763
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9777250020473344,
+  "pred_error": 3.505721401985158,
+  "exact_rows": 0.16026533453443617
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992629596265662,
+  "pred_error": 0.1922726302710725,
+  "exact_rows": 0.975513880927033
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9866513799033658,
+  "pred_error": 2.3437076413530558,
+  "exact_rows": 0.2996478584882483
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992629596265662,
+  "pred_error": 0.10847967681015563,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9868970600278437,
+  "pred_error": 1.880473759879645,
+  "exact_rows": 0.4190483989845222
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.048420552218239404,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9871427401523217,
+  "pred_error": 1.7257994156673446,
+  "exact_rows": 0.5291949881254606
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.03539206284159763,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9871427401523217,
+  "pred_error": 1.6354089663416467,
+  "exact_rows": 0.584227336008517
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9950045041356155,
+  "pred_error": 1.4617148472688564,
+  "exact_rows": 0.09794447629186799
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9947588240111375,
+  "pred_error": 1.40125080811212,
+  "exact_rows": 0.16272213577921546
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9213823601670624,
+  "pred_error": 8.456232788563758,
+  "exact_rows": 0.04864466464663009
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9960691180083531,
+  "pred_error": 0.1214478748669234,
+  "exact_rows": 0.8847760216198509
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9959872246335272,
+  "pred_error": 0.6676630132913847,
+  "exact_rows": 0.40086806977315537
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.979117189419376,
+  "pred_error": 3.7709401844944668,
+  "exact_rows": 0.1758250757513717
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.28708918412684403,
+  "exact_rows": 0.8920645319793629
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.985996232904758,
+  "pred_error": 2.693318758393454,
+  "exact_rows": 0.21202194742445335
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.12067058416899355,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9868970600278437,
+  "pred_error": 1.997617708396045,
+  "exact_rows": 0.34198673327327817
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.055128553912644436,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9868970600278437,
+  "pred_error": 1.7632994707498264,
+  "exact_rows": 0.4973384653181558
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.028641630765175802,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9872246335271476,
+  "pred_error": 1.584884415688465,
+  "exact_rows": 0.7227090328392433
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9889443943984931,
+  "pred_error": 8.49561870444681,
+  "exact_rows": 0.00016378674965195316
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9890262877733191,
+  "pred_error": 8.30978647355984,
+  "exact_rows": 0.12955531897469494
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.8943575464744902,
+  "pred_error": 9.921020710117398,
+  "exact_rows": 0.04872655802145606
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 1.1819670788633205,
+  "exact_rows": 0.17680779624928344
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9946769306363116,
+  "pred_error": 1.1243296767277555,
+  "exact_rows": 0.37572680370158057
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9764147080501188,
+  "pred_error": 3.8720032169424146,
+  "exact_rows": 0.14634346081402014
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.1599377610351321,
+  "exact_rows": 0.8401441323396938
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992629596265662,
+  "pred_error": 0.3948627901452729,
+  "exact_rows": 0.6348374416509704
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9851772991564982,
+  "pred_error": 2.8330002186275745,
+  "exact_rows": 0.15862746703791664
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.999918106625174,
+  "pred_error": 0.20234018795363218,
+  "exact_rows": 0.9574973384653181
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9868970600278437,
+  "pred_error": 2.104520795358349,
+  "exact_rows": 0.2930963885021702
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.13682240587020944,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9870608467774957,
+  "pred_error": 1.979465675608239,
+  "exact_rows": 0.4167553844893948
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.06386842657577266,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9871427401523217,
+  "pred_error": 1.8343048984435826,
+  "exact_rows": 0.5113422324133977
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9942674637621817,
+  "pred_error": 2.427401523216772,
+  "exact_rows": 0.004176562116124806
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9946769306363116,
+  "pred_error": 2.2843125379133653,
+  "exact_rows": 0.16493325689951682
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9122103021865531,
+  "pred_error": 8.899895275747108,
+  "exact_rows": 0.0482351977725002
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9958234378838752,
+  "pred_error": 1.49136024895586,
+  "exact_rows": 0.15092948980427484
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9913193022684464,
+  "pred_error": 1.3020397136460473,
+  "exact_rows": 0.19203996396691508
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9681434771926951,
+  "pred_error": 4.175477808014435,
+  "exact_rows": 0.1496191958070592
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.22446974039800163,
+  "exact_rows": 0.7749570059782164
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.5359459717349112,
+  "exact_rows": 0.5255097862582917
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9785439357955942,
+  "pred_error": 3.1581103298344435,
+  "exact_rows": 0.20637130456146097
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.15329578594237672,
+  "exact_rows": 0.9846859389075424
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9871427401523217,
+  "pred_error": 2.2520105312520498,
+  "exact_rows": 0.3280648595528622
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.999918106625174,
+  "pred_error": 0.08694290627480601,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.986078126279584,
+  "pred_error": 2.0594623963915817,
+  "exact_rows": 0.37630005732536237
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.06146496784123072,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9871427401523217,
+  "pred_error": 1.8307104803129517,
+  "exact_rows": 0.3803947260666612
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9887806076488412,
+  "pred_error": 10.648513635246909,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.985996232904758,
+  "pred_error": 10.622366364606194,
+  "exact_rows": 0.036770125296863486
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.8991892555892228,
+  "pred_error": 10.578072442724078,
+  "exact_rows": 0.03971828679059864
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9992629596265662,
+  "pred_error": 2.125296863483745,
+  "exact_rows": 8.189337482597658e-05
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9939398902628778,
+  "pred_error": 2.0802358450128393,
+  "exact_rows": 0.2535418884612235
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.975841454426337,
+  "pred_error": 4.912203436080636,
+  "exact_rows": 0.08066497420358693
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9945131438866596,
+  "pred_error": 1.1148145115060182,
+  "exact_rows": 0.11899107362214396
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992629596265662,
+  "pred_error": 0.8121464900843325,
+  "exact_rows": 0.32044877569404634
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9801818032921137,
+  "pred_error": 3.2801057918159535,
+  "exact_rows": 0.18999262959626567
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.05265744001310293,
+  "exact_rows": 0.9473425599868971
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992629596265662,
+  "pred_error": 0.40199789894294774,
+  "exact_rows": 0.6610433215952829
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9867332732781918,
+  "pred_error": 2.885076368355866,
+  "exact_rows": 0.12177544836622717
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.24184438009277687,
+  "exact_rows": 0.9144214233068545
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9870608467774957,
+  "pred_error": 2.170476148189399,
+  "exact_rows": 0.3017770862337237
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.13115656055300295,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9868970600278437,
+  "pred_error": 2.1285609682206506,
+  "exact_rows": 0.33862910490541315
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9882073540250593,
+  "pred_error": 4.122594382114487,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9880435672754074,
+  "pred_error": 4.193742097599933,
+  "exact_rows": 0.08164769470149864
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9043485382032593,
+  "pred_error": 9.590145286155478,
+  "exact_rows": 0.045450823028417
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9905822618950126,
+  "pred_error": 2.7662763082466624,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9898452215215789,
+  "pred_error": 2.753227561140855,
+  "exact_rows": 0.11628859225288674
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9524199492261076,
+  "pred_error": 5.131676626726733,
+  "exact_rows": 0.09434116779952502
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9960691180083531,
+  "pred_error": 1.0443862091556804,
+  "exact_rows": 0.09081975268200802
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9951682908852674,
+  "pred_error": 1.0511260223268268,
+  "exact_rows": 0.27745475391040864
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9814102039145033,
+  "pred_error": 3.2691166500466364,
+  "exact_rows": 0.21447874866923267
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.999918106625174,
+  "pred_error": 0.03709769879616737,
+  "exact_rows": 0.9620014740807469
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.3467507660668546,
+  "exact_rows": 0.8032102202931782
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9867332732781918,
+  "pred_error": 2.8348927122695593,
+  "exact_rows": 0.18262222586192778
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992629596265662,
+  "pred_error": 0.18058731672332415,
+  "exact_rows": 0.9913193022684464
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9868970600278437,
+  "pred_error": 2.5207137175466783,
+  "exact_rows": 0.2524772745884858
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993448530013922,
+  "pred_error": 0.1298277970626451,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9870608467774957,
+  "pred_error": 1.734225497472208,
+  "exact_rows": 0.5428711817213987
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 3.811524171224309e-12,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9882666666666666,
+  "pred_error": 6.824404090634137,
+  "exact_rows": 0.07773333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 2.6682470781964632e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9917333333333334,
+  "pred_error": 4.843239858306566,
+  "exact_rows": 0.12666666666666668
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 8.106425205846331e-12,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9944,
+  "pred_error": 3.2063018517397683,
+  "exact_rows": 0.25906666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 3.2805374452515554e-12,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9958666666666667,
+  "pred_error": 1.8862368830153005,
+  "exact_rows": 0.42106666666666664
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.6888950089471746e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9970666666666667,
+  "pred_error": 1.4109856494791355,
+  "exact_rows": 0.40746666666666664
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.0381750084193006e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9973333333333333,
+  "pred_error": 1.4281364197602675,
+  "exact_rows": 0.5624
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 2.80801758106522e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9897333333333334,
+  "pred_error": 6.8625282464867325,
+  "exact_rows": 0.0792
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 7.721379850877288e-13,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9913333333333333,
+  "pred_error": 5.156249531547101,
+  "exact_rows": 0.1228
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 2.989982235053788e-12,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9934666666666667,
+  "pred_error": 3.3074920436320356,
+  "exact_rows": 0.29893333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 5.16922289991068e-12,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9966666666666667,
+  "pred_error": 2.0125346711061702,
+  "exact_rows": 0.3761333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.245025426624465e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9972,
+  "pred_error": 1.4421156990931034,
+  "exact_rows": 0.5649333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.2136217810179429e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9972,
+  "pred_error": 1.421987679753667,
+  "exact_rows": 0.5554666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9982666666666666,
+  "pred_error": 2.1566666666666654,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9978666666666667,
+  "pred_error": 1.8453446967676612,
+  "exact_rows": 0.222
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9874666666666667,
+  "pred_error": 7.025842556211029,
+  "exact_rows": 0.06346666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9993333333333333,
+  "pred_error": 0.4883999999999997,
+  "exact_rows": 0.4472
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9989333333333333,
+  "pred_error": 1.0419852539643564,
+  "exact_rows": 0.26053333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9917333333333334,
+  "pred_error": 4.735733986253848,
+  "exact_rows": 0.14773333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0009333333333333314,
+  "exact_rows": 0.9990666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9986666666666667,
+  "pred_error": 0.5019757580540016,
+  "exact_rows": 0.5361333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9937333333333334,
+  "pred_error": 3.1439254045614153,
+  "exact_rows": 0.2172
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992,
+  "pred_error": 0.22098686828206823,
+  "exact_rows": 0.9482666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9948,
+  "pred_error": 2.269026857705673,
+  "exact_rows": 0.3582666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9997333333333334,
+  "pred_error": 0.09805374313732905,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9969333333333333,
+  "pred_error": 1.6946828406447703,
+  "exact_rows": 0.3536
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.03932481863470331,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9973333333333333,
+  "pred_error": 1.4114203132970549,
+  "exact_rows": 0.5189333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9986666666666667,
+  "pred_error": 2.1790666666666665,
+  "exact_rows": 0.0005333333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9989333333333333,
+  "pred_error": 2.1205644692367196,
+  "exact_rows": 0.08573333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9896,
+  "pred_error": 6.684928785483833,
+  "exact_rows": 0.0736
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9997333333333334,
+  "pred_error": 0.8685333333333346,
+  "exact_rows": 0.3433333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992,
+  "pred_error": 0.8685676655579597,
+  "exact_rows": 0.2704
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9914666666666667,
+  "pred_error": 5.133936280037559,
+  "exact_rows": 0.10666666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0010666666666666632,
+  "exact_rows": 0.9989333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.43698401457225633,
+  "exact_rows": 0.5833333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9933333333333333,
+  "pred_error": 3.283459681133202,
+  "exact_rows": 0.25053333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993333333333333,
+  "pred_error": 0.21611802241866052,
+  "exact_rows": 0.9166666666666666
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9950666666666667,
+  "pred_error": 2.222302181875434,
+  "exact_rows": 0.33586666666666665
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.13850382446805204,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9976,
+  "pred_error": 1.5682393540968362,
+  "exact_rows": 0.5133333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9997333333333334,
+  "pred_error": 0.030978353393806626,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9972,
+  "pred_error": 1.4499820168569393,
+  "exact_rows": 0.5172
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9958666666666667,
+  "pred_error": 3.6442666666666645,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9956,
+  "pred_error": 3.6289226229293643,
+  "exact_rows": 0.0584
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9885333333333334,
+  "pred_error": 7.395405877362604,
+  "exact_rows": 0.0604
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9972,
+  "pred_error": 1.876133333333333,
+  "exact_rows": 0.0009333333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9969333333333333,
+  "pred_error": 1.7154816077902664,
+  "exact_rows": 0.0972
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9921333333333333,
+  "pred_error": 5.587180648787551,
+  "exact_rows": 0.08466666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9992,
+  "pred_error": 0.323866666666667,
+  "exact_rows": 0.6205333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9985333333333334,
+  "pred_error": 0.7515828705689617,
+  "exact_rows": 0.3236
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9937333333333334,
+  "pred_error": 3.4299314077640077,
+  "exact_rows": 0.19346666666666668
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0021333333333333417,
+  "exact_rows": 0.9978666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992,
+  "pred_error": 0.3689583485669732,
+  "exact_rows": 0.7146666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9945333333333334,
+  "pred_error": 2.5526799812661505,
+  "exact_rows": 0.2388
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.15081632006857304,
+  "exact_rows": 0.9957333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9969333333333333,
+  "pred_error": 1.8745401650529248,
+  "exact_rows": 0.3877333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.08551036773644614,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9970666666666667,
+  "pred_error": 1.4947716417304524,
+  "exact_rows": 0.46413333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9981333333333333,
+  "pred_error": 3.5306666666666677,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.998,
+  "pred_error": 3.3218570424524714,
+  "exact_rows": 0.0324
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9896,
+  "pred_error": 7.025321648507291,
+  "exact_rows": 0.06666666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9994666666666666,
+  "pred_error": 1.6520000000000006,
+  "exact_rows": 0.0017333333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 1.6462336814223035,
+  "exact_rows": 0.1384
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9906666666666667,
+  "pred_error": 5.9197595244804635,
+  "exact_rows": 0.08493333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9997333333333334,
+  "pred_error": 0.3447999999999998,
+  "exact_rows": 0.5409333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.6947267913306651,
+  "exact_rows": 0.43466666666666665
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.994,
+  "pred_error": 3.609339907246106,
+  "exact_rows": 0.20066666666666666
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993333333333333,
+  "pred_error": 0.3894954267289189,
+  "exact_rows": 0.7016
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9965333333333334,
+  "pred_error": 2.56015833548963,
+  "exact_rows": 0.2772
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.2071111648850776,
+  "exact_rows": 0.9836
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9965333333333334,
+  "pred_error": 1.8245833657231267,
+  "exact_rows": 0.3236
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.07289001737697272,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9968,
+  "pred_error": 1.6947616296046943,
+  "exact_rows": 0.42333333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.99,
+  "pred_error": 7.061866666666665,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9901333333333333,
+  "pred_error": 6.9915080445497155,
+  "exact_rows": 0.1144
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9881333333333333,
+  "pred_error": 9.332048356268666,
+  "exact_rows": 0.03866666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9941333333333333,
+  "pred_error": 3.8477333333333337,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9946666666666667,
+  "pred_error": 3.65371007199341,
+  "exact_rows": 0.056
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9905333333333334,
+  "pred_error": 6.6629039264905305,
+  "exact_rows": 0.06573333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.998,
+  "pred_error": 1.6451999999999996,
+  "exact_rows": 0.004
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9977333333333334,
+  "pred_error": 1.6250610494532054,
+  "exact_rows": 0.10533333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9930666666666667,
+  "pred_error": 3.6426891556485486,
+  "exact_rows": 0.19826666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9990666666666667,
+  "pred_error": 0.6869333333333341,
+  "exact_rows": 0.35026666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9989333333333333,
+  "pred_error": 0.7469598247331566,
+  "exact_rows": 0.4588
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9942666666666666,
+  "pred_error": 2.861279270305701,
+  "exact_rows": 0.224
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0010666666666666632,
+  "exact_rows": 0.9989333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.31767663378644934,
+  "exact_rows": 0.8204
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.996,
+  "pred_error": 1.7607345158997891,
+  "exact_rows": 0.4308
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.16386506821461297,
+  "exact_rows": 0.9933333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9952,
+  "pred_error": 1.8468865925721176,
+  "exact_rows": 0.3214666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9962666666666666,
+  "pred_error": 7.131333333333332,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9952,
+  "pred_error": 6.70867805117255,
+  "exact_rows": 0.15586666666666665
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9876,
+  "pred_error": 7.562242411529773,
+  "exact_rows": 0.0544
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9990666666666667,
+  "pred_error": 2.7522666666666673,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9992,
+  "pred_error": 2.8224185840308524,
+  "exact_rows": 0.1952
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9897333333333334,
+  "pred_error": 6.718710020582266,
+  "exact_rows": 0.062
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9994666666666666,
+  "pred_error": 1.7769333333333315,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9994666666666666,
+  "pred_error": 1.5995917324717983,
+  "exact_rows": 0.14706666666666668
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.992,
+  "pred_error": 3.9518642546256473,
+  "exact_rows": 0.20333333333333334
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9997333333333334,
+  "pred_error": 0.4041333333333331,
+  "exact_rows": 0.594
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9997333333333334,
+  "pred_error": 0.7585642342609392,
+  "exact_rows": 0.5298666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9941333333333333,
+  "pred_error": 2.8910419061214965,
+  "exact_rows": 0.24306666666666665
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9996,
+  "pred_error": 0.48186911022612167,
+  "exact_rows": 0.4630666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9950666666666667,
+  "pred_error": 2.416489391424589,
+  "exact_rows": 0.2512
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9994666666666666,
+  "pred_error": 0.13646255453523382,
+  "exact_rows": 0.9984
+ },
+ {
+  "dataset": "credit_default",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9958666666666667,
+  "pred_error": 1.962864804698485,
+  "exact_rows": 0.30933333333333335
+ }
+]

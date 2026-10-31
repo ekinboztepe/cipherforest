@@ -27,23 +27,28 @@ DEPTH, TREES, OUTPUT_BITS, N_BINS = 6, 3, 8, 32
 N_BACKGROUND, N_SAMPLES, SEED = 100, 20, 0
 
 
+def student(x_tr: np.ndarray, y_tr: np.ndarray, quantizer: FeatureQuantizer, rng: np.random.Generator):
+    """Teacher forest, distilled ensemble on the quantiser's edges, and its SHAP tables."""
+    teacher = RandomForestClassifier(n_estimators=100, max_depth=12, n_jobs=-1, random_state=SEED).fit(x_tr, y_tr)
+    ensemble = distill_ensemble(x_tr, teacher.predict_proba(x_tr)[:, 1], DEPTH, TREES, quantizer.edges)
+    background = x_tr[rng.choice(len(x_tr), size=N_BACKGROUND, replace=False)]
+    return teacher, ensemble, [build_shap_table(tree, background) for tree in ensemble.trees]
+
+
 def prepare(name: str) -> dict[str, float]:
     x, y = load_dataset(name)
     x_tr, x_te, y_tr, y_te = train_test_split(x, y, test_size=0.25, stratify=y, random_state=SEED)
     rng = np.random.default_rng(SEED)
 
-    teacher = RandomForestClassifier(n_estimators=100, max_depth=12, n_jobs=-1, random_state=SEED).fit(x_tr, y_tr)
     quantizer = FeatureQuantizer.fit(x_tr, N_BINS)
-    ensemble = distill_ensemble(x_tr, teacher.predict_proba(x_tr)[:, 1], DEPTH, TREES, quantizer.edges)
-    background = x_tr[rng.choice(len(x_tr), size=N_BACKGROUND, replace=False)]
-    tables = [build_shap_table(tree, background) for tree in ensemble.trees]
+    teacher, ensemble, tables = student(x_tr, y_tr, quantizer, rng)
     model = quantize_model(ensemble, tables, quantizer, OUTPUT_BITS)
 
     codes = quantizer.transform(x_te)
     for float_tree, int_tree in zip(ensemble.trees, model.trees, strict=True):
         if not np.array_equal(float_tree.leaf_index(x_te), int_tree.leaf_index(codes)):
             raise AssertionError("integer routing diverged from float routing")
-    student = ensemble.predict(x_te)
+    student_pred = ensemble.predict(x_te)
     quant_pred, quant_shap = model.decode(model.simulate(codes))
     exact_shap = explain_ensemble(ensemble, tables, x_te, x.shape[1])
 
@@ -54,7 +59,7 @@ def prepare(name: str) -> dict[str, float]:
     np.savez(
         out / "samples.npz",
         x=x_te[pick],
-        student_pred=student[pick],
+        student_pred=student_pred[pick],
         student_shap=exact_shap[pick],
         teacher_prob=teacher.predict_proba(x_te[pick])[:, 1],
     )
@@ -65,9 +70,9 @@ def prepare(name: str) -> dict[str, float]:
         "input_bits": quantizer.input_bits,
         "scale": model.scale,
         "auc_teacher": float(roc_auc_score(y_te, teacher.predict_proba(x_te)[:, 1])),
-        "auc_student_float": float(roc_auc_score(y_te, student)),
+        "auc_student_float": float(roc_auc_score(y_te, student_pred)),
         "auc_student_quantized": float(roc_auc_score(y_te, quant_pred)),
-        "max_pred_error_quantized": float(np.abs(quant_pred - student).max()),
+        "max_pred_error_quantized": float(np.abs(quant_pred - student_pred).max()),
         "max_shap_error_quantized": float(np.abs(quant_shap - exact_shap).max()),
         "max_abs_shap": float(np.abs(exact_shap).max()),
     }

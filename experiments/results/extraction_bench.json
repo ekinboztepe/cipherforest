@@ -1,0 +1,482 @@
+[
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 2068,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 1,
+  "rounds": 2,
+  "queries": 2979,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 2068,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 2547,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 4,
+  "rounds": 2,
+  "queries": 2979,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 2547,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 3123,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 2068,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 2068,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, full grid",
+  "seed": 9,
+  "rounds": 2,
+  "queries": 3123,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 757,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 2,
+  "queries": 1468,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 694,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 1390,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 2,
+  "queries": 1487,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 1374,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 1640,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 757,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 751,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred, graph",
+  "seed": 9,
+  "rounds": 2,
+  "queries": 1469,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 2,
+  "queries": 1180,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 1,
+  "queries": 688,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 5,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 6,
+  "rounds": 1,
+  "queries": 686,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 686,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "adult",
+  "attacker": "pred+shap, graph",
+  "seed": 9,
+  "rounds": 1,
+  "queries": 687,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 0,
+  "rounds": 2,
+  "queries": 30429,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 29277,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 4,
+  "rounds": 2,
+  "queries": 30813,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 29277,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 6,
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 8,
+  "rounds": 2,
+  "queries": 30813,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, full grid",
+  "seed": 9,
+  "rounds": 1,
+  "queries": 28258,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 2,
+  "queries": 2573,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 4,
+  "queries": 5038,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 2,
+  "queries": 2497,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 2483,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 2,
+  "queries": 2459,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 2482,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 2488,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 7,
+  "rounds": 2,
+  "queries": 2487,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 8,
+  "rounds": 2,
+  "queries": 2528,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred, graph",
+  "seed": 9,
+  "rounds": 3,
+  "queries": 3771,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 2,
+  "queries": 2147,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 1095,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 2,
+  "queries": 2148,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 2148,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 2,
+  "queries": 2146,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 5,
+  "rounds": 2,
+  "queries": 2148,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 2148,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 7,
+  "rounds": 2,
+  "queries": 2148,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 8,
+  "rounds": 3,
+  "queries": 3198,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "credit_default",
+  "attacker": "pred+shap, graph",
+  "seed": 9,
+  "rounds": 1,
+  "queries": 1095,
+  "exact_rows": 1.0
+ }
+]
