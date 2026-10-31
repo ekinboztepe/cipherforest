@@ -15,7 +15,8 @@ from pathlib import Path
 import numpy as np
 
 from cipherforest.extraction import (
-    CountingOracle,
+    Cached,
+    Counted,
     code_values,
     extract,
     plaintext_oracle,
@@ -42,8 +43,9 @@ ATTACKERS = {
 def attack(model: QuantizedModel, name: str, seed: int) -> dict[str, object]:
     sees_shap, graph = ATTACKERS[name]
     view = plaintext_oracle(model) if sees_shap else prediction_only(plaintext_oracle(model))
-    oracle = CountingOracle(view)
-    copy, rounds = extract(oracle, model.quantizer, np.random.default_rng(seed), graph)
+    counter = Counted(view)
+    copy, rounds = extract(Cached(counter), model.quantizer, np.random.default_rng(seed), graph)
+    assert copy is not None, "attack did not converge"
 
     rng = np.random.default_rng(1000 + seed)
     x = np.column_stack([rng.choice(code_values(e), size=N_EVAL) for e in model.quantizer.edges])
@@ -52,7 +54,7 @@ def attack(model: QuantizedModel, name: str, seed: int) -> dict[str, object]:
         "attacker": name,
         "seed": seed,
         "rounds": rounds,
-        "queries": oracle.queries,
+        "queries": counter.queries,
         "exact_rows": float(np.mean(np.all(np.abs(got - want) < 1e-9, axis=1))),
     }
 

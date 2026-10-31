@@ -30,6 +30,7 @@ from __future__ import annotations
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
 from itertools import combinations
+from math import prod
 
 import numpy as np
 
@@ -61,12 +62,41 @@ def prediction_only(oracle: Oracle) -> Oracle:
     return query
 
 
+def noisy_oracle(model: QuantizedModel, noise: float, rng: np.random.Generator) -> Oracle:
+    """Server-side defence: rounded Laplace(noise) added to every integer SHAP output.
+
+    In the circuit this is a clear random integer added to each encrypted output,
+    which needs no bootstrapping. Features no tree uses are not outputs and stay 0.
+    """
+    clean = plaintext_oracle(model)
+    active = np.unique(np.concatenate([tree.players for tree in model.trees]))
+
+    def query(x: FloatArray) -> tuple[FloatArray, FloatArray]:
+        pred, shap = clean(x)
+        eta = np.zeros_like(shap)
+        eta[:, active] = np.rint(rng.laplace(0.0, noise, size=(x.shape[0], active.size))) / model.scale
+        return pred + eta.sum(axis=1), shap + eta
+
+    return query
+
+
 @dataclass
-class CountingOracle:
-    """Counts distinct inputs; a repeated one is answered from the attacker's own cache."""
+class Counted:
+    """Counts every input sent to the server."""
 
     oracle: Oracle
     queries: int = field(default=0, init=False)
+
+    def __call__(self, x: FloatArray) -> tuple[FloatArray, FloatArray]:
+        self.queries += x.shape[0]
+        return self.oracle(x)
+
+
+@dataclass
+class Cached:
+    """Never asks the same input twice; the attacker keeps the answers."""
+
+    oracle: Oracle
     _cache: dict[bytes, tuple[float, FloatArray]] = field(default_factory=dict, init=False, repr=False)
 
     def __call__(self, x: FloatArray) -> tuple[FloatArray, FloatArray]:
@@ -76,9 +106,26 @@ class CountingOracle:
         if first:
             pred, shap = self.oracle(x[list(first.values())])
             self._cache.update(zip(first, zip(pred, shap, strict=True), strict=True))
-            self.queries += len(first)
         answers = [self._cache[k] for k in keys]
         return np.array([a[0] for a in answers]), np.array([a[1] for a in answers])
+
+
+def denoised(oracle: Oracle, repeats: int, scale: float, base_value: float, batch: int = 1 << 20) -> Oracle:
+    """Asks every input `repeats` times and rounds the means back onto the 1/scale grid.
+
+    scale and base_value are in client.json. Exact once the mean noise of every
+    output stays under half a unit.
+    """
+
+    def query(x: FloatArray) -> tuple[FloatArray, FloatArray]:
+        preds, shaps = [], []
+        for chunk in np.array_split(x, min(x.shape[0], x.shape[0] * repeats // batch + 1)):
+            pred, shap = oracle(np.repeat(chunk, repeats, axis=0))
+            preds.append(np.rint((pred.reshape(-1, repeats).mean(axis=1) - base_value) * scale))
+            shaps.append(np.rint(shap.reshape(chunk.shape[0], repeats, -1).mean(axis=1) * scale))
+        return base_value + np.concatenate(preds) / scale, np.concatenate(shaps) / scale
+
+    return query
 
 
 def code_values(edges: FloatArray) -> FloatArray:
@@ -222,22 +269,27 @@ class ExtractedModel:
 
 
 def reconstruct(
-    oracle: Oracle, grid: CellGrid, cliques: list[frozenset[int]], anchor: IntArray
+    oracle: Oracle, grid: CellGrid, cliques: list[frozenset[int]], anchor: IntArray, max_cells: int | None = None
 ) -> ExtractedModel:
-    """Queries a grid over every clique intersection, each distinct cell once."""
+    """Queries a grid over every clique intersection, each distinct cell once.
+
+    Raises ValueError rather than plan more than max_cells cells.
+    """
     coef: dict[frozenset[int], int] = {}
     for size in range(1, len(cliques) + 1):
         for subset in combinations(cliques, size):
             u = frozenset.intersection(*subset)
             coef[u] = coef.get(u, 0) + (-1) ** (size + 1)
 
+    shapes = {u: tuple(int(grid.sizes[f]) for f in sorted(u)) for u, c in coef.items() if c != 0}
+    planned = sum(prod(s) for s in shapes.values())
+    if max_cells is not None and planned > max_cells:
+        raise ValueError(f"{planned} cells to query, over the budget of {max_cells}")
+
     plans = []
-    for u, c in coef.items():
-        if c == 0:
-            continue
-        features = tuple(sorted(u))
-        shape = tuple(int(grid.sizes[f]) for f in features)
-        cells = np.tile(anchor, (int(np.prod(shape)), 1))
+    for u, shape in shapes.items():
+        features, c = tuple(sorted(u)), coef[u]
+        cells = np.tile(anchor, (prod(shape), 1))
         if features:  # the empty intersection is just the anchor
             for f, axis in zip(features, np.indices(shape).reshape(len(shape), -1), strict=True):
                 cells[:, f] = axis
@@ -259,10 +311,14 @@ def extract(
     graph: Callable[[Oracle, CellGrid, int, np.random.Generator], set[tuple[int, int]]] | None,
     check: int = 200,
     max_rounds: int = 20,
-) -> tuple[ExtractedModel, int]:
+    max_cells: int = 1 << 17,
+    max_cliques: int = 16,
+) -> tuple[ExtractedModel | None, int]:
     """Adds a starting point per round until the copy matches `check` fresh random queries.
 
-    graph=None skips the decomposition and queries the full cell grid.
+    graph=None skips the decomposition and queries the full cell grid. Gives up,
+    returning None, after max_rounds or once the structure it found is too big to
+    query, which is what unremoved noise looks like: changes everywhere.
     Returns the copy and the number of rounds.
     """
     values = [code_values(e) for e in quantizer.edges]
@@ -278,9 +334,14 @@ def extract(
         else:
             edges |= graph(oracle, grid, 1, rng)
             cliques = maximal_cliques(active, edges)
-        copy = reconstruct(oracle, grid, cliques, grid.index(anchor_x)[0])
+        if len(cliques) > max_cliques:
+            return None, round_
+        try:
+            copy = reconstruct(oracle, grid, cliques, grid.index(anchor_x)[0], max_cells)
+        except ValueError:
+            return None, round_
 
         x = np.column_stack([rng.choice(v, size=check) for v in values])
         if all(np.all(np.abs(a - b) <= TOLERANCE) for a, b in zip(copy(x), oracle(x), strict=True)):
-            break
-    return copy, round_
+            return copy, round_
+    return None, max_rounds

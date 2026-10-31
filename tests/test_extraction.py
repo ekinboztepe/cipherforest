@@ -5,12 +5,15 @@ import pytest
 
 from cipherforest.distill import distill_ensemble
 from cipherforest.extraction import (
+    Cached,
     CellGrid,
-    CountingOracle,
+    Counted,
     code_values,
+    denoised,
     extract,
     find_thresholds,
     maximal_cliques,
+    noisy_oracle,
     plaintext_oracle,
     prediction_interactions,
     prediction_only,
@@ -57,20 +60,21 @@ def test_shap_finds_every_threshold(depth: int, n_trees: int) -> None:
 
 def test_query_count() -> None:
     model = small_model(1, 3, 2)
-    oracle = CountingOracle(plaintext_oracle(model))
-    find_thresholds(oracle, model.quantizer, 1, np.random.default_rng(0))
+    counter = Counted(plaintext_oracle(model))
+    find_thresholds(Cached(counter), model.quantizer, 1, np.random.default_rng(0))
     # the starting point itself is in every sweep but asked only once
     swept = [e for e in model.quantizer.edges if e.size]
-    assert oracle.queries == sum(e.size + 1 for e in swept) - (len(swept) - 1)
+    assert counter.queries == sum(e.size + 1 for e in swept) - (len(swept) - 1)
 
 
 def test_repeated_inputs_are_counted_once() -> None:
     model = small_model(1, 3, 2)
-    oracle = CountingOracle(plaintext_oracle(model))
+    counter = Counted(plaintext_oracle(model))
+    oracle = Cached(counter)
     x = random_rows(model, 50, np.random.default_rng(0))
     first = oracle(np.vstack([x, x[:10]]))
     second = oracle(x[::-1])
-    assert oracle.queries == 50
+    assert counter.queries == 50
     for a, b, c in zip(first, second, plaintext_oracle(model)(x), strict=True):
         np.testing.assert_array_equal(a[:50], c)
         np.testing.assert_array_equal(b[::-1], c)
@@ -132,20 +136,73 @@ def test_interaction_graphs_are_subsets_of_the_tree_graph(depth: int, n_trees: i
 def test_end_to_end_extraction_is_exact(depth: int, n_trees: int, use_shap: bool) -> None:
     model = small_model(depth + 20, depth, n_trees)
     view = plaintext_oracle(model) if use_shap else prediction_only(plaintext_oracle(model))
-    oracle = CountingOracle(view)
+    counter = Counted(view)
     rng = np.random.default_rng(0)
     graph = shap_interactions if use_shap else prediction_interactions
-    copy, _ = extract(oracle, model.quantizer, rng, graph)
+    copy, _ = extract(Cached(counter), model.quantizer, rng, graph)
+    assert copy is not None
 
     x = random_rows(model, 2000, np.random.default_rng(1))
     for got, want in zip(copy(x), view(x), strict=True):
         np.testing.assert_allclose(got, want, atol=1e-9)
-    assert oracle.queries < np.prod([e.size + 1 for e in model.quantizer.edges])
+    assert counter.queries < np.prod([e.size + 1 for e in model.quantizer.edges])
 
 
 def test_full_grid_extraction_is_exact() -> None:
     model = small_model(30, 3, 2)
     view = prediction_only(plaintext_oracle(model))
-    copy, _ = extract(CountingOracle(view), model.quantizer, np.random.default_rng(0), graph=None)
+    copy, _ = extract(Cached(view), model.quantizer, np.random.default_rng(0), graph=None)
+    assert copy is not None
     x = random_rows(model, 2000, np.random.default_rng(1))
     np.testing.assert_allclose(copy(x)[0], view(x)[0], atol=1e-9)
+
+
+def test_noise_is_on_the_integer_grid_and_only_on_active_features() -> None:
+    model = small_model(40, 3, 2, n_features=8)
+    x = random_rows(model, 500, np.random.default_rng(0))
+    pred, shap = noisy_oracle(model, 2.0, np.random.default_rng(1))(x)
+    clean_pred, clean_shap = plaintext_oracle(model)(x)
+    eta = (shap - clean_shap) * model.scale
+    np.testing.assert_allclose(eta, np.rint(eta), atol=1e-9)
+    inactive = np.setdiff1d(np.arange(8), np.concatenate([t.players for t in model.trees]))
+    assert inactive.size and np.all(shap[:, inactive] == 0)
+    np.testing.assert_allclose(pred - clean_pred, eta.sum(axis=1) / model.scale, atol=1e-9)
+    assert np.any(eta != 0)
+
+
+def test_enough_repeats_remove_the_noise() -> None:
+    model = small_model(41, 4, 2)
+    x = random_rows(model, 300, np.random.default_rng(0))
+    server = noisy_oracle(model, 1.0, np.random.default_rng(1))
+    view = denoised(server, 2000, model.scale, model.base_value, batch=50_000)
+    for got, want in zip(view(x), plaintext_oracle(model)(x), strict=True):
+        np.testing.assert_allclose(got, want, atol=1e-9)
+    _, shap = denoised(server, 1, model.scale, model.base_value)(x)
+    assert not np.allclose(shap, plaintext_oracle(model)(x)[1])
+
+
+def test_extraction_through_noise_is_exact_with_enough_repeats() -> None:
+    model = small_model(42, 3, 2)
+    counter = Counted(noisy_oracle(model, 0.5, np.random.default_rng(1)))
+    oracle = Cached(denoised(counter, 400, model.scale, model.base_value))
+    copy, _ = extract(oracle, model.quantizer, np.random.default_rng(0), shap_interactions)
+    assert copy is not None
+    x = random_rows(model, 2000, np.random.default_rng(2))
+    for got, want in zip(copy(x), plaintext_oracle(model)(x), strict=True):
+        np.testing.assert_allclose(got, want, atol=1e-9)
+    assert counter.queries % 400 == 0
+
+
+def test_too_few_repeats_give_up_instead_of_returning_a_wrong_copy() -> None:
+    model = small_model(43, 4, 3)
+    oracle = Cached(denoised(noisy_oracle(model, 4.0, np.random.default_rng(1)), 1, model.scale, model.base_value))
+    copy, _ = extract(oracle, model.quantizer, np.random.default_rng(0), shap_interactions, max_cells=5000)
+    assert copy is None
+
+
+def test_cell_budget_does_not_overflow() -> None:
+    # 40^8 cells overflows a 32-bit product, which np.prod uses on Windows
+    quantizer = FeatureQuantizer(tuple(np.arange(39.0) for _ in range(8)))
+    grid = CellGrid(quantizer, {(f, k) for f in range(8) for k in range(39)})
+    with pytest.raises(ValueError, match="budget"):
+        reconstruct(plaintext_oracle, grid, [frozenset(range(8))], np.zeros(8, dtype=np.int64), max_cells=1000)
