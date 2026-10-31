@@ -78,7 +78,8 @@ Concrete has no Windows wheels, hence the image.
   ([experiments/RESULTS.md](experiments/RESULTS.md)). None of the defences we
   measured stops this. Noise on the outputs is averaged away by least squares.
   Hiding the edges behind server-side quantisation costs the client a few
-  thousand more queries, and it recovers every edge the model uses bit for bit.
+  thousand more queries, and it recovers every edge the model uses bit for bit,
+  while the wider comparisons make the circuit 130 to 200 times as expensive.
   Evenly spaced edges keep the training quantiles private but not the model.
   Coarser outputs cost the honest client explanation quality long before they
   cost the attacker more than a few thousand queries.
