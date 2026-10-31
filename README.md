@@ -75,9 +75,11 @@ Concrete has no Windows wheels, hence the image.
   edges and the model is a few trees with 2^D leaves each, so a client copies
   it exactly, prediction and SHAP, in about 700 to 1700 queries on the
   benchmarks here; about 1200 to 2700 without SHAP outputs
-  ([experiments/RESULTS.md](experiments/RESULTS.md)). What hiding the edges,
-  coarser outputs and noise cost an attacker and the explanations is the next
-  experiment.
+  ([experiments/RESULTS.md](experiments/RESULTS.md)). None of the defences we
+  measured stops this. Noise on the outputs is averaged away by least squares.
+  Hiding the edges behind server-side quantisation costs the client a few
+  thousand more queries, and it recovers every edge the model uses bit for bit.
+  Evenly spaced edges keep the training quantiles private but not the model.
 
 Treat the deployed model as extractable by its clients.
 

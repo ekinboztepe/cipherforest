@@ -156,3 +156,46 @@ previous section is in the last column.
 - Open: the cost of finding thresholds and the graph through noise. A
   threshold is a jump in the mean output along one feature, so the same
   averaging should find it, but this is not measured.
+
+## Hiding or replacing the edges (`edges_bench.py`)
+
+Three deployments of the same pipeline:
+
+- quantile edges, public: the e2e model.
+- uniform edges, public: edges evenly spaced between the training minimum and
+  maximum, so they say nothing about the distribution in between.
+- quantile edges, hidden: the server quantises raw inputs, and the client
+  only knows each feature's range.
+
+With hidden edges, the client sweeps each feature over 16 points and bisects
+every interval whose ends answer differently, down to adjacent floats. Since
+code = number of edges < x, the lower float is then the edge itself. It then
+runs the attack above on the edges it found. 5 seeds.
+
+| data | edges | AUC | pred+shap queries, median (max) | pred queries, median (max) |
+|---|---|---|---|---|
+| Adult | quantile, public | 0.897 | 687 (1027) | 1176 (1670) |
+| Adult | uniform, public | 0.899 | 995 (1634) | 3243 (5727) |
+| Adult | quantile, hidden | 0.897 | 2652 (2792) | 5287 (6397) |
+| Taiwan | quantile, public | 0.763 | 1722 (1722) | 3441 (6483) |
+| Taiwan | uniform, public | 0.755 | 2350 (2351) | 1522 (3679) |
+| Taiwan | quantile, hidden | 0.763 | 8500 (8722) | 8799 (10496) |
+
+Every copy matched the server on the whole test split and on 5000 random
+inputs from the range, except one: uniform edges, Adult, prediction only, where
+the attacker stopped at 985 queries with a copy right on only 94% of the test
+split. Its own check samples codes evenly, and with even edges the real data
+sit in a few of them. More checks would fix it; the median is unaffected.
+
+- Hiding the edges multiplies the cost by 3 to 5. Every run recovered all the
+  edges the model uses (14 on Adult, 16 on Taiwan) bit for bit, and no wrong
+  ones. So the hidden deployment still leaks those training quantiles; only
+  the unused ones stay private. In TFHE it also moves quantisation onto the
+  server, which is not free.
+- Uniform edges keep the training distribution out of client.json at little
+  AUC cost (+0.002 on Adult, -0.008 on Taiwan) but do not protect the model.
+  They stop a data leak, not a model leak.
+- Together with the noise results: for a model this small, the cheap defences
+  only raise the price from hundreds to thousands of queries. What is left is
+  a per-client query limit, or a bigger model, which the attack's 2^m
+  inclusion-exclusion and the regression's table sizes would feel first.
