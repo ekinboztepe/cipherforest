@@ -115,7 +115,44 @@ cells were rounded the wrong way and the 200-query check missed them.
   cannot key the noise to an input it never sees. So averaging is always
   possible and the noise only works together with a per-client query limit.
 - Not differential privacy: there is no budget across queries.
-- This attacker is naive. It wants an exact copy and repeats every input
-  equally. One that fits an approximate model to noisy answers, or repeats only
-  where it is unsure, will need far fewer queries. Until that is measured, these
-  numbers are an upper bound on the protection, not a claim that noise works.
+- This attacker is naive: it repeats every input equally. The next section
+  shows how much cheaper learning from the noise is.
+
+## Learning through the noise (`learning_bench.py`)
+
+Instead of repeating inputs, the attacker asks n random inputs once and fits a
+copy. The model is a sum of one table per clique, so least squares on cell
+indicators fits it, and every query informs every table. These attackers get
+the thresholds and the interaction graph for free; without noise those cost
+the ~700 to 1700 queries above, with noise we have not measured it. A plain
+gradient-boosted regressor on the prediction, which needs no structure, is
+the baseline. 2 seeds, budgets 2^10 to 2^20, scored on the test split.
+
+Queries until every seed's copy agrees with the clean model on 99% of test
+labels (threshold 0.5) / on every test prediction and SHAP vector after
+rounding to the output grid. The repeating attacker's exact-copy cost from the
+previous section is in the last column.
+
+| data | b | tables, pred+shap | tables, pred | gbdt, pred | repeating |
+|---|---|---|---|---|---|
+| Adult | 0 | 1K / 4K | 1K / 4K | >1M / >1M | 687 |
+| Adult | 0.5 | 1K / 16K | 1K / 66K | >1M / >1M | 8.5M |
+| Adult | 1 | 4K / 66K | 4K / 262K | >1M / >1M | 21M |
+| Adult | 2 | 4K / 262K | 16K / 1M | >1M / >1M | 115M |
+| Taiwan | 0 | 1K / 1K | 1K / 1K | 4K / >1M | 1408 |
+| Taiwan | 0.5 | 1K / 66K | 1K / 262K | 4K / >1M | 24M |
+| Taiwan | 1 | 1K / 262K | 1K / 1M | 4K / >1M | 121M |
+| Taiwan | 2 | 1K / 1M | 1K / >1M | 16K / >1M | 452M |
+
+- Output noise does not protect the model. At b = 2, where the honest client
+  already loses 0.01 AUC and a fifth of its top-3 features, an exact copy costs
+  262K queries on Adult and 1M on Taiwan, about 440 times fewer than repeating.
+  A copy that gives the same decision 99% of the time costs a few thousand.
+- SHAP still helps by about 4x here: each SHAP output carries one noise term,
+  the prediction carries the sum of all of them.
+- The generic regressor is much worse than the structured fit (1.5 to 1.9
+  output units of error at 1M queries). Knowing the model's form is what makes
+  the attack cheap, and client.json gives most of it away.
+- Open: the cost of finding thresholds and the graph through noise. A
+  threshold is a jump in the mean output along one feature, so the same
+  averaging should find it, but this is not measured.
