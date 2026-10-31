@@ -48,7 +48,7 @@ def prepare(name: str) -> dict[str, float]:
     for float_tree, int_tree in zip(ensemble.trees, model.trees, strict=True):
         if not np.array_equal(float_tree.leaf_index(x_te), int_tree.leaf_index(codes)):
             raise AssertionError("integer routing diverged from float routing")
-    student = ensemble.predict(x_te)
+    student_pred = ensemble.predict(x_te)
     quant_pred, quant_shap = model.decode(model.simulate(codes))
     exact_shap = explain_ensemble(ensemble, tables, x_te, x.shape[1])
 
@@ -59,7 +59,7 @@ def prepare(name: str) -> dict[str, float]:
     np.savez(
         out / "samples.npz",
         x=x_te[pick],
-        student_pred=student[pick],
+        student_pred=student_pred[pick],
         student_shap=exact_shap[pick],
         teacher_prob=teacher.predict_proba(x_te[pick])[:, 1],
     )
@@ -70,9 +70,9 @@ def prepare(name: str) -> dict[str, float]:
         "input_bits": quantizer.input_bits,
         "scale": model.scale,
         "auc_teacher": float(roc_auc_score(y_te, teacher.predict_proba(x_te)[:, 1])),
-        "auc_student_float": float(roc_auc_score(y_te, student)),
+        "auc_student_float": float(roc_auc_score(y_te, student_pred)),
         "auc_student_quantized": float(roc_auc_score(y_te, quant_pred)),
-        "max_pred_error_quantized": float(np.abs(quant_pred - student).max()),
+        "max_pred_error_quantized": float(np.abs(quant_pred - student_pred).max()),
         "max_shap_error_quantized": float(np.abs(quant_shap - exact_shap).max()),
         "max_abs_shap": float(np.abs(exact_shap).max()),
     }
