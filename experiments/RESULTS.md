@@ -236,3 +236,57 @@ check queries do not see it.
 - 6 bits is nearly free for the honest client and costs the attacker 1.5x to
   2.5x more. Not a defence on its own.
 - Not measured: a label-only server, which the attack above does not cover.
+
+## What the defences cost under FHE (`defense_fhe_prepare.py` + `defense_fhe.py`)
+
+The e2e circuit with each defence built in, compiled with Concrete 2.11 in the
+same Docker setup. Noise and coarse outputs ran encrypted on 10 samples, every
+result equal to the integer reference plus the noise the server drew. Hidden
+edges are compile-time estimates only (see below). Cost is Concrete's
+complexity estimate relative to the e2e circuit.
+
+- noise-b: the server passes rounded Laplace(b), clipped to +-8b, as a clear
+  argument and the circuit adds it to the outputs.
+- bits-k: the student quantised to k output bits.
+- grid-p: hidden edges. The client encodes each feature on a public p-bit
+  grid over the dataset's range, and every threshold moves up to the next grid
+  edge. Up, not to the nearest: discrete features have many rows exactly on an
+  edge, and rounding down flipped 40% of Taiwan's labels. Labels are compared
+  with the deployed model on the test split.
+
+| data | variant | PBS | widest value | cost | evaluation keys | ciphertext in | server run, median | labels vs deployed |
+|---|---|---|---|---|---|---|---|---|
+| Adult | e2e | 31 | 8 bits | 1x | 566 MB | 224 KB | 0.74 s | 1 |
+| Adult | noise b = 0.5 / 2 / 4 | 31 | 9 | | 735 MB | 224 KB | 0.9 to 1.1 s | |
+| Adult | bits-6, bits-4 | 31 | 6 | | 566 MB | 224 KB | 0.7 s | 1.000 / 0.988 |
+| Adult | grid-8 | 31 | 8 | 7.6x | 2.2 GB* | 1.8 MB | | 0.998 |
+| Adult | grid-10 | 31 | 10 | 37x | 11 GB* | 7 MB | | 0.999 |
+| Adult | grid-12 | 27 | 12 | 136x | (0.8 GB*) | 0.9 MB | | 1 |
+| Adult | grid-16 | 27 | 16 | 200x | (0.9 GB*) | 1.1 MB | | 1 |
+| Taiwan | e2e | 36 | 8 | 1x | 335 MB | 368 KB | 0.68 s | 1 |
+| Taiwan | noise b = 0.5 / 2 / 4 | 36 | 9 | 1.3x | 468 MB | 368 KB | 0.9 to 1.2 s | |
+| Taiwan | bits-6, bits-4 | 36 | 6 | 1x | 335 MB | 368 KB | 0.7 to 0.8 s | 0.999 / 0.998 |
+| Taiwan | grid-8 | 36 | 8 | 6x | 2.2 GB* | 2.9 MB | | 0.983 |
+| Taiwan | grid-10 | 36 | 10 | 29x | 11 GB* | 12 MB | | 0.994 |
+| Taiwan | grid-12 | 34 | 12 | 129x | (0.8 GB*) | 1.5 MB | | 0.997 |
+| Taiwan | grid-16 | 34 | 16 | 189x | (0.9 GB*) | 1.8 MB | | 1 |
+
+\* Concrete's estimate of bootstrap plus keyswitch keys, not measured. For
+12 bits and up Concrete switches to another bootstrapping method with smaller
+keys of those two kinds, but keygen still went past 3 GB on both runs we
+tried (Adult grid-12, Taiwan grid-16), so the real total is larger. Concrete
+also could not lower the vectorised comparison on inputs wider than 11 bits;
+those circuits compare one feature at a time, which saves a few PBS.
+
+- Noise is cheap: one more output bit, about 30% larger keys and up to 0.3 s
+  more per request, whatever the bound. It is also the defence the learning
+  attacker removes (see above).
+- Coarser outputs cost the server nothing and save it nothing: the input
+  comparisons, not the output tables, set the parameters.
+- Hidden edges are the only defence that costs FHE much, and their price grows
+  with the grid. Adult keeps every prediction only at 12 bits, Taiwan every label only
+  at 16, about 130x and 190x the e2e circuit's cost, with keys that did not fit
+  this laptop. In exchange the attacker pays about 4x more queries.
+- Taken together: none of the defences buys much against extraction, and the
+  one that buys the most is by far the most expensive under FHE. For a model
+  this small, a per-client query limit is the defence that remains.
