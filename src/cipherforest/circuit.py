@@ -54,10 +54,17 @@ def circuit_function(model: QuantizedModel, noise: bool = False) -> Callable[...
         scatter[np.arange(tree.players.size), [slot[int(p)] for p in tree.players]] = 1
         plan.append((tree.features, tree.thresholds, weights, tables, scatter))
 
+    # Concrete cannot lower the vectorised comparison on inputs this wide; one
+    # comparison at a time works, but needs larger keys on narrow inputs
+    scalar = model.quantizer.input_bits > 11
+
     def run(codes: Any) -> Any:
         total = None
         for features, thresholds, weights, tables, scatter in plan:
-            index = np.sum((codes[features] > thresholds) * weights)
+            if scalar:
+                index = sum((codes[int(f)] > int(t)) * int(w) for f, t, w in zip(features, thresholds, weights, strict=True))
+            else:
+                index = np.sum((codes[features] > thresholds) * weights)
             fanned = index + np.zeros(scatter.shape[0], dtype=np.int64)  # one copy per player table
             contribution = tables[fanned] @ scatter
             total = contribution if total is None else total + contribution

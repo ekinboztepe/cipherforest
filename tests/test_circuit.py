@@ -7,7 +7,7 @@ pytest.importorskip("concrete.fhe")
 
 from cipherforest.circuit import compile_model  # noqa: E402
 from cipherforest.distill import distill_ensemble  # noqa: E402
-from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_model  # noqa: E402
+from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_model, to_grid  # noqa: E402
 from cipherforest.shap_table import build_shap_table  # noqa: E402
 
 pytestmark = pytest.mark.fhe
@@ -91,3 +91,15 @@ def test_encrypted_noise_at_the_bound() -> None:
         for row, want in zip(rows, model.simulate(rows), strict=True):
             got = compiled.expand(np.asarray(compiled.circuit.encrypt_run_decrypt(row, noise)))[0]
             np.testing.assert_array_equal(got[active], want[active] + noise)
+
+
+def test_wide_grid_circuit_matches_reference() -> None:
+    model = small_model(seed=6, depth=4, n_trees=2)
+    lows = np.array([min(e.min(), -4.0) for e in model.quantizer.edges])
+    highs = np.array([max(e.max(), 4.0) for e in model.quantizer.edges])
+    model = to_grid(model, lows, highs, bits=12)
+    compiled = compile_model(model)
+    codes = edge_cases(model, np.random.default_rng(3), n_random=100)
+    for row, want in zip(codes, model.simulate(codes), strict=True):
+        got = compiled.expand(np.asarray(compiled.circuit.simulate(row)))[0]
+        np.testing.assert_array_equal(got, want)
