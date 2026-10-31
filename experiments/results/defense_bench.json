@@ -35,7 +35,7 @@
   "top3_overlap": 0.9483798760680261,
   "max_pred_shift": 0.06308710536632003,
   "repeats": 256,
-  "queries": 10183935,
+  "queries": 9607887,
   "exact_rows": 1.0
  },
  {
@@ -47,8 +47,8 @@
   "shap_cosine": 0.9964370111965636,
   "top3_overlap": 0.947424453361723,
   "max_pred_shift": 0.06308710536632003,
-  "repeats": 128,
-  "queries": 6867636,
+  "repeats": 256,
+  "queries": 9201956,
   "exact_rows": 1.0
  },
  {
@@ -61,8 +61,8 @@
   "top3_overlap": 0.8955040537220539,
   "max_pred_shift": 0.1191645323586045,
   "repeats": 512,
-  "queries": 26550216,
-  "exact_rows": 0.996
+  "queries": 36257416,
+  "exact_rows": 0.998
  },
  {
   "dataset": "adult",
@@ -74,7 +74,7 @@
   "top3_overlap": 0.891409384980755,
   "max_pred_shift": 0.11215485398456895,
   "repeats": 512,
-  "queries": 15401784,
+  "queries": 23689912,
   "exact_rows": 1.0
  },
  {
@@ -87,8 +87,8 @@
   "top3_overlap": 0.814593399393989,
   "max_pred_shift": 0.2593580998393157,
   "repeats": 2048,
-  "queries": 87324640,
-  "exact_rows": 1.0
+  "queries": 90980832,
+  "exact_rows": 0.9978
  },
  {
   "dataset": "adult",
@@ -100,7 +100,7 @@
   "top3_overlap": 0.8115906423170365,
   "max_pred_shift": 0.23832906471720902,
   "repeats": 2048,
-  "queries": 142855656,
+  "queries": 115291624,
   "exact_rows": 1.0
  },
  {
@@ -113,7 +113,7 @@
   "top3_overlap": 0.7098244751999563,
   "max_pred_shift": 0.5046968429305603,
   "repeats": 8192,
-  "queries": 334449384,
+  "queries": 686122728,
   "exact_rows": 1.0
  },
  {
@@ -126,7 +126,7 @@
   "top3_overlap": 0.708486883411132,
   "max_pred_shift": 0.4626387726863469,
   "repeats": 8192,
-  "queries": 430466664,
+  "queries": 531482216,
   "exact_rows": 0.9988
  },
  {
@@ -139,7 +139,7 @@
   "top3_overlap": 1.0,
   "max_pred_shift": 0.0,
   "repeats": 1,
-  "queries": 1722,
+  "queries": 2147,
   "exact_rows": 1.0
  },
  {
@@ -164,8 +164,8 @@
   "shap_cosine": 0.9936646988320814,
   "top3_overlap": 0.8937333333333332,
   "max_pred_shift": 0.055302138405449286,
-  "repeats": 256,
-  "queries": 29540468,
+  "repeats": 512,
+  "queries": 17218164,
   "exact_rows": 1.0
  },
  {
@@ -178,8 +178,8 @@
   "top3_overlap": 0.8950666666666667,
   "max_pred_shift": 0.05530213840544929,
   "repeats": 256,
-  "queries": 18527208,
-  "exact_rows": 0.9978
+  "queries": 13942504,
+  "exact_rows": 0.9984
  },
  {
   "dataset": "credit_default",
@@ -191,8 +191,8 @@
   "top3_overlap": 0.8272,
   "max_pred_shift": 0.1066541240676522,
   "repeats": 1024,
-  "queries": 141488444,
-  "exact_rows": 1.0
+  "queries": 151332668,
+  "exact_rows": 0.9968
  },
  {
   "dataset": "credit_default",
@@ -204,7 +204,7 @@
   "top3_overlap": 0.8273777777777777,
   "max_pred_shift": 0.11455442955414497,
   "repeats": 1024,
-  "queries": 100089676,
+  "queries": 86022220,
   "exact_rows": 1.0
  },
  {
@@ -217,8 +217,8 @@
   "top3_overlap": 0.7106666666666667,
   "max_pred_shift": 0.20935809539205805,
   "repeats": 4096,
-  "queries": 376940108,
-  "exact_rows": 1.0
+  "queries": 256323148,
+  "exact_rows": 0.9992
  },
  {
   "dataset": "credit_default",
@@ -230,8 +230,8 @@
   "top3_overlap": 0.7137333333333333,
   "max_pred_shift": 0.22910885910828988,
   "repeats": 4096,
-  "queries": 527557068,
-  "exact_rows": 1.0
+  "queries": 290989004,
+  "exact_rows": 0.9948
  },
  {
   "dataset": "credit_default",
@@ -243,7 +243,7 @@
   "top3_overlap": 0.5658666666666666,
   "max_pred_shift": 0.41871619078411604,
   "repeats": 16384,
-  "queries": 2141288908,
+  "queries": 1189956044,
   "exact_rows": 1.0
  },
  {
@@ -256,7 +256,7 @@
   "top3_overlap": 0.5685777777777778,
   "max_pred_shift": 0.4463672599868407,
   "repeats": 16384,
-  "queries": 1625626572,
+  "queries": 1862461388,
   "exact_rows": 1.0
  }
 ]

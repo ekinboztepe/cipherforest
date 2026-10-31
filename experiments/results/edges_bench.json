@@ -28,7 +28,7 @@
   "seed": 2,
   "auc": 0.8966032295232804,
   "total_edges": 139,
-  "queries": 1027,
+  "queries": 1180,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -72,7 +72,7 @@
   "seed": 1,
   "auc": 0.8966032295232804,
   "total_edges": 139,
-  "queries": 1244,
+  "queries": 1468,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -94,7 +94,7 @@
   "seed": 3,
   "auc": 0.8966032295232804,
   "total_edges": 139,
-  "queries": 1176,
+  "queries": 1390,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -105,7 +105,7 @@
   "seed": 4,
   "auc": 0.8966032295232804,
   "total_edges": 139,
-  "queries": 1670,
+  "queries": 1487,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -116,7 +116,7 @@
   "seed": 0,
   "auc": 0.8994056102067102,
   "total_edges": 434,
-  "queries": 1634,
+  "queries": 2071,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -171,7 +171,7 @@
   "seed": 0,
   "auc": 0.8994056102067102,
   "total_edges": 434,
-  "queries": 5727,
+  "queries": 3397,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -193,7 +193,7 @@
   "seed": 2,
   "auc": 0.8994056102067102,
   "total_edges": 434,
-  "queries": 3161,
+  "queries": 2290,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -204,7 +204,7 @@
   "seed": 3,
   "auc": 0.8994056102067102,
   "total_edges": 434,
-  "queries": 3919,
+  "queries": 2385,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -215,9 +215,9 @@
   "seed": 4,
   "auc": 0.8994056102067102,
   "total_edges": 434,
-  "queries": 3243,
-  "exact_test": 1.0,
-  "exact_range": 1.0
+  "queries": 2168,
+  "exact_test": 0.9416100237490787,
+  "exact_range": 0.9988
  },
  {
   "dataset": "adult",
@@ -257,7 +257,7 @@
   "used_edges": 14,
   "recovered_edges": 14,
   "wrong_edges": 0,
-  "queries": 2792,
+  "queries": 2803,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -299,7 +299,7 @@
   "used_edges": 14,
   "recovered_edges": 14,
   "wrong_edges": 0,
-  "queries": 6397,
+  "queries": 6385,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -313,7 +313,7 @@
   "used_edges": 14,
   "recovered_edges": 14,
   "wrong_edges": 0,
-  "queries": 5037,
+  "queries": 5052,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -327,7 +327,7 @@
   "used_edges": 14,
   "recovered_edges": 14,
   "wrong_edges": 0,
-  "queries": 4805,
+  "queries": 4433,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -341,7 +341,7 @@
   "used_edges": 14,
   "recovered_edges": 14,
   "wrong_edges": 0,
-  "queries": 5287,
+  "queries": 5265,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -355,7 +355,7 @@
   "used_edges": 14,
   "recovered_edges": 14,
   "wrong_edges": 0,
-  "queries": 6296,
+  "queries": 5651,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -366,7 +366,7 @@
   "seed": 0,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 1722,
+  "queries": 2147,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -388,7 +388,7 @@
   "seed": 2,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 1722,
+  "queries": 2148,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -399,7 +399,7 @@
   "seed": 3,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 1722,
+  "queries": 2148,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -410,7 +410,7 @@
   "seed": 4,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 1720,
+  "queries": 2146,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -421,7 +421,7 @@
   "seed": 0,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 6483,
+  "queries": 2573,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -432,7 +432,7 @@
   "seed": 1,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 5661,
+  "queries": 5038,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -443,7 +443,7 @@
   "seed": 2,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 3441,
+  "queries": 2497,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -454,7 +454,7 @@
   "seed": 3,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 1941,
+  "queries": 2483,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -465,7 +465,7 @@
   "seed": 4,
   "auc": 0.7628495289941332,
   "total_edges": 409,
-  "queries": 2668,
+  "queries": 2459,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -474,9 +474,9 @@
   "edges": "uniform, public",
   "attacker": "pred+shap",
   "seed": 0,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
-  "queries": 2350,
+  "queries": 3077,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -485,9 +485,9 @@
   "edges": "uniform, public",
   "attacker": "pred+shap",
   "seed": 1,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
-  "queries": 2351,
+  "queries": 3079,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -496,7 +496,7 @@
   "edges": "uniform, public",
   "attacker": "pred+shap",
   "seed": 2,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
   "queries": 1422,
   "exact_test": 1.0,
@@ -507,9 +507,9 @@
   "edges": "uniform, public",
   "attacker": "pred+shap",
   "seed": 3,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
-  "queries": 2351,
+  "queries": 3079,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -518,9 +518,9 @@
   "edges": "uniform, public",
   "attacker": "pred+shap",
   "seed": 4,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
-  "queries": 2343,
+  "queries": 3072,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -529,7 +529,7 @@
   "edges": "uniform, public",
   "attacker": "pred",
   "seed": 0,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
   "queries": 1504,
   "exact_test": 1.0,
@@ -540,7 +540,7 @@
   "edges": "uniform, public",
   "attacker": "pred",
   "seed": 1,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
   "queries": 1520,
   "exact_test": 1.0,
@@ -551,7 +551,7 @@
   "edges": "uniform, public",
   "attacker": "pred",
   "seed": 2,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
   "queries": 1522,
   "exact_test": 1.0,
@@ -562,9 +562,9 @@
   "edges": "uniform, public",
   "attacker": "pred",
   "seed": 3,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
-  "queries": 3679,
+  "queries": 3434,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -573,9 +573,9 @@
   "edges": "uniform, public",
   "attacker": "pred",
   "seed": 4,
-  "auc": 0.7546344927808133,
+  "auc": 0.7546318096629189,
   "total_edges": 713,
-  "queries": 2516,
+  "queries": 3342,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -589,7 +589,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 8490,
+  "queries": 8505,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -603,7 +603,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 8496,
+  "queries": 8512,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -617,7 +617,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 8500,
+  "queries": 8516,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -631,7 +631,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 8720,
+  "queries": 8743,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -645,7 +645,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 8722,
+  "queries": 8511,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -659,7 +659,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 9887,
+  "queries": 9039,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -673,7 +673,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 10496,
+  "queries": 10427,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -687,7 +687,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 8729,
+  "queries": 8861,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -701,7 +701,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 8720,
+  "queries": 8815,
   "exact_test": 1.0,
   "exact_range": 1.0
  },
@@ -715,7 +715,7 @@
   "used_edges": 16,
   "recovered_edges": 16,
   "wrong_edges": 0,
-  "queries": 8799,
+  "queries": 8930,
   "exact_test": 1.0,
   "exact_range": 1.0
  }

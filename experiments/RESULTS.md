@@ -68,19 +68,24 @@ exactly: same prediction and SHAP vector on every input. Same e2e models,
 
 Each round adds one random starting point; the client stops once its copy
 agrees with the server on 200 fresh queries, which count towards the total.
+An input the copy got wrong becomes an extra starting point of the next round.
+If a round finds nothing new, the client also runs the 2-d test from that
+input on every output: an edge between f and g can show up only jointly, in a
+third feature's SHAP value, which 1-d sweeps rarely see. 8-bit outputs almost
+never need this; the coarse outputs below do.
 
 | attacker | Adult queries, median (max) | Taiwan queries, median (max) |
 |---|---|---|
-| prediction only, every cell | 2624 (3088) | 28563 (31014) |
-| prediction only, graph | 1169 (1670) | 2684 (6483) |
-| prediction + SHAP, graph | 687 (1027) | 1722 (2348) |
+| prediction only, every cell | 2547 (3123) | 28767 (30813) |
+| prediction only, graph | 1382 (1640) | 2492 (5038) |
+| prediction + SHAP, graph | 687 (1180) | 2148 (3198) |
 
 Every copy matched the server on all 5000 inputs.
 
 - A few thousand queries copy the model exactly even without explanations. The
   leak comes from the small model and the public edges, not from SHAP.
-- Against an attacker that also exploits structure, SHAP saves about 1.6x. The
-  naive comparison (every cell) would suggest 4x to 17x, which overstates it.
+- Against an attacker that also exploits structure, SHAP saves 1.2x to 2x. The
+  naive comparison (every cell) would suggest 4x to 13x, which overstates it.
 - Defences that only touch the SHAP output cannot stop this; the prediction
   alone suffices. Hiding the edges and coarsening the output are the candidates.
 
@@ -96,17 +101,17 @@ doubling r until its copy passes the 200-query check; all attempts count.
 | data | b | AUC (clean) | SHAP cosine | top-3 overlap | repeats | attacker queries, median |
 |---|---|---|---|---|---|---|
 | Adult | 0 | 0.897 (0.897) | 1.000 | 1.00 | 1 | 687 |
-| Adult | 0.5 | 0.896 | 0.996 | 0.95 | 128–256 | 8.5M |
-| Adult | 1 | 0.894 | 0.987 | 0.89 | 512 | 21M |
-| Adult | 2 | 0.889 | 0.953 | 0.81 | 2048 | 115M |
-| Adult | 4 | 0.871 | 0.850 | 0.71 | 8192 | 382M |
-| Taiwan | 0 | 0.763 (0.763) | 1.000 | 1.00 | 1 | 1408 |
-| Taiwan | 0.5 | 0.762 | 0.994 | 0.89 | 256 | 24M |
-| Taiwan | 1 | 0.760 | 0.977 | 0.83 | 1024 | 121M |
-| Taiwan | 2 | 0.753 | 0.920 | 0.71 | 4096 | 452M |
-| Taiwan | 4 | 0.738 | 0.773 | 0.57 | 16384 | 1.9G |
+| Adult | 0.5 | 0.896 | 0.996 | 0.95 | 256 | 9.4M |
+| Adult | 1 | 0.894 | 0.987 | 0.89 | 512 | 30M |
+| Adult | 2 | 0.889 | 0.953 | 0.81 | 2048 | 103M |
+| Adult | 4 | 0.871 | 0.850 | 0.71 | 8192 | 609M |
+| Taiwan | 0 | 0.763 (0.763) | 1.000 | 1.00 | 1 | 1621 |
+| Taiwan | 0.5 | 0.762 | 0.994 | 0.89 | 256–512 | 16M |
+| Taiwan | 1 | 0.760 | 0.977 | 0.83 | 1024 | 119M |
+| Taiwan | 2 | 0.753 | 0.920 | 0.71 | 4096 | 274M |
+| Taiwan | 4 | 0.738 | 0.773 | 0.57 | 16384 | 1.5G |
 
-Copies matched the clean model on at least 99.6% of 5000 random inputs; a few
+Copies matched the clean model on at least 99.5% of 5000 random inputs; a few
 cells were rounded the wrong way and the 200-query check missed them.
 
 - b = 0.5 costs the honest client almost nothing (AUC -0.001, cosine 0.99) and
@@ -124,7 +129,7 @@ Instead of repeating inputs, the attacker asks n random inputs once and fits a
 copy. The model is a sum of one table per clique, so least squares on cell
 indicators fits it, and every query informs every table. These attackers get
 the thresholds and the interaction graph for free; without noise those cost
-the ~700 to 1700 queries above, with noise we have not measured it. A plain
+the ~700 to 2200 queries above, with noise we have not measured it. A plain
 gradient-boosted regressor on the prediction, which needs no structure, is
 the baseline. 2 seeds, budgets 2^10 to 2^20, scored on the test split.
 
@@ -136,17 +141,17 @@ previous section is in the last column.
 | data | b | tables, pred+shap | tables, pred | gbdt, pred | repeating |
 |---|---|---|---|---|---|
 | Adult | 0 | 1K / 4K | 1K / 4K | >1M / >1M | 687 |
-| Adult | 0.5 | 1K / 16K | 1K / 66K | >1M / >1M | 8.5M |
-| Adult | 1 | 4K / 66K | 4K / 262K | >1M / >1M | 21M |
-| Adult | 2 | 4K / 262K | 16K / 1M | >1M / >1M | 115M |
-| Taiwan | 0 | 1K / 1K | 1K / 1K | 4K / >1M | 1408 |
-| Taiwan | 0.5 | 1K / 66K | 1K / 262K | 4K / >1M | 24M |
-| Taiwan | 1 | 1K / 262K | 1K / 1M | 4K / >1M | 121M |
-| Taiwan | 2 | 1K / 1M | 1K / >1M | 16K / >1M | 452M |
+| Adult | 0.5 | 1K / 16K | 1K / 66K | >1M / >1M | 9.4M |
+| Adult | 1 | 4K / 66K | 4K / 262K | >1M / >1M | 30M |
+| Adult | 2 | 4K / 262K | 16K / 1M | >1M / >1M | 103M |
+| Taiwan | 0 | 1K / 1K | 1K / 1K | 4K / >1M | 1621 |
+| Taiwan | 0.5 | 1K / 66K | 1K / 262K | 4K / >1M | 16M |
+| Taiwan | 1 | 1K / 262K | 1K / 1M | 4K / >1M | 119M |
+| Taiwan | 2 | 1K / 1M | 1K / >1M | 16K / >1M | 274M |
 
 - Output noise does not protect the model. At b = 2, where the honest client
   already loses 0.01 AUC and a fifth of its top-3 features, an exact copy costs
-  262K queries on Adult and 1M on Taiwan, about 440 times fewer than repeating.
+  262K queries on Adult and 1M on Taiwan, 260 to 390 times fewer than repeating.
   A copy that gives the same decision 99% of the time costs a few thousand.
 - SHAP still helps by about 4x here: each SHAP output carries one noise term,
   the prediction carries the sum of all of them.
@@ -174,20 +179,20 @@ runs the attack above on the edges it found. 5 seeds.
 
 | data | edges | AUC | pred+shap queries, median (max) | pred queries, median (max) |
 |---|---|---|---|---|
-| Adult | quantile, public | 0.897 | 687 (1027) | 1176 (1670) |
-| Adult | uniform, public | 0.899 | 995 (1634) | 3243 (5727) |
-| Adult | quantile, hidden | 0.897 | 2652 (2792) | 5287 (6397) |
-| Taiwan | quantile, public | 0.763 | 1722 (1722) | 3441 (6483) |
-| Taiwan | uniform, public | 0.755 | 2350 (2351) | 1522 (3679) |
-| Taiwan | quantile, hidden | 0.763 | 8500 (8722) | 8799 (10496) |
+| Adult | quantile, public | 0.897 | 687 (1180) | 1390 (1487) |
+| Adult | uniform, public | 0.899 | 995 (2071) | 2290 (3397) |
+| Adult | quantile, hidden | 0.897 | 2652 (2803) | 5265 (6385) |
+| Taiwan | quantile, public | 0.763 | 2147 (2148) | 2497 (5038) |
+| Taiwan | uniform, public | 0.755 | 3077 (3079) | 1522 (3434) |
+| Taiwan | quantile, hidden | 0.763 | 8512 (8743) | 8930 (10427) |
 
 Every copy matched the server on the whole test split and on 5000 random
-inputs from the range, except one: uniform edges, Adult, prediction only, where
-the attacker stopped at 985 queries with a copy right on only 94% of the test
-split. Its own check samples codes evenly, and with even edges the real data
+inputs from the range, except two: uniform edges, Adult, prediction only, where
+the attacker stopped (at 985 and 2168 queries) with a copy right on only 94% of
+the test split and 99.9% of the range. Its own check samples codes evenly, and with even edges the real data
 sit in a few of them. More checks would fix it; the median is unaffected.
 
-- Hiding the edges multiplies the cost by 3 to 5. Every run recovered all the
+- Hiding the edges multiplies the cost by about 4. Every run recovered all the
   edges the model uses (14 on Adult, 16 on Taiwan) bit for bit, and no wrong
   ones. So the hidden deployment still leaks those training quantiles; only
   the unused ones stay private. In TFHE it also moves quantisation onto the
@@ -199,3 +204,35 @@ sit in a few of them. More checks would fix it; the median is unaffected.
   only raise the price from hundreds to thousands of queries. What is left is
   a per-client query limit, or a bigger model, which the attack's 2^m
   inclusion-exclusion and the regression's table sizes would feel first.
+
+## Coarser outputs (`coarse_bench.py`)
+
+Fewer output bits per SHAP value: the same student quantised to 8, 6, 5 or 4
+bits (3 trees need at least 4, since each can add one rounding unit). The
+attacker copies the deployed coarse model, so the honest cost is measured
+against the float student the owner trained. 5 seeds per attacker.
+
+| data | bits | AUC | SHAP cosine vs float | labels vs float | pred+shap queries, median | pred queries, median |
+|---|---|---|---|---|---|---|
+| Adult | 8 | 0.897 | 0.999 | 1.000 | 687 | 1390 |
+| Adult | 6 | 0.896 | 0.987 | 1.000 | 1763 | 1969 |
+| Adult | 5 | 0.890 | 0.923 | 0.963 | 1805 | 2086 |
+| Adult | 4 | 0.876 | 0.842 | 0.988 | 2898 | 3079 |
+| Taiwan | 8 | 0.763 | 0.999 | 1.000 | 2147 | 2497 |
+| Taiwan | 6 | 0.763 | 0.972 | 0.999 | 3315 | 2600 |
+| Taiwan | 5 | 0.759 | 0.927 | 0.997 | 5332 | 3674 |
+| Taiwan | 4 | 0.752 | 0.797 | 0.998 | 9615 | 5117 |
+
+Every copy was exact on the test split except three at 4 bits on Taiwan
+(99.6%, 95.9%, 99.6%): there the copy and the server rarely differ, and 200
+check queries do not see it.
+
+- Coarsening is the worst trade-off measured. At 4 bits the honest client
+  loses 0.02 AUC and the explanations drift to cosine 0.8, while the attacker
+  pays at most 4.5x more and still ends with an exact or near-exact copy.
+- The extra cost comes from effects that only show jointly (see Extraction),
+  not from hidden information: the coarse model is still a sum of clique
+  tables, and nothing it computes is out of the attacker's reach.
+- 6 bits is nearly free for the honest client and costs the attacker 1.5x to
+  2.5x more. Not a defence on its own.
+- Not measured: a label-only server, which the attack above does not cover.
