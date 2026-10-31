@@ -20,12 +20,10 @@ from pathlib import Path
 
 import numpy as np
 from datasets import load_dataset
-from e2e_prepare import DEPTH, N_BACKGROUND, N_BINS, OUTPUT_BITS, SEED, TREES
-from sklearn.ensemble import RandomForestClassifier
+from e2e_prepare import N_BINS, OUTPUT_BITS, SEED, student
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
 
-from cipherforest.distill import distill_ensemble
 from cipherforest.extraction import (
     Cached,
     Counted,
@@ -38,7 +36,6 @@ from cipherforest.extraction import (
     true_thresholds,
 )
 from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_model
-from cipherforest.shap_table import build_shap_table
 
 E2E = Path(__file__).resolve().parent / "e2e"
 OUT = Path(__file__).resolve().parent / "results" / "edges_bench.json"
@@ -49,14 +46,11 @@ N_EVAL = 5000
 
 def uniform_model(x_tr: np.ndarray, y_tr: np.ndarray) -> QuantizedModel:
     """e2e_prepare.py with evenly spaced edges."""
-    rng = np.random.default_rng(SEED)
-    teacher = RandomForestClassifier(n_estimators=100, max_depth=12, n_jobs=-1, random_state=SEED).fit(x_tr, y_tr)
     inner = np.linspace(0.0, 1.0, N_BINS + 1)[1:-1]
     lo, hi = x_tr.min(axis=0), x_tr.max(axis=0)
     quantizer = FeatureQuantizer(tuple(np.unique(a + inner * (b - a)) if b > a else np.zeros(0) for a, b in zip(lo, hi, strict=True)))
-    ensemble = distill_ensemble(x_tr, teacher.predict_proba(x_tr)[:, 1], DEPTH, TREES, quantizer.edges)
-    background = x_tr[rng.choice(len(x_tr), size=N_BACKGROUND, replace=False)]
-    return quantize_model(ensemble, [build_shap_table(t, background) for t in ensemble.trees], quantizer, OUTPUT_BITS)
+    _, ensemble, tables = student(x_tr, y_tr, quantizer, np.random.default_rng(SEED))
+    return quantize_model(ensemble, tables, quantizer, OUTPUT_BITS)
 
 
 def exact_share(copy, view, x: np.ndarray) -> float:
