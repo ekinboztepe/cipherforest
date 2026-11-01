@@ -27,10 +27,10 @@ DEPTH, TREES, OUTPUT_BITS, N_BINS = 6, 3, 8, 32
 N_BACKGROUND, N_SAMPLES, SEED = 100, 20, 0
 
 
-def student(x_tr: np.ndarray, y_tr: np.ndarray, quantizer: FeatureQuantizer, rng: np.random.Generator):
+def student(x_tr: np.ndarray, y_tr: np.ndarray, quantizer: FeatureQuantizer, rng: np.random.Generator, n_trees: int = TREES):
     """Teacher forest, distilled ensemble on the quantiser's edges, and its SHAP tables."""
     teacher = RandomForestClassifier(n_estimators=100, max_depth=12, n_jobs=-1, random_state=SEED).fit(x_tr, y_tr)
-    ensemble = distill_ensemble(x_tr, teacher.predict_proba(x_tr)[:, 1], DEPTH, TREES, quantizer.edges)
+    ensemble = distill_ensemble(x_tr, teacher.predict_proba(x_tr)[:, 1], DEPTH, n_trees, quantizer.edges)
     background = x_tr[rng.choice(len(x_tr), size=N_BACKGROUND, replace=False)]
     return teacher, ensemble, [build_shap_table(tree, background) for tree in ensemble.trees]
 
