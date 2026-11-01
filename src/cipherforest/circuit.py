@@ -100,13 +100,18 @@ def noisy_inputs(model: QuantizedModel, noise_bound: int, n: int, seed: int = 0)
     return cases
 
 
-def compile_model(model: QuantizedModel, inputset_size: int = 64, noise_bound: int = 0) -> CompiledModel:
+def compile_model(
+    model: QuantizedModel,
+    inputset_size: int = 64,
+    noise_bound: int = 0,
+    configuration: fhe.Configuration | None = None,
+) -> CompiledModel:
     if noise_bound:
         compiler = fhe.Compiler(circuit_function(model, noise=True), {"codes": "encrypted", "noise": "clear"})
-        circuit = compiler.compile(noisy_inputs(model, noise_bound, inputset_size))
+        circuit = compiler.compile(noisy_inputs(model, noise_bound, inputset_size), configuration)
     else:
         compiler = fhe.Compiler(circuit_function(model), {"codes": "encrypted"})
-        circuit = compiler.compile(representative_inputs(model, inputset_size))
+        circuit = compiler.compile(representative_inputs(model, inputset_size), configuration)
     return CompiledModel(
         circuit=circuit,
         active_features=active_features(model),
