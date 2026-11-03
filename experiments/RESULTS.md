@@ -52,9 +52,6 @@ Bank marketing came later and only went through the defence benches below: 16
 features (8 used), AUC teacher / student / quantised student 0.925 / 0.899 /
 0.899, max error 0.006 on both outputs. Its encrypted runs are in the FHE section.
 
-For scale only (different model and scheme, vendor numbers): CipherExplain lists
-about 70 s per encrypted explanation for a 100-tree, depth-4 XGBoost under CKKS.
-
 ## Extraction (`extraction_bench.py`)
 
 A client with only `client.json` and a query budget copies the deployed model
@@ -272,6 +269,18 @@ and 200 check queries do not see it.
   to 2.7x more. Not a defence on its own.
 - Not measured: a label-only server, which the attack above does not cover.
 
+## Returning only the top-k SHAP values
+
+Not implemented, because the benches above already bound it. As long as the
+prediction comes back, the attacker can ignore the explanation altogether, and
+that attacker is the prediction-only one: about 1000 to 2500 queries for a copy
+of the prediction on public edges. So top-k can at best take the SHAP attacker
+up to that cost, a factor of 1.1 to 2 by the extraction table. Once it holds the
+model, the attacker can also compute SHAP values itself, against a background set
+of its own. The honest client, on the other hand, loses the other values and the
+check that they sum to the prediction. A server that also
+withholds the prediction is the label-only case above, not measured.
+
 ## What the defences cost under FHE (`defense_fhe_prepare.py` + `defense_fhe.py`)
 
 The e2e circuit with each defence built in, compiled with Concrete 2.11 in the
@@ -391,3 +400,20 @@ retry. We do not know why, so treat the XGB times as laptop numbers.
   killed at 3 GB; its row was run with 4 GB. Compressed keys avoid this: the same
   model on Concrete-ML's settings fit in 3 GB.
 
+## Published numbers, not measured here
+
+Other work on SHAP for private tree models. Different models, threat models and
+hardware, so these are for scale and not a comparison.
+
+| | setting | model | time per explanation | source |
+|---|---|---|---|---|
+| XorSHAP | semi-honest MPC, full threshold | 60 trees, depth 4, 100 features | 4.5 s (100 samples in 7.5 min, preliminary) | [paper](https://cic.iacr.org/p/1/4/27) |
+| CipherExplain | "full-FHE path-product", scheme not named on the page | 100 trees, depth 4, K=40 | about 70 s (vendor figure) | [vendor page](https://vaultbytes.com/cipherexplain) |
+
+The same vendor's [SDK page](https://pypi.org/project/cipherexplain/) (0.8.1) lists
+its tree model types as plaintext KernelSHAP with `fhe_mode` ignored, and the
+vendor page says hosted CatBoost SHAP is plaintext TreeSHAP. The 70 s path is
+not what that SDK runs, and we could not check it.
+
+Nearest row of ours: T=30 at 16 to 35 s on 2 laptop CPUs (see above). We have no
+encrypted run at T=100, only Concrete's estimates.
