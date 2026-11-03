@@ -290,3 +290,57 @@ those circuits compare one feature at a time, which saves a few PBS.
 - Taken together: none of the defences buys much against extraction, and the
   one that buys the most is by far the most expensive under FHE. For a model
   this small, a per-client query limit is the defence that remains.
+
+## Against Concrete-ML (`concrete_ml_bench.py`)
+
+Concrete-ML 1.9's own XGBClassifier (depth 6, 6-bit inputs, prediction only)
+against our pipeline (T oblivious trees of depth 6, 5-bit inputs, 8-bit outputs,
+prediction and exact SHAP). Same split, same Concrete 2.10 from
+`docker/concrete-ml.Dockerfile`, each through its own client/server files. Our
+circuit was compiled twice: with the settings Concrete-ML uses (compressed keys
+and inputs, p_error 2^-40 per bootstrap), and with Concrete's defaults as in the
+e2e demo.
+
+Every container was capped at 2 CPUs and 3 GB, so times here are slower than in
+the e2e table. Server run is the median over 10 rows, 3 for XGB T=30. Our
+results equalled the integer reference on every row, Concrete-ML's its own
+simulation. T=100 was compiled only; the last column is the ratio of Concrete's
+complexity estimates, XGB over ours on the same settings.
+
+| data | T | PBS XGB / ours | AUC XGB / ours | server run XGB | ours, same settings | ours, defaults | cost ratio |
+|---|---|---|---|---|---|---|---|
+| Adult | 3 | 1218 / 31 | 0.902 / 0.897 | 19.5 s | 3.6 s | 2.1 s | 5.5x |
+| Adult | 10 | 4690 / 109 | 0.912 / 0.906 | 60.6 s | 9.9 s | 5.3 s | 5.3x |
+| Adult | 30 | 15960 / 338 | 0.919 / 0.904 | 183 s | 34.5 s | 16.2 s | 5.6x |
+| Adult | 100 | 56800 / 1137 | 0.919 / 0.895 | | | | 5.8x |
+| Taiwan | 3 | 1461 / 36 | 0.761 / 0.763 | 25.6 s | 4.3 s | 2.0 s | 4.4x |
+| Taiwan | 10 | 5050 / 117 | 0.767 / 0.769 | 73.1 s | 11.7 s | 5.8 s | 4.7x |
+| Taiwan | 30 | 15150 / 353 | 0.766 / 0.766 | 149 s* | 33.6 s | 16.5 s | 4.7x |
+| Taiwan | 100 | 51400 / 1182 | 0.759 / 0.752 | | | | 4.7x |
+
+\* Third attempt. The first produced no output in 30 minutes, the second
+finished one row in 186 s and not the next in the rest of its 30 minutes. An
+earlier Adult XGB T=10 run also stalled for an hour, then took 10 minutes on the
+retry. We do not know why, so treat the XGB times as laptop numbers.
+
+|  | evaluation keys | ciphertext in |
+|---|---|---|
+| Concrete-ML XGB | 74 MB | 0.33 KB (Adult), 0.54 KB (Taiwan) |
+| ours, same settings | 361 MB (Adult), 319 MB (Taiwan) | same |
+| ours, defaults | 566 to 829 MB (Adult), 335 MB (Taiwan) | 224 KB (Adult), 368 KB (Taiwan) |
+
+- Ours is about 4x to 6x faster on the same settings, and returns the
+  explanation too. The PBS count is 40x to 50x lower, but that overstates it: our
+  bootstraps carry heavier parameters, and time follows Concrete's complexity
+  estimate, not the PBS count.
+- Concrete-ML's keys are 4x to 5x smaller than ours on the same settings.
+- Compression is free to take: it shrinks our ciphertext about 700x, for about
+  twice the server time because of the stricter p_error.
+- Ours does not gain from more trees. Adult's float student stays at 0.906 from
+  T=10 on while XGB climbs to 0.919, so at T=30 XGB is ahead by 0.015 and buys it
+  with 5x the time. On Taiwan the two are level.
+- At T=100 our 8 output bits start to hurt: the float student scores 0.907 on
+  Adult and 0.767 on Taiwan, the quantised one 0.895 and 0.752.
+- Adult ours T=10 with defaults picked larger keys than T=3 or T=30 and was
+  killed at 3 GB; its row was run with 4 GB. Compressed keys avoid this: the same
+  model on Concrete-ML's settings fit in 3 GB.

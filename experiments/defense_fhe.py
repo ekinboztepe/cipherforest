@@ -45,11 +45,17 @@ def load(directory: Path, variant: str) -> tuple[QuantizedModel, float]:
 
 def run(directory: Path, variant: str, keygen: bool) -> dict[str, object]:
     model, b = load(directory, variant)
-    bound = math.ceil(8 * b)
     x = np.load(directory / "samples.npz")["x"][:N_SAMPLES]
+    return measure(model, b, x, directory / "deploy" / variant, keygen)
 
+
+def measure(
+    model: QuantizedModel, b: float, x: np.ndarray, deploy: Path, keygen: bool, configuration: object = None
+) -> dict[str, object]:
+    """Compile, then unless keygen is False deploy to files and run x encrypted."""
+    bound = math.ceil(8 * b)
     start = time.perf_counter()
-    compiled = compile_model(model, noise_bound=bound)
+    compiled = compile_model(model, noise_bound=bound, configuration=configuration)
     compile_s = time.perf_counter() - start
     circuit = compiled.circuit
     static = {
@@ -67,7 +73,6 @@ def run(directory: Path, variant: str, keygen: bool) -> dict[str, object]:
     }
     if not keygen:
         return static
-    deploy = directory / "deploy" / variant
     export(compiled, model, deploy)
 
     server = Server(deploy / SERVER_FILE)
