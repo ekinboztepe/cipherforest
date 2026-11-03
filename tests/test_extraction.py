@@ -287,6 +287,18 @@ def test_extraction_with_hidden_edges_is_exact(use_shap: bool) -> None:
             np.testing.assert_allclose(got, want, atol=1e-9)
 
 
+@pytest.mark.parametrize("seed", range(10))
+def test_hidden_edge_that_shows_rarely_is_found_from_a_wrong_input(seed: int) -> None:
+    # x0's threshold only shows where x1 > 0.9, which few random starts hit
+    def view(x: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        return ((x[:, 0] > 0.5) & (x[:, 1] > 0.9)).astype(np.float64), np.zeros_like(x)
+
+    low, high = np.zeros(2), np.ones(2)
+    copy, found = extract_hidden(Cached(view), low, high, np.random.default_rng(seed), prediction_interactions, max_rounds=3)
+    assert copy is not None
+    assert [e.tolist() for e in found] == [[0.5], [0.9]]
+
+
 @pytest.mark.parametrize("seed", range(6))
 def test_extraction_is_exact_on_coarse_outputs(seed: int) -> None:
     model = small_model(seed + 70, 6, 3, output_bits=4)

@@ -480,18 +480,24 @@ def extract_hidden(
 ) -> tuple[ExtractedModel | None, list[FloatArray]]:
     """extract() for a client that only knows a plausible range of each feature.
 
-    Each round bisects from one more random start, then runs extract() on the
-    edges found so far. extract() only checks inputs on those edges, so the copy
-    must also match `check` random inputs from the range, which a missed
-    threshold would break. Returns the copy and the edges it found.
+    Each round bisects from one more start, then runs extract() on the edges
+    found so far. extract() only checks inputs on those edges, so the copy must
+    also match `check` random inputs from the range, which a missed threshold
+    would break. An input that breaks it is the next start, since the threshold
+    shows from there; otherwise the start is random. Returns the copy and the
+    edges it found.
     """
     known = [np.zeros(0) for _ in range(low.size)]
+    start = rng.uniform(low, high)[None]
     for _ in range(max_rounds):
-        known = bisect_edges(oracle, low, high, rng.uniform(low, high)[None], known)
+        known = bisect_edges(oracle, low, high, start, known)
         copy, _ = extract(oracle, FeatureQuantizer(tuple(known)), rng, graph)
         if copy is None:
+            start = rng.uniform(low, high)[None]
             continue
         x = rng.uniform(low, high, size=(check, low.size))
-        if all(np.all(np.abs(a - b) <= TOLERANCE) for a, b in zip(copy(x), oracle(x), strict=True)):
+        wrong = _differ(np.column_stack(copy(x)), np.column_stack(oracle(x)))
+        if not wrong.any():
             return copy, known
+        start = x[np.flatnonzero(wrong)[:1]]
     return None, known
