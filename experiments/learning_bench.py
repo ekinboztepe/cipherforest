@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 from itertools import combinations
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -31,7 +32,7 @@ from cipherforest.quantize import QuantizedModel
 
 E2E = Path(__file__).resolve().parent / "e2e"
 OUT = Path(__file__).resolve().parent / "results" / "learning_bench.json"
-DATASETS = ("adult", "credit_default")
+DATASETS = ("adult", "credit_default", "bank_marketing")
 NOISE = (0.0, 0.5, 1.0, 2.0)
 BUDGETS = [1 << k for k in range(10, 21, 2)]
 SEEDS = range(2)
@@ -101,8 +102,9 @@ def first(sel: list[dict[str, object]], key: str, target: float) -> str:
 
 
 if __name__ == "__main__":
-    rows: list[dict[str, object]] = []
-    for dataset in DATASETS:
+    selected = sys.argv[1:] or DATASETS
+    rows: list[dict[str, object]] = [r for r in json.loads(OUT.read_text()) if r["dataset"] not in selected]  # keep the other datasets
+    for dataset in selected:
         run(dataset, rows)
     print("dataset         attacker           noise  99% labels  exact  labels / error at max budget")
     for dataset in DATASETS:

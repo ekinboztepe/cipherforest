@@ -11,6 +11,7 @@ invisible to both. Same pipeline and split as e2e_prepare.py.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -25,7 +26,7 @@ from cipherforest.shap_table import explain_ensemble
 
 E2E = Path(__file__).resolve().parent / "e2e"
 OUT = Path(__file__).resolve().parent / "results" / "coarse_bench.json"
-DATASETS = ("adult", "credit_default")
+DATASETS = ("adult", "credit_default", "bank_marketing")
 BITS = (8, 6, 5, 4)  # 3 trees need at least 4: each may add a rounding unit
 SEEDS = range(5)
 
@@ -83,8 +84,9 @@ def run(dataset: str, rows: list[dict[str, object]]) -> None:
 
 
 if __name__ == "__main__":
-    rows: list[dict[str, object]] = []
-    for dataset in DATASETS:
+    selected = sys.argv[1:] or DATASETS
+    rows: list[dict[str, object]] = [r for r in json.loads(OUT.read_text()) if r["dataset"] not in selected]  # keep the other datasets
+    for dataset in selected:
         run(dataset, rows)
     print("dataset         bits  AUC    SHAP cos  labels vs fine  pred+shap queries  pred queries  exact (min)")
     for dataset in DATASETS:

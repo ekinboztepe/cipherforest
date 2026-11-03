@@ -10,6 +10,7 @@ Needs experiments/e2e/<dataset>/model.json from e2e_prepare.py.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -28,7 +29,7 @@ from cipherforest.quantize import QuantizedModel
 
 E2E = Path(__file__).resolve().parent / "e2e"
 OUT = Path(__file__).resolve().parent / "results" / "extraction_bench.json"
-DATASETS = ("adult", "credit_default")
+DATASETS = ("adult", "credit_default", "bank_marketing")
 SEEDS = range(10)
 N_EVAL = 5000
 
@@ -65,7 +66,9 @@ def run(dataset: str) -> list[dict[str, object]]:
 
 
 if __name__ == "__main__":
-    rows = [r for dataset in DATASETS for r in run(dataset)]
+    selected = sys.argv[1:] or DATASETS
+    rows = [r for r in json.loads(OUT.read_text()) if r["dataset"] not in selected]  # keep the other datasets
+    rows += [r for dataset in selected for r in run(dataset)]
     OUT.write_text(json.dumps(rows, indent=1))
     print("dataset         attacker           queries (median, max)  rounds (max)  exact rows (min)")
     for dataset in DATASETS:
