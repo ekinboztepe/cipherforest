@@ -389,14 +389,20 @@
       "server_run_s_max": 74.18229306400099
     },
     "xgb-30-6": {
-      "compile_s": 25.07923935100007,
+      "compile_s": 29.942303785000007,
       "auc": 0.7663482631300697,
       "pbs_count": 15150,
       "max_bit_width": 8,
       "complexity": 846383608650.0,
       "bootstrap_keys_mb": 800.359375,
       "keyswitch_keys_mb": 110.39453125,
-      "ciphertext_kb": 0.5390625
+      "ciphertext_kb": 0.5390625,
+      "samples": 3,
+      "max_diff_vs_simulate": 0.0,
+      "keygen_s": 3.9610320649999267,
+      "evaluation_keys_mb": 73.9403305053711,
+      "server_run_s_median": 149.16622670300012,
+      "server_run_s_max": 154.68071027099995
     },
     "xgb-100-6": {
       "compile_s": 41.94206026499978,

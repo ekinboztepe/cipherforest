@@ -302,7 +302,7 @@ and inputs, p_error 2^-40 per bootstrap), and with Concrete's defaults as in the
 e2e demo.
 
 Every container was capped at 2 CPUs and 3 GB, so times here are slower than in
-the e2e table. Server run is the median over 10 rows, 3 for Adult XGB T=30. Our
+the e2e table. Server run is the median over 10 rows, 3 for XGB T=30. Our
 results equalled the integer reference on every row, Concrete-ML's its own
 simulation. T=100 was compiled only; the last column is the ratio of Concrete's
 complexity estimates, XGB over ours on the same settings.
@@ -315,13 +315,13 @@ complexity estimates, XGB over ours on the same settings.
 | Adult | 100 | 56800 / 1137 | 0.919 / 0.895 | | | | 5.8x |
 | Taiwan | 3 | 1461 / 36 | 0.761 / 0.763 | 25.6 s | 4.3 s | 2.0 s | 4.4x |
 | Taiwan | 10 | 5050 / 117 | 0.767 / 0.769 | 73.1 s | 11.7 s | 5.8 s | 4.7x |
-| Taiwan | 30 | 15150 / 353 | 0.766 / 0.766 | 186 s* | 33.6 s | 16.5 s | 4.7x |
+| Taiwan | 30 | 15150 / 353 | 0.766 / 0.766 | 149 s* | 33.6 s | 16.5 s | 4.7x |
 | Taiwan | 100 | 51400 / 1182 | 0.759 / 0.752 | | | | 4.7x |
 
-\* One row, not in the json. Both attempts failed to finish: the first produced
-no output in 30 minutes, the second finished one row and not the next in the
-rest of its 30 minutes. An earlier Adult XGB T=10 run also stalled for an hour,
-then took 10 minutes on the retry. We do not know why.
+\* Third attempt. The first produced no output in 30 minutes, the second
+finished one row in 186 s and not the next in the rest of its 30 minutes. An
+earlier Adult XGB T=10 run also stalled for an hour, then took 10 minutes on the
+retry. We do not know why, so treat the XGB times as laptop numbers.
 
 |  | evaluation keys | ciphertext in |
 |---|---|---|
@@ -329,7 +329,7 @@ then took 10 minutes on the retry. We do not know why.
 | ours, same settings | 361 MB (Adult), 319 MB (Taiwan) | same |
 | ours, defaults | 566 to 829 MB (Adult), 335 MB (Taiwan) | 224 KB (Adult), 368 KB (Taiwan) |
 
-- Ours is about 5x to 6x faster on the same settings, and returns the
+- Ours is about 4x to 6x faster on the same settings, and returns the
   explanation too. The PBS count is 40x to 50x lower, but that overstates it: our
   bootstraps carry heavier parameters, and time follows Concrete's complexity
   estimate, not the PBS count.
