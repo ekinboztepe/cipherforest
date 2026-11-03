@@ -54,6 +54,12 @@ Laptop, Concrete 2.11 in a WSL2 VM; details in [experiments/RESULTS.md](experime
 
 Every encrypted result was checked against the plaintext integer model: bit-exact.
 
+Against Concrete-ML's own XGBoost on the same data, Concrete version and 2 CPU
+settings, this is 4 to 6 times faster at 3 to 30 trees and also returns SHAP.
+Concrete-ML's trees are prediction only, its keys are 4 to 5 times smaller, and at
+30 trees on Adult its AUC is 0.015 higher. Table in
+[experiments/RESULTS.md](experiments/RESULTS.md).
+
 ## Running
 
 ```
