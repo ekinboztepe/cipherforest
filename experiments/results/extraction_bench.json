@@ -478,5 +478,245 @@
   "rounds": 1,
   "queries": 1095,
   "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 2962,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 1,
+  "rounds": 2,
+  "queries": 3501,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 2962,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 3501,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 2962,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 5,
+  "rounds": 1,
+  "queries": 2962,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 3885,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 2962,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 2962,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, full grid",
+  "seed": 9,
+  "rounds": 1,
+  "queries": 2962,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 2,
+  "queries": 1673,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 2,
+  "queries": 1591,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 963,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 1601,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 964,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 5,
+  "rounds": 1,
+  "queries": 942,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 6,
+  "rounds": 2,
+  "queries": 1717,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 7,
+  "rounds": 1,
+  "queries": 962,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 963,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred, graph",
+  "seed": 9,
+  "rounds": 1,
+  "queries": 940,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 800,
+  "exact_rows": 0.9866
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 726,
+  "exact_rows": 0.9956
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 2,
+  "queries": 1442,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 1,
+  "queries": 717,
+  "exact_rows": 0.9962
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 728,
+  "exact_rows": 0.997
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 5,
+  "rounds": 1,
+  "queries": 870,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 6,
+  "rounds": 1,
+  "queries": 859,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 7,
+  "rounds": 2,
+  "queries": 1441,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 8,
+  "rounds": 1,
+  "queries": 872,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "attacker": "pred+shap, graph",
+  "seed": 9,
+  "rounds": 2,
+  "queries": 1440,
+  "exact_rows": 1.0
  }
 ]

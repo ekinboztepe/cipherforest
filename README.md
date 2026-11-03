@@ -73,8 +73,9 @@ Concrete has no Windows wheels, hence the image.
   so they reveal its marginal distributions.
 - Client, from queries: the whole model. Every threshold is one of the known
   edges and the model is a few trees with 2^D leaves each, so a client copies
-  it exactly, prediction and SHAP, in about 700 to 2200 queries on the
-  benchmarks here; about 1400 to 2500 without SHAP outputs
+  it, prediction and SHAP, in about 700 to 2200 queries on the benchmarks here;
+  about 1000 to 2500 without SHAP outputs. The copies are exact, apart from some
+  that stop early and get about 1% of inputs wrong
   ([experiments/RESULTS.md](experiments/RESULTS.md)). None of the defences we
   measured stops this. Noise on the outputs is averaged away by least squares.
   Hiding the edges behind server-side quantisation costs the client a few
