@@ -57,8 +57,8 @@ def circuit_sizes(circuit) -> dict[str, float]:
     }
 
 
-def xgb(x_tr, y_tr, x_te, y_te, x_run, keygen: bool, n_trees: int, depth: int) -> dict[str, object]:
-    model = XGBClassifier(n_bits=6, n_estimators=n_trees, max_depth=depth, random_state=SEED, n_jobs=1)
+def xgb(x_tr, y_tr, x_te, y_te, x_run, keygen: bool, n_trees: int, depth: int, seed: int = SEED) -> dict[str, object]:
+    model = XGBClassifier(n_bits=6, n_estimators=n_trees, max_depth=depth, random_state=seed, n_jobs=1)
     model.fit(x_tr, y_tr)
     start = time.perf_counter()
     model.compile(x_tr)
@@ -95,13 +95,15 @@ def xgb(x_tr, y_tr, x_te, y_te, x_run, keygen: bool, n_trees: int, depth: int) -
         "keygen_s": keygen_s,
         "evaluation_keys_mb": len(keys) / 2**20,
         "server_run_s_median": float(np.median(run_s)),
+        "server_run_s_p99": float(np.percentile(run_s, 99)),
         "server_run_s_max": float(np.max(run_s)),
+        "server_run_s": run_s,
     }
 
 
-def ours(x_tr, y_tr, x_te, y_te, x_run, keygen: bool, n_trees: int, settings: str) -> dict[str, object]:
+def ours(x_tr, y_tr, x_te, y_te, x_run, keygen: bool, n_trees: int, settings: str, seed: int = SEED) -> dict[str, object]:
     quantizer = FeatureQuantizer.fit(x_tr, N_BINS)
-    teacher, ensemble, tables = student(x_tr, y_tr, quantizer, np.random.default_rng(SEED), n_trees)
+    teacher, ensemble, tables = student(x_tr, y_tr, quantizer, np.random.default_rng(seed), n_trees)
     model = quantize_model(ensemble, tables, quantizer, OUTPUT_BITS)
     pred, _ = model.decode(model.simulate(quantizer.transform(x_te)))
     row: dict[str, object] = {
