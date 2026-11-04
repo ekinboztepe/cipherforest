@@ -15,6 +15,7 @@ model.json from e2e_prepare.py.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -26,7 +27,7 @@ from sklearn.model_selection import train_test_split
 from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_model, to_grid
 
 E2E = Path(__file__).resolve().parent / "e2e"
-DATASETS = ("adult", "credit_default")
+DATASETS = ("adult", "credit_default", "bank_marketing")
 GRID_BITS = (8, 10, 12, 14, 16)  # Concrete looks up at most 16 bits
 OUTPUT_BITS = (6, 4)
 
@@ -62,5 +63,5 @@ def run(dataset: str) -> dict[str, dict[str, float]]:
 
 
 if __name__ == "__main__":
-    for dataset in DATASETS:
+    for dataset in sys.argv[1:] or DATASETS:
         print(dataset, json.dumps(run(dataset), indent=2), flush=True)

@@ -42,7 +42,7 @@ float32 there).
 ## Numbers
 
 Random forest teacher (100 trees) distilled to 3 oblivious trees of depth 6.
-Laptop, Concrete 2.11 in a WSL2 VM; details in [experiments/RESULTS.md](experiments/RESULTS.md).
+Desktop (Ryzen 5 3600, 16 GB), Concrete 2.11 in a WSL2 VM; details in [experiments/RESULTS.md](experiments/RESULTS.md).
 
 |                              | Adult             | Taiwan credit default |
 |------------------------------|-------------------|-----------------------|
@@ -53,6 +53,12 @@ Laptop, Concrete 2.11 in a WSL2 VM; details in [experiments/RESULTS.md](experime
 | max error vs plaintext model | 0.005             | 0.004                 |
 
 Every encrypted result was checked against the plaintext integer model: bit-exact.
+
+Against Concrete-ML's own XGBoost on the same data, Concrete version and 2 CPU
+settings, this is 4 to 6 times faster at 3 to 30 trees and also returns SHAP.
+Concrete-ML's trees are prediction only, its keys are 4 to 5 times smaller, and at
+30 trees on Adult its AUC is 0.015 higher. Table in
+[experiments/RESULTS.md](experiments/RESULTS.md).
 
 ## Running
 
@@ -73,8 +79,9 @@ Concrete has no Windows wheels, hence the image.
   so they reveal its marginal distributions.
 - Client, from queries: the whole model. Every threshold is one of the known
   edges and the model is a few trees with 2^D leaves each, so a client copies
-  it exactly, prediction and SHAP, in about 700 to 2200 queries on the
-  benchmarks here; about 1400 to 2500 without SHAP outputs
+  it, prediction and SHAP, in about 700 to 2200 queries on the benchmarks here;
+  about 1000 to 2500 without SHAP outputs. The copies are exact, apart from some
+  that stop early and get about 1% of inputs wrong
   ([experiments/RESULTS.md](experiments/RESULTS.md)). None of the defences we
   measured stops this. Noise on the outputs is averaged away by least squares.
   Hiding the edges behind server-side quantisation costs the client a few

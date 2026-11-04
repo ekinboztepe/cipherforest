@@ -2878,5 +2878,1445 @@
   "label_agreement": 0.9958666666666667,
   "pred_error": 1.962864804698485,
   "exact_rows": 0.30933333333333335
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.5942670087587367,
+  "exact_rows": 0.9593028399539946
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.5624378071092749,
+  "exact_rows": 0.9593028399539946
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9676192161373087,
+  "pred_error": 10.574651051246645,
+  "exact_rows": 0.04883659205520658
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 2.711191422492082e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9713350437936831,
+  "pred_error": 5.889803140137373,
+  "exact_rows": 0.13987436963637973
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.74413089421382e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9893833495532159,
+  "pred_error": 2.8342101623249008,
+  "exact_rows": 0.5148190745819694
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.0609210392929448e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9950455631248342,
+  "pred_error": 2.0518051324800495,
+  "exact_rows": 0.7453773334512961
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 2.4328972188165685e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9962841723436255,
+  "pred_error": 1.8246498705978091,
+  "exact_rows": 0.8181898610988233
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 6.058476131255263e-12,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9966380606918517,
+  "pred_error": 1.8044830312936706,
+  "exact_rows": 0.847651066088649
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 4.116340794479342,
+  "exact_rows": 0.8449084313898965
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 4.119249084568,
+  "exact_rows": 0.8449084313898965
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9679731044855349,
+  "pred_error": 10.396404384918382,
+  "exact_rows": 0.06688489781473946
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.9321838578882056e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.97779350614881,
+  "pred_error": 5.830615313000964,
+  "exact_rows": 0.14624435990445014
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.5229714689824908e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9932761213837035,
+  "pred_error": 2.616005698851049,
+  "exact_rows": 0.5628594178536672
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.6985941824953704e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.994691674776608,
+  "pred_error": 2.152147537822772,
+  "exact_rows": 0.7564363443333628
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 2.3675517984832413e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9966380606918517,
+  "pred_error": 1.850636074610942,
+  "exact_rows": 0.7989914182075555
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.4960802175658563e-11,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9966380606918517,
+  "pred_error": 1.7734144414654485,
+  "exact_rows": 0.8477395381757056
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9993806953906043,
+  "pred_error": 2.49411660621074,
+  "exact_rows": 0.010793594620897106
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.992214456339025,
+  "pred_error": 2.2913185099736517,
+  "exact_rows": 0.2557728036804388
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.967176855702026,
+  "pred_error": 10.984944617345331,
+  "exact_rows": 0.05193311510218526
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9993806953906043,
+  "pred_error": 0.4856232858533131,
+  "exact_rows": 0.5157037954525348
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993806953906043,
+  "pred_error": 0.4228221075127083,
+  "exact_rows": 0.6227550207909405
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9707157391842873,
+  "pred_error": 6.317914292799889,
+  "exact_rows": 0.10864372290542335
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.23038756213911135,
+  "exact_rows": 0.9481553569848713
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9900026541626117,
+  "pred_error": 3.053442846012741,
+  "exact_rows": 0.3432716977793506
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.13736347208015162,
+  "exact_rows": 0.9976997257365301
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9939838980801557,
+  "pred_error": 2.449553989178466,
+  "exact_rows": 0.5171193488454393
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.06625079736888595,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9953109793860038,
+  "pred_error": 2.1177132680475017,
+  "exact_rows": 0.5924975670176059
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.03475212682869281,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9958418119083429,
+  "pred_error": 1.9239856864617695,
+  "exact_rows": 0.7278598602141024
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 5.4859771742015395,
+  "exact_rows": 0.00265416261169601
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 5.285632470350451,
+  "exact_rows": 0.14978324338671148
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9694771299654958,
+  "pred_error": 10.732120771029075,
+  "exact_rows": 0.06033796337255596
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.37096346102804606,
+  "exact_rows": 0.6390338848093426
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.7196290867331042,
+  "exact_rows": 0.3444218349110856
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9769972573653013,
+  "pred_error": 5.983674961052357,
+  "exact_rows": 0.12200300805095993
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0028311067858090757,
+  "exact_rows": 0.9971688932141909
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.39737916642239446,
+  "exact_rows": 0.7255595859506325
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.992037512164912,
+  "pred_error": 2.8191387896627234,
+  "exact_rows": 0.423073520304344
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.14123425543217052,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9944262585154384,
+  "pred_error": 2.3580230466466854,
+  "exact_rows": 0.4793417676722994
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.08437940626593012,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9953994514730603,
+  "pred_error": 2.032439435233207,
+  "exact_rows": 0.6435459612492259
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.035914593385460776,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 0.5,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9966380606918517,
+  "pred_error": 1.9442617184613509,
+  "exact_rows": 0.7092807219322304
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9889409891179333,
+  "pred_error": 3.5000442360435278,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9910643192072901,
+  "pred_error": 3.409195290282395,
+  "exact_rows": 0.20383968857825355
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9676192161373087,
+  "pred_error": 10.948104579759693,
+  "exact_rows": 0.049809785012828456
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9993806953906043,
+  "pred_error": 1.263469875254358,
+  "exact_rows": 0.019021498717154736
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993806953906043,
+  "pred_error": 0.9460852198027728,
+  "exact_rows": 0.32389631071396974
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9697425462266654,
+  "pred_error": 6.586849952835617,
+  "exact_rows": 0.09652304697867822
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.38998495974520003,
+  "exact_rows": 0.5875431301424401
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.47563587904437904,
+  "exact_rows": 0.659647881093515
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9892064053791029,
+  "pred_error": 3.5914414056445048,
+  "exact_rows": 0.2780677696186853
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.2850671281747285,
+  "exact_rows": 0.8755197735114572
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9942493143413254,
+  "pred_error": 2.7473396583526632,
+  "exact_rows": 0.38830399009112626
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.1426980260704412,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9952225072989472,
+  "pred_error": 2.16660812472235,
+  "exact_rows": 0.6378837476776077
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.06375621390626,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9953994514730603,
+  "pred_error": 1.981593999190151,
+  "exact_rows": 0.7308679111740246
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9921259842519685,
+  "pred_error": 6.039900911262497,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9921259842519685,
+  "pred_error": 5.783869268932667,
+  "exact_rows": 0.08006723878616297
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9673537998761391,
+  "pred_error": 10.99538131189349,
+  "exact_rows": 0.052817835972750596
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 0.9552331239493944,
+  "exact_rows": 0.20198177475006635
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 1.0484025211344548,
+  "exact_rows": 0.2659470936919402
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9757586481465098,
+  "pred_error": 6.640628436630842,
+  "exact_rows": 0.08440237105193311
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.11076705299478005,
+  "exact_rows": 0.893391135096877
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.6417176702957164,
+  "exact_rows": 0.44032557728036803
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9911527912943466,
+  "pred_error": 3.122297984405247,
+  "exact_rows": 0.2755905511811024
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.3196756410907853,
+  "exact_rows": 0.7920021233300893
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9931876492966469,
+  "pred_error": 2.637406383147106,
+  "exact_rows": 0.3100946651331505
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.16694478834290336,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9943377864283819,
+  "pred_error": 2.2199981252273315,
+  "exact_rows": 0.5916128461470406
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.06309943037558115,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 1.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9953994514730603,
+  "pred_error": 2.1824804613954645,
+  "exact_rows": 0.42121560647615675
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9844289126780501,
+  "pred_error": 6.87799699194904,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9844289126780501,
+  "pred_error": 6.819896177362304,
+  "exact_rows": 0.1553569848712731
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9666460231796868,
+  "pred_error": 12.989944519137332,
+  "exact_rows": 0.029815093338051844
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9993806953906043,
+  "pred_error": 1.6373529151552695,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9993806953906043,
+  "pred_error": 1.6412004571554293,
+  "exact_rows": 0.25895779881447406
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.968503937007874,
+  "pred_error": 7.397421894537217,
+  "exact_rows": 0.06883128372998319
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 0.7267981951694245,
+  "exact_rows": 0.05830310537025568
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 0.9531435143301257,
+  "exact_rows": 0.2502875342829337
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9874369636379722,
+  "pred_error": 4.106823367183725,
+  "exact_rows": 0.17216668141201452
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 0.1795098646377066,
+  "exact_rows": 0.8245598513668937
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.5386135724296948,
+  "exact_rows": 0.45165000442360437
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9929222330354773,
+  "pred_error": 3.379408971217995,
+  "exact_rows": 0.15756878704768645
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.25873338517501066,
+  "exact_rows": 0.8748119968150049
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9946032026895515,
+  "pred_error": 2.437300810976662,
+  "exact_rows": 0.45510041581880917
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.13634804984300453,
+  "exact_rows": 0.9999115279129435
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 0,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9947801468636646,
+  "pred_error": 2.2229610458077174,
+  "exact_rows": 0.5593205343714058
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9914182075555162,
+  "pred_error": 8.264000707776695,
+  "exact_rows": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9911527912943466,
+  "pred_error": 8.099525904244967,
+  "exact_rows": 0.05892240997965142
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1024,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9666460231796868,
+  "pred_error": 11.901117245384542,
+  "exact_rows": 0.03733522073785721
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9913297354684597,
+  "pred_error": 2.5145536583207986,
+  "exact_rows": 0.0015040254799610724
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9927452888613643,
+  "pred_error": 2.495924114735257,
+  "exact_rows": 0.044324515615323364
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 4096,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.973812262231266,
+  "pred_error": 7.523874854957684,
+  "exact_rows": 0.06263823763602583
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 1.2893037246748653,
+  "exact_rows": 0.20817482084402372
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "tables, pred",
+  "label_agreement": 0.9999115279129435,
+  "pred_error": 1.380912969654585,
+  "exact_rows": 0.1489869946032027
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 16384,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.990710430859064,
+  "pred_error": 3.940518648995388,
+  "exact_rows": 0.16022294965938247
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.19817747500663518,
+  "exact_rows": 0.8075732106520392
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.5965186604658655,
+  "exact_rows": 0.427054764221888
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 65536,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9912412633814032,
+  "pred_error": 3.2771019303919253,
+  "exact_rows": 0.16641599575333982
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.32058343091480873,
+  "exact_rows": 0.7648411926037335
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 262144,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9948686189507211,
+  "pred_error": 2.5897260767306696,
+  "exact_rows": 0.3247810315845351
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred+shap",
+  "label_agreement": 1.0,
+  "pred_error": 0.0,
+  "exact_rows": 1.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "tables, pred",
+  "label_agreement": 1.0,
+  "pred_error": 0.12821626078550993,
+  "exact_rows": 0.9980536140847562
+ },
+ {
+  "dataset": "bank_marketing",
+  "noise": 2.0,
+  "seed": 1,
+  "queries": 1048576,
+  "attacker": "gbdt, pred",
+  "label_agreement": 0.9946032026895515,
+  "pred_error": 2.2551568844531245,
+  "exact_rows": 0.5298593293815801
  }
 ]

@@ -9,6 +9,7 @@ Part 2, the encrypted run, is e2e_fhe.py inside the Docker image.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -22,7 +23,7 @@ from cipherforest.quantize import FeatureQuantizer, quantize_model
 from cipherforest.shap_table import build_shap_table, explain_ensemble
 
 OUT = Path(__file__).resolve().parent / "e2e"
-DATASETS = ("adult", "credit_default")
+DATASETS = ("adult", "credit_default", "bank_marketing")
 DEPTH, TREES, OUTPUT_BITS, N_BINS = 6, 3, 8, 32
 N_BACKGROUND, N_SAMPLES, SEED = 100, 20, 0
 
@@ -81,5 +82,5 @@ def prepare(name: str) -> dict[str, float]:
 
 
 if __name__ == "__main__":
-    for dataset in DATASETS:
+    for dataset in sys.argv[1:] or DATASETS:
         print(dataset, json.dumps(prepare(dataset), indent=2))

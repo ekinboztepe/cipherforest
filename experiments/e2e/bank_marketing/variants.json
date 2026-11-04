@@ -1,0 +1,58 @@
+{
+  "grid-8": {
+    "input_bits": 8,
+    "output_bits": 8,
+    "auc": 0.895940676089411,
+    "label_agreement": 0.9965495886047951,
+    "max_shap_change": 0.43628443002584877,
+    "rows_changed": 0.1001504025479961
+  },
+  "grid-10": {
+    "input_bits": 10,
+    "output_bits": 8,
+    "auc": 0.897804732168124,
+    "label_agreement": 0.9995576395647173,
+    "max_shap_change": 0.2064141389369607,
+    "rows_changed": 0.016278864018402193
+  },
+  "grid-12": {
+    "input_bits": 12,
+    "output_bits": 8,
+    "auc": 0.8981736251980124,
+    "label_agreement": 1.0,
+    "max_shap_change": 0.2064141389369607,
+    "rows_changed": 0.0009731929576218703
+  },
+  "grid-14": {
+    "input_bits": 14,
+    "output_bits": 8,
+    "auc": 0.8986025415005606,
+    "label_agreement": 1.0,
+    "max_shap_change": 0.0,
+    "rows_changed": 0.0
+  },
+  "grid-16": {
+    "input_bits": 16,
+    "output_bits": 8,
+    "auc": 0.8986025415005606,
+    "label_agreement": 1.0,
+    "max_shap_change": 0.0,
+    "rows_changed": 0.0
+  },
+  "bits-6": {
+    "input_bits": 5,
+    "output_bits": 6,
+    "auc": 0.8972082887895474,
+    "label_agreement": 0.9974343094753605,
+    "max_shap_change": 0.0328386130126983,
+    "rows_changed": 1.0
+  },
+  "bits-4": {
+    "input_bits": 5,
+    "output_bits": 4,
+    "auc": 0.8712300344936772,
+    "label_agreement": 0.9905334866849509,
+    "max_shap_change": 0.1735755259242624,
+    "rows_changed": 1.0
+  }
+}

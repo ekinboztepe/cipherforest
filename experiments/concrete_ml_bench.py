@@ -1,4 +1,4 @@
-"""Concrete-ML's own trees against ours, same data, same Concrete, same laptop.
+"""Concrete-ML's own trees against ours, same data, same Concrete, same machine.
 
 Variants, one per process (docker/concrete-ml.Dockerfile, which pins
 concrete-python 2.10):
@@ -12,7 +12,7 @@ concrete-python 2.10):
   bootstrap), for a like-for-like comparison.
 
 Both run through their own client/server files on 10 test rows. Keys take
-several GB for the larger models and the laptop has crashed on less, so
+several GB for the larger models and this machine has crashed on less, so
 --compile-only records Concrete's estimates without keygen, and --samples runs
 fewer rows of a slow model. Results go to results/concrete_ml_bench.json.
 

@@ -16,6 +16,7 @@ bit. Needs experiments/e2e/<dataset>/model.json from e2e_prepare.py.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -39,7 +40,7 @@ from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_mod
 
 E2E = Path(__file__).resolve().parent / "e2e"
 OUT = Path(__file__).resolve().parent / "results" / "edges_bench.json"
-DATASETS = ("adult", "credit_default")
+DATASETS = ("adult", "credit_default", "bank_marketing")
 SEEDS = range(5)
 N_EVAL = 5000
 
@@ -107,8 +108,9 @@ def run(dataset: str, rows: list[dict[str, object]]) -> None:
 
 
 if __name__ == "__main__":
-    rows: list[dict[str, object]] = []
-    for dataset in DATASETS:
+    selected = sys.argv[1:] or DATASETS
+    rows: list[dict[str, object]] = [r for r in json.loads(OUT.read_text()) if r["dataset"] not in selected]  # keep the other datasets
+    for dataset in selected:
         run(dataset, rows)
     print("dataset         edges              attacker   AUC    queries (median, max)  exact test / range (min)")
     for dataset in DATASETS:

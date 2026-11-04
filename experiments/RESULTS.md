@@ -45,11 +45,12 @@ D=6, T=3, 32 quantiser bins, 8-bit signed outputs. Client and server exchange on
 | ciphertext in / out | 224 KB / 224 KB | 368 KB / 416 KB |
 | max error vs float student, prediction / SHAP | 0.005 / 0.009 | 0.004 / 0.004 |
 
-The max is the first request; medians are stable. Laptop, Concrete 2.11, Docker
+The max is the first request; medians are stable. Desktop (Ryzen 5 3600, 16 GB), Concrete 2.11, Docker
 Desktop on a memory-constrained WSL2 VM.
 
-For scale only (different model and scheme, vendor numbers): CipherExplain lists
-about 70 s per encrypted explanation for a 100-tree, depth-4 XGBoost under CKKS.
+Bank marketing came later and only went through the defence benches below: 16
+features (8 used), AUC teacher / student / quantised student 0.925 / 0.899 /
+0.899, max error 0.006 on both outputs. Its encrypted runs are in the FHE section.
 
 ## Extraction (`extraction_bench.py`)
 
@@ -74,18 +75,22 @@ input on every output: an edge between f and g can show up only jointly, in a
 third feature's SHAP value, which 1-d sweeps rarely see. 8-bit outputs almost
 never need this; the coarse outputs below do.
 
-| attacker | Adult queries, median (max) | Taiwan queries, median (max) |
-|---|---|---|
-| prediction only, every cell | 2547 (3123) | 28767 (30813) |
-| prediction only, graph | 1382 (1640) | 2492 (5038) |
-| prediction + SHAP, graph | 687 (1180) | 2148 (3198) |
+| attacker | Adult queries, median (max) | Taiwan queries, median (max) | Bank marketing queries, median (max) |
+|---|---|---|---|
+| prediction only, every cell | 2547 (3123) | 28767 (30813) | 2962 (3885) |
+| prediction only, graph | 1382 (1640) | 2492 (5038) | 963 (1717) |
+| prediction + SHAP, graph | 687 (1180) | 2148 (3198) | 864 (1442) |
 
-Every copy matched the server on all 5000 inputs.
+Every copy matched the server on all 5000 inputs, except four of the ten
+prediction + SHAP copies on Bank marketing (98.7% to 99.7%). Those stopped at 717
+to 800 queries, when the 200-query check happened not to hit the few cells they
+got wrong; the six exact copies took 859 to 1442. So 864 is a little optimistic
+for an exact copy, and a longer check would close the gap.
 
 - A few thousand queries copy the model exactly even without explanations. The
   leak comes from the small model and the public edges, not from SHAP.
-- Against an attacker that also exploits structure, SHAP saves 1.2x to 2x. The
-  naive comparison (every cell) would suggest 4x to 13x, which overstates it.
+- Against an attacker that also exploits structure, SHAP saves 1.1x to 2x. The
+  naive comparison (every cell) would suggest 3x to 13x, which overstates it.
 - Defences that only touch the SHAP output cannot stop this; the prediction
   alone suffices. Hiding the edges and coarsening the output are the candidates.
 
@@ -110,9 +115,15 @@ doubling r until its copy passes the 200-query check; all attempts count.
 | Taiwan | 1 | 0.760 | 0.977 | 0.83 | 1024 | 119M |
 | Taiwan | 2 | 0.753 | 0.920 | 0.71 | 4096 | 274M |
 | Taiwan | 4 | 0.738 | 0.773 | 0.57 | 16384 | 1.5G |
+| Bank marketing | 0 | 0.899 (0.899) | 1.000 | 1.00 | 1 | 763 |
+| Bank marketing | 0.5 | 0.897 | 0.992 | 0.93 | 256 | 31M |
+| Bank marketing | 1 | 0.894 | 0.971 | 0.87 | 512–1024 | 126M |
+| Bank marketing | 2 | 0.884 | 0.904 | 0.77 | 4096 | 462M |
+| Bank marketing | 4 | 0.865 | 0.755 | 0.65 | 8192 | 2.5G |
 
-Copies matched the clean model on at least 99.5% of 5000 random inputs; a few
-cells were rounded the wrong way and the 200-query check missed them.
+Copies matched the clean model on at least 99.5% of 5000 random inputs on Adult
+and Taiwan, 98.7% on Bank marketing; the 200-query check missed the rest, as in
+the section above.
 
 - b = 0.5 costs the honest client almost nothing (AUC -0.001, cosine 0.99) and
   this attacker 10^4 times more queries. r grows like b^2, as expected.
@@ -148,14 +159,19 @@ previous section is in the last column.
 | Taiwan | 0.5 | 1K / 66K | 1K / 262K | 4K / >1M | 16M |
 | Taiwan | 1 | 1K / 262K | 1K / 1M | 4K / >1M | 119M |
 | Taiwan | 2 | 1K / 1M | 1K / >1M | 16K / >1M | 274M |
+| Bank marketing | 0 | 1K / 4K | 1K / 4K | 66K / >1M | 763 |
+| Bank marketing | 0.5 | 1K / 66K | 1K / 262K | 16K / >1M | 31M |
+| Bank marketing | 1 | 4K / 66K | 1K / 262K | 66K / >1M | 126M |
+| Bank marketing | 2 | 4K / 262K | 4K / >1M | 66K / >1M | 462M |
 
 - Output noise does not protect the model. At b = 2, where the honest client
   already loses 0.01 AUC and a fifth of its top-3 features, an exact copy costs
-  262K queries on Adult and 1M on Taiwan, 260 to 390 times fewer than repeating.
+  262K queries on Adult and Bank marketing and 1M on Taiwan, 260 to 1800 times
+  fewer than repeating.
   A copy that gives the same decision 99% of the time costs a few thousand.
 - SHAP still helps by about 4x here: each SHAP output carries one noise term,
   the prediction carries the sum of all of them.
-- The generic regressor is much worse than the structured fit (1.5 to 1.9
+- The generic regressor is much worse than the structured fit (1.5 to 2.2
   output units of error at 1M queries). Knowing the model's form is what makes
   the attack cheap, and client.json gives most of it away.
 - Open: the cost of finding thresholds and the graph through noise. A
@@ -175,30 +191,41 @@ Three deployments of the same pipeline:
 With hidden edges, the client sweeps each feature over 16 points and bisects
 every interval whose ends answer differently, down to adjacent floats. Since
 code = number of edges < x, the lower float is then the edge itself. It then
-runs the attack above on the edges it found. 5 seeds.
+runs the attack above on the edges it found. If the copy fails a check on random
+inputs from the range, it bisects again from an input that failed. 5 seeds.
 
 | data | edges | AUC | pred+shap queries, median (max) | pred queries, median (max) |
 |---|---|---|---|---|
 | Adult | quantile, public | 0.897 | 687 (1180) | 1390 (1487) |
 | Adult | uniform, public | 0.899 | 995 (2071) | 2290 (3397) |
-| Adult | quantile, hidden | 0.897 | 2652 (2803) | 5265 (6385) |
+| Adult | quantile, hidden | 0.897 | 2652 (2803) | 4263 (4360) |
 | Taiwan | quantile, public | 0.763 | 2147 (2148) | 2497 (5038) |
 | Taiwan | uniform, public | 0.755 | 3077 (3079) | 1522 (3434) |
-| Taiwan | quantile, hidden | 0.763 | 8512 (8743) | 8930 (10427) |
+| Taiwan | quantile, hidden | 0.763 | 8512 (8743) | 8930 (10467) |
+| Bank marketing | quantile, public | 0.899 | 728 (1442) | 1591 (1673) |
+| Bank marketing | uniform, public | 0.895 | 1224 (2438) | 2518 (5426) |
+| Bank marketing | quantile, hidden | 0.899 | 4973 (5166) | 6351 (6950) |
 
 Every copy matched the server on the whole test split and on 5000 random
-inputs from the range, except two: uniform edges, Adult, prediction only, where
-the attacker stopped (at 985 and 2168 queries) with a copy right on only 94% of
-the test split and 99.9% of the range. Its own check samples codes evenly, and with even edges the real data
-sit in a few of them. More checks would fix it; the median is unaffected.
+inputs from the range, except two groups. Uniform edges, Adult, prediction only:
+two copies stopped (at 985 and 2168 queries) right on only 94% of the test split
+and 99.9% of the range. Quantile edges, public, Bank marketing, with SHAP: four
+copies right on 98.4% to 99.6% of the test split and all of the range. The
+attacker's own check samples codes evenly, while real data sit in a few of them.
+More checks would fix both; on Bank marketing the median is what moves.
 
-- Hiding the edges multiplies the cost by about 4. Every run recovered all the
-  edges the model uses (14 on Adult, 16 on Taiwan) bit for bit, and no wrong
+A first version of the hidden attacker always bisected from a random start, and on
+Bank marketing one prediction-only run gave up after 10 rounds, one threshold
+short and aware of it. That was the attacker's weakness, not a defence, so it now
+starts from an input its copy got wrong. The numbers above are with that fix.
+
+- Hiding the edges multiplies the cost by about 3 to 7. Every run recovered all the
+  edges the model uses (14 on Adult, 16 on Taiwan, 15 on Bank marketing) bit for bit, and no wrong
   ones. So the hidden deployment still leaks those training quantiles; only
   the unused ones stay private. In TFHE it also moves quantisation onto the
   server, which is not free.
 - Uniform edges keep the training distribution out of client.json at little
-  AUC cost (+0.002 on Adult, -0.008 on Taiwan) but do not protect the model.
+  AUC cost (+0.002 on Adult, -0.008 on Taiwan, -0.004 on Bank marketing) but do not protect the model.
   They stop a data leak, not a model leak.
 - Together with the noise results: for a model this small, the cheap defences
   only raise the price from hundreds to thousands of queries. What is left is
@@ -222,20 +249,37 @@ against the float student the owner trained. 5 seeds per attacker.
 | Taiwan | 6 | 0.763 | 0.972 | 0.999 | 3315 | 2600 |
 | Taiwan | 5 | 0.759 | 0.927 | 0.997 | 5332 | 3674 |
 | Taiwan | 4 | 0.752 | 0.797 | 0.998 | 9615 | 5117 |
+| Bank marketing | 8 | 0.899 | 0.997 | 1.000 | 728 | 1591 |
+| Bank marketing | 6 | 0.897 | 0.956 | 0.997 | 1984 | 1922 |
+| Bank marketing | 5 | 0.895 | 0.880 | 0.999 | 2236 | 2614 |
+| Bank marketing | 4 | 0.871 | 0.879 | 0.991 | 3890 | 3631 |
 
 Every copy was exact on the test split except three at 4 bits on Taiwan
-(99.6%, 95.9%, 99.6%): there the copy and the server rarely differ, and 200
-check queries do not see it.
+(99.6%, 95.9%, 99.6%) and eight on Bank marketing (four at 8 bits, one at 6, one
+at 5, two at 4; 98.4% or better): there the copy and the server rarely differ,
+and 200 check queries do not see it.
 
 - Coarsening is the worst trade-off measured. At 4 bits the honest client
-  loses 0.02 AUC and the explanations drift to cosine 0.8, while the attacker
-  pays at most 4.5x more and still ends with an exact or near-exact copy.
+  loses 0.01 to 0.03 AUC and the explanations drift to cosine 0.8 to 0.88, while the attacker
+  pays at most about 5x more and still ends with an exact or near-exact copy.
 - The extra cost comes from effects that only show jointly (see Extraction),
   not from hidden information: the coarse model is still a sum of clique
   tables, and nothing it computes is out of the attacker's reach.
-- 6 bits is nearly free for the honest client and costs the attacker 1.5x to
-  2.5x more. Not a defence on its own.
+- 6 bits is nearly free for the honest client and costs the SHAP attacker 1.5x
+  to 2.7x more. Not a defence on its own.
 - Not measured: a label-only server, which the attack above does not cover.
+
+## Returning only the top-k SHAP values
+
+Not implemented, because the benches above already bound it. As long as the
+prediction comes back, the attacker can ignore the explanation altogether, and
+that attacker is the prediction-only one: about 1000 to 2500 queries for a copy
+of the prediction on public edges. So top-k can at best take the SHAP attacker
+up to that cost, a factor of 1.1 to 2 by the extraction table. Once it holds the
+model, the attacker can also compute SHAP values itself, against a background set
+of its own. The honest client, on the other hand, loses the other values and the
+check that they sum to the prediction. A server that also
+withholds the prediction is the label-only case above, not measured.
 
 ## What the defences cost under FHE (`defense_fhe_prepare.py` + `defense_fhe.py`)
 
@@ -270,6 +314,16 @@ complexity estimate relative to the e2e circuit.
 | Taiwan | grid-10 | 36 | 10 | 29x | 11 GB* | 12 MB | | 0.994 |
 | Taiwan | grid-12 | 34 | 12 | 129x | (0.8 GB*) | 1.5 MB | | 0.997 |
 | Taiwan | grid-16 | 34 | 16 | 189x | (0.9 GB*) | 1.8 MB | | 1 |
+| Bank marketing | e2e | 32 | 8 | 1x | 335 MB | 256 KB | 1.9 s† | 1 |
+| Bank marketing | noise b = 0.5 / 2 / 4 | 32 | 9 | 1.3x | 468 MB | 256 KB | 2.1 s† | |
+| Bank marketing | bits-6, bits-4 | 32 | 6 | 1x | 335 MB | 256 KB | 1.9 s† | 0.997 / 0.991 |
+| Bank marketing | grid-8 | 32 | 8 | 6.7x | 2.2 GB* | 2 MB | | 0.997 |
+| Bank marketing | grid-10 | 32 | 10 | 32x | 11 GB* | 8 MB | | 1.000 |
+| Bank marketing | grid-12 | 29 | 12 | 128x | (0.8 GB*) | 1 MB | | 1 |
+| Bank marketing | grid-16 | 29 | 16 | 187x | (0.9 GB*) | 1.3 MB | | 1 |
+
+† Capped at 2 CPUs, unlike the Adult and Taiwan rows, so compare within the
+dataset only. Bank marketing's grids were compiled only; we did not try keygen.
 
 \* Concrete's estimate of bootstrap plus keyswitch keys, not measured. For
 12 bits and up Concrete switches to another bootstrapping method with smaller
@@ -278,15 +332,16 @@ tried (Adult grid-12, Taiwan grid-16), so the real total is larger. Concrete
 also could not lower the vectorised comparison on inputs wider than 11 bits;
 those circuits compare one feature at a time, which saves a few PBS.
 
-- Noise is cheap: one more output bit, about 30% larger keys and up to 0.3 s
+- Noise is cheap: one more output bit, 30% to 40% larger keys and up to 0.3 s
   more per request, whatever the bound. It is also the defence the learning
   attacker removes (see above).
 - Coarser outputs cost the server nothing and save it nothing: the input
   comparisons, not the output tables, set the parameters.
 - Hidden edges are the only defence that costs FHE much, and their price grows
-  with the grid. Adult keeps every prediction only at 12 bits, Taiwan every label only
-  at 16, about 130x and 190x the e2e circuit's cost, with keys that did not fit
-  this laptop. In exchange the attacker pays about 4x more queries.
+  with the grid. Adult keeps every prediction only at 12 bits, Bank marketing every
+  label at 12, Taiwan every label only at 16, about 130x, 130x and 190x the e2e
+  circuit's cost. The Adult and Taiwan keys did not fit this machine. In exchange
+  the attacker pays about 3x to 7x more queries.
 - Taken together: none of the defences buys much against extraction, and the
   one that buys the most is by far the most expensive under FHE. For a model
   this small, a per-client query limit is the defence that remains.
@@ -321,7 +376,7 @@ complexity estimates, XGB over ours on the same settings.
 \* Third attempt. The first produced no output in 30 minutes, the second
 finished one row in 186 s and not the next in the rest of its 30 minutes. An
 earlier Adult XGB T=10 run also stalled for an hour, then took 10 minutes on the
-retry. We do not know why, so treat the XGB times as laptop numbers.
+retry. We do not know why, so treat the XGB times as numbers from this one machine.
 
 |  | evaluation keys | ciphertext in |
 |---|---|---|
@@ -344,3 +399,21 @@ retry. We do not know why, so treat the XGB times as laptop numbers.
 - Adult ours T=10 with defaults picked larger keys than T=3 or T=30 and was
   killed at 3 GB; its row was run with 4 GB. Compressed keys avoid this: the same
   model on Concrete-ML's settings fit in 3 GB.
+
+## Published numbers, not measured here
+
+Other work on SHAP for private tree models. Different models, threat models and
+hardware, so these are for scale and not a comparison.
+
+| | setting | model | time per explanation | source |
+|---|---|---|---|---|
+| XorSHAP | semi-honest MPC, full threshold | 60 trees, depth 4, 100 features | 4.5 s (100 samples in 7.5 min, preliminary) | [paper](https://cic.iacr.org/p/1/4/27) |
+| CipherExplain | "full-FHE path-product", scheme not named on the page | 100 trees, depth 4, K=40 | about 70 s (vendor figure) | [vendor page](https://vaultbytes.com/cipherexplain) |
+
+The same vendor's [SDK page](https://pypi.org/project/cipherexplain/) (0.8.1) lists
+its tree model types as plaintext KernelSHAP with `fhe_mode` ignored, and the
+vendor page says hosted CatBoost SHAP is plaintext TreeSHAP. The 70 s path is
+not what that SDK runs, and we could not check it.
+
+Nearest row of ours: T=30 at 16 to 35 s on 2 desktop CPUs (see above). We have no
+encrypted run at T=100, only Concrete's estimates.
