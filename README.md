@@ -42,7 +42,7 @@ float32 there).
 ## Numbers
 
 Random forest teacher (100 trees) distilled to 3 oblivious trees of depth 6.
-Laptop, Concrete 2.11 in a WSL2 VM; details in [experiments/RESULTS.md](experiments/RESULTS.md).
+Desktop (Ryzen 5 3600, 16 GB), Concrete 2.11 in a WSL2 VM; details in [experiments/RESULTS.md](experiments/RESULTS.md).
 
 |                              | Adult             | Taiwan credit default |
 |------------------------------|-------------------|-----------------------|

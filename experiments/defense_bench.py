@@ -4,7 +4,7 @@ An honest client asks once and reads a noisy prediction and SHAP vector. The
 attacker asks every input r times and rounds the means back onto the integer
 grid, doubling r until its exact copy passes its own check; every query of every
 attempt counts. Needs experiments/e2e/<dataset>/model.json from e2e_prepare.py.
-About three hours on a laptop, almost all of it Taiwan at noise 4.
+About three hours on a desktop, almost all of it Taiwan at noise 4.
 
     uv run python experiments/defense_bench.py
 """

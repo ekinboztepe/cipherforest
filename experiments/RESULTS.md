@@ -45,7 +45,7 @@ D=6, T=3, 32 quantiser bins, 8-bit signed outputs. Client and server exchange on
 | ciphertext in / out | 224 KB / 224 KB | 368 KB / 416 KB |
 | max error vs float student, prediction / SHAP | 0.005 / 0.009 | 0.004 / 0.004 |
 
-The max is the first request; medians are stable. Laptop, Concrete 2.11, Docker
+The max is the first request; medians are stable. Desktop (Ryzen 5 3600, 16 GB), Concrete 2.11, Docker
 Desktop on a memory-constrained WSL2 VM.
 
 Bank marketing came later and only went through the defence benches below: 16
@@ -340,7 +340,7 @@ those circuits compare one feature at a time, which saves a few PBS.
 - Hidden edges are the only defence that costs FHE much, and their price grows
   with the grid. Adult keeps every prediction only at 12 bits, Bank marketing every
   label at 12, Taiwan every label only at 16, about 130x, 130x and 190x the e2e
-  circuit's cost. The Adult and Taiwan keys did not fit this laptop. In exchange
+  circuit's cost. The Adult and Taiwan keys did not fit this machine. In exchange
   the attacker pays about 3x to 7x more queries.
 - Taken together: none of the defences buys much against extraction, and the
   one that buys the most is by far the most expensive under FHE. For a model
@@ -376,7 +376,7 @@ complexity estimates, XGB over ours on the same settings.
 \* Third attempt. The first produced no output in 30 minutes, the second
 finished one row in 186 s and not the next in the rest of its 30 minutes. An
 earlier Adult XGB T=10 run also stalled for an hour, then took 10 minutes on the
-retry. We do not know why, so treat the XGB times as laptop numbers.
+retry. We do not know why, so treat the XGB times as numbers from this one machine.
 
 |  | evaluation keys | ciphertext in |
 |---|---|---|
@@ -415,5 +415,5 @@ its tree model types as plaintext KernelSHAP with `fhe_mode` ignored, and the
 vendor page says hosted CatBoost SHAP is plaintext TreeSHAP. The 70 s path is
 not what that SDK runs, and we could not check it.
 
-Nearest row of ours: T=30 at 16 to 35 s on 2 laptop CPUs (see above). We have no
+Nearest row of ours: T=30 at 16 to 35 s on 2 desktop CPUs (see above). We have no
 encrypted run at T=100, only Concrete's estimates.
