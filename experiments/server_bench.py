@@ -42,4 +42,7 @@ if __name__ == "__main__":
     rows = json.loads(OUT.read_text()) if OUT.exists() else []
     OUT.write_text(json.dumps([*rows, row], indent=1))
     shutil.rmtree(WORK, ignore_errors=True)
-    print("RESULT", json.dumps(row), flush=True)  # the pod's log is how the rows leave it
+    # the pod's log is how results leave it, so one short line per job
+    run_s = np.array(row.pop("server_run_s"))
+    row |= {"first_s": run_s[0], "rest_p95_s": np.percentile(run_s[1:], 95), "rest_p99_s": np.percentile(run_s[1:], 99), "rest_max_s": run_s[1:].max()}
+    print("RESULT", json.dumps({k: round(float(v), 4) if isinstance(v, (float, np.floating)) else v for k, v in row.items()}), flush=True)

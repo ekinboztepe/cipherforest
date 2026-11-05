@@ -6,7 +6,7 @@ echo "BOOT start $(date -u +%H:%M:%S)"
 lscpu | grep -E "Model name|^CPU\(s\)|Thread|Core|Socket"; nproc; free -g | sed -n 2p
 lscpu | grep -o -E "avx512f|avx2" | sort -u | tr '\n' ' '; echo
 which runpodctl; env | grep -c RUNPOD_API_KEY
-( sleep "${MAX_S:-32400}"; echo "WATCHDOG stop"; runpodctl pod stop "$RUNPOD_POD_ID" 2>&1 | tail -n 2 ) &
+( sleep "${MAX_S:-32400}"; echo "WATCHDOG stop"; runpodctl stop pod "$RUNPOD_POD_ID" 2>&1 | tail -n 2 ) &
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq >/dev/null && apt-get install -y -qq binutils >/dev/null; echo "BOOT apt $?"
 curl -LsSf https://astral.sh/uv/install.sh | sh >/dev/null 2>&1; export PATH=$HOME/.local/bin:$PATH
@@ -27,5 +27,5 @@ echo "$JOBS" | while read -r d s v r; do
   echo "JOB end $d $s $v exit ${PIPESTATUS[0]} $(date -u +%H:%M:%S)"
 done
 echo "ALL DONE $(date -u +%H:%M:%S)"
-runpodctl pod stop "$RUNPOD_POD_ID" 2>&1 | tail -n 2; echo "STOP attempted"
+runpodctl stop pod "$RUNPOD_POD_ID" 2>&1 | tail -n 2; echo "STOP attempted"
 sleep infinity
