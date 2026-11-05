@@ -24,6 +24,12 @@ from cipherforest.oblivious import IntArray
 from cipherforest.quantize import QuantizedModel
 
 
+# Concrete's own default allows about 1e-5 error per lookup, so with a few hundred
+# lookups roughly one request in 300 to 3000 decrypts wrong. These are Concrete-ML's
+# settings: 2-3x slower, no wrong result seen in 7500 requests. Compression is free.
+SAFE = fhe.Configuration(compress_evaluation_keys=True, compress_input_ciphertexts=True, p_error=2**-40)
+
+
 @dataclass(frozen=True)
 class CompiledModel:
     circuit: fhe.Circuit
@@ -106,6 +112,8 @@ def compile_model(
     noise_bound: int = 0,
     configuration: fhe.Configuration | None = None,
 ) -> CompiledModel:
+    """configuration=None means SAFE; pass fhe.Configuration() for Concrete's defaults."""
+    configuration = SAFE if configuration is None else configuration
     if noise_bound:
         compiler = fhe.Compiler(circuit_function(model, noise=True), {"codes": "encrypted", "noise": "clear"})
         circuit = compiler.compile(noisy_inputs(model, noise_bound, inputset_size), configuration)
