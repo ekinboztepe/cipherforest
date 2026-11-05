@@ -54,10 +54,17 @@ Desktop (Ryzen 5 3600, 16 GB), Concrete 2.11 in a WSL2 VM; details in [experimen
 
 Every encrypted result was checked against the plaintext integer model: bit-exact.
 
-Against Concrete-ML's own XGBoost on the same data, Concrete version and 2 CPU
-settings, this is 4 to 6 times faster at 3 to 30 trees and also returns SHAP.
-Concrete-ML's trees are prediction only, its keys are 4 to 5 times smaller, and at
-30 trees on Adult its AUC is 0.015 higher. Table in
+Against Concrete-ML's own XGBoost, on one rented 8 vCPU server (EPYC 9655P) with the
+same Concrete version and settings, over five datasets and up to five seeds, at 3 to
+30 trees:
+
+- 3.4 to 4.7 times faster on the three largest datasets, 2.3 to 3 times on German credit.
+- On Breast cancer the gap closes: 1.6 times at 3 trees, and at 30 trees Concrete-ML
+  is the faster one (0.7).
+- This also returns SHAP. Concrete-ML's trees are prediction only, but its keys are
+  3 to 5 times smaller, and at 30 trees its AUC is higher on all five, by 0.005 to 0.057.
+
+Those ratios hold for that machine only; see the tables in
 [experiments/RESULTS.md](experiments/RESULTS.md).
 
 ## Running
@@ -100,6 +107,10 @@ Treat the deployed model as extractable by its clients.
 - Its SHAP values explain the student exactly, but agree only moderately with
   the teacher's (cosine 0.6 to 0.85).
 - Evaluation keys are hundreds of MB per client.
+- With Concrete's default settings a request can decrypt to a wrong answer: the
+  compiler reports a chance of about 1 in 3400 at 3 trees and 1 in 300 at 30, and we
+  saw 2 in 6806 requests. With `p_error=2**-40` we saw none in 7500, at 2 to 3 times
+  the server time. Pass that `configuration` to `compile_model` for real use.
 
 ## Layout
 
