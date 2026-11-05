@@ -384,8 +384,8 @@ retry. We do not know why, so treat the XGB times as numbers from this one machi
 | ours, same settings | 361 MB (Adult), 319 MB (Taiwan) | same |
 | ours, defaults | 566 to 829 MB (Adult), 335 MB (Taiwan) | 224 KB (Adult), 368 KB (Taiwan) |
 
-- Ours is about 4x to 6x faster on the same settings, and returns the
-  explanation too. The PBS count is 40x to 50x lower, but that overstates it: our
+- Ours is about 4x to 6x faster on these two datasets on the same settings, and
+  returns the explanation too. The server runs below give a wider range. The PBS count is 40x to 50x lower, but that overstates it: our
   bootstraps carry heavier parameters, and time follows Concrete's complexity
   estimate, not the PBS count.
 - Concrete-ML's keys are 4x to 5x smaller than ours on the same settings.
@@ -399,6 +399,115 @@ retry. We do not know why, so treat the XGB times as numbers from this one machi
 - Adult ours T=10 with defaults picked larger keys than T=3 or T=30 and was
   killed at 3 GB; its row was run with 4 GB. Compressed keys avoid this: the same
   model on Concrete-ML's settings fit in 3 GB.
+
+## On a rented server (`server_bench.py`)
+
+Three more datasets and five seeds. The seed changes the split, the requests and
+the SHAP background. Raw rows are in `results/server_bench.csv` (16 vCPU) and
+`results/server_bench_8vcpu.csv` (8 vCPU).
+
+| machine | CPU | used for |
+|---|---|---|
+| Runpod cpu3c, 16 vCPU, 32 GB, EUR-IS-1 | EPYC 9965 | ours with Concrete's defaults |
+| Runpod cpu3c, 8 vCPU, 16 GB, EU-RO-1 | EPYC 9655P | ours on Concrete-ML's settings against Concrete-ML |
+
+These are cloud containers on hosts shared with others, so treat the times as
+numbers from those machines. Concrete-ML's own XGB T=30 on Adult took 18.7 s and
+24.4 s on the same machine for the same circuit size.
+
+### Against Concrete-ML, same machine, same settings
+
+100 requests per job for ours, 10 for XGB; XGB's P99 is not reported because 10
+requests cannot give one. Server run is the median of the per-job medians, then
+the lowest and highest job. P99 leaves out the first request, which is slower and
+has its own column. XGB keys are 74 MB everywhere. Five seeds, except XGB at T=30
+with three (see below).
+
+| data | T | AUC XGB / ours | server run XGB, s | ours, s | XGB / ours | P99 ours, s | first request ours, s | keys ours, MB |
+|---|---|---|---|---|---|---|---|---|
+| Adult | 3 | 0.903 / 0.899 | 2.58 (2.52-2.68) | 0.71 (0.67-0.73) | 3.6x | 0.79 | 2.51 | 361 |
+| Taiwan | 3 | 0.763 / 0.767 | 3.14 (3.10-3.75) | 0.77 (0.76-0.79) | 4.1x | 0.98 | 2.32 | 319 |
+| Bank | 3 | 0.896 / 0.897 | 3.47 (3.36-3.78) | 0.76 (0.56-0.78) | 4.6x | 0.83 | 2.14 | 215-319 |
+| Breast cancer | 3 | 0.984 / 0.973 | 1.24 (1.02-1.29) | 0.77 (0.75-0.79) | 1.6x | 0.85 | 2.10 | 319 |
+| German credit | 3 | 0.756 / 0.729 | 2.26 (1.92-2.59) | 0.74 (0.56-0.77) | 3.0x | 0.76 | 2.23 | 215-361 |
+| Adult | 10 | 0.913 / 0.907 | 7.62 (7.15-7.95) | 1.84 (1.75-1.88) | 4.1x | 2.07 | 3.68 | 361 |
+| Taiwan | 10 | 0.770 / 0.772 | 8.33 (8.03-8.46) | 1.95 (1.93-1.98) | 4.3x | 2.24 | 3.25 | 319 |
+| Bank | 10 | 0.916 / 0.912 | 9.09 (8.61-9.24) | 1.94 (1.85-1.98) | 4.7x | 2.21 | 3.49 | 319 |
+| Breast cancer | 10 | 0.988 / 0.972 | 2.18 (2.11-2.27) | 1.94 (1.91-2.02) | 1.1x | 2.25 | 3.59 | 319 |
+| German credit | 10 | 0.779 / 0.732 | 5.27 (5.08-5.80) | 1.89 (1.84-2.05) | 2.8x | 2.22 | 3.81 | 347-361 |
+| Adult | 30 | 0.920 / 0.907 | 18.67 (18.52-24.42) | 5.29 (5.13-5.68) | 3.5x | 6.87 | 7.46 | 361 |
+| Taiwan | 30 | 0.771 / 0.766 | 18.97 (17.71-22.69) | 5.52 (5.33-5.95) | 3.4x | 6.51 | 8.71 | 319 |
+| Bank | 30 | 0.929 / 0.913 | 23.22 (20.40-25.58) | 5.66 (5.18-5.90) | 4.1x | 6.34 | 7.88 | 319 |
+| Breast cancer | 30 | 0.986 / 0.973 | 4.05 (3.61-4.14) | 5.49 (5.22-5.65) | 0.7x | 6.29 | 7.09 | 319 |
+| German credit | 30 | 0.772 / 0.715 | 12.48 (12.06-13.60) | 5.33 (4.97-5.95) | 2.3x | 6.55 | 8.13 | 361-396 |
+
+- On the three largest datasets ours is 3.4x to 4.7x faster at every T.
+- The gap shrinks on the smaller ones: 2.3x to 3.0x on German credit, and on Breast
+  cancer 1.6x, 1.1x, then 0.7x, so at T=30 Concrete-ML is the faster one. Its PBS
+  count follows the size of its trees (2730 to 3000 there, against about 16000 on
+  Adult) while ours stays near 340 whatever the data.
+- At T=30 Concrete-ML has the higher AUC on all five datasets, by 0.005 to 0.057.
+  From T=10 to T=30 ours gains at most 0.001 and on two datasets loses AUC.
+- Concrete-ML returns only the prediction, ours the explanation too. Its keys are
+  3x to 5x smaller.
+
+XGB T=30 seeds 3 and 4 are missing. The first run's rows were lost: the boot script
+stopped the pod when the queue ended, and that deleted the log, the only copy. We
+then tried again on two other machines. EPYC 9654: Adult seed 3 gave no result in
+19 minutes, and none in 11 after a restart. EPYC 9754: Adult and Taiwan seed 3 hit
+the 20-minute limit, and Bank gave none in 11. The same jobs at seeds 0 to 2 took
+4 to 6 minutes on the EPYC 9655P. We do not know whether these runs were slow or
+stuck, as with the stalls in the 2 CPU runs above, and ours was not run on those
+two machines. So the ratios hold for the EPYC 9655P only.
+
+### Wrong results with Concrete's defaults
+
+With the defaults ours is 2x to 3x faster and has larger, uncompressed keys:
+
+| data | T | seeds | AUC teacher / float student / encrypted | server run, s | keys, MB |
+|---|---|---|---|---|---|
+| Adult | 3 | 5 | 0.918 / 0.899 / 0.899 | 0.35 (0.31-0.36) | 566-566 |
+| Taiwan | 3 | 5 | 0.775 / 0.767 / 0.767 | 0.30 (0.27-0.32) | 335-335 |
+| Bank | 3 | 5 | 0.925 / 0.897 / 0.897 | 0.31 (0.24-0.32) | 335-335 |
+| Breast cancer | 3 | 5 | 0.984 / 0.974 / 0.973 | 0.30 (0.24-0.31) | 335-335 |
+| German credit | 3 | 5 | 0.795 / 0.729 / 0.729 | 0.31 (0.24-0.35) | 335-566 |
+| Adult | 10 | 5 | 0.918 / 0.907 / 0.907 | 0.75 (0.72-0.79) | 566-829 |
+| Taiwan | 10 | 5 | 0.775 / 0.772 / 0.772 | 0.77 (0.59-0.79) | 335-463 |
+| Bank | 10 | 5 | 0.925 / 0.913 / 0.912 | 0.76 (0.60-0.80) | 335-463 |
+| Breast cancer | 10 | 5 | 0.984 / 0.973 / 0.972 | 0.69 (0.61-0.80) | 463-463 |
+| German credit | 10 | 4 | 0.793 / 0.735 / 0.735 | 0.78 (0.76-0.83) | 532-566 |
+| Adult | 30 | 3 | 0.918 / 0.908 / 0.906 | 1.93 (1.80-2.05) | 566-566 |
+| Taiwan | 30 | 3 | 0.778 / 0.774 / 0.771 | 2.11 (2.11-2.15) | 335-335 |
+| Bank | 30 | 3 | 0.924 / 0.919 / 0.912 | 2.03 (2.00-2.07) | 335-335 |
+| Breast cancer | 30 | 3 | 0.984 / 0.974 / 0.973 | 2.46 (2.39-2.64) | 468-468 |
+| German credit | 30 | 1 | 0.802 / 0.696 / 0.699 | 2.18 (2.18-2.18) | 747-747 |
+
+Two jobs failed the check against the integer reference and gave no row: German
+credit seed 1 T=10 at request 95, German credit seed 0 T=30 at request 9. T=30 stops
+at seed 2 because we ended this run early to switch to Concrete-ML's settings, which
+also cut German credit seed 2.
+
+We replayed both rows on the desktop with fresh keys, twice each, and got the right
+answer. All 250 test rows fit the chosen bit width, so it is not an overflow. The
+likely cause, not proven, is Concrete's failure probability. The defaults allow
+about 9.3e-6 per lookup, which the compiler reports as this per request:
+
+| T | PBS | failure chance per request | requests | wrong |
+|---|---|---|---|---|
+| 3 | 31 | 2.9e-4 | 2500 | 0 |
+| 10 | 115 | 1.0e-3 | 2996 | 1 |
+| 30 | 338 to 353 | 3.2e-3 | 1310 | 1 |
+
+On Concrete-ML's settings (p_error 2^-40 per bootstrap) ours had no mismatch in 7500
+requests. Concrete 2.10's `circuit.global_p_error` returns the per-lookup value; the
+real one is in `circuit.server._library.get_program_compilation_feedback()`.
+
+So the fair comparison with Concrete-ML is its settings, not the defaults, and those
+settings are the ones to deploy. Our circuit still compiles with the defaults unless
+told otherwise.
+
+More cores did not visibly help: ours at T=10 with defaults took 0.65 to 0.73 s on
+8 vCPU and 0.69 to 0.78 s on 16, though the CPUs differ, so this settles nothing.
 
 ## Published numbers, not measured here
 
