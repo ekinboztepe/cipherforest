@@ -43,6 +43,8 @@ float32 there).
 
 Random forest teacher (100 trees) distilled to 3 oblivious trees of depth 6.
 Desktop (Ryzen 5 3600, 16 GB), Concrete 2.11 in a WSL2 VM; details in [experiments/RESULTS.md](experiments/RESULTS.md).
+Measured with Concrete's default settings, which are no longer ours (see Limits): the
+current default is 2 to 3 times slower and sends smaller keys.
 
 |                              | Adult             | Taiwan credit default |
 |------------------------------|-------------------|-----------------------|
@@ -106,11 +108,23 @@ Treat the deployed model as extractable by its clients.
   against the forest.
 - Its SHAP values explain the student exactly, but agree only moderately with
   the teacher's (cosine 0.6 to 0.85).
-- Evaluation keys are hundreds of MB per client.
+- Each client sends 215 to 396 MB of compressed evaluation keys, and the server
+  holds them expanded, about 1 to 1.5 GB per client.
 - With Concrete's default settings a request can decrypt to a wrong answer: the
   compiler reports a chance of about 1 in 3400 at 3 trees and 1 in 300 at 30, and we
-  saw 2 in 6806 requests. With `p_error=2**-40` we saw none in 7500, at 2 to 3 times
-  the server time. Pass that `configuration` to `compile_model` for real use.
+  saw 2 in 6806 requests. `compile_model` therefore uses Concrete-ML's settings
+  (`p_error=2**-40`, compressed keys and inputs) unless given a `configuration`:
+  none wrong in 7500 requests, at 2 to 3 times the server time.
+  `fhe.Configuration()` gives Concrete's defaults back.
+- Concrete is BSD-3-Clause-Clear, which grants no patents, and Zama states that
+  commercial use needs its patent licence. Fine for research, not for a product as is.
+
+## Related work
+
+The closest work we know is XorSHAP (Jetchev and Vuille, [ePrint 2023/1859](https://eprint.iacr.org/2023/1859)):
+exact TreeSHAP for ordinary tree ensembles under secure multiparty computation, about
+4.5 s per prediction (100 at once, 60 trees of depth 4, 100 features). It needs several non-colluding servers; this needs one, but only
+works on oblivious trees.
 
 ## Layout
 

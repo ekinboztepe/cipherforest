@@ -26,6 +26,7 @@ import time
 from pathlib import Path
 
 import numpy as np
+from concrete import fhe
 
 from cipherforest.circuit import compile_model
 from cipherforest.deploy import CLIENT_FILE, SERVER_FILE, Client, Server, export, laplace_noise
@@ -46,7 +47,8 @@ def load(directory: Path, variant: str) -> tuple[QuantizedModel, float]:
 def run(directory: Path, variant: str, keygen: bool) -> dict[str, object]:
     model, b = load(directory, variant)
     x = np.load(directory / "samples.npz")["x"][:N_SAMPLES]
-    return measure(model, b, x, directory / "deploy" / variant, keygen)
+    # Concrete's defaults, as for the table in RESULTS.md
+    return measure(model, b, x, directory / "deploy" / variant, keygen, fhe.Configuration())
 
 
 def measure(

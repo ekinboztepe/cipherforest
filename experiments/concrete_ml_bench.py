@@ -111,7 +111,7 @@ def ours(x_tr, y_tr, x_te, y_te, x_run, keygen: bool, n_trees: int, settings: st
         "auc_float": float(roc_auc_score(y_te, ensemble.predict(x_te))),
         "auc": float(roc_auc_score(y_te, pred)),
     }
-    configuration = {"default": None, "cml": LIKE_CONCRETE_ML}[settings]
+    configuration = {"default": fhe.Configuration(), "cml": LIKE_CONCRETE_ML}[settings]
     return row | measure(model, 0.0, x_run, WORK, keygen, configuration)
 
 
