@@ -104,7 +104,9 @@ def measure(
         "keygen_s": keygen_s,
         "evaluation_keys_mb": keys_mb,
         "server_run_s_median": float(np.median(run_s)),
+        "server_run_s_p99": float(np.percentile(run_s, 99)),
         "server_run_s_max": float(np.max(run_s)),
+        "server_run_s": run_s,
     }
 
 
