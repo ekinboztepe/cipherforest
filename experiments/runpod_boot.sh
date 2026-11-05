@@ -27,5 +27,5 @@ echo "$JOBS" | while read -r d s v r; do
   echo "JOB end $d $s $v exit ${PIPESTATUS[0]} $(date -u +%H:%M:%S)"
 done
 echo "ALL DONE $(date -u +%H:%M:%S)"
-runpodctl stop pod "$RUNPOD_POD_ID" 2>&1 | tail -n 2; echo "STOP attempted"
+# Stopping the pod here would delete the log, the only copy of the results. Delete it by hand.
 sleep infinity
