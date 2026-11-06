@@ -25,6 +25,8 @@ pip install "cipherforest[catboost,fhe]"    # plus the encrypted parts, Linux or
 ```
 
 Not on PyPI yet: until then, `pip install "cipherforest[catboost] @ git+https://github.com/ekinboztepe/cipherforest"`.
+Concrete needs numpy below 2. Install everything in one command, as above; adding
+CatBoost or pandas later on its own can pull numpy 2 and break the encrypted part.
 
 A CatBoost model with symmetric trees (CatBoost's default), one output and numeric
 features is served as it is:
