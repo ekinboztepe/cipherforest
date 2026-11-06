@@ -32,8 +32,8 @@ print("first test row, top features:", np.argsort(-np.abs(shap[0]))[:3], "score"
 
 try:
     from concrete import fhe  # noqa: F401
-except ImportError:
-    raise SystemExit("concrete-python is not installed: stopping before the encrypted part")
+except ImportError as error:
+    raise SystemExit(f"stopping before the encrypted part, concrete-python does not load: {error}") from error
 
 # 3. Compile and export. server.zip goes to the server, client.json to clients.
 with TemporaryDirectory() as tmp:
