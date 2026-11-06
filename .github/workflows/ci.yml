@@ -35,6 +35,6 @@ jobs:
       - run: uv build
       - run: uv venv /tmp/pkg
       # one install, so the resolver keeps numpy below 2 for Concrete
-      - run: uv pip install --python /tmp/pkg/bin/python "$(ls dist/*.whl)" "concrete-python==2.11.0" "catboost>=1.2" scikit-learn
+      - run: uv pip install --python /tmp/pkg/bin/python "cipherforest[fhe,catboost] @ file://$PWD/$(ls dist/*.whl)" scikit-learn
       - run: /tmp/pkg/bin/python -c "from concrete import fhe"
       - run: cd /tmp && /tmp/pkg/bin/python "$GITHUB_WORKSPACE/examples/quickstart.py"
