@@ -509,6 +509,40 @@ told otherwise.
 More cores did not visibly help: ours at T=10 with defaults took 0.65 to 0.73 s on
 8 vCPU and 0.69 to 0.78 s on 16, though the CPUs differ, so this settles nothing.
 
+## Explanations fitted to the teacher (`align_bench.py`)
+
+The student's exact SHAP values explain the student. When it stands in for a
+teacher, users want the teacher's reasons, and the two agree only moderately.
+`align_tables` keeps the splits and every leaf's total, so the prediction does not
+move by one unit, and refits how each leaf's total is divided among the tree's
+features to the teacher's SHAP values, by least squares on 1000 training rows with
+a ridge towards the exact tables. The circuit is the same size: same players, same
+leaves. Teacher: the 100-tree forest, interventional SHAP against the same 50
+background rows as the student. Agreement on 200 test rows, mean over seeds 0 to 2,
+ridge 1 (0.1 and 10 are in the json; 10 is a little worse, 0.1 the same).
+
+| data | T | cosine, exact / aligned | top-3 overlap, exact / aligned | relative L1 error, exact / aligned |
+|---|---|---|---|---|
+| Adult | 3 | 0.80 / 0.84 | 0.67 / 0.70 | 0.75 / 0.55 |
+| Adult | 10 | 0.84 / 0.95 | 0.69 / 0.87 | 0.64 / 0.25 |
+| Taiwan | 3 | 0.86 / 0.89 | 0.73 / 0.77 | 0.65 / 0.51 |
+| Taiwan | 10 | 0.89 / 0.94 | 0.73 / 0.81 | 0.56 / 0.39 |
+| Bank | 3 | 0.83 / 0.90 | 0.62 / 0.74 | 0.83 / 0.48 |
+| Bank | 10 | 0.86 / 0.95 | 0.67 / 0.80 | 0.68 / 0.32 |
+| Breast cancer | 3 | 0.57 / 0.67 | 0.40 / 0.54 | 1.43 / 0.94 |
+| Breast cancer | 10 | 0.57 / 0.82 | 0.41 / 0.70 | 1.45 / 0.62 |
+| German credit | 3 | 0.81 / 0.84 | 0.66 / 0.69 | 0.84 / 0.67 |
+| German credit | 10 | 0.78 / 0.83 | 0.64 / 0.67 | 1.03 / 0.73 |
+
+- At T=10 the fitted tables agree with the teacher at cosine 0.82 to 0.95, against
+  0.57 to 0.89 for the exact ones, and the L1 error roughly halves. At T=3 the gain is
+  smaller: three trees use few features, and a feature no tree uses gets 0 either way.
+- What is given up: these are no longer the student's Shapley values. They are its
+  prediction, split the way the teacher splits it, as far as the trees allow. They
+  still add up to the prediction, and a feature no tree tests still gets 0.
+- Breast cancer stays the hardest: the teacher spreads credit over 30 correlated
+  features and the trees see at most 13 at T=3.
+
 ## What each output costs (`output_bench.py`)
 
 `compile_model(output=...)` on the e2e student of each dataset (seed 0) with
