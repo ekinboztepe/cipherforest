@@ -38,7 +38,7 @@ from cipherforest.quantize import QuantizedModel
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "results" / "label_bench.json"
 DATASETS = {"adult": False, "credit_default": True, "bank_marketing": False}  # adverse above 0.5?
-SEEDS = range(10)
+SEEDS = range(5)
 REASONS = 4
 BUDGET = 20_000
 STARTS, SWEPT, UNSURE, POOL = 4, 4, 256, 8192
