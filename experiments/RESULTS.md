@@ -535,7 +535,7 @@ ridge 1 (0.1 and 10 are in the json; 10 is a little worse, 0.1 the same).
 | German credit | 10 | 0.78 / 0.83 | 0.64 / 0.67 | 1.03 / 0.73 |
 
 - At T=10 the fitted tables agree with the teacher at cosine 0.82 to 0.95, against
-  0.57 to 0.89 for the exact ones, and the L1 error roughly halves. At T=3 the gain is
+  0.57 to 0.89 for the exact ones, and the L1 error falls by 30% to 60%. At T=3 the gain is
   smaller: three trees use few features, and a feature no tree uses gets 0 either way.
 - What is given up: these are no longer the student's Shapley values. They are its
   prediction, split the way the teacher splits it, as far as the trees allow. They
