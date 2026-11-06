@@ -3,10 +3,10 @@ revision = 5
 requires-python = ">=3.11, <3.13"
 resolution-markers = [
     "python_full_version >= '3.12' and sys_platform == 'win32'",
-    "python_full_version < '3.12' and sys_platform == 'win32'",
     "python_full_version >= '3.12' and sys_platform == 'emscripten'",
-    "python_full_version < '3.12' and sys_platform == 'emscripten'",
     "python_full_version >= '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "python_full_version < '3.12' and sys_platform == 'win32'",
+    "python_full_version < '3.12' and sys_platform == 'emscripten'",
     "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 
@@ -37,7 +37,7 @@ wheels = [
 
 [[package]]
 name = "cipherforest"
-version = "0.1.0"
+version = "0.2.0"
 source = { editable = "." }
 default-groups = ["dev", "experiments"]
 dependencies = [
@@ -45,6 +45,9 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+catboost = [
+    { name = "catboost" },
+]
 fhe = [
     { name = "concrete-python", marker = "sys_platform != 'win32'" },
 ]
@@ -63,10 +66,11 @@ experiments = [
 
 [package.metadata]
 requires-dist = [
+    { name = "catboost", marker = "extra == 'catboost'", specifier = ">=1.2" },
     { name = "concrete-python", marker = "sys_platform != 'win32' and extra == 'fhe'", specifier = "==2.11.0" },
     { name = "numpy", specifier = ">=1.26,<2.0" },
 ]
-provides-extras = ["fhe"]
+provides-extras = ["fhe", "catboost"]
 
 [package.metadata.requires-dev]
 dev = [
