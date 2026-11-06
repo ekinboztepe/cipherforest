@@ -1,0 +1,1697 @@
+[
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "forest teacher",
+  "auc": 0.9175082816744157
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 31,
+  "auc": 0.8966032295232804
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 109,
+  "auc": 0.9054749757741175
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 338,
+  "auc": 0.9039465032975275
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.887806531744472,
+  "pbs": 22,
+  "auc": 0.8878003237584451
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.9094936611857335,
+  "pbs": 71,
+  "auc": 0.9094395024945787
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.9211446325163329,
+  "pbs": 208,
+  "auc": 0.9210341598391716
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.9256593120637784,
+  "pbs": 696,
+  "auc": 0.923496261834503
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.8946163239895223,
+  "pbs": 35,
+  "auc": 0.8944535347535584
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.9115073329025691,
+  "pbs": 106,
+  "auc": 0.9114599901011177
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.9216213947904055,
+  "pbs": 308,
+  "auc": 0.9214000257456416
+ },
+ {
+  "dataset": "adult",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.9267609808956875,
+  "pbs": 1046,
+  "auc": 0.9256019664836546
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "forest teacher",
+  "auc": 0.9188507540474042
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 30,
+  "auc": 0.8981473417035407
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 108,
+  "auc": 0.9078007231327392
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 336,
+  "auc": 0.9069802558043933
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.8966670409879607,
+  "pbs": 23,
+  "auc": 0.896549291888008
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.9119015492259397,
+  "pbs": 74,
+  "auc": 0.9120480908545572
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.9222087771122276,
+  "pbs": 210,
+  "auc": 0.922155042111514
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.925803882610779,
+  "pbs": 707,
+  "auc": 0.9233837628117542
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.9010967061273522,
+  "pbs": 33,
+  "auc": 0.901083295403828
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.9149581257526491,
+  "pbs": 108,
+  "auc": 0.9147689387600784
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.9241673322290855,
+  "pbs": 306,
+  "auc": 0.9237247415101462
+ },
+ {
+  "dataset": "adult",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.9269835289051567,
+  "pbs": 1052,
+  "auc": 0.9236329296337126
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "forest teacher",
+  "auc": 0.9184009053269973
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 30,
+  "auc": 0.8985275578210346
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 108,
+  "auc": 0.9054903023152877
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 337,
+  "auc": 0.9050467536875253
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.8926364185587023,
+  "pbs": 23,
+  "auc": 0.8928084921417212
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.9113750309570341,
+  "pbs": 73,
+  "auc": 0.911405481404816
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.9212920399471559,
+  "pbs": 212,
+  "auc": 0.9212208783743905
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.9269214122022406,
+  "pbs": 705,
+  "auc": 0.9239987034335653
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.8994513687743386,
+  "pbs": 34,
+  "auc": 0.8992922269604323
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.913885249449405,
+  "pbs": 106,
+  "auc": 0.9138258038383996
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.9254673987153264,
+  "pbs": 308,
+  "auc": 0.9248694609751261
+ },
+ {
+  "dataset": "adult",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.9285188541140967,
+  "pbs": 1043,
+  "auc": 0.9279366297628608
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "forest teacher",
+  "auc": 0.7736867969650635
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 36,
+  "auc": 0.7629087123830741
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 117,
+  "auc": 0.769167704052922
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 353,
+  "auc": 0.7657708252001322
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.7563902322537808,
+  "pbs": 24,
+  "auc": 0.756412161582726
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.769649426911817,
+  "pbs": 80,
+  "auc": 0.7695315245197245
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.7726422901278083,
+  "pbs": 239,
+  "auc": 0.772514687232559
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.7730362440725025,
+  "pbs": 779,
+  "auc": 0.7689951073345194
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.7642649768802955,
+  "pbs": 34,
+  "auc": 0.7638680818256017
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.7752902694975211,
+  "pbs": 117,
+  "auc": 0.775201055827531
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.7752707136959444,
+  "pbs": 348,
+  "auc": 0.7757943344727297
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.7669298805321118,
+  "pbs": 1151,
+  "auc": 0.7563956500879908
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "forest teacher",
+  "auc": 0.7800551256891098
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 36,
+  "auc": 0.7683267013882762
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 119,
+  "auc": 0.7742167643476376
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 356,
+  "auc": 0.7732871671940541
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.7611283604632672,
+  "pbs": 23,
+  "auc": 0.7607451389901507
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.7710676611127159,
+  "pbs": 79,
+  "auc": 0.7712116207074371
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.7753131791964661,
+  "pbs": 236,
+  "auc": 0.7754382021706631
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.7773668479525593,
+  "pbs": 778,
+  "auc": 0.774716443457057
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.7646354535434131,
+  "pbs": 33,
+  "auc": 0.7649159425602248
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.7756437702801144,
+  "pbs": 113,
+  "auc": 0.7756874741427412
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.7777306168209408,
+  "pbs": 347,
+  "auc": 0.7764796647010764
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.7728026064220014,
+  "pbs": 1158,
+  "auc": 0.7643991843734388
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "forest teacher",
+  "auc": 0.7821616312283551
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 36,
+  "auc": 0.7739147587892492
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 118,
+  "auc": 0.7784616632503353
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 354,
+  "auc": 0.7725274836409787
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.7681424950251382,
+  "pbs": 23,
+  "auc": 0.7681592645119786
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.7782516060782527,
+  "pbs": 78,
+  "auc": 0.7782325662608864
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.7834294044334809,
+  "pbs": 234,
+  "auc": 0.7829504162909011
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.7808115585416594,
+  "pbs": 784,
+  "auc": 0.7768027740136729
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.7675704233309896,
+  "pbs": 34,
+  "auc": 0.7676071614067752
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.7759421639490294,
+  "pbs": 117,
+  "auc": 0.7759479429721867
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.7754054887717192,
+  "pbs": 355,
+  "auc": 0.7752255134791071
+ },
+ {
+  "dataset": "credit_default",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.7753026015201514,
+  "pbs": 1150,
+  "auc": 0.7695354975981452
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "forest teacher",
+  "auc": 0.9253925878230665
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 32,
+  "auc": 0.8987786703965976
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 107,
+  "auc": 0.9156987535015472
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 337,
+  "auc": 0.9130656492418803
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.8727424769694796,
+  "pbs": 22,
+  "auc": 0.8738698458993418
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.9024155729471471,
+  "pbs": 76,
+  "auc": 0.902505456282216
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.927944941076396,
+  "pbs": 225,
+  "auc": 0.9272420170184167
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.9315852919336451,
+  "pbs": 747,
+  "auc": 0.9304004007008172
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.8871676154436242,
+  "pbs": 34,
+  "auc": 0.887317370477432
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.9151169748998134,
+  "pbs": 111,
+  "auc": 0.9152902238913542
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.9311846062738569,
+  "pbs": 330,
+  "auc": 0.9307581151540423
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.9349879748829887,
+  "pbs": 1086,
+  "auc": 0.9305521640890764
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "forest teacher",
+  "auc": 0.9220981286532156
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 32,
+  "auc": 0.89627607128279
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 108,
+  "auc": 0.9076400607447646
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 333,
+  "auc": 0.9049261296918002
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.8841871416508309,
+  "pbs": 23,
+  "auc": 0.8837939210066448
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.9112812452585782,
+  "pbs": 76,
+  "auc": 0.9113679455413092
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.9250965260621504,
+  "pbs": 230,
+  "auc": 0.9245042130729171
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.9324029574497142,
+  "pbs": 729,
+  "auc": 0.9312428864464267
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.8812996963519643,
+  "pbs": 33,
+  "auc": 0.8812134886844765
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.9176443184562014,
+  "pbs": 110,
+  "auc": 0.9174859616023848
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.927783628531123,
+  "pbs": 329,
+  "auc": 0.9272005236575818
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.9327825743345035,
+  "pbs": 1033,
+  "auc": 0.9292139558353004
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "forest teacher",
+  "auc": 0.9231782444132506
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 32,
+  "auc": 0.8938947691991488
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 108,
+  "auc": 0.9099897217724267
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 337,
+  "auc": 0.9108826816336818
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.8743275612468532,
+  "pbs": 21,
+  "auc": 0.8742953896821509
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.9034355896475619,
+  "pbs": 74,
+  "auc": 0.9033854186797577
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.9242584359602457,
+  "pbs": 223,
+  "auc": 0.9237327018157496
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.9299025182642784,
+  "pbs": 750,
+  "auc": 0.927099878574132
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.8855533910799659,
+  "pbs": 31,
+  "auc": 0.8857040555572986
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.920224409737048,
+  "pbs": 108,
+  "auc": 0.9201740114083626
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.9286323288074876,
+  "pbs": 326,
+  "auc": 0.9287455166328884
+ },
+ {
+  "dataset": "bank_marketing",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.9311993847311404,
+  "pbs": 1062,
+  "auc": 0.9248890971514561
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "forest teacher",
+  "auc": 0.9771488469601678
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 34,
+  "auc": 0.9641509433962265
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 114,
+  "auc": 0.9616352201257862
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 344,
+  "auc": 0.9649895178197065
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.9727463312368972,
+  "pbs": 24,
+  "auc": 0.9727463312368972
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.9777777777777779,
+  "pbs": 80,
+  "auc": 0.9780922431865828
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.9886792452830189,
+  "pbs": 238,
+  "auc": 0.9880503144654089
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.9870020964360587,
+  "pbs": 791,
+  "auc": 0.9874213836477987
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.9749475890985325,
+  "pbs": 36,
+  "auc": 0.9748427672955975
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.9769392033542977,
+  "pbs": 119,
+  "auc": 0.9771488469601677
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.9863731656184487,
+  "pbs": 349,
+  "auc": 0.9861635220125786
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.9851153039832286,
+  "pbs": 1166,
+  "auc": 0.9849056603773585
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "forest teacher",
+  "auc": 0.979454926624738
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 36,
+  "auc": 0.9749475890985324
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 120,
+  "auc": 0.969496855345912
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 356,
+  "auc": 0.9616352201257862
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.9770440251572327,
+  "pbs": 24,
+  "auc": 0.9770440251572327
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.9828092243186584,
+  "pbs": 80,
+  "auc": 0.9823899371069182
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.9932914046121594,
+  "pbs": 234,
+  "auc": 0.9932914046121594
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.9903563941299791,
+  "pbs": 788,
+  "auc": 0.990356394129979
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.9753668763102725,
+  "pbs": 36,
+  "auc": 0.9753668763102725
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.9876310272536688,
+  "pbs": 117,
+  "auc": 0.9878406708595389
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.989517819706499,
+  "pbs": 358,
+  "auc": 0.9894129979035639
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.989517819706499,
+  "pbs": 1164,
+  "auc": 0.989937106918239
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "forest teacher",
+  "auc": 0.9916142557651991
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 35,
+  "auc": 0.9843815513626835
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 116,
+  "auc": 0.9917190775681342
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 351,
+  "auc": 0.9875262054507338
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.9873165618448637,
+  "pbs": 22,
+  "auc": 0.9879454926624738
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.989517819706499,
+  "pbs": 77,
+  "auc": 0.989727463312369
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.9893081761006289,
+  "pbs": 234,
+  "auc": 0.9893081761006289
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.989727463312369,
+  "pbs": 784,
+  "auc": 0.989727463312369
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.9723270440251572,
+  "pbs": 34,
+  "auc": 0.9723270440251572
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.9811320754716981,
+  "pbs": 116,
+  "auc": 0.9812368972746331
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.9884696016771488,
+  "pbs": 348,
+  "auc": 0.9884696016771488
+ },
+ {
+  "dataset": "breast_cancer",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.9918238993710692,
+  "pbs": 1168,
+  "auc": 0.9918238993710692
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "forest teacher",
+  "auc": 0.8072380952380951
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 36,
+  "auc": 0.7808380952380952
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 118,
+  "auc": 0.7873904761904761
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 352,
+  "auc": 0.7836571428571429
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.7448380952380953,
+  "pbs": 24,
+  "auc": 0.7451047619047617
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.8185142857142857,
+  "pbs": 79,
+  "auc": 0.8176
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.8107428571428571,
+  "pbs": 236,
+  "auc": 0.8105904761904763
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.8291809523809525,
+  "pbs": 778,
+  "auc": 0.8272761904761905
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.7585904761904761,
+  "pbs": 35,
+  "auc": 0.7588571428571429
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.7554285714285714,
+  "pbs": 118,
+  "auc": 0.7563047619047619
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.7955809523809524,
+  "pbs": 337,
+  "auc": 0.7952
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 0,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.8051809523809524,
+  "pbs": 1145,
+  "auc": 0.8051047619047619
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "forest teacher",
+  "auc": 0.8059428571428572
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 35,
+  "auc": 0.730247619047619
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 115,
+  "auc": 0.7298666666666668
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 347,
+  "auc": 0.6966476190476191
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.7588952380952382,
+  "pbs": 22,
+  "auc": 0.7587428571428572
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.7799238095238096,
+  "pbs": 76,
+  "auc": 0.7798095238095237
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.8213333333333334,
+  "pbs": 234,
+  "auc": 0.8227428571428571
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.8247619047619048,
+  "pbs": 768,
+  "auc": 0.827161904761905
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.7614095238095239,
+  "pbs": 34,
+  "auc": 0.7617142857142858
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.7289904761904762,
+  "pbs": 115,
+  "auc": 0.7317333333333335
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.8032761904761905,
+  "pbs": 347,
+  "auc": 0.8033523809523809
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 1,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.8169142857142857,
+  "pbs": 1141,
+  "auc": 0.8153142857142857
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "forest teacher",
+  "auc": 0.7443809523809524
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 3,
+  "pbs": 34,
+  "auc": 0.6584
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 10,
+  "pbs": 114,
+  "auc": 0.6991999999999999
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "distilled",
+  "depth": 6,
+  "trees": 30,
+  "pbs": 344,
+  "auc": 0.6948571428571428
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 3,
+  "auc_float": 0.7051809523809525,
+  "pbs": 23,
+  "auc": 0.7054095238095238
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 10,
+  "auc_float": 0.7118476190476191,
+  "pbs": 78,
+  "auc": 0.7114285714285714
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 30,
+  "auc_float": 0.7214476190476191,
+  "pbs": 235,
+  "auc": 0.7212571428571428
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 4,
+  "trees": 100,
+  "auc_float": 0.7250285714285714,
+  "pbs": 783,
+  "auc": 0.7254476190476191
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 3,
+  "auc_float": 0.7356190476190476,
+  "pbs": 35,
+  "auc": 0.7360380952380953
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 10,
+  "auc_float": 0.7366857142857143,
+  "pbs": 117,
+  "auc": 0.7368
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 30,
+  "auc_float": 0.7300571428571428,
+  "pbs": 347,
+  "auc": 0.7319238095238096
+ },
+ {
+  "dataset": "credit_g",
+  "seed": 2,
+  "model": "catboost",
+  "depth": 6,
+  "trees": 100,
+  "auc_float": 0.7202285714285714,
+  "pbs": 1138,
+  "auc": 0.7143238095238095
+ }
+]

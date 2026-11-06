@@ -141,8 +141,11 @@ walks through choosing the output, the budget and the settings.
 
 ## Limits
 
-- The student is small. On the benchmarks here it gives up 0.01 to 0.03 AUC
-  against the forest.
+- A distilled student is small. On the benchmarks here it gives up 0.005 to 0.06 AUC
+  against a 100-tree forest. CatBoost trained directly does not: at depth 4 with 30
+  trees it matches the forest on all five datasets, with its own exact SHAP values and
+  a cheaper circuit (about 230 bootstraps against 340). Distil only models you are
+  handed, not ones you train.
 - Its SHAP values explain the student exactly, but agree only moderately with
   the teacher's (cosine 0.6 to 0.85). `distill(..., teacher_shap=(rows, values))`
   refits the tables to the teacher's values instead, prediction and circuit cost

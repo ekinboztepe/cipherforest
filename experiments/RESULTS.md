@@ -509,6 +509,36 @@ told otherwise.
 More cores did not visibly help: ours at T=10 with defaults took 0.65 to 0.73 s on
 8 vCPU and 0.69 to 0.78 s on 16, though the CPUs differ, so this settles nothing.
 
+## Serve CatBoost directly (`catboost_bench.py`)
+
+The student's accuracy loss came from its size, not from distilling (same-size
+CatBoost on the labels scored the same, Distillation above). So: does a bigger
+CatBoost model, served as it is, close the gap, and what does it cost? AUC of the
+integer model the circuit serves, on the test split, mean over seeds 0 to 2. PBS is
+the SHAP circuit's bootstrap count (depth + used features per tree).
+
+| data | forest | distilled D6 T3 | distilled D6 T10 | distilled D6 T30 | CatBoost D4 T10 | CatBoost D4 T30 | CatBoost D4 T100 | CatBoost D6 T30 | CatBoost D6 T100 |
+|---|---|---|---|---|---|---|---|---|---|
+| Adult | 0.918 | 0.898 | 0.906 | 0.905 | 0.911 | 0.921 | 0.924 | 0.923 | 0.926 |
+| Taiwan | 0.779 | 0.768 | 0.774 | 0.771 | 0.773 | 0.777 | 0.774 | 0.776 | 0.763 |
+| Bank | 0.924 | 0.896 | 0.911 | 0.910 | 0.906 | 0.925 | 0.930 | 0.929 | 0.928 |
+| Breast cancer | 0.983 | 0.974 | 0.974 | 0.971 | 0.983 | 0.990 | 0.989 | 0.988 | 0.989 |
+| German credit | 0.786 | 0.723 | 0.739 | 0.725 | 0.770 | 0.785 | 0.793 | 0.777 | 0.778 |
+| PBS (mean) | | 34 | 113 | 345 | 77 | 229 | 758 | 336 | 1114 |
+
+- CatBoost at depth 4 with 30 trees matches the 100-tree forest on all five datasets
+  (0.002 below to 0.007 above), with no distillation and its own exact SHAP values.
+  The best distilled student of each dataset stays 0.005 to 0.047 below.
+- It is also the cheaper circuit: about 230 bootstraps against 340 for 30 distilled
+  trees of depth 6, since depth 4 needs fewer comparisons and each tree uses fewer
+  features. Timed on Adult, seed 0, 20 requests each, in the same Docker image on
+  the desktop (4 CPUs): 13.1 s for CatBoost depth 4 x 30 (AUC 0.921) against 17.0 s
+  for distilled depth 6 x 30 (0.905); the score output takes 12.1 s.
+- 100 trees buy little and start to lose to output rounding (8 bits): Taiwan drops
+  from 0.776 to 0.763 at depth 6.
+- So distil only what CatBoost cannot replace, a model you are handed rather than
+  one you train; then use the teacher-fitted tables above for its explanations.
+
 ## Explanations fitted to the teacher (`align_bench.py`)
 
 The student's exact SHAP values explain the student. When it stands in for a
