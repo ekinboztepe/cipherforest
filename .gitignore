@@ -11,3 +11,4 @@ experiments/e2e/*/model.json
 experiments/e2e/*/samples.npz
 experiments/e2e/*/deploy/
 experiments/e2e/*/variants/
+dist/

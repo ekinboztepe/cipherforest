@@ -62,6 +62,30 @@ def prediction_only(oracle: Oracle) -> Oracle:
     return query
 
 
+def decision_oracle(oracle: Oracle, adverse_above: bool, reasons: int = 0, threshold: float = 0.5) -> Oracle:
+    """An approve/decline API, as a lender would run it under ECOA Regulation B.
+
+    The prediction becomes 1 on the adverse outcome (score above `threshold` if
+    adverse_above, else at or below it) and 0 otherwise. With reasons > 0, an adverse
+    answer also names the features that pushed hardest towards it, ranked: the top one
+    gets `reasons`, the next reasons - 1, and so on. No values, and nothing on approvals.
+    """
+
+    def query(x: FloatArray) -> tuple[FloatArray, FloatArray]:
+        pred, shap = oracle(x)
+        adverse = pred > threshold if adverse_above else pred <= threshold
+        ranks = np.zeros_like(shap)
+        if reasons:
+            push = shap if adverse_above else -shap
+            order = np.argsort(-push, axis=1, kind="stable")[:, :reasons]
+            for row in np.flatnonzero(adverse):
+                top = [f for f in order[row] if push[row, f] > 0]
+                ranks[row, top] = reasons - np.arange(len(top))
+        return adverse.astype(np.float64), ranks
+
+    return query
+
+
 def noisy_oracle(model: QuantizedModel, noise: float, rng: np.random.Generator) -> Oracle:
     """Server-side defence: rounded Laplace(noise) added to every integer SHAP output.
 

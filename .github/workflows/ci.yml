@@ -23,3 +23,18 @@ jobs:
       - uses: actions/checkout@v7
       - run: docker build -f docker/Dockerfile -t cipherforest .
       - run: docker run --rm cipherforest pytest -q -m fhe
+
+  package:
+    # the wheel as a user gets it, in a fresh environment, through the whole quickstart
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.2
+        with:
+          python-version: "3.11"
+      - run: uv build
+      - run: uv venv /tmp/pkg
+      # one install, so the resolver keeps numpy below 2 for Concrete
+      - run: uv pip install --python /tmp/pkg/bin/python "cipherforest[fhe,catboost] @ file://$PWD/$(ls dist/*.whl)" scikit-learn
+      - run: /tmp/pkg/bin/python -c "from concrete import fhe"
+      - run: cd /tmp && /tmp/pkg/bin/python "$GITHUB_WORKSPACE/examples/quickstart.py"

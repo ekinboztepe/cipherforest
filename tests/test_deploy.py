@@ -60,3 +60,25 @@ def test_client_bundle_json_round_trip() -> None:
     np.testing.assert_array_equal(restored.active_features, bundle.active_features)
     for a, b in zip(restored.quantizer.edges, bundle.quantizer.edges, strict=True):
         np.testing.assert_array_equal(a, b)
+
+
+@pytest.mark.parametrize("output", ["score", "decision"])
+def test_round_trip_without_explanations(tmp_path: Path, output: str) -> None:
+    rng = np.random.default_rng(5)
+    x = rng.normal(size=(400, 6))
+    y = (x[:, 0] > 0.1).astype(float) + np.tanh(x[:, 3] * x[:, 4])
+    quantizer = FeatureQuantizer.fit(x, n_bins=16)
+    ensemble = distill_ensemble(x, y, 4, 2, quantizer.edges)
+    model = quantize_model(ensemble, [build_shap_table(t, x[:30]) for t in ensemble.trees], quantizer, output_bits=8)
+    threshold = float(np.median(model.decode(model.simulate(quantizer.transform(x)))[0]))
+    cut = model.cut_for(threshold) if output == "decision" else None
+    export(compile_model(model, output=output, cut=cut), model, tmp_path)
+    server = Server(tmp_path / SERVER_FILE)
+    client = Client.load(tmp_path / CLIENT_FILE, secret_seed=12)
+    keys = server.load_keys(client.evaluation_keys())
+    for sample in x[rng.choice(400, size=4, replace=False)]:
+        pred, _ = model.decode(model.simulate(quantizer.transform(sample[None])))
+        got, shap = client.decrypt(server.run(client.encrypt(sample), keys))
+        assert shap is None
+        want = float(pred[0] > threshold) if output == "decision" else pred[0]
+        assert abs(got - want) < 1e-12

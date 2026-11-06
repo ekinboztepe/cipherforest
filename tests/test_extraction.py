@@ -10,6 +10,7 @@ from cipherforest.extraction import (
     CellGrid,
     Counted,
     code_values,
+    decision_oracle,
     denoised,
     extract,
     extract_hidden,
@@ -317,3 +318,36 @@ def test_pair_tests_see_joint_effects_that_shap_sweeps_miss() -> None:
     starts = np.array([grid.random_cell(np.random.default_rng(i)) for i in range(20)])
     assert (0, 2) in pair_interactions(oracle, grid, starts)
     assert (0, 2) not in shap_interactions(oracle, grid, 20, np.random.default_rng(0))
+
+
+@pytest.mark.parametrize("adverse_above", [True, False])
+def test_decision_oracle_gives_labels_and_reasons_only_on_adverse_answers(adverse_above: bool) -> None:
+    model = small_model(seed=3, depth=4, n_trees=2)
+    rng = np.random.default_rng(4)
+    x = random_rows(model, 300, rng)
+    pred, shap = plaintext_oracle(model)(x)
+    threshold = float(np.median(pred))
+    label, ranks = decision_oracle(plaintext_oracle(model), adverse_above, reasons=3, threshold=threshold)(x)
+    adverse = pred > threshold if adverse_above else pred <= threshold
+    np.testing.assert_array_equal(label, adverse)
+    assert not ranks[~adverse].any()
+    push = shap if adverse_above else -shap
+    for row in np.flatnonzero(adverse):
+        named = np.flatnonzero(ranks[row])
+        assert len(named) <= 3 and np.all(push[row, named] > 0)
+        # ranked by push, and no stronger feature left out
+        order = named[np.argsort(-ranks[row, named])]
+        assert np.all(np.diff(push[row, order]) <= 0)
+        if named.size:
+            others = np.setdiff1d(np.arange(push.shape[1]), named)
+            assert np.all(push[row, others] <= push[row, order[-1]])
+    _, silent = decision_oracle(plaintext_oracle(model), adverse_above)(x)
+    assert not silent.any()
+
+
+def test_label_sweeps_find_only_true_thresholds() -> None:
+    model = small_model(seed=5, depth=4, n_trees=3)
+    pred, _ = plaintext_oracle(model)(random_rows(model, 500, np.random.default_rng(6)))
+    oracle = decision_oracle(plaintext_oracle(model), True, threshold=float(np.median(pred)))
+    found = find_thresholds(oracle, model.quantizer, 30, np.random.default_rng(7))
+    assert found and found <= true_thresholds(model)

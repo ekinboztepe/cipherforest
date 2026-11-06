@@ -509,6 +509,108 @@ told otherwise.
 More cores did not visibly help: ours at T=10 with defaults took 0.65 to 0.73 s on
 8 vCPU and 0.69 to 0.78 s on 16, though the CPUs differ, so this settles nothing.
 
+## What each output costs (`output_bench.py`)
+
+`compile_model(output=...)` on the e2e student of each dataset (seed 0) with
+`SAFE`, against Concrete-ML's XGBClassifier, compiled only. Server keys are the
+expanded bootstrap and keyswitch keys the server holds, as Concrete reports them;
+XGB's are 911 MB everywhere.
+
+| data | T | PBS: XGB / shap / score / decision | server keys, MB: shap and score / decision | complexity, XGB over shap / over score |
+|---|---|---|---|---|
+| Adult | 3 | 1218 / 31 / 21 / 28 | 1174 / 2189 | 5.5 / 12.3 |
+| Adult | 10 | 4690 / 109 / 70 / 77 | 1174 / 2189 | 5.3 / 11.8 |
+| Adult | 30 | 15960 / 338 / 210 / 218 | 1174 / 2316 | 5.6 / 12.8 |
+| Taiwan | 3 | 1461 / 36 / 21 / 28 | 981 / 1540 | 4.4 / 10.2 |
+| Taiwan | 10 | 5050 / 117 / 70 / 78 | 981 / 1657 | 4.7 / 10.5 |
+| Taiwan | 30 | 15150 / 353 / 210 / 218 | 981 / 1659 | 4.7 / 10.5 |
+| Bank | 3 | 1623 / 32 / 21 / 28 | 981 / 1540 | 5.8 / 11.3 |
+| Bank | 10 | 5410 / 107 / 70 / 77 | 981 / 1647 | 5.7 / 11.3 |
+| Bank | 30 | 16230 / 337 / 210 / 217 | 981 / 1647 | 5.4 / 11.3 |
+| Breast cancer | 3 | 246 / 34 / 21 / 28 | 981 / 1456 | 0.8 / 1.7 |
+| Breast cancer | 10 | 820 / 114 / 70 / 77 | 981 / 1456 | 0.8 / 1.7 |
+| Breast cancer | 30 | 2460 / 332 / 203 / 211 | 981 / 1552 | 0.8 / 1.8 |
+| German credit | 3 | 948 / 36 / 21 / 28 | 1271 / 2117 | 3.2 / 8.4 |
+| German credit | 10 | 3250 / 118 / 70 / 78 | 1297 / 2314 | 3.2 / 7.6 |
+| German credit | 30 | 10560 / 352 / 210 / 218 | 1561 / 2687 | 3.5 / 8.2 |
+
+Concrete's complexity estimate is not a stopwatch. Against the times measured in
+server_bench it puts our lead over XGB at 5.3x to 5.6x on Adult where the server
+measured 3.6x to 4.2x, and at 0.8x on Breast cancer where the server measured 1.35x,
+1.09x and 0.69x for T = 3, 10, 30. So we timed the outputs themselves: 20 requests
+each through the exported files on Adult, Docker on the desktop (4 CPUs, Ryzen 5
+3600), medians without counting anything but `server.run`:
+
+| T | shap | score | decision |
+|---|---|---|---|
+| 3 | 2.40 s | 2.01 s | 2.33 s |
+| 30 | 17.11 s | 13.89 s | 13.96 s |
+
+- The explanation is cheap. Dropping it saves 37% of the bootstraps at T=30 but only
+  about 20% of the time (17.1 s against 13.9 s), and 16% at T=3. Exact SHAP costs
+  about a quarter more than the prediction alone, not twice as much as the estimate
+  suggests.
+- At T=30 the decision costs the same time as the score, at T=3 its 7 extra
+  bootstraps add 16%: the comparison runs on 4 bits after flooring the difference,
+  which keeps its sign exact. Its keys are larger
+  (1.5 to 2.7 GB expanded), because that last bootstrap needs its own parameters.
+- Against Concrete-ML on the same output, the prediction alone, we did not time the
+  two on one machine. From server_bench (3.4x to 4.7x with SHAP on the three large
+  datasets) and the 1.2x above, expect roughly 4x to 6x there; on Breast cancer
+  at T=30 Concrete-ML stays faster.
+
+## Label-only answers (`label_bench.py`)
+
+The defences above leave the prediction in the answer. A lender under ECOA
+Regulation B need not: it can answer approve or decline, and on a decline name the
+principal reasons. `decision_oracle` is that server on the e2e models: adverse is a
+score at or below 0.5 on Adult and Bank marketing and above 0.5 on Taiwan, and with
+reasons a decline names the 4 features that pushed hardest towards it, ranked, no
+values. The "decision" output of `compile_model` computes the bit under encryption;
+reasons would need an encrypted top-k and are not implemented in the circuit.
+
+The attacker works in rounds of about 800 queries. It asks the 4 points its copy
+is least sure about, sweeps 4 features through all their codes from each (a
+decline's reasons if it has them, random used features otherwise), adds the 256
+least certain of 8192 fresh random inputs, and refits a gradient-boosted copy on
+every answer so far. "edges" reads `client.json`; "no edges" does not, draws inputs
+evenly between each feature's lowest and highest edge and fits on raw values.
+Agreement is with the server's answers on the whole test split (12211, 7500 and
+11303 rows), median over 5 seeds, 20000 queries at most. A constant copy agrees
+with the share of the majority answer, 1 - adverse share or the adverse share.
+
+| data | attacker | adverse share | q to 99% | q to 99.9% | q to every test row | agreement at 500 / 1000 / 2000 / 5000 / 20000 queries |
+|---|---|---|---|---|---|---|
+| Adult | edges | 0.830 | 2381 | 5462 | 5502 | 0.912 / 0.976 / 0.986 / 0.996 / 1.000 |
+| Adult | edges + reasons | 0.830 | 2609 | 7477 | 7477 | 0.929 / 0.960 / 0.985 / 0.996 / 1.000 |
+| Adult | no edges | 0.830 | > 20000 | > 20000 | > 20000 | 0.830 / 0.874 / 0.925 / 0.984 / 0.987 |
+| Taiwan | edges | 0.115 | 1721 | > 20000 | > 20000 | 0.885 / 0.979 / 0.991 / 0.994 / 0.996 |
+| Taiwan | edges + reasons | 0.115 | 1649 | > 20000 | > 20000 | 0.885 / 0.979 / 0.992 / 0.995 / 0.997 |
+| Taiwan | no edges | 0.115 | > 20000 | > 20000 | > 20000 | 0.885 / 0.874 / 0.631 / 0.581 / 0.597 |
+| Bank marketing | edges | 0.939 | 3602 | 14724 | > 20000 | 0.957 / 0.968 / 0.975 / 0.996 / 0.999 |
+| Bank marketing | edges + reasons | 0.939 | 2735 | 9793 | 15496 | 0.939 / 0.973 / 0.978 / 0.995 / 1.000 |
+| Bank marketing | no edges | 0.939 | > 20000 | > 20000 | > 20000 | 0.939 / 0.680 / 0.892 / 0.942 / 0.961 |
+
+- Approve/decline alone does not keep the model: with the edges, the copy matches
+  99% of real decisions after 1600 to 3600 queries, and every test row on Adult
+  after about 5500. Returning the score instead gives an exact copy in 1000 to 2500
+  (Extraction), so taking the score away costs the attacker a few times more, not more.
+- The reasons help it little: about 1.5x fewer queries to 99.9% on Bank marketing,
+  nothing on Adult or Taiwan. They only change which features it sweeps, and points
+  the copy is unsure about lead to the same thresholds.
+- Taiwan's copies stop near 99.6%: some real rows sit where only a few leaf
+  combinations decide, and random sweeps rarely reach them.
+- Hiding the edges slows this attacker a lot, and on Taiwan its copy is worse than a
+  constant one (0.58 to 0.60): inputs drawn evenly between the edges miss where
+  Taiwan's skewed amounts lie. We do not count that as a defence. An attacker with
+  data from the same population draws where real inputs are, and Edges shows that
+  with the prediction back the hidden edges come out bit for bit.
+- What the server can still do is count. It sees every request and which
+  evaluation key it came with, and a new identity costs a key upload of hundreds of
+  MB. The last column is the copy's agreement under such a budget: at 500 queries
+  per key it is at the majority share on Taiwan and Adult's attacker reaches 0.91;
+  by 2000 every attacker with the edges is at 0.975 or better.
+
 ## Published numbers, not measured here
 
 Other work on SHAP for private tree models. Different models, threat models and
