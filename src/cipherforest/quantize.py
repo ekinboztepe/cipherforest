@@ -79,6 +79,17 @@ class QuantizedModel:
             out[:, tree.players] += tree.shap[tree.leaf_index(codes)]
         return out
 
+    def score(self, codes: IntArray) -> IntArray:
+        """Integer prediction before base and scale: base + score / scale is the prediction."""
+        out = np.zeros(codes.shape[0], dtype=np.int64)
+        for tree in self.trees:
+            out += tree.shap[tree.leaf_index(codes)].sum(axis=1)
+        return out
+
+    def cut_for(self, threshold: float) -> int:
+        """The integer cut with score > cut exactly when base + score / scale > threshold."""
+        return int(np.floor((threshold - self.base_value) * self.scale))
+
     def decode(self, shap_codes: IntArray) -> tuple[FloatArray, FloatArray]:
         shap = shap_codes / self.scale
         return self.base_value + shap.sum(axis=1), shap

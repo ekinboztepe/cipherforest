@@ -14,6 +14,9 @@ only the quantiser edges (training-data quantiles per feature).
 
 A circuit compiled with noise_bound also takes clear noise from the server, which
 the server draws per request with laplace_noise.
+
+A "score" circuit returns the prediction only and a "decision" circuit one bit;
+Client.decrypt then gives (prediction, None) or (1.0 or 0.0, None).
 """
 
 from __future__ import annotations
@@ -42,6 +45,7 @@ class ClientBundle:
     base_value: float
     active_features: IntArray
     server_noise: bool = False
+    output: str = "shap"
 
     def to_json(self) -> str:
         return json.dumps(
@@ -52,6 +56,7 @@ class ClientBundle:
                 "base_value": self.base_value,
                 "active_features": self.active_features.tolist(),
                 "server_noise": self.server_noise,
+                "output": self.output,
             }
         )
 
@@ -65,6 +70,7 @@ class ClientBundle:
             base_value=float(doc["base_value"]),
             active_features=np.asarray(doc["active_features"], dtype=np.int64),
             server_noise=bool(doc.get("server_noise", False)),
+            output=str(doc.get("output", "shap")),
         )
 
 
@@ -78,6 +84,7 @@ def export(compiled: CompiledModel, model: QuantizedModel, directory: Path) -> N
         base_value=model.base_value,
         active_features=compiled.active_features,
         server_noise=compiled.noise_bound > 0,
+        output=compiled.output,
     )
     (directory / CLIENT_FILE).write_text(bundle.to_json())
 
@@ -123,8 +130,12 @@ class Client:
             return self._client.encrypt(codes, None)[0].serialize()
         return self._client.encrypt(codes).serialize()
 
-    def decrypt(self, result: bytes) -> tuple[float, FloatArray]:
+    def decrypt(self, result: bytes) -> tuple[float, FloatArray | None]:
         outputs = np.atleast_1d(np.asarray(self._client.decrypt(fhe.Value.deserialize(result)), dtype=np.int64))
+        if self._bundle.output == "decision":
+            return float(outputs[0]), None
+        if self._bundle.output == "score":
+            return self._bundle.base_value + float(outputs[0]) / self._bundle.scale, None
         shap = np.zeros(self._bundle.quantizer.n_features)
         shap[self._bundle.active_features] = outputs / self._bundle.scale
         return self._bundle.base_value + float(shap.sum()), shap

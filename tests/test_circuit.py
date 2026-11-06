@@ -5,7 +5,7 @@ import pytest
 
 pytest.importorskip("concrete.fhe")
 
-from cipherforest.circuit import compile_model  # noqa: E402
+from cipherforest.circuit import compile_model, score_bound  # noqa: E402
 from cipherforest.distill import distill_ensemble  # noqa: E402
 from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_model, to_grid  # noqa: E402
 from cipherforest.shap_table import build_shap_table  # noqa: E402
@@ -103,3 +103,43 @@ def test_wide_grid_circuit_matches_reference() -> None:
     for row, want in zip(codes, model.simulate(codes), strict=True):
         got = compiled.expand(np.asarray(compiled.circuit.simulate(row)))[0]
         np.testing.assert_array_equal(got, want)
+
+
+@pytest.mark.parametrize("output", ["score", "decision"])
+def test_score_and_decision_circuits_match_reference(output: str) -> None:
+    model = small_model(seed=8, depth=5, n_trees=3)
+    codes = edge_cases(model, np.random.default_rng(9), n_random=200)
+    score = model.score(codes)
+    cut = int(np.median(score)) if output == "decision" else None
+    compiled = compile_model(model, output=output, cut=cut)
+    want = score if cut is None else (score > cut).astype(np.int64)
+    for row, w in zip(codes, want, strict=True):
+        assert int(compiled.circuit.simulate(row)) == w
+
+
+def test_score_is_the_sum_of_shap_and_the_cut_matches_the_float_threshold() -> None:
+    model = small_model(seed=8, depth=5, n_trees=3)
+    codes = edge_cases(model, np.random.default_rng(10), n_random=300)
+    np.testing.assert_array_equal(model.score(codes), model.simulate(codes).sum(axis=1))
+    pred, _ = model.decode(model.simulate(codes))
+    assert np.all(np.abs(model.score(codes)) <= score_bound(model))
+    for threshold in np.quantile(pred, [0.1, 0.5, 0.9]):
+        np.testing.assert_array_equal(model.score(codes) > model.cut_for(threshold), pred > threshold)
+
+
+def test_encrypted_decision() -> None:
+    model = small_model(seed=8, depth=5, n_trees=3)
+    codes = edge_cases(model, np.random.default_rng(11), n_random=4)[:10]
+    cut = int(np.median(model.score(codes)))
+    compiled = compile_model(model, output="decision", cut=cut)
+    compiled.circuit.keygen()
+    for row, w in zip(codes, model.score(codes) > cut, strict=True):
+        assert int(compiled.circuit.encrypt_run_decrypt(row)) == int(w)
+
+
+def test_outputs_are_sized_for_every_input_not_just_the_inputset() -> None:
+    model = small_model(seed=6, depth=4, n_trees=2)
+    compiled = compile_model(model, inputset_size=1)
+    limit = (1 << (model.output_bits - 1)) - 1
+    widths = [n.output.dtype.bit_width for n in compiled.circuit.graph.ordered_outputs()]
+    assert min(widths) >= limit.bit_length() + 1  # signed
