@@ -105,6 +105,45 @@ class Server:
         return self._server.run(*args, evaluation_keys=evaluation_keys).serialize()
 
 
+class BudgetExceeded(RuntimeError):
+    """A client's evaluation keys have used up their requests."""
+
+
+class BudgetedServer(Server):
+    """A Server that answers each set of evaluation keys at most `budget` times.
+
+    The server cannot see inputs or answers, but it sees every request and the keys
+    it comes with, and a new identity means a new key upload of hundreds of MB.
+    Copying the model takes thousands of requests (RESULTS.md, Label-only answers),
+    so a budget is the defence that remains. Keys are told apart by a SHA-256 of
+    their bytes; `used` maps that fingerprint to the requests answered so far.
+    """
+
+    def __init__(self, path: Path, budget: int) -> None:
+        super().__init__(path)
+        self.budget = budget
+        self.used: dict[str, int] = {}
+        self._fingerprint: dict[int, str] = {}
+
+    def load_keys(self, evaluation_keys: bytes) -> fhe.EvaluationKeys:  # type: ignore[override]
+        import hashlib
+
+        keys = Server.load_keys(evaluation_keys)
+        fingerprint = hashlib.sha256(evaluation_keys).hexdigest()
+        self._fingerprint[id(keys)] = fingerprint
+        self.used.setdefault(fingerprint, 0)
+        return keys
+
+    def run(self, ciphertext: bytes, evaluation_keys: fhe.EvaluationKeys, noise: IntArray | None = None) -> bytes:
+        fingerprint = self._fingerprint.get(id(evaluation_keys))
+        if fingerprint is None:
+            raise KeyError("load these keys with this server's load_keys first")
+        if self.used[fingerprint] >= self.budget:
+            raise BudgetExceeded(f"these keys have used their {self.budget} requests")
+        self.used[fingerprint] += 1
+        return super().run(ciphertext, evaluation_keys, noise)
+
+
 def laplace_noise(b: float, bound: int, size: int, rng: np.random.Generator) -> IntArray:
     """Rounded Laplace(b), clipped to the bound the circuit was compiled for."""
     return np.clip(np.rint(rng.laplace(0.0, b, size=size)), -bound, bound).astype(np.int64)

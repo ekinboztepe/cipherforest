@@ -134,7 +134,10 @@ Concrete has no Windows wheels, hence the image.
   Coarser outputs cost the honest client explanation quality long before they
   cost the attacker more than a few thousand queries.
 
-Treat the deployed model as extractable by its clients.
+Treat the deployed model as extractable by its clients. An approve/decline server
+slows copying to a few thousand queries but does not stop it, and `BudgetedServer`
+caps the requests per set of evaluation keys. [docs/deploying.md](docs/deploying.md)
+walks through choosing the output, the budget and the settings.
 
 ## Limits
 

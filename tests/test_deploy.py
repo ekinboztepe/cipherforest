@@ -8,7 +8,17 @@ import pytest
 pytest.importorskip("concrete.fhe")
 
 from cipherforest.circuit import compile_model  # noqa: E402
-from cipherforest.deploy import CLIENT_FILE, SERVER_FILE, Client, ClientBundle, Server, export, laplace_noise  # noqa: E402
+from cipherforest.deploy import (  # noqa: E402
+    CLIENT_FILE,
+    SERVER_FILE,
+    BudgetedServer,
+    BudgetExceeded,
+    Client,
+    ClientBundle,
+    Server,
+    export,
+    laplace_noise,
+)
 from cipherforest.distill import distill_ensemble  # noqa: E402
 from cipherforest.quantize import FeatureQuantizer, quantize_model  # noqa: E402
 from cipherforest.shap_table import build_shap_table  # noqa: E402
@@ -82,3 +92,26 @@ def test_round_trip_without_explanations(tmp_path: Path, output: str) -> None:
         assert shap is None
         want = float(pred[0] > threshold) if output == "decision" else pred[0]
         assert abs(got - want) < 1e-12
+
+
+def test_budget_counts_requests_per_set_of_keys(tmp_path: Path) -> None:
+    rng = np.random.default_rng(6)
+    x = rng.normal(size=(300, 4))
+    y = (x[:, 0] > 0).astype(float)
+    quantizer = FeatureQuantizer.fit(x, n_bins=8)
+    ensemble = distill_ensemble(x, y, 3, 1, quantizer.edges)
+    model = quantize_model(ensemble, [build_shap_table(t, x[:20]) for t in ensemble.trees], quantizer, output_bits=8)
+    export(compile_model(model, output="score"), model, tmp_path)
+    server = BudgetedServer(tmp_path / SERVER_FILE, budget=2)
+    alice, bob = (Client.load(tmp_path / CLIENT_FILE, secret_seed=s) for s in (1, 2))
+    alice_keys, bob_keys = server.load_keys(alice.evaluation_keys()), server.load_keys(bob.evaluation_keys())
+    for _ in range(2):
+        server.run(alice.encrypt(x[0]), alice_keys)
+    with pytest.raises(BudgetExceeded):
+        server.run(alice.encrypt(x[0]), alice_keys)
+    server.run(bob.encrypt(x[0]), bob_keys)  # someone else's keys have their own budget
+    assert sorted(server.used.values()) == [1, 2]
+    # the same keys uploaded again are the same identity
+    again = server.load_keys(alice.evaluation_keys())
+    with pytest.raises(BudgetExceeded):
+        server.run(alice.encrypt(x[0]), again)

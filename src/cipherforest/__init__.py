@@ -19,6 +19,8 @@ _FHE = {
     "export": "cipherforest.deploy",
     "Client": "cipherforest.deploy",
     "Server": "cipherforest.deploy",
+    "BudgetedServer": "cipherforest.deploy",
+    "BudgetExceeded": "cipherforest.deploy",
 }
 
 __all__ = ["FeatureQuantizer", "QuantizedModel", "distill", "explain", "from_catboost", "from_ensemble", *_FHE]

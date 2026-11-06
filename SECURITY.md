@@ -27,7 +27,9 @@ prediction alone about 1000 to 2500. An approve/decline answer slows this down
 but does not stop it (see "Label-only answers" in RESULTS.md). None of the
 defences we measured stops extraction at an acceptable cost. Deploy as if every
 client can copy the model; the server can count requests per evaluation key,
-and that budget is the lever that remains.
+and that budget is the lever that remains. `BudgetedServer` enforces one; it holds
+only as well as keys are tied to real accounts, since a fresh key pair is a fresh
+budget.
 
 ## Assumptions
 
