@@ -16,6 +16,7 @@ from typing import Any
 
 import numpy as np
 
+from cipherforest.align import align_tables
 from cipherforest.catboost_json import load_catboost_json
 from cipherforest.distill import distill_ensemble
 from cipherforest.oblivious import FloatArray, ObliviousEnsemble
@@ -66,12 +67,20 @@ def distill(
     background: int | FloatArray = 100,
     output_bits: int = 8,
     seed: int = 0,
+    teacher_shap: tuple[FloatArray, FloatArray] | None = None,
+    ridge: float = 1.0,
 ) -> QuantizedModel:
     """Fits a small oblivious ensemble to `target`: labels, or any model's scores on x_train.
 
     Use it for models the circuit cannot take directly (XGBoost, LightGBM, forests):
     pass their predict_proba on x_train. The copy explains itself exactly, not the
     original, and agrees with it only as well as its size allows.
+
+    teacher_shap=(rows, values) instead divides each leaf's total among the tree's
+    features the way the original's SHAP values on those rows do (align.align_tables).
+    The prediction is unchanged and the values still sum to it, but they are then no
+    longer the copy's own Shapley values. Compute the original's SHAP values against
+    the same background.
     """
     x_train = np.asarray(x_train, dtype=np.float64)
     quantizer = FeatureQuantizer.fit(x_train, n_bins)
@@ -79,7 +88,11 @@ def distill(
     if isinstance(background, int):
         rng = np.random.default_rng(seed)
         background = x_train[rng.choice(len(x_train), size=min(background, len(x_train)), replace=False)]
-    return from_ensemble(ensemble, quantizer, background, output_bits)
+    if teacher_shap is None:
+        return from_ensemble(ensemble, quantizer, background, output_bits)
+    tables = [build_shap_table(tree, np.asarray(background, dtype=np.float64)) for tree in ensemble.trees]
+    tables = align_tables(ensemble, tables, teacher_shap[0], teacher_shap[1], ridge=ridge)
+    return quantize_model(ensemble, tables, quantizer, output_bits)
 
 
 def explain(model: QuantizedModel, x: FloatArray) -> tuple[FloatArray, FloatArray]:
