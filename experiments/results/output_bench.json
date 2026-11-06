@@ -1,0 +1,617 @@
+[
+ {
+  "dataset": "adult",
+  "variant": "ours-3-shap",
+  "pbs_count": 31,
+  "max_bit_width": 8,
+  "complexity": 12314996223.0,
+  "bootstrap_keys_mb": 720.625,
+  "keyswitch_keys_mb": 453.0625,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-3-score",
+  "pbs_count": 21,
+  "max_bit_width": 9,
+  "complexity": 5555437413.0,
+  "bootstrap_keys_mb": 720.625,
+  "keyswitch_keys_mb": 453.0625,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-3-decision",
+  "pbs_count": 28,
+  "max_bit_width": 10,
+  "complexity": 5912813228.0,
+  "bootstrap_keys_mb": 1523.3671875,
+  "keyswitch_keys_mb": 665.56640625,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "xgb-3-6",
+  "compile_s": 28.1508662440001,
+  "pbs_count": 1218,
+  "max_bit_width": 8,
+  "complexity": 68092351407.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-10-shap",
+  "pbs_count": 109,
+  "max_bit_width": 8,
+  "complexity": 49121154309.0,
+  "bootstrap_keys_mb": 720.625,
+  "keyswitch_keys_mb": 453.0625,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-10-score",
+  "pbs_count": 70,
+  "max_bit_width": 10,
+  "complexity": 22187034438.0,
+  "bootstrap_keys_mb": 720.625,
+  "keyswitch_keys_mb": 453.0625,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-10-decision",
+  "pbs_count": 77,
+  "max_bit_width": 10,
+  "complexity": 22508257955.0,
+  "bootstrap_keys_mb": 1523.3671875,
+  "keyswitch_keys_mb": 665.56640625,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "xgb-10-6",
+  "compile_s": 30.143201651000027,
+  "pbs_count": 4690,
+  "max_bit_width": 8,
+  "complexity": 262072100510.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-30-shap",
+  "pbs_count": 338,
+  "max_bit_width": 8,
+  "complexity": 158421768498.0,
+  "bootstrap_keys_mb": 720.625,
+  "keyswitch_keys_mb": 453.0625,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-30-score",
+  "pbs_count": 210,
+  "max_bit_width": 11,
+  "complexity": 69562938546.0,
+  "bootstrap_keys_mb": 720.625,
+  "keyswitch_keys_mb": 453.0625,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-30-decision",
+  "pbs_count": 218,
+  "max_bit_width": 11,
+  "complexity": 69831963482.0,
+  "bootstrap_keys_mb": 1658.15625,
+  "keyswitch_keys_mb": 657.7734375,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "adult",
+  "variant": "xgb-30-6",
+  "compile_s": 37.44452888200021,
+  "pbs_count": 15960,
+  "max_bit_width": 8,
+  "complexity": 891509088990.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.328125
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-3-shap",
+  "pbs_count": 36,
+  "max_bit_width": 8,
+  "complexity": 18526857480.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-3-score",
+  "pbs_count": 21,
+  "max_bit_width": 10,
+  "complexity": 8031443730.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-3-decision",
+  "pbs_count": 28,
+  "max_bit_width": 10,
+  "complexity": 8450592314.0,
+  "bootstrap_keys_mb": 1005.109375,
+  "keyswitch_keys_mb": 534.734375,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "xgb-3-6",
+  "compile_s": 17.92074115000014,
+  "pbs_count": 1461,
+  "max_bit_width": 8,
+  "complexity": 81629995509.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-10-shap",
+  "pbs_count": 117,
+  "max_bit_width": 8,
+  "complexity": 59657108850.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-10-score",
+  "pbs_count": 70,
+  "max_bit_width": 11,
+  "complexity": 26771479100.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-10-decision",
+  "pbs_count": 78,
+  "max_bit_width": 11,
+  "complexity": 27471938155.0,
+  "bootstrap_keys_mb": 1132.2421875,
+  "keyswitch_keys_mb": 524.609375,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "xgb-10-6",
+  "compile_s": 20.968928521999942,
+  "pbs_count": 5050,
+  "max_bit_width": 8,
+  "complexity": 282127869550.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-30-shap",
+  "pbs_count": 353,
+  "max_bit_width": 8,
+  "complexity": 180370715050.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-30-score",
+  "pbs_count": 210,
+  "max_bit_width": 11,
+  "complexity": 80314437300.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "ours-30-decision",
+  "pbs_count": 218,
+  "max_bit_width": 11,
+  "complexity": 81688571591.0,
+  "bootstrap_keys_mb": 1133.8046875,
+  "keyswitch_keys_mb": 524.796875,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "credit_default",
+  "variant": "xgb-30-6",
+  "compile_s": 23.359699135000028,
+  "pbs_count": 15150,
+  "max_bit_width": 8,
+  "complexity": 846383608650.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.5390625
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-3-shap",
+  "pbs_count": 32,
+  "max_bit_width": 8,
+  "complexity": 15728080480.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-3-score",
+  "pbs_count": 21,
+  "max_bit_width": 10,
+  "complexity": 8031443730.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-3-decision",
+  "pbs_count": 28,
+  "max_bit_width": 10,
+  "complexity": 8450592314.0,
+  "bootstrap_keys_mb": 1005.109375,
+  "keyswitch_keys_mb": 534.734375,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "xgb-3-6",
+  "compile_s": 27.22303631800014,
+  "pbs_count": 1623,
+  "max_bit_width": 8,
+  "complexity": 90655091577.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-10-shap",
+  "pbs_count": 107,
+  "max_bit_width": 8,
+  "complexity": 52660166350.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-10-score",
+  "pbs_count": 70,
+  "max_bit_width": 10,
+  "complexity": 26771479100.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-10-decision",
+  "pbs_count": 77,
+  "max_bit_width": 10,
+  "complexity": 27414399325.0,
+  "bootstrap_keys_mb": 1123.6484375,
+  "keyswitch_keys_mb": 523.578125,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "xgb-10-6",
+  "compile_s": 28.962114830000246,
+  "pbs_count": 5410,
+  "max_bit_width": 8,
+  "complexity": 302183638590.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-30-shap",
+  "pbs_count": 337,
+  "max_bit_width": 8,
+  "complexity": 169175607050.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-30-score",
+  "pbs_count": 210,
+  "max_bit_width": 10,
+  "complexity": 80314437300.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "ours-30-decision",
+  "pbs_count": 217,
+  "max_bit_width": 10,
+  "complexity": 81628896725.0,
+  "bootstrap_keys_mb": 1123.6484375,
+  "keyswitch_keys_mb": 523.578125,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "bank_marketing",
+  "variant": "xgb-30-6",
+  "compile_s": 35.15000967600008,
+  "pbs_count": 16230,
+  "max_bit_width": 8,
+  "complexity": 906550915770.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.375
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-3-shap",
+  "pbs_count": 34,
+  "max_bit_width": 8,
+  "complexity": 17127468980.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-3-score",
+  "pbs_count": 21,
+  "max_bit_width": 10,
+  "complexity": 8031443730.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-3-decision",
+  "pbs_count": 28,
+  "max_bit_width": 10,
+  "complexity": 8474463748.0,
+  "bootstrap_keys_mb": 918.734375,
+  "keyswitch_keys_mb": 537.265625,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "xgb-3-6",
+  "compile_s": 1.1984402160001082,
+  "pbs_count": 246,
+  "max_bit_width": 8,
+  "complexity": 13919963919.0,
+  "bootstrap_keys_mb": 799.859375,
+  "keyswitch_keys_mb": 110.12109375,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-10-shap",
+  "pbs_count": 114,
+  "max_bit_width": 8,
+  "complexity": 57558026100.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-10-score",
+  "pbs_count": 70,
+  "max_bit_width": 10,
+  "complexity": 26771479100.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-10-decision",
+  "pbs_count": 77,
+  "max_bit_width": 10,
+  "complexity": 27449995560.0,
+  "bootstrap_keys_mb": 919.125,
+  "keyswitch_keys_mb": 537.3125,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "xgb-10-6",
+  "compile_s": 1.202148832000148,
+  "pbs_count": 820,
+  "max_bit_width": 8,
+  "complexity": 46472583330.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-30-shap",
+  "pbs_count": 332,
+  "max_bit_width": 8,
+  "complexity": 167897847640.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-30-score",
+  "pbs_count": 203,
+  "max_bit_width": 10,
+  "complexity": 77637289390.0,
+  "bootstrap_keys_mb": 636.5,
+  "keyswitch_keys_mb": 344.84375,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "ours-30-decision",
+  "pbs_count": 211,
+  "max_bit_width": 11,
+  "complexity": 78989571522.0,
+  "bootstrap_keys_mb": 1015.65625,
+  "keyswitch_keys_mb": 536.0,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "breast_cancer",
+  "variant": "xgb-30-6",
+  "compile_s": 1.230843953999738,
+  "pbs_count": 2460,
+  "max_bit_width": 8,
+  "complexity": 139417749990.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.703125
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-3-shap",
+  "pbs_count": 36,
+  "max_bit_width": 8,
+  "complexity": 16640331174.0,
+  "bootstrap_keys_mb": 832.375,
+  "keyswitch_keys_mb": 439.0625,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-3-score",
+  "pbs_count": 21,
+  "max_bit_width": 10,
+  "complexity": 6308040639.0,
+  "bootstrap_keys_mb": 832.375,
+  "keyswitch_keys_mb": 439.0625,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-3-decision",
+  "pbs_count": 28,
+  "max_bit_width": 10,
+  "complexity": 6700791764.0,
+  "bootstrap_keys_mb": 1502.8984375,
+  "keyswitch_keys_mb": 614.2734375,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "xgb-3-6",
+  "compile_s": 1.5047342550001304,
+  "pbs_count": 948,
+  "max_bit_width": 8,
+  "complexity": 53050524627.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-10-shap",
+  "pbs_count": 118,
+  "max_bit_width": 8,
+  "complexity": 57384265514.0,
+  "bootstrap_keys_mb": 831.875,
+  "keyswitch_keys_mb": 465.4375,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-10-score",
+  "pbs_count": 70,
+  "max_bit_width": 11,
+  "complexity": 23939106634.0,
+  "bootstrap_keys_mb": 831.875,
+  "keyswitch_keys_mb": 465.4375,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-10-decision",
+  "pbs_count": 78,
+  "max_bit_width": 11,
+  "complexity": 24270411351.0,
+  "bootstrap_keys_mb": 1647.6875,
+  "keyswitch_keys_mb": 665.94921875,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "xgb-10-6",
+  "compile_s": 1.5521088520004014,
+  "pbs_count": 3250,
+  "max_bit_width": 8,
+  "complexity": 181849024350.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-30-shap",
+  "pbs_count": 352,
+  "max_bit_width": 8,
+  "complexity": 171001416560.0,
+  "bootstrap_keys_mb": 928.25,
+  "keyswitch_keys_mb": 632.625,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-30-score",
+  "pbs_count": 210,
+  "max_bit_width": 11,
+  "complexity": 72065328420.0,
+  "bootstrap_keys_mb": 928.25,
+  "keyswitch_keys_mb": 632.625,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "ours-30-decision",
+  "pbs_count": 218,
+  "max_bit_width": 11,
+  "complexity": 72269278460.0,
+  "bootstrap_keys_mb": 1861.84375,
+  "keyswitch_keys_mb": 825.1015625,
+  "ciphertext_kb": 0.46875
+ },
+ {
+  "dataset": "credit_g",
+  "variant": "xgb-30-6",
+  "compile_s": 1.6709536710000066,
+  "pbs_count": 10560,
+  "max_bit_width": 8,
+  "complexity": 590672553390.0,
+  "bootstrap_keys_mb": 800.359375,
+  "keyswitch_keys_mb": 110.39453125,
+  "ciphertext_kb": 0.46875
+ }
+]

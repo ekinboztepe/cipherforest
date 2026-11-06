@@ -69,7 +69,9 @@ computed from CatBoost's own predictions to 1e-9, and `shap.TreeExplainer` to 1e
 | `"decision"`, with `cut=model.cut_for(t)` | one bit: prediction > t | depth + 1, plus 1 overall |
 
 The decision output is an approve/decline API: the server compares on ciphertexts
-and the client learns one bit.
+and the client learns one bit. Measured on Adult at 30 trees, the explanation adds
+about a quarter to the server time of the prediction alone (17.1 s against 13.9 s
+on the desktop), and the decision costs the same as the score.
 
 ## Numbers
 

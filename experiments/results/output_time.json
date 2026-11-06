@@ -1,0 +1,50 @@
+[
+ {
+  "dataset": "adult",
+  "variant": "ours-3-shap",
+  "server_run_s_median": 2.3998060175001683,
+  "server_run_s_max": 6.479386471999987,
+  "first_s": 6.479386471999987,
+  "requests": 20
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-3-score",
+  "server_run_s_median": 2.0130300195000927,
+  "server_run_s_max": 6.168452071000047,
+  "first_s": 6.168452071000047,
+  "requests": 20
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-3-decision",
+  "server_run_s_median": 2.3270680769999217,
+  "server_run_s_max": 10.120180725999944,
+  "first_s": 10.120180725999944,
+  "requests": 20
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-30-shap",
+  "server_run_s_median": 17.111033668500113,
+  "server_run_s_max": 20.920384490000288,
+  "first_s": 20.920384490000288,
+  "requests": 20
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-30-score",
+  "server_run_s_median": 13.889060202999644,
+  "server_run_s_max": 17.898317977999795,
+  "first_s": 17.898317977999795,
+  "requests": 20
+ },
+ {
+  "dataset": "adult",
+  "variant": "ours-30-decision",
+  "server_run_s_median": 13.95689189199993,
+  "server_run_s_max": 21.258960646999185,
+  "first_s": 21.258960646999185,
+  "requests": 20
+ }
+]
