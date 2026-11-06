@@ -98,7 +98,10 @@ same Concrete version and settings, over five datasets and up to five seeds, at 
 - On Breast cancer the gap closes: 1.6 times at 3 trees, and at 30 trees Concrete-ML
   is the faster one (0.7).
 - This also returns SHAP. Concrete-ML's trees are prediction only, but its keys are
-  3 to 5 times smaller, and at 30 trees its AUC is higher on all five, by 0.005 to 0.057.
+  3 to 5 times smaller, and at 30 trees its AUC is higher than our distilled student's
+  on all five, by 0.005 to 0.057. CatBoost served directly (depth 4, 30 trees) closes
+  that: from 0.004 below to 0.013 above Concrete-ML's XGBoost, with a smaller circuit
+  than the distilled 30 trees. We have not timed it against Concrete-ML on the server.
 
 Those ratios hold for that machine only; see the tables in
 [experiments/RESULTS.md](experiments/RESULTS.md).
@@ -187,6 +190,7 @@ See [SECURITY.md](SECURITY.md) for the threat model, parameters and failure prob
 ```
 src/cipherforest/
   api.py            from_catboost, distill, explain
+  align.py          explanation tables fitted to a teacher's SHAP values
   oblivious.py      oblivious trees
   shap_table.py     per-leaf exact SHAP tables
   distill.py        greedy distillation into oblivious ensembles
@@ -194,6 +198,7 @@ src/cipherforest/
   quantize.py       exact input encoding, sum-preserving output rounding
   circuit.py        Concrete circuit
   deploy.py         client/server artifacts and byte protocol
+docs/               deployment guide
 examples/           quickstart
 experiments/        benchmarks and the end-to-end demo
 ```
