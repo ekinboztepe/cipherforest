@@ -141,7 +141,10 @@ Treat the deployed model as extractable by its clients.
 - The student is small. On the benchmarks here it gives up 0.01 to 0.03 AUC
   against the forest.
 - Its SHAP values explain the student exactly, but agree only moderately with
-  the teacher's (cosine 0.6 to 0.85).
+  the teacher's (cosine 0.6 to 0.85). `distill(..., teacher_shap=(rows, values))`
+  refits the tables to the teacher's values instead, prediction and circuit cost
+  unchanged: cosine 0.82 to 0.95 at 10 trees. They are then no longer the student's
+  own Shapley values.
 - Each client sends 215 to 396 MB of compressed evaluation keys, and the server
   holds them expanded, about 1 to 1.5 GB per client.
 - With Concrete's default settings a request can decrypt to a wrong answer: the

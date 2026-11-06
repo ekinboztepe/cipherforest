@@ -56,3 +56,16 @@ def test_fhe_names_load_lazily() -> None:
     assert "compile_model" in cipherforest.__all__
     with pytest.raises(AttributeError):
         _ = cipherforest.no_such_name
+
+
+def test_distill_with_teacher_shap_keeps_the_prediction() -> None:
+    x, y = data(4)
+    plain = cipherforest.distill(x, y, depth=4, n_trees=2, n_bins=16, background=x[:40])
+    _, own = cipherforest.explain(plain, x[:200])
+    target = np.roll(own, 1, axis=1)  # any other division of the same totals
+    aligned = cipherforest.distill(x, y, depth=4, n_trees=2, n_bins=16, background=x[:40], teacher_shap=(x[:200], target))
+    p1, _ = cipherforest.explain(plain, x[:200])
+    p2, s2 = cipherforest.explain(aligned, x[:200])
+    tol = 2 * (len(plain.trees) / plain.scale + len(aligned.trees) / aligned.scale)
+    np.testing.assert_allclose(p1, p2, atol=tol)
+    assert np.mean((s2 - target) ** 2) < np.mean((own - target) ** 2)
