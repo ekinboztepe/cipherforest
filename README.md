@@ -5,8 +5,9 @@ SHAP explanation. The server never sees the input, the prediction or the explana
 
 ## How it works
 
-1. Distil a tree ensemble into a few oblivious trees: every level tests one
-   (feature, threshold) pair, so the D comparison bits of a sample are its leaf index.
+1. Take an ensemble of oblivious trees, as CatBoost trains them, or distil another
+   model into a few: every level tests one (feature, threshold) pair, so the D
+   comparison bits of a sample are its leaf index.
 2. Interventional SHAP of an oblivious tree depends on the input only through
    those D bits. The full SHAP vector of every leaf is computed once, in the clear.
 3. Under TFHE the server runs D encrypted comparisons and one lookup per output.
@@ -16,28 +17,57 @@ Splits are restricted to the quantiser edges, so encoding the inputs as integers
 is exact. The only error is fixed-point rounding of the outputs, bounded by
 `trees / (2 * scale)`.
 
-```python
-quantizer = FeatureQuantizer.fit(x_train, n_bins=32)
-student = distill_ensemble(x_train, teacher_proba, depth=6, n_trees=3, thresholds=quantizer.edges)
-tables = [build_shap_table(tree, background) for tree in student.trees]
-model = quantize_model(student, tables, quantizer, output_bits=8)
-export(compile_model(model), model, Path("artifacts"))  # server.zip + client.json
+## Use
+
+```
+pip install "cipherforest[catboost]"        # model preparation, any OS
+pip install "cipherforest[catboost,fhe]"    # plus the encrypted parts, Linux or macOS
 ```
 
-A CatBoost model with symmetric trees, one output and numeric features can be
-served directly, no distillation:
+Not on PyPI yet: until then, `pip install "cipherforest[catboost] @ git+https://github.com/ekinboztepe/cipherforest"`.
+
+A CatBoost model with symmetric trees (CatBoost's default), one output and numeric
+features is served as it is:
 
 ```python
-cb_model.save_model("model.json", format="json")
-padding = FeatureQuantizer.fit(x_train, n_bins=32)
-ensemble, quantizer = load_catboost_json(Path("model.json").read_text(), extra_edges=padding)
+import cipherforest
+
+model = cipherforest.from_catboost(cb_model, background=x_train[:100], x_train=x_train)
+score, shap = cipherforest.explain(model, x_test)       # in the clear, what clients will decrypt
+cipherforest.export(cipherforest.compile_model(model), model, Path("artifacts"))
 ```
 
-The JSON only keeps the borders the trees use. Without `extra_edges` they become
-the quantiser edges, and `client.json` then lists every threshold of the model.
-Imported SHAP values match brute-force Shapley values computed from CatBoost's
-own predictions to 1e-9, and `shap.TreeExplainer` to 1e-6 (shap works in
-float32 there).
+`artifacts/server.zip` goes to the server, `artifacts/client.json` to clients.
+Then, in bytes over any transport:
+
+```python
+client = cipherforest.Client.load(Path("client.json"))
+keys = server.load_keys(client.evaluation_keys())        # once per client, hundreds of MB
+pred, shap = client.decrypt(server.run(client.encrypt(x), keys))
+```
+
+Any other model (XGBoost, LightGBM, a forest) goes through a small oblivious copy
+fitted to its scores; the copy is what gets explained, exactly:
+
+```python
+model = cipherforest.distill(x_train, teacher.predict_proba(x_train)[:, 1], depth=6, n_trees=3)
+```
+
+`x_train` adds training quantiles to the edges, so `client.json` does not list only
+the model's own thresholds. Imported SHAP values match brute-force Shapley values
+computed from CatBoost's own predictions to 1e-9, and `shap.TreeExplainer` to 1e-6
+(shap works in float32 there). A full run is in [examples/quickstart.py](examples/quickstart.py).
+
+### Three outputs
+
+| `compile_model(..., output=)` | client gets | bootstraps per tree |
+|---|---|---|
+| `"shap"` (default) | prediction and exact SHAP vector | depth + features the tree uses |
+| `"score"` | prediction only | depth + 1 |
+| `"decision"`, with `cut=model.cut_for(t)` | one bit: prediction > t | depth + 1, plus 1 overall |
+
+The decision output is an approve/decline API: the server compares on ciphertexts
+and the client learns one bit.
 
 ## Numbers
 
@@ -123,13 +153,27 @@ Treat the deployed model as extractable by its clients.
 
 The closest work we know is XorSHAP (Jetchev and Vuille, [ePrint 2023/1859](https://eprint.iacr.org/2023/1859)):
 exact TreeSHAP for ordinary tree ensembles under secure multiparty computation, about
-4.5 s per prediction (100 at once, 60 trees of depth 4, 100 features). It needs several non-colluding servers; this needs one, but only
-works on oblivious trees.
+4.5 s per prediction (100 at once, 60 trees of depth 4, 100 features). It needs several
+non-colluding servers; this needs one, but only works on oblivious trees. We found no
+public code for it.
+
+CipherExplain ([VaultBytes](https://github.com/VaultBytes/cipherexplain-examples), 2026) is a
+hosted API that computes SHAP under CKKS. For tree ensembles its examples route leaves
+under encryption and compute SHAP on the client from the model's own weights, so the
+client owns the model; its server code is not public.
+
+Private tree evaluation without explanations is a larger field: Concrete-ML (TFHE,
+one server, the comparison above), RCC-PDTE ([code](https://github.com/RasoulAM/private-decision-tree-evaluation),
+BFV, one server), SortingHat (TFHE), SilentWood (BFV, client-aided, no public code)
+and MPC protocols such as Mostree and Kangaroo that need several servers.
+
+See [SECURITY.md](SECURITY.md) for the threat model, parameters and failure probability.
 
 ## Layout
 
 ```
 src/cipherforest/
+  api.py            from_catboost, distill, explain
   oblivious.py      oblivious trees
   shap_table.py     per-leaf exact SHAP tables
   distill.py        greedy distillation into oblivious ensembles
@@ -137,5 +181,6 @@ src/cipherforest/
   quantize.py       exact input encoding, sum-preserving output rounding
   circuit.py        Concrete circuit
   deploy.py         client/server artifacts and byte protocol
+examples/           quickstart
 experiments/        benchmarks and the end-to-end demo
 ```
