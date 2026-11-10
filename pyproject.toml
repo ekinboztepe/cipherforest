@@ -17,6 +17,9 @@ classifiers = [
 ]
 dependencies = ["numpy>=1.26,<2.0"]
 
+[project.scripts]
+cipherforest = "cipherforest.cli:main"
+
 [project.urls]
 Repository = "https://github.com/ekinboztepe/cipherforest"
 
