@@ -38,3 +38,7 @@ jobs:
       - run: uv pip install --python /tmp/pkg/bin/python "cipherforest[fhe,catboost] @ file://$PWD/$(ls dist/*.whl)" scikit-learn
       - run: /tmp/pkg/bin/python -c "from concrete import fhe"
       - run: cd /tmp && /tmp/pkg/bin/python "$GITHUB_WORKSPACE/examples/quickstart.py"
+      # the command line, from the installed entry point down to an encrypted run
+      - run: uv pip install --python /tmp/pkg/bin/python pytest
+      - run: /tmp/pkg/bin/cipherforest --help
+      - run: /tmp/pkg/bin/python -m pytest -q -p no:cacheprovider tests/test_cli.py
