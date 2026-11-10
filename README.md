@@ -60,6 +60,26 @@ the model's own thresholds. Imported SHAP values match brute-force Shapley value
 computed from CatBoost's own predictions to 1e-9, and `shap.TreeExplainer` to 1e-6
 (shap works in float32 there). A full run is in [examples/quickstart.py](examples/quickstart.py).
 
+### Command line
+
+The same path without writing code, for a CatBoost model saved with `save_model`:
+
+```
+cipherforest prepare model.cbm --train x_train.csv --out model.json   # any OS
+cipherforest explain model.json --data x_test.csv > shap.csv           # any OS, in the clear
+cipherforest compile model.json --out artifacts                       # Linux or macOS
+```
+
+`prepare` prints the model's size, its cost in bootstraps per request and its
+largest difference from CatBoost's own score. `compile` takes `--output score` or
+`--output decision --threshold T` (see below).
+
+Other examples: [examples/http_server.py](examples/http_server.py) is a small HTTP
+server and client for encrypted requests with a request budget per set of keys, and
+[examples/distill_other_model.py](examples/distill_other_model.py) serves a
+scikit-learn gradient boosting model through a distilled copy whose explanation
+tables follow the original's SHAP values.
+
 ### Three outputs
 
 | `compile_model(..., output=)` | client gets | bootstraps per tree |
