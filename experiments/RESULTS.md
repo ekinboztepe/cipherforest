@@ -719,6 +719,82 @@ with the share of the majority answer, 1 - adverse share or the adverse share.
   per key it is at the majority share on Taiwan and Adult's attacker reaches 0.91;
   by 2000 every attacker with the edges is at 0.975 or better.
 
+## Copying the CatBoost model (`catboost_attack_bench.py`, `catboost_tables_bench.py`)
+
+Every attack above ran on the 3-tree distilled student. The model we recommend is
+CatBoost at depth 4 with 30 trees: more trees, more features (13, 23 and 16 of them
+on Adult, Taiwan and Bank marketing) and more interactions. Same attacks, same split
+as the e2e models, CatBoost at 10 and 30 trees imported with 32 training quantiles as
+edges, so `client.json` lists the same kind of edges as before.
+
+**The exact attacker** of Extraction (5 seeds). Median queries to a copy that matched
+the server on 5000 random inputs:
+
+| data | trees | prediction only, graph | prediction + SHAP, graph |
+|---|---|---|---|
+| Adult | 10 | 5232 | 3406 |
+| Taiwan | 10 | 5406 | 2904 (4 of 5 copied) |
+| Bank marketing | 10 | 9657 | 6714 |
+| all three | 30 | no copy | no copy |
+
+At 10 trees copying costs 1.4 to 10 times what it cost on the student. At 30 trees the
+attacker gives up every time, in its first round on 29 of 30 runs (one Bank marketing run
+got to a second round and 98K queries): the interaction graph has maximal
+cliques of up to 7 features, and the grids over them hold about 5 million cells on
+Adult, past its limit of 2^17 per clique. That is a limit of the clique decomposition,
+not proof the model is safe: it is still a sum of 30 tables over at most 4 features.
+
+**A stronger attacker** that is handed every threshold and every tree's feature set
+for free, asks n random inputs once and fits one table per tree by sparse least
+squares, on the prediction or on each SHAP value. 46K, 56K and 95K unknowns at 30
+trees. Since the structure is free its costs are a lower bound for this kind of
+attack. Queries until both seeds' copies agree with the server on 99% of the test
+split, exactly (after rounding to the output grid) / on the decision (score above 0):
+
+| data | trees | prediction only | prediction + SHAP |
+|---|---|---|---|
+| Adult | 10 | 4K / 1K | 4K / 1K |
+| Taiwan | 10 | 16K / 1K | 16K / 1K |
+| Bank marketing | 10 | 16K / 4K | 65K / 4K |
+| Adult | 30 | 262K / 65K | 65K / 16K |
+| Taiwan | 30 | 262K / 65K | 262K / 16K |
+| Bank marketing | 30 | 262K / 65K | 262K / 65K |
+
+Budgets are powers of 4 from 1K to 262K, so each figure is the first budget that got
+there. At 262K every copy was exact on at least 99.0% of the test split.
+
+**The approve/decline attacker** of Label-only answers, with the decision at a score
+of 0 (probability 0.5), 3 seeds, 20000 queries at most. Agreement with the server's
+decisions on the test split, median:
+
+| data | trees | reasons | majority share | q to 99% | at 1000 / 5000 / 20000 |
+|---|---|---|---|---|---|
+| Adult | 10 | no / 4 | 0.836 | 7199 / 6566 | 0.958 / 0.988 / 0.993 |
+| Taiwan | 10 | no / 4 | 0.887 | 4673 / 4601 | 0.981 / 0.987 / 0.996 |
+| Bank marketing | 10 | no / 4 | 0.942 | 8616 / 6398 | 0.974 / 0.988 / 0.994 |
+| Adult | 30 | no / 4 | 0.817 | > 20000 | 0.910 / 0.912 / 0.969 |
+| Taiwan | 30 | no / 4 | 0.879 | > 20000 | 0.953 / 0.970 / 0.975 |
+| Bank marketing | 30 | no / 4 | 0.914 | > 20000 | 0.937 / 0.964 / 0.975 |
+
+The agreement columns are for the attacker without reasons; with reasons they are
+within 0.04. A first run put the decision at 0.5 as for the student, whose score is a
+probability; CatBoost's is log-odds, so that run decided at the wrong place and was
+thrown away.
+
+- The bigger model is harder to copy exactly. An exact copy of the 30-tree model
+  takes 65K to 262K queries even when the structure comes for free, against 700 to
+  2200 for the student, and the attacker that has to find the structure itself does
+  not get there at all.
+- Copying the decisions is still cheap. The structured attacker agrees with 99% of
+  real decisions after 16K to 65K queries, and the approve/decline attacker reaches
+  about 97% within 20000 (99% within 4600 to 8600 at 10 trees). A request budget of
+  a few thousand per key still leaves most decisions to a copier.
+- SHAP outputs help the structured attacker by up to 4x here, as in Learning through
+  the noise: each value carries the tables of fewer trees.
+- These attackers are ours, and a better one would do better. What we measured is that
+  model size, not any output defence, is what moved the exact-copy cost by two orders
+  of magnitude.
+
 ## Published numbers, not measured here
 
 Other work on SHAP for private tree models. Different models, threat models and
