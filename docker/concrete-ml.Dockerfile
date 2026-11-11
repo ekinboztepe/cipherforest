@@ -13,6 +13,8 @@ RUN apt-get update \
 # CPU torch first, or pip pulls ~2 GB of CUDA libs
 RUN pip install --no-cache-dir "torch==2.3.1" --index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir "concrete-ml==1.9.0"
+# CatBoost served directly, timed in catboost_cml_bench.py
+RUN pip install --no-cache-dir "catboost==1.2.10"
 
 WORKDIR /work
 COPY pyproject.toml README.md ./
