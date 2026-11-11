@@ -20,15 +20,15 @@ On five tabular datasets a CatBoost model of 30 trees of depth 4 matches a
 With the same Concrete version and settings, on the same 4 desktop cores, that model
 with SHAP ran 2.9 to 3.6 times faster than Concrete-ML's XGBoost of the same shape
 without SHAP on four of five datasets (1.5 to 1.9 times on the smallest); on a rented
-server our earlier distilled models ran 3.4 to 4.7 times faster than its depth-6 trees. We then measure the other
-side: a client that can query the server copies a model of this size exactly in
-about 700 to 2500 queries, and none of the defences we tried (output noise, coarser
+server our earlier distilled models ran 3.4 to 4.7 times faster than its depth-6
+trees on three of five. We then measure the other side: a client that can query the
+server copies a 3-tree model exactly in about 700 to 2500 queries, and none of the defences we tried (output noise, coarser
 outputs, hidden or uniform quantiser edges, approve/decline answers) raises that
 past a few thousand queries at a price an honest client would accept. The 30-tree
 CatBoost model takes 65K to 262K queries to copy exactly even with its structure
 given away, but a copy that agrees with 99% of its decisions still takes 16K to 65K.
-A per-client request budget is what remains. To our knowledge this is the first open-source
-implementation of encrypted exact SHAP for tree ensembles.
+A per-client request budget is what remains. To our knowledge this is the first
+open-source implementation of encrypted exact SHAP for tree ensembles.
 
 ## 1. Setting
 
