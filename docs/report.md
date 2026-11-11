@@ -147,8 +147,26 @@ our distilled student with SHAP against its XGBoost at the same tree count:
 - Concrete-ML's evaluation keys are 3 to 5 times smaller (74 MB against 215 to 396
   MB compressed), and at 30 trees its AUC is higher than the distilled student's.
 
-[TO FILL from catboost_cml_bench: CatBoost 30 x depth 4, with SHAP and score only,
-against Concrete-ML's XGBoost on the desktop, same container and CPU limit.]
+The model we recommend, CatBoost at depth 4, was timed against Concrete-ML on the
+desktop instead: one job at a time in the same container, both pinned to the same 4
+cores of a Ryzen 5 3600, seed 0, 20 requests each, median server time per request:
+
+| data, 30 trees | AUC CatBoost / XGB D4 / XGB D6 | CatBoost with SHAP | XGB depth 4 | XGB depth 6 |
+|---|---|---|---|---|
+| Adult | 0.921 / 0.918 / 0.919 | 4.9 s | 17.6 s | 50.0 s |
+| Taiwan credit default | 0.773 / 0.768 / 0.766 | 6.0 s | 17.3 s | 55.5 s |
+| Bank marketing | 0.927 / 0.924 / 0.932 | 5.8 s | 17.7 s | 62.0 s |
+| German credit | 0.811 / 0.822 / 0.798 | 5.4 s | 15.7 s | 34.5 s |
+| Breast cancer | 0.988 / 0.985 / 0.985 | 6.3 s | 9.5 s | 9.9 s |
+
+At 10 trees the picture is the same (2.1 to 2.5 s against 4.7 to 7.6 s and 4.7 to
+22.9 s). So, with the explanation, 2.9x to 3.6x faster than Concrete-ML's trees of the
+same shape on four datasets and 6x to 11x faster than its depth-6 trees, at similar
+AUC; on Breast cancer 1.5x to 1.9x. Without the explanation ours is only 2% to 10%
+faster still. The depth-6 ratio is two to three times what the rented server showed
+for the distilled student, so these ratios belong to the machine they were measured
+on. Concrete-ML keeps its smaller keys (74 MB against 216 to 279 MB) and faster key
+generation (2.5 s against 8 to 13 s).
 
 The explanation itself is cheap: on Adult at 30 trees, the SHAP output took 17.1 s
 on 4 desktop cores against 13.9 s for the score alone, about a quarter more.
