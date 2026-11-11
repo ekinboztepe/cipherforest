@@ -23,8 +23,13 @@ otherwise, so `client.json` reveals the marginal distribution of each feature.
 
 **The client learns the model from its answers.** With the edges known, a copy of
 the prediction and SHAP outputs takes about 700 to 2200 queries, and of the
-prediction alone about 1000 to 2500. An approve/decline answer slows this down
-but does not stop it (see "Label-only answers" in RESULTS.md). None of the
+prediction alone about 1000 to 2500. Those figures are for a 3-tree model. The
+recommended CatBoost model (depth 4, 30 trees) is much harder to copy exactly: 65K
+to 262K queries even for an attacker handed the model's structure. Its decisions
+are not: that attacker agrees with 99% of them after 16K to 65K queries, and an
+approve/decline attacker with about 97% after 20K (see "Copying the CatBoost
+model" in RESULTS.md). An approve/decline answer slows copying down but does not
+stop it (see "Label-only answers"). None of the
 defences we measured stops extraction at an acceptable cost. Deploy as if every
 client can copy the model; the server can count requests per evaluation key,
 and that budget is the lever that remains. `BudgetedServer` enforces one; it holds

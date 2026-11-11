@@ -162,6 +162,9 @@ Concrete has no Windows wheels, hence the image.
   Evenly spaced edges keep the training quantiles private but not the model.
   Coarser outputs cost the honest client explanation quality long before they
   cost the attacker more than a few thousand queries.
+- A bigger model helps more than any of those. CatBoost at depth 4 with 30 trees
+  took 65K to 262K queries to copy exactly even with its structure given away, but
+  a copy that agrees with 99% of its decisions still took only 16K to 65K.
 
 Treat the deployed model as extractable by its clients. An approve/decline server
 slows copying to a few thousand queries but does not stop it, and `BudgetedServer`
