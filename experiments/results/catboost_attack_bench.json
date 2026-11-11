@@ -1,0 +1,8626 @@
+[
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 2,
+  "queries": 5234,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11468879999301862
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 2,
+  "queries": 5231,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11366229999111965
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 2,
+  "queries": 5232,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11279160001140554
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 5231,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11361100000794977
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 2,
+  "queries": 5233,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11392829999385867
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 3406,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.037413400001241826
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 3406,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.03806590000749566
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 2,
+  "queries": 4011,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.06490119999216404
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 3,
+  "queries": 4763,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11567859999195207
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 3406,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.036980899996706285
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 2746,
+  "copied": false,
+  "attack_s": 0.07676459998765495
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 2740,
+  "copied": false,
+  "attack_s": 0.07661360000201967
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 2723,
+  "copied": false,
+  "attack_s": 0.06753709999611601
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 1,
+  "queries": 2667,
+  "copied": false,
+  "attack_s": 0.07631259999470785
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 2729,
+  "copied": false,
+  "attack_s": 0.07606859999941662
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 300,
+  "copied": false,
+  "attack_s": 0.020562099991366267
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 299,
+  "copied": false,
+  "attack_s": 0.020816000003833324
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 299,
+  "copied": false,
+  "attack_s": 0.02231319999555126
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 1,
+  "queries": 299,
+  "copied": false,
+  "attack_s": 0.021441700009745546
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 300,
+  "copied": false,
+  "attack_s": 0.020813900002394803
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 2,
+  "queries": 4728,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.33421260000613984
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 3,
+  "queries": 7543,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.529718599995249
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 3,
+  "queries": 7931,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.5176043000101345
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 5383,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.3100616000010632
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 2,
+  "queries": 5406,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.3152601999900071
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 2,
+  "queries": 2904,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11438939999789
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 2,
+  "queries": 3440,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11841140000615269
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 483,
+  "copied": false,
+  "attack_s": 0.017491100006736815
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 3,
+  "queries": 4431,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.20077329999185167
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 2,
+  "queries": 2904,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.13967200000479352
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 4766,
+  "copied": false,
+  "attack_s": 0.22613529999216553
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 4338,
+  "copied": false,
+  "attack_s": 0.2572379000048386
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 4246,
+  "copied": false,
+  "attack_s": 0.21389250000356697
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 1,
+  "queries": 4867,
+  "copied": false,
+  "attack_s": 0.23216739999770653
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 4859,
+  "copied": false,
+  "attack_s": 0.23171900000306778
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 620,
+  "copied": false,
+  "attack_s": 0.03610859999025706
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 615,
+  "copied": false,
+  "attack_s": 0.036502199989627115
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 616,
+  "copied": false,
+  "attack_s": 0.036685400002170354
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 1,
+  "queries": 619,
+  "copied": false,
+  "attack_s": 0.03672640000877436
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 621,
+  "copied": false,
+  "attack_s": 0.03671820000454318
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 3,
+  "queries": 9660,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.2767131000000518
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 3,
+  "queries": 9660,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.27394150001055095
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 6496,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.08918789999734145
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 8079,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.18118690000846982
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 3,
+  "queries": 9657,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.29137639999680687
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 2,
+  "queries": 6714,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.1264781999925617
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 2,
+  "queries": 6714,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.11035239999182522
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 2,
+  "queries": 6713,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.12270609999541193
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 2,
+  "queries": 6714,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.12145460001192987
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 3,
+  "queries": 7387,
+  "copied": true,
+  "exact_rows": 1.0,
+  "attack_s": 0.1654153999988921
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 2525,
+  "copied": false,
+  "attack_s": 0.16098580000107177
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 1,
+  "rounds": 1,
+  "queries": 2421,
+  "copied": false,
+  "attack_s": 0.10930240000016056
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 2530,
+  "copied": false,
+  "attack_s": 0.11081189999822527
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 3,
+  "rounds": 1,
+  "queries": 2471,
+  "copied": false,
+  "attack_s": 0.11347070000192616
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 2607,
+  "copied": false,
+  "attack_s": 0.11422669999592472
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 0,
+  "rounds": 1,
+  "queries": 330,
+  "copied": false,
+  "attack_s": 0.029947000002721325
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 1,
+  "rounds": 2,
+  "queries": 98215,
+  "copied": false,
+  "attack_s": 1.0159955999988597
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 2,
+  "rounds": 1,
+  "queries": 329,
+  "copied": false,
+  "attack_s": 0.025497800001176074
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 3,
+  "rounds": 1,
+  "queries": 331,
+  "copied": false,
+  "attack_s": 0.02532200000132434
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "exact",
+  "attacker": "pred+shap, graph",
+  "seed": 4,
+  "rounds": 1,
+  "queries": 333,
+  "copied": false,
+  "attack_s": 0.02686639998864848
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.8358856768487429,
+  "adverse_random": 0.5152,
+  "majority_real": 0.8358856768487429,
+  "majority_random": 0.5152,
+  "queries_99_real": 8138,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9926295962656622,
+  "final_random": 0.9816,
+  "trace": [
+   {
+    "queries": 491,
+    "real": 0.9539759233478011,
+    "random": 0.8804
+   },
+   {
+    "queries": 995,
+    "real": 0.9248218819097535,
+    "random": 0.9004
+   },
+   {
+    "queries": 1479,
+    "real": 0.9411186635001229,
+    "random": 0.9264
+   },
+   {
+    "queries": 1954,
+    "real": 0.9665056096961756,
+    "random": 0.934
+   },
+   {
+    "queries": 2456,
+    "real": 0.9739579068053394,
+    "random": 0.9434
+   },
+   {
+    "queries": 2959,
+    "real": 0.9897633281467529,
+    "random": 0.9462
+   },
+   {
+    "queries": 3449,
+    "real": 0.9836213250348047,
+    "random": 0.9464
+   },
+   {
+    "queries": 3889,
+    "real": 0.9852591925313242,
+    "random": 0.9552
+   },
+   {
+    "queries": 4327,
+    "real": 0.9813283105396774,
+    "random": 0.9546
+   },
+   {
+    "queries": 4828,
+    "real": 0.9868970600278437,
+    "random": 0.9594
+   },
+   {
+    "queries": 5307,
+    "real": 0.9887806076488412,
+    "random": 0.9622
+   },
+   {
+    "queries": 5802,
+    "real": 0.9881254606502334,
+    "random": 0.9664
+   },
+   {
+    "queries": 6270,
+    "real": 0.9832937515355008,
+    "random": 0.9656
+   },
+   {
+    "queries": 6724,
+    "real": 0.9897633281467529,
+    "random": 0.9692
+   },
+   {
+    "queries": 7196,
+    "real": 0.9891900745229711,
+    "random": 0.9676
+   },
+   {
+    "queries": 7681,
+    "real": 0.9886987142740152,
+    "random": 0.9702
+   },
+   {
+    "queries": 8138,
+    "real": 0.9905003685201867,
+    "random": 0.9706
+   },
+   {
+    "queries": 8592,
+    "real": 0.9920563426418803,
+    "random": 0.9704
+   },
+   {
+    "queries": 9104,
+    "real": 0.9912374088936206,
+    "random": 0.9732
+   },
+   {
+    "queries": 9594,
+    "real": 0.9919744492670542,
+    "random": 0.9732
+   },
+   {
+    "queries": 10044,
+    "real": 0.9908279420194906,
+    "random": 0.9718
+   },
+   {
+    "queries": 10522,
+    "real": 0.9910736221439685,
+    "random": 0.9704
+   },
+   {
+    "queries": 10987,
+    "real": 0.9919744492670542,
+    "random": 0.9732
+   },
+   {
+    "queries": 11491,
+    "real": 0.9918925558922284,
+    "random": 0.9714
+   },
+   {
+    "queries": 11951,
+    "real": 0.9914830890180985,
+    "random": 0.9752
+   },
+   {
+    "queries": 12370,
+    "real": 0.9914011956432724,
+    "random": 0.9746
+   },
+   {
+    "queries": 12858,
+    "real": 0.9941036770125297,
+    "random": 0.977
+   },
+   {
+    "queries": 13376,
+    "real": 0.9933666366390959,
+    "random": 0.9774
+   },
+   {
+    "queries": 13879,
+    "real": 0.9954139710097453,
+    "random": 0.9776
+   },
+   {
+    "queries": 14340,
+    "real": 0.9936942101383998,
+    "random": 0.9806
+   },
+   {
+    "queries": 14818,
+    "real": 0.9937761035132258,
+    "random": 0.976
+   },
+   {
+    "queries": 15297,
+    "real": 0.9901727950208828,
+    "random": 0.9788
+   },
+   {
+    "queries": 15770,
+    "real": 0.9934485300139219,
+    "random": 0.9796
+   },
+   {
+    "queries": 16259,
+    "real": 0.993202849889444,
+    "random": 0.9798
+   },
+   {
+    "queries": 16756,
+    "real": 0.9954139710097453,
+    "random": 0.9816
+   },
+   {
+    "queries": 17229,
+    "real": 0.9945950372614856,
+    "random": 0.9806
+   },
+   {
+    "queries": 17708,
+    "real": 0.9959872246335272,
+    "random": 0.9832
+   },
+   {
+    "queries": 18231,
+    "real": 0.9960691180083531,
+    "random": 0.9816
+   },
+   {
+    "queries": 18690,
+    "real": 0.9950045041356155,
+    "random": 0.9782
+   },
+   {
+    "queries": 19175,
+    "real": 0.9949226107607895,
+    "random": 0.9784
+   },
+   {
+    "queries": 19614,
+    "real": 0.9956596511342233,
+    "random": 0.9786
+   },
+   {
+    "queries": 20097,
+    "real": 0.9926295962656622,
+    "random": 0.9816
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.8358856768487429,
+  "adverse_random": 0.5,
+  "majority_real": 0.8358856768487429,
+  "majority_random": 0.5,
+  "queries_99_real": 7199,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.993120956514618,
+  "final_random": 0.9806,
+  "trace": [
+   {
+    "queries": 481,
+    "real": 0.9525837359757595,
+    "random": 0.888
+   },
+   {
+    "queries": 974,
+    "real": 0.9618376873310949,
+    "random": 0.9168
+   },
+   {
+    "queries": 1444,
+    "real": 0.958152485463926,
+    "random": 0.93
+   },
+   {
+    "queries": 1887,
+    "real": 0.9609368602080092,
+    "random": 0.9314
+   },
+   {
+    "queries": 2378,
+    "real": 0.9850954057816723,
+    "random": 0.938
+   },
+   {
+    "queries": 2835,
+    "real": 0.9886168208991892,
+    "random": 0.9474
+   },
+   {
+    "queries": 3254,
+    "real": 0.9845221521578904,
+    "random": 0.9542
+   },
+   {
+    "queries": 3719,
+    "real": 0.9854229792809762,
+    "random": 0.9542
+   },
+   {
+    "queries": 4223,
+    "real": 0.9834575382851527,
+    "random": 0.9558
+   },
+   {
+    "queries": 4709,
+    "real": 0.9875522070264515,
+    "random": 0.9612
+   },
+   {
+    "queries": 5200,
+    "real": 0.9882073540250593,
+    "random": 0.9632
+   },
+   {
+    "queries": 5704,
+    "real": 0.9882073540250593,
+    "random": 0.9664
+   },
+   {
+    "queries": 6155,
+    "real": 0.9895995413971009,
+    "random": 0.9658
+   },
+   {
+    "queries": 6661,
+    "real": 0.9884530341495373,
+    "random": 0.9652
+   },
+   {
+    "queries": 7199,
+    "real": 0.9900090082712308,
+    "random": 0.965
+   },
+   {
+    "queries": 7655,
+    "real": 0.9891900745229711,
+    "random": 0.9674
+   },
+   {
+    "queries": 8148,
+    "real": 0.9914011956432724,
+    "random": 0.9682
+   },
+   {
+    "queries": 8606,
+    "real": 0.9915649823929245,
+    "random": 0.9688
+   },
+   {
+    "queries": 9034,
+    "real": 0.9917287691425763,
+    "random": 0.9704
+   },
+   {
+    "queries": 9542,
+    "real": 0.9926295962656622,
+    "random": 0.9734
+   },
+   {
+    "queries": 9996,
+    "real": 0.9912374088936206,
+    "random": 0.9756
+   },
+   {
+    "queries": 10470,
+    "real": 0.9913193022684464,
+    "random": 0.9736
+   },
+   {
+    "queries": 10936,
+    "real": 0.9914011956432724,
+    "random": 0.9738
+   },
+   {
+    "queries": 11428,
+    "real": 0.9915649823929245,
+    "random": 0.974
+   },
+   {
+    "queries": 11935,
+    "real": 0.9915649823929245,
+    "random": 0.9746
+   },
+   {
+    "queries": 12388,
+    "real": 0.989517648022275,
+    "random": 0.977
+   },
+   {
+    "queries": 12857,
+    "real": 0.9923839161411842,
+    "random": 0.974
+   },
+   {
+    "queries": 13317,
+    "real": 0.9917287691425763,
+    "random": 0.977
+   },
+   {
+    "queries": 13787,
+    "real": 0.9940217836377037,
+    "random": 0.974
+   },
+   {
+    "queries": 14286,
+    "real": 0.9948407173859635,
+    "random": 0.9776
+   },
+   {
+    "queries": 14751,
+    "real": 0.9926295962656622,
+    "random": 0.978
+   },
+   {
+    "queries": 15242,
+    "real": 0.992711489640488,
+    "random": 0.972
+   },
+   {
+    "queries": 15726,
+    "real": 0.9947588240111375,
+    "random": 0.9794
+   },
+   {
+    "queries": 16208,
+    "real": 0.9918106625174024,
+    "random": 0.9806
+   },
+   {
+    "queries": 16719,
+    "real": 0.9918106625174024,
+    "random": 0.9786
+   },
+   {
+    "queries": 17184,
+    "real": 0.99328474326427,
+    "random": 0.9766
+   },
+   {
+    "queries": 17674,
+    "real": 0.992711489640488,
+    "random": 0.9812
+   },
+   {
+    "queries": 18144,
+    "real": 0.9940217836377037,
+    "random": 0.9814
+   },
+   {
+    "queries": 18612,
+    "real": 0.9943493571370076,
+    "random": 0.9792
+   },
+   {
+    "queries": 19045,
+    "real": 0.992711489640488,
+    "random": 0.981
+   },
+   {
+    "queries": 19524,
+    "real": 0.9948407173859635,
+    "random": 0.9796
+   },
+   {
+    "queries": 19996,
+    "real": 0.99328474326427,
+    "random": 0.9794
+   },
+   {
+    "queries": 20492,
+    "real": 0.993120956514618,
+    "random": 0.9806
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.8358856768487429,
+  "adverse_random": 0.5142,
+  "majority_real": 0.8358856768487429,
+  "majority_random": 0.5142,
+  "queries_99_real": 5674,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.99328474326427,
+  "final_random": 0.9802,
+  "trace": [
+   {
+    "queries": 434,
+    "real": 0.9027925640815658,
+    "random": 0.8826
+   },
+   {
+    "queries": 871,
+    "real": 0.9353042338874785,
+    "random": 0.9146
+   },
+   {
+    "queries": 1392,
+    "real": 0.9723200393088199,
+    "random": 0.9286
+   },
+   {
+    "queries": 1882,
+    "real": 0.9568421914667103,
+    "random": 0.9378
+   },
+   {
+    "queries": 2362,
+    "real": 0.9808369502907215,
+    "random": 0.9476
+   },
+   {
+    "queries": 2905,
+    "real": 0.9736303333060355,
+    "random": 0.951
+   },
+   {
+    "queries": 3404,
+    "real": 0.9775612152976824,
+    "random": 0.9516
+   },
+   {
+    "queries": 3836,
+    "real": 0.9786258291704201,
+    "random": 0.958
+   },
+   {
+    "queries": 4312,
+    "real": 0.9820653509131111,
+    "random": 0.959
+   },
+   {
+    "queries": 4756,
+    "real": 0.9814920972893293,
+    "random": 0.9612
+   },
+   {
+    "queries": 5206,
+    "real": 0.9873884202767996,
+    "random": 0.9624
+   },
+   {
+    "queries": 5674,
+    "real": 0.9901727950208828,
+    "random": 0.9666
+   },
+   {
+    "queries": 6187,
+    "real": 0.9919744492670542,
+    "random": 0.9692
+   },
+   {
+    "queries": 6697,
+    "real": 0.9937761035132258,
+    "random": 0.9752
+   },
+   {
+    "queries": 7166,
+    "real": 0.9921382360167063,
+    "random": 0.97
+   },
+   {
+    "queries": 7611,
+    "real": 0.9919744492670542,
+    "random": 0.9702
+   },
+   {
+    "queries": 8046,
+    "real": 0.9898452215215789,
+    "random": 0.9744
+   },
+   {
+    "queries": 8502,
+    "real": 0.9936123167635739,
+    "random": 0.974
+   },
+   {
+    "queries": 8986,
+    "real": 0.9914830890180985,
+    "random": 0.9736
+   },
+   {
+    "queries": 9417,
+    "real": 0.9935304233887479,
+    "random": 0.9758
+   },
+   {
+    "queries": 9895,
+    "real": 0.989353861272623,
+    "random": 0.9738
+   },
+   {
+    "queries": 10381,
+    "real": 0.9902546883957087,
+    "random": 0.9686
+   },
+   {
+    "queries": 10860,
+    "real": 0.9909917287691425,
+    "random": 0.9728
+   },
+   {
+    "queries": 11310,
+    "real": 0.9885349275243632,
+    "random": 0.9718
+   },
+   {
+    "queries": 11867,
+    "real": 0.9890262877733191,
+    "random": 0.974
+   },
+   {
+    "queries": 12359,
+    "real": 0.9862419130292359,
+    "random": 0.9722
+   },
+   {
+    "queries": 12855,
+    "real": 0.9871427401523217,
+    "random": 0.9756
+   },
+   {
+    "queries": 13348,
+    "real": 0.9877978871509295,
+    "random": 0.974
+   },
+   {
+    "queries": 13831,
+    "real": 0.9840307919089346,
+    "random": 0.975
+   },
+   {
+    "queries": 14327,
+    "real": 0.989271967897797,
+    "random": 0.9724
+   },
+   {
+    "queries": 14779,
+    "real": 0.9887806076488412,
+    "random": 0.9742
+   },
+   {
+    "queries": 15302,
+    "real": 0.9879616739005814,
+    "random": 0.9754
+   },
+   {
+    "queries": 15762,
+    "real": 0.9909917287691425,
+    "random": 0.9758
+   },
+   {
+    "queries": 16223,
+    "real": 0.993120956514618,
+    "random": 0.9782
+   },
+   {
+    "queries": 16674,
+    "real": 0.9901727950208828,
+    "random": 0.9794
+   },
+   {
+    "queries": 17116,
+    "real": 0.9919744492670542,
+    "random": 0.9782
+   },
+   {
+    "queries": 17583,
+    "real": 0.9925477028908362,
+    "random": 0.9796
+   },
+   {
+    "queries": 18077,
+    "real": 0.9945131438866596,
+    "random": 0.9792
+   },
+   {
+    "queries": 18530,
+    "real": 0.9870608467774957,
+    "random": 0.9792
+   },
+   {
+    "queries": 19024,
+    "real": 0.9873884202767996,
+    "random": 0.9792
+   },
+   {
+    "queries": 19488,
+    "real": 0.9928752763901401,
+    "random": 0.9818
+   },
+   {
+    "queries": 19982,
+    "real": 0.9953320776349194,
+    "random": 0.9806
+   },
+   {
+    "queries": 20418,
+    "real": 0.99328474326427,
+    "random": 0.9802
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.8358856768487429,
+  "adverse_random": 0.5152,
+  "majority_real": 0.8358856768487429,
+  "majority_random": 0.5152,
+  "queries_99_real": 6473,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9950863975104414,
+  "final_random": 0.979,
+  "trace": [
+   {
+    "queries": 475,
+    "real": 0.9432478912455983,
+    "random": 0.8642
+   },
+   {
+    "queries": 991,
+    "real": 0.9732208664319056,
+    "random": 0.9072
+   },
+   {
+    "queries": 1450,
+    "real": 0.9814102039145033,
+    "random": 0.9194
+   },
+   {
+    "queries": 1866,
+    "real": 0.9780525755466383,
+    "random": 0.9302
+   },
+   {
+    "queries": 2323,
+    "real": 0.9833756449103268,
+    "random": 0.9392
+   },
+   {
+    "queries": 2774,
+    "real": 0.9833756449103268,
+    "random": 0.9458
+   },
+   {
+    "queries": 3268,
+    "real": 0.9622471542052248,
+    "random": 0.95
+   },
+   {
+    "queries": 3706,
+    "real": 0.982638604536893,
+    "random": 0.9542
+   },
+   {
+    "queries": 4199,
+    "real": 0.9842764720334125,
+    "random": 0.956
+   },
+   {
+    "queries": 4637,
+    "real": 0.9882892473998853,
+    "random": 0.959
+   },
+   {
+    "queries": 5054,
+    "real": 0.9853410859061502,
+    "random": 0.9612
+   },
+   {
+    "queries": 5501,
+    "real": 0.9885349275243632,
+    "random": 0.9646
+   },
+   {
+    "queries": 5972,
+    "real": 0.989517648022275,
+    "random": 0.9636
+   },
+   {
+    "queries": 6473,
+    "real": 0.9919744492670542,
+    "random": 0.9644
+   },
+   {
+    "queries": 6955,
+    "real": 0.9910736221439685,
+    "random": 0.9652
+   },
+   {
+    "queries": 7411,
+    "real": 0.9905822618950126,
+    "random": 0.9676
+   },
+   {
+    "queries": 7887,
+    "real": 0.9906641552698386,
+    "random": 0.968
+   },
+   {
+    "queries": 8351,
+    "real": 0.9895995413971009,
+    "random": 0.9716
+   },
+   {
+    "queries": 8826,
+    "real": 0.9900909016460568,
+    "random": 0.9726
+   },
+   {
+    "queries": 9360,
+    "real": 0.9916468757677503,
+    "random": 0.973
+   },
+   {
+    "queries": 9829,
+    "real": 0.9927933830153141,
+    "random": 0.9736
+   },
+   {
+    "queries": 10300,
+    "real": 0.9905822618950126,
+    "random": 0.9716
+   },
+   {
+    "queries": 10765,
+    "real": 0.9906641552698386,
+    "random": 0.9726
+   },
+   {
+    "queries": 11192,
+    "real": 0.9896814347719269,
+    "random": 0.975
+   },
+   {
+    "queries": 11670,
+    "real": 0.9866513799033658,
+    "random": 0.9742
+   },
+   {
+    "queries": 12119,
+    "real": 0.9886168208991892,
+    "random": 0.9752
+   },
+   {
+    "queries": 12533,
+    "real": 0.9913193022684464,
+    "random": 0.9784
+   },
+   {
+    "queries": 12989,
+    "real": 0.9921382360167063,
+    "random": 0.9754
+   },
+   {
+    "queries": 13419,
+    "real": 0.9914011956432724,
+    "random": 0.9768
+   },
+   {
+    "queries": 13890,
+    "real": 0.9765784947997707,
+    "random": 0.9752
+   },
+   {
+    "queries": 14352,
+    "real": 0.9923839161411842,
+    "random": 0.9772
+   },
+   {
+    "queries": 14863,
+    "real": 0.9908279420194906,
+    "random": 0.9758
+   },
+   {
+    "queries": 15376,
+    "real": 0.9914011956432724,
+    "random": 0.9796
+   },
+   {
+    "queries": 15825,
+    "real": 0.9937761035132258,
+    "random": 0.9768
+   },
+   {
+    "queries": 16308,
+    "real": 0.9943493571370076,
+    "random": 0.98
+   },
+   {
+    "queries": 16805,
+    "real": 0.9919744492670542,
+    "random": 0.9784
+   },
+   {
+    "queries": 17223,
+    "real": 0.9891900745229711,
+    "random": 0.979
+   },
+   {
+    "queries": 17653,
+    "real": 0.9945131438866596,
+    "random": 0.9792
+   },
+   {
+    "queries": 18144,
+    "real": 0.9944312505118336,
+    "random": 0.98
+   },
+   {
+    "queries": 18596,
+    "real": 0.9953320776349194,
+    "random": 0.9814
+   },
+   {
+    "queries": 19062,
+    "real": 0.9957415445090492,
+    "random": 0.9814
+   },
+   {
+    "queries": 19563,
+    "real": 0.9972156252559168,
+    "random": 0.981
+   },
+   {
+    "queries": 20012,
+    "real": 0.9950863975104414,
+    "random": 0.979
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.8358856768487429,
+  "adverse_random": 0.5,
+  "majority_real": 0.8358856768487429,
+  "majority_random": 0.5,
+  "queries_99_real": 6566,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9912374088936206,
+  "final_random": 0.9804,
+  "trace": [
+   {
+    "queries": 461,
+    "real": 0.9170420113012857,
+    "random": 0.8908
+   },
+   {
+    "queries": 923,
+    "real": 0.9763328146752928,
+    "random": 0.9104
+   },
+   {
+    "queries": 1364,
+    "real": 0.975595774301859,
+    "random": 0.9282
+   },
+   {
+    "queries": 1876,
+    "real": 0.9687986241913029,
+    "random": 0.935
+   },
+   {
+    "queries": 2360,
+    "real": 0.975513880927033,
+    "random": 0.9442
+   },
+   {
+    "queries": 2830,
+    "real": 0.9782163622962903,
+    "random": 0.948
+   },
+   {
+    "queries": 3318,
+    "real": 0.9816558840389813,
+    "random": 0.9514
+   },
+   {
+    "queries": 3709,
+    "real": 0.9814920972893293,
+    "random": 0.9502
+   },
+   {
+    "queries": 4187,
+    "real": 0.9820653509131111,
+    "random": 0.9544
+   },
+   {
+    "queries": 4637,
+    "real": 0.9857505527802801,
+    "random": 0.9572
+   },
+   {
+    "queries": 5152,
+    "real": 0.9888625010236672,
+    "random": 0.9582
+   },
+   {
+    "queries": 5624,
+    "real": 0.985996232904758,
+    "random": 0.9588
+   },
+   {
+    "queries": 6099,
+    "real": 0.989435754647449,
+    "random": 0.9664
+   },
+   {
+    "queries": 6566,
+    "real": 0.9910736221439685,
+    "random": 0.9658
+   },
+   {
+    "queries": 7028,
+    "real": 0.989353861272623,
+    "random": 0.9694
+   },
+   {
+    "queries": 7471,
+    "real": 0.9886168208991892,
+    "random": 0.9696
+   },
+   {
+    "queries": 7910,
+    "real": 0.989271967897797,
+    "random": 0.9708
+   },
+   {
+    "queries": 8371,
+    "real": 0.9897633281467529,
+    "random": 0.97
+   },
+   {
+    "queries": 8815,
+    "real": 0.9945131438866596,
+    "random": 0.9726
+   },
+   {
+    "queries": 9281,
+    "real": 0.9943493571370076,
+    "random": 0.9748
+   },
+   {
+    "queries": 9740,
+    "real": 0.9959872246335272,
+    "random": 0.9754
+   },
+   {
+    "queries": 10179,
+    "real": 0.9921382360167063,
+    "random": 0.9726
+   },
+   {
+    "queries": 10622,
+    "real": 0.9915649823929245,
+    "random": 0.971
+   },
+   {
+    "queries": 11087,
+    "real": 0.9924658095160102,
+    "random": 0.9718
+   },
+   {
+    "queries": 11535,
+    "real": 0.9941855703873557,
+    "random": 0.9736
+   },
+   {
+    "queries": 11973,
+    "real": 0.9917287691425763,
+    "random": 0.9732
+   },
+   {
+    "queries": 12372,
+    "real": 0.9857505527802801,
+    "random": 0.976
+   },
+   {
+    "queries": 12797,
+    "real": 0.9920563426418803,
+    "random": 0.9722
+   },
+   {
+    "queries": 13269,
+    "real": 0.9936942101383998,
+    "random": 0.9746
+   },
+   {
+    "queries": 13783,
+    "real": 0.9912374088936206,
+    "random": 0.9756
+   },
+   {
+    "queries": 14247,
+    "real": 0.996724265006961,
+    "random": 0.978
+   },
+   {
+    "queries": 14773,
+    "real": 0.9933666366390959,
+    "random": 0.9766
+   },
+   {
+    "queries": 15238,
+    "real": 0.9862419130292359,
+    "random": 0.9788
+   },
+   {
+    "queries": 15694,
+    "real": 0.9938579968880518,
+    "random": 0.982
+   },
+   {
+    "queries": 16120,
+    "real": 0.9912374088936206,
+    "random": 0.9784
+   },
+   {
+    "queries": 16563,
+    "real": 0.9950045041356155,
+    "random": 0.9786
+   },
+   {
+    "queries": 17045,
+    "real": 0.9939398902628778,
+    "random": 0.9764
+   },
+   {
+    "queries": 17516,
+    "real": 0.9907460486446646,
+    "random": 0.98
+   },
+   {
+    "queries": 17980,
+    "real": 0.9907460486446646,
+    "random": 0.9788
+   },
+   {
+    "queries": 18452,
+    "real": 0.989517648022275,
+    "random": 0.9802
+   },
+   {
+    "queries": 18920,
+    "real": 0.992711489640488,
+    "random": 0.98
+   },
+   {
+    "queries": 19450,
+    "real": 0.9922201293915323,
+    "random": 0.9812
+   },
+   {
+    "queries": 19914,
+    "real": 0.9913193022684464,
+    "random": 0.9804
+   },
+   {
+    "queries": 20386,
+    "real": 0.9912374088936206,
+    "random": 0.9804
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 10,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.8358856768487429,
+  "adverse_random": 0.5142,
+  "majority_real": 0.8358856768487429,
+  "majority_random": 0.5142,
+  "queries_99_real": 9476,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9913193022684464,
+  "final_random": 0.98,
+  "trace": [
+   {
+    "queries": 489,
+    "real": 0.940381623126689,
+    "random": 0.8752
+   },
+   {
+    "queries": 943,
+    "real": 0.9479977069855049,
+    "random": 0.9138
+   },
+   {
+    "queries": 1412,
+    "real": 0.9609368602080092,
+    "random": 0.927
+   },
+   {
+    "queries": 1832,
+    "real": 0.9680615838178691,
+    "random": 0.9356
+   },
+   {
+    "queries": 2283,
+    "real": 0.9820653509131111,
+    "random": 0.944
+   },
+   {
+    "queries": 2773,
+    "real": 0.9715829989353861,
+    "random": 0.9542
+   },
+   {
+    "queries": 3282,
+    "real": 0.9740398001801654,
+    "random": 0.9536
+   },
+   {
+    "queries": 3790,
+    "real": 0.9808369502907215,
+    "random": 0.9548
+   },
+   {
+    "queries": 4241,
+    "real": 0.9827204979117189,
+    "random": 0.9584
+   },
+   {
+    "queries": 4683,
+    "real": 0.982556711162067,
+    "random": 0.963
+   },
+   {
+    "queries": 5203,
+    "real": 0.9742854803046433,
+    "random": 0.966
+   },
+   {
+    "queries": 5696,
+    "real": 0.9802636966669397,
+    "random": 0.967
+   },
+   {
+    "queries": 6123,
+    "real": 0.986078126279584,
+    "random": 0.9702
+   },
+   {
+    "queries": 6625,
+    "real": 0.9882892473998853,
+    "random": 0.9682
+   },
+   {
+    "queries": 7119,
+    "real": 0.9882073540250593,
+    "random": 0.9668
+   },
+   {
+    "queries": 7561,
+    "real": 0.9857505527802801,
+    "random": 0.9678
+   },
+   {
+    "queries": 8040,
+    "real": 0.9873884202767996,
+    "random": 0.9726
+   },
+   {
+    "queries": 8575,
+    "real": 0.9882892473998853,
+    "random": 0.969
+   },
+   {
+    "queries": 9007,
+    "real": 0.9879616739005814,
+    "random": 0.971
+   },
+   {
+    "queries": 9476,
+    "real": 0.9908279420194906,
+    "random": 0.9742
+   },
+   {
+    "queries": 9874,
+    "real": 0.9900090082712308,
+    "random": 0.972
+   },
+   {
+    "queries": 10345,
+    "real": 0.9886987142740152,
+    "random": 0.9706
+   },
+   {
+    "queries": 10799,
+    "real": 0.9909917287691425,
+    "random": 0.9732
+   },
+   {
+    "queries": 11257,
+    "real": 0.9877978871509295,
+    "random": 0.9726
+   },
+   {
+    "queries": 11700,
+    "real": 0.9849316190320203,
+    "random": 0.9744
+   },
+   {
+    "queries": 12220,
+    "real": 0.9877159937761035,
+    "random": 0.9704
+   },
+   {
+    "queries": 12658,
+    "real": 0.9846859389075424,
+    "random": 0.9742
+   },
+   {
+    "queries": 13131,
+    "real": 0.9900090082712308,
+    "random": 0.975
+   },
+   {
+    "queries": 13569,
+    "real": 0.9922201293915323,
+    "random": 0.9738
+   },
+   {
+    "queries": 14072,
+    "real": 0.9855048726558021,
+    "random": 0.9748
+   },
+   {
+    "queries": 14542,
+    "real": 0.9865694865285398,
+    "random": 0.9774
+   },
+   {
+    "queries": 15038,
+    "real": 0.9868151666530177,
+    "random": 0.979
+   },
+   {
+    "queries": 15511,
+    "real": 0.9863238064040619,
+    "random": 0.977
+   },
+   {
+    "queries": 15984,
+    "real": 0.9879616739005814,
+    "random": 0.9778
+   },
+   {
+    "queries": 16437,
+    "real": 0.9925477028908362,
+    "random": 0.977
+   },
+   {
+    "queries": 16917,
+    "real": 0.9909917287691425,
+    "random": 0.9786
+   },
+   {
+    "queries": 17385,
+    "real": 0.9938579968880518,
+    "random": 0.9814
+   },
+   {
+    "queries": 17819,
+    "real": 0.9830480714110228,
+    "random": 0.9798
+   },
+   {
+    "queries": 18284,
+    "real": 0.9835394316599787,
+    "random": 0.9796
+   },
+   {
+    "queries": 18762,
+    "real": 0.9805912701662436,
+    "random": 0.9798
+   },
+   {
+    "queries": 19214,
+    "real": 0.9886987142740152,
+    "random": 0.9818
+   },
+   {
+    "queries": 19669,
+    "real": 0.9900090082712308,
+    "random": 0.9802
+   },
+   {
+    "queries": 20167,
+    "real": 0.9913193022684464,
+    "random": 0.98
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.8174596675128982,
+  "adverse_random": 0.619,
+  "majority_real": 0.8174596675128982,
+  "majority_random": 0.619,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9593808860863157,
+  "final_random": 0.957,
+  "trace": [
+   {
+    "queries": 568,
+    "real": 0.9036933912046515,
+    "random": 0.8238
+   },
+   {
+    "queries": 1171,
+    "real": 0.9101629678159037,
+    "random": 0.871
+   },
+   {
+    "queries": 1757,
+    "real": 0.8969781344689215,
+    "random": 0.8956
+   },
+   {
+    "queries": 2325,
+    "real": 0.9217099336663664,
+    "random": 0.9014
+   },
+   {
+    "queries": 2898,
+    "real": 0.9217099336663664,
+    "random": 0.9112
+   },
+   {
+    "queries": 3413,
+    "real": 0.9075423798214725,
+    "random": 0.9216
+   },
+   {
+    "queries": 3912,
+    "real": 0.936860208009172,
+    "random": 0.9244
+   },
+   {
+    "queries": 4481,
+    "real": 0.9178609450495455,
+    "random": 0.9292
+   },
+   {
+    "queries": 4975,
+    "real": 0.9181885185488494,
+    "random": 0.9292
+   },
+   {
+    "queries": 5518,
+    "real": 0.9117189419375973,
+    "random": 0.9306
+   },
+   {
+    "queries": 6004,
+    "real": 0.933666366390959,
+    "random": 0.9392
+   },
+   {
+    "queries": 6556,
+    "real": 0.9678159036933912,
+    "random": 0.9374
+   },
+   {
+    "queries": 7131,
+    "real": 0.9691261976906068,
+    "random": 0.9366
+   },
+   {
+    "queries": 7629,
+    "real": 0.9623290475800508,
+    "random": 0.94
+   },
+   {
+    "queries": 8129,
+    "real": 0.9647039554500041,
+    "random": 0.9398
+   },
+   {
+    "queries": 8689,
+    "real": 0.9710097453116043,
+    "random": 0.9472
+   },
+   {
+    "queries": 9178,
+    "real": 0.9601179264597494,
+    "random": 0.9484
+   },
+   {
+    "queries": 9704,
+    "real": 0.9673245434444353,
+    "random": 0.9526
+   },
+   {
+    "queries": 10299,
+    "real": 0.9569240848415363,
+    "random": 0.9474
+   },
+   {
+    "queries": 10859,
+    "real": 0.9592170993366637,
+    "random": 0.9448
+   },
+   {
+    "queries": 11393,
+    "real": 0.9493898943575465,
+    "random": 0.9448
+   },
+   {
+    "queries": 11928,
+    "real": 0.9396445827532552,
+    "random": 0.9466
+   },
+   {
+    "queries": 12506,
+    "real": 0.9574154450904921,
+    "random": 0.9476
+   },
+   {
+    "queries": 13081,
+    "real": 0.9592170993366637,
+    "random": 0.9494
+   },
+   {
+    "queries": 13621,
+    "real": 0.9611006469576612,
+    "random": 0.9504
+   },
+   {
+    "queries": 14068,
+    "real": 0.9640488084513963,
+    "random": 0.9536
+   },
+   {
+    "queries": 14660,
+    "real": 0.9550405372205388,
+    "random": 0.951
+   },
+   {
+    "queries": 15178,
+    "real": 0.9619195807059209,
+    "random": 0.9546
+   },
+   {
+    "queries": 15732,
+    "real": 0.9560232577184505,
+    "random": 0.9552
+   },
+   {
+    "queries": 16290,
+    "real": 0.9594627794611416,
+    "random": 0.9558
+   },
+   {
+    "queries": 16822,
+    "real": 0.9707640651871263,
+    "random": 0.9556
+   },
+   {
+    "queries": 17372,
+    "real": 0.9656047825730898,
+    "random": 0.9562
+   },
+   {
+    "queries": 17890,
+    "real": 0.9780525755466383,
+    "random": 0.9548
+   },
+   {
+    "queries": 18468,
+    "real": 0.9683072639423471,
+    "random": 0.9608
+   },
+   {
+    "queries": 19115,
+    "real": 0.9696175579395627,
+    "random": 0.9546
+   },
+   {
+    "queries": 19671,
+    "real": 0.9597903529604455,
+    "random": 0.9602
+   },
+   {
+    "queries": 20208,
+    "real": 0.9593808860863157,
+    "random": 0.957
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.8174596675128982,
+  "adverse_random": 0.6078,
+  "majority_real": 0.8174596675128982,
+  "majority_random": 0.6078,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9746949471787733,
+  "final_random": 0.9562,
+  "trace": [
+   {
+    "queries": 609,
+    "real": 0.8796986323806404,
+    "random": 0.85
+   },
+   {
+    "queries": 1128,
+    "real": 0.9311276717713537,
+    "random": 0.8796
+   },
+   {
+    "queries": 1642,
+    "real": 0.9478339202358529,
+    "random": 0.8924
+   },
+   {
+    "queries": 2088,
+    "real": 0.9595446728359676,
+    "random": 0.8968
+   },
+   {
+    "queries": 2683,
+    "real": 0.958316272213578,
+    "random": 0.912
+   },
+   {
+    "queries": 3154,
+    "real": 0.9517648022274998,
+    "random": 0.9196
+   },
+   {
+    "queries": 3648,
+    "real": 0.9570059782163622,
+    "random": 0.9252
+   },
+   {
+    "queries": 4212,
+    "real": 0.9583981655884038,
+    "random": 0.9286
+   },
+   {
+    "queries": 4828,
+    "real": 0.9529932028498894,
+    "random": 0.9332
+   },
+   {
+    "queries": 5356,
+    "real": 0.9602817132094014,
+    "random": 0.9342
+   },
+   {
+    "queries": 5957,
+    "real": 0.961755793956269,
+    "random": 0.9374
+   },
+   {
+    "queries": 6546,
+    "real": 0.9662599295716976,
+    "random": 0.9356
+   },
+   {
+    "queries": 7118,
+    "real": 0.9638850217017443,
+    "random": 0.9394
+   },
+   {
+    "queries": 7731,
+    "real": 0.9481614937351568,
+    "random": 0.9366
+   },
+   {
+    "queries": 8260,
+    "real": 0.9264597494062731,
+    "random": 0.9416
+   },
+   {
+    "queries": 8730,
+    "real": 0.9260502825321432,
+    "random": 0.9444
+   },
+   {
+    "queries": 9290,
+    "real": 0.9217918270411923,
+    "random": 0.9462
+   },
+   {
+    "queries": 9876,
+    "real": 0.9608549668331832,
+    "random": 0.9394
+   },
+   {
+    "queries": 10341,
+    "real": 0.9579886987142741,
+    "random": 0.9388
+   },
+   {
+    "queries": 10893,
+    "real": 0.9479158136106789,
+    "random": 0.9406
+   },
+   {
+    "queries": 11449,
+    "real": 0.9638031283269184,
+    "random": 0.9378
+   },
+   {
+    "queries": 11972,
+    "real": 0.9665875030710016,
+    "random": 0.9454
+   },
+   {
+    "queries": 12517,
+    "real": 0.9726476128081238,
+    "random": 0.9442
+   },
+   {
+    "queries": 13061,
+    "real": 0.9631479813283106,
+    "random": 0.945
+   },
+   {
+    "queries": 13628,
+    "real": 0.9747768405535993,
+    "random": 0.9472
+   },
+   {
+    "queries": 14122,
+    "real": 0.9760871345508149,
+    "random": 0.9484
+   },
+   {
+    "queries": 14667,
+    "real": 0.9692080910654328,
+    "random": 0.9448
+   },
+   {
+    "queries": 15227,
+    "real": 0.9665056096961756,
+    "random": 0.9504
+   },
+   {
+    "queries": 15714,
+    "real": 0.9679796904430431,
+    "random": 0.9486
+   },
+   {
+    "queries": 16213,
+    "real": 0.9749406273032512,
+    "random": 0.9474
+   },
+   {
+    "queries": 16679,
+    "real": 0.9759233478011629,
+    "random": 0.952
+   },
+   {
+    "queries": 17178,
+    "real": 0.9796904430431578,
+    "random": 0.95
+   },
+   {
+    "queries": 17692,
+    "real": 0.9759233478011629,
+    "random": 0.9526
+   },
+   {
+    "queries": 18153,
+    "real": 0.9765784947997707,
+    "random": 0.9562
+   },
+   {
+    "queries": 18725,
+    "real": 0.971992465809516,
+    "random": 0.9542
+   },
+   {
+    "queries": 19299,
+    "real": 0.9764147080501188,
+    "random": 0.9588
+   },
+   {
+    "queries": 19760,
+    "real": 0.9714192121857341,
+    "random": 0.957
+   },
+   {
+    "queries": 20247,
+    "real": 0.9746949471787733,
+    "random": 0.9562
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.8174596675128982,
+  "adverse_random": 0.6214,
+  "majority_real": 0.8174596675128982,
+  "majority_random": 0.6214,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9692899844402588,
+  "final_random": 0.954,
+  "trace": [
+   {
+    "queries": 501,
+    "real": 0.8697895340266972,
+    "random": 0.8334
+   },
+   {
+    "queries": 1012,
+    "real": 0.9056588322004749,
+    "random": 0.8776
+   },
+   {
+    "queries": 1606,
+    "real": 0.8655310785357465,
+    "random": 0.8954
+   },
+   {
+    "queries": 2137,
+    "real": 0.8792891655065105,
+    "random": 0.9102
+   },
+   {
+    "queries": 2685,
+    "real": 0.9269511096552289,
+    "random": 0.9146
+   },
+   {
+    "queries": 3290,
+    "real": 0.9484071738596348,
+    "random": 0.9242
+   },
+   {
+    "queries": 3818,
+    "real": 0.9240029481614938,
+    "random": 0.931
+   },
+   {
+    "queries": 4292,
+    "real": 0.9456227991155516,
+    "random": 0.9356
+   },
+   {
+    "queries": 4867,
+    "real": 0.9338301531406109,
+    "random": 0.9388
+   },
+   {
+    "queries": 5412,
+    "real": 0.9032020309556957,
+    "random": 0.9408
+   },
+   {
+    "queries": 5952,
+    "real": 0.9549586438457128,
+    "random": 0.9396
+   },
+   {
+    "queries": 6491,
+    "real": 0.9629023012038326,
+    "random": 0.9408
+   },
+   {
+    "queries": 7071,
+    "real": 0.9540578167226271,
+    "random": 0.9436
+   },
+   {
+    "queries": 7609,
+    "real": 0.9569240848415363,
+    "random": 0.9398
+   },
+   {
+    "queries": 8123,
+    "real": 0.9669969699451314,
+    "random": 0.9442
+   },
+   {
+    "queries": 8666,
+    "real": 0.9461141593645074,
+    "random": 0.949
+   },
+   {
+    "queries": 9141,
+    "real": 0.9713373188109082,
+    "random": 0.943
+   },
+   {
+    "queries": 9665,
+    "real": 0.9683072639423471,
+    "random": 0.95
+   },
+   {
+    "queries": 10160,
+    "real": 0.9641307018262223,
+    "random": 0.9448
+   },
+   {
+    "queries": 10624,
+    "real": 0.9630660879534846,
+    "random": 0.947
+   },
+   {
+    "queries": 11176,
+    "real": 0.9669150765703055,
+    "random": 0.9506
+   },
+   {
+    "queries": 11728,
+    "real": 0.9710916386864302,
+    "random": 0.9524
+   },
+   {
+    "queries": 12289,
+    "real": 0.9673245434444353,
+    "random": 0.9532
+   },
+   {
+    "queries": 12903,
+    "real": 0.964949635574482,
+    "random": 0.9488
+   },
+   {
+    "queries": 13491,
+    "real": 0.9692899844402588,
+    "random": 0.9524
+   },
+   {
+    "queries": 14119,
+    "real": 0.9706002784374744,
+    "random": 0.9532
+   },
+   {
+    "queries": 14664,
+    "real": 0.9701908115633445,
+    "random": 0.956
+   },
+   {
+    "queries": 15226,
+    "real": 0.9634755548276145,
+    "random": 0.957
+   },
+   {
+    "queries": 15769,
+    "real": 0.9606911800835313,
+    "random": 0.9516
+   },
+   {
+    "queries": 16352,
+    "real": 0.9465236262386373,
+    "random": 0.9576
+   },
+   {
+    "queries": 16831,
+    "real": 0.9584800589632299,
+    "random": 0.9578
+   },
+   {
+    "queries": 17418,
+    "real": 0.9711735320612562,
+    "random": 0.9538
+   },
+   {
+    "queries": 17972,
+    "real": 0.957824911964622,
+    "random": 0.956
+   },
+   {
+    "queries": 18536,
+    "real": 0.9452133322414217,
+    "random": 0.9512
+   },
+   {
+    "queries": 19055,
+    "real": 0.9729751863074277,
+    "random": 0.9558
+   },
+   {
+    "queries": 19517,
+    "real": 0.9679796904430431,
+    "random": 0.9556
+   },
+   {
+    "queries": 20055,
+    "real": 0.9692899844402588,
+    "random": 0.954
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.8174596675128982,
+  "adverse_random": 0.619,
+  "majority_real": 0.8174596675128982,
+  "majority_random": 0.619,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9687986241913029,
+  "final_random": 0.9578,
+  "trace": [
+   {
+    "queries": 564,
+    "real": 0.9249856686594055,
+    "random": 0.8396
+   },
+   {
+    "queries": 1142,
+    "real": 0.9321922856440914,
+    "random": 0.869
+   },
+   {
+    "queries": 1645,
+    "real": 0.9534845630988453,
+    "random": 0.8924
+   },
+   {
+    "queries": 2208,
+    "real": 0.9436573581197281,
+    "random": 0.91
+   },
+   {
+    "queries": 2786,
+    "real": 0.9417738104987307,
+    "random": 0.9064
+   },
+   {
+    "queries": 3301,
+    "real": 0.9596265662107936,
+    "random": 0.9184
+   },
+   {
+    "queries": 3748,
+    "real": 0.96519531569896,
+    "random": 0.9274
+   },
+   {
+    "queries": 4221,
+    "real": 0.9629841945786586,
+    "random": 0.9254
+   },
+   {
+    "queries": 4723,
+    "real": 0.961673900581443,
+    "random": 0.93
+   },
+   {
+    "queries": 5246,
+    "real": 0.944066824993858,
+    "random": 0.9314
+   },
+   {
+    "queries": 5791,
+    "real": 0.9529932028498894,
+    "random": 0.9316
+   },
+   {
+    "queries": 6316,
+    "real": 0.9468511997379412,
+    "random": 0.9348
+   },
+   {
+    "queries": 6820,
+    "real": 0.951027761854066,
+    "random": 0.9354
+   },
+   {
+    "queries": 7369,
+    "real": 0.9354680206371304,
+    "random": 0.9418
+   },
+   {
+    "queries": 7865,
+    "real": 0.9643763819507002,
+    "random": 0.9424
+   },
+   {
+    "queries": 8334,
+    "real": 0.9550405372205388,
+    "random": 0.9456
+   },
+   {
+    "queries": 8838,
+    "real": 0.9678159036933912,
+    "random": 0.9486
+   },
+   {
+    "queries": 9374,
+    "real": 0.9652772090737859,
+    "random": 0.9512
+   },
+   {
+    "queries": 9896,
+    "real": 0.9634755548276145,
+    "random": 0.951
+   },
+   {
+    "queries": 10432,
+    "real": 0.961592007206617,
+    "random": 0.952
+   },
+   {
+    "queries": 10974,
+    "real": 0.9705183850626484,
+    "random": 0.949
+   },
+   {
+    "queries": 11502,
+    "real": 0.964949635574482,
+    "random": 0.9526
+   },
+   {
+    "queries": 12010,
+    "real": 0.9669150765703055,
+    "random": 0.9544
+   },
+   {
+    "queries": 12562,
+    "real": 0.9670788633199574,
+    "random": 0.96
+   },
+   {
+    "queries": 13043,
+    "real": 0.9678159036933912,
+    "random": 0.951
+   },
+   {
+    "queries": 13555,
+    "real": 0.9713373188109082,
+    "random": 0.9544
+   },
+   {
+    "queries": 14036,
+    "real": 0.9747768405535993,
+    "random": 0.961
+   },
+   {
+    "queries": 14637,
+    "real": 0.968389157317173,
+    "random": 0.9596
+   },
+   {
+    "queries": 15166,
+    "real": 0.9698632380640406,
+    "random": 0.9578
+   },
+   {
+    "queries": 15671,
+    "real": 0.9704364916878224,
+    "random": 0.9592
+   },
+   {
+    "queries": 16208,
+    "real": 0.9596265662107936,
+    "random": 0.9614
+   },
+   {
+    "queries": 16714,
+    "real": 0.975513880927033,
+    "random": 0.9602
+   },
+   {
+    "queries": 17219,
+    "real": 0.968552944066825,
+    "random": 0.954
+   },
+   {
+    "queries": 17783,
+    "real": 0.9747768405535993,
+    "random": 0.9604
+   },
+   {
+    "queries": 18303,
+    "real": 0.9748587339284251,
+    "random": 0.9608
+   },
+   {
+    "queries": 18836,
+    "real": 0.9805093767914176,
+    "random": 0.962
+   },
+   {
+    "queries": 19348,
+    "real": 0.9695356645647367,
+    "random": 0.9612
+   },
+   {
+    "queries": 19858,
+    "real": 0.9700270248136925,
+    "random": 0.9598
+   },
+   {
+    "queries": 20424,
+    "real": 0.9687986241913029,
+    "random": 0.9578
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.8174596675128982,
+  "adverse_random": 0.6078,
+  "majority_real": 0.8174596675128982,
+  "majority_random": 0.6078,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9600360330849235,
+  "final_random": 0.9558,
+  "trace": [
+   {
+    "queries": 550,
+    "real": 0.8737204160183442,
+    "random": 0.8424
+   },
+   {
+    "queries": 1039,
+    "real": 0.9409548767504708,
+    "random": 0.874
+   },
+   {
+    "queries": 1573,
+    "real": 0.9253951355335354,
+    "random": 0.8998
+   },
+   {
+    "queries": 2063,
+    "real": 0.9135205961837687,
+    "random": 0.9068
+   },
+   {
+    "queries": 2651,
+    "real": 0.9068053394480386,
+    "random": 0.9084
+   },
+   {
+    "queries": 3167,
+    "real": 0.9262140692817951,
+    "random": 0.9166
+   },
+   {
+    "queries": 3620,
+    "real": 0.965031528949308,
+    "random": 0.915
+   },
+   {
+    "queries": 4146,
+    "real": 0.940627303251167,
+    "random": 0.9192
+   },
+   {
+    "queries": 4614,
+    "real": 0.9628204078290067,
+    "random": 0.9204
+   },
+   {
+    "queries": 5109,
+    "real": 0.9357955941364343,
+    "random": 0.926
+   },
+   {
+    "queries": 5676,
+    "real": 0.9384980755056916,
+    "random": 0.9294
+   },
+   {
+    "queries": 6133,
+    "real": 0.9281795102776186,
+    "random": 0.9336
+   },
+   {
+    "queries": 6642,
+    "real": 0.9497993612316764,
+    "random": 0.9372
+   },
+   {
+    "queries": 7201,
+    "real": 0.9605273933338793,
+    "random": 0.9382
+   },
+   {
+    "queries": 7752,
+    "real": 0.9538940299729752,
+    "random": 0.9428
+   },
+   {
+    "queries": 8240,
+    "real": 0.9549586438457128,
+    "random": 0.94
+   },
+   {
+    "queries": 8742,
+    "real": 0.9654409958234379,
+    "random": 0.943
+   },
+   {
+    "queries": 9207,
+    "real": 0.9550405372205388,
+    "random": 0.9474
+   },
+   {
+    "queries": 9749,
+    "real": 0.9563508312177544,
+    "random": 0.9466
+   },
+   {
+    "queries": 10277,
+    "real": 0.9567602980918843,
+    "random": 0.9452
+   },
+   {
+    "queries": 10758,
+    "real": 0.9522561624764556,
+    "random": 0.9454
+   },
+   {
+    "queries": 11276,
+    "real": 0.9664237163213496,
+    "random": 0.9402
+   },
+   {
+    "queries": 11837,
+    "real": 0.9468511997379412,
+    "random": 0.9472
+   },
+   {
+    "queries": 12365,
+    "real": 0.9520923757268037,
+    "random": 0.9496
+   },
+   {
+    "queries": 12886,
+    "real": 0.9602817132094014,
+    "random": 0.9496
+   },
+   {
+    "queries": 13387,
+    "real": 0.9726476128081238,
+    "random": 0.9504
+   },
+   {
+    "queries": 13941,
+    "real": 0.9653591024486119,
+    "random": 0.9458
+   },
+   {
+    "queries": 14487,
+    "real": 0.9677340103185652,
+    "random": 0.9496
+   },
+   {
+    "queries": 15006,
+    "real": 0.9623290475800508,
+    "random": 0.9528
+   },
+   {
+    "queries": 15533,
+    "real": 0.975677667676685,
+    "random": 0.9508
+   },
+   {
+    "queries": 16107,
+    "real": 0.9634755548276145,
+    "random": 0.953
+   },
+   {
+    "queries": 16575,
+    "real": 0.9633117680779625,
+    "random": 0.9562
+   },
+   {
+    "queries": 17099,
+    "real": 0.971992465809516,
+    "random": 0.9574
+   },
+   {
+    "queries": 17639,
+    "real": 0.9680615838178691,
+    "random": 0.9544
+   },
+   {
+    "queries": 18215,
+    "real": 0.972074359184342,
+    "random": 0.9584
+   },
+   {
+    "queries": 18787,
+    "real": 0.9745311604291212,
+    "random": 0.956
+   },
+   {
+    "queries": 19336,
+    "real": 0.972074359184342,
+    "random": 0.9556
+   },
+   {
+    "queries": 19924,
+    "real": 0.9681434771926951,
+    "random": 0.957
+   },
+   {
+    "queries": 20454,
+    "real": 0.9600360330849235,
+    "random": 0.9558
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "adult",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 13,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.8174596675128982,
+  "adverse_random": 0.6214,
+  "majority_real": 0.8174596675128982,
+  "majority_random": 0.6214,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9766603881745967,
+  "final_random": 0.9612,
+  "trace": [
+   {
+    "queries": 555,
+    "real": 0.8754401768896897,
+    "random": 0.8484
+   },
+   {
+    "queries": 1060,
+    "real": 0.9278519367783147,
+    "random": 0.8758
+   },
+   {
+    "queries": 1596,
+    "real": 0.9430022111211203,
+    "random": 0.8968
+   },
+   {
+    "queries": 2168,
+    "real": 0.9312914585210057,
+    "random": 0.9088
+   },
+   {
+    "queries": 2690,
+    "real": 0.923347801162886,
+    "random": 0.9198
+   },
+   {
+    "queries": 3244,
+    "real": 0.9473425599868971,
+    "random": 0.924
+   },
+   {
+    "queries": 3784,
+    "real": 0.9630660879534846,
+    "random": 0.9238
+   },
+   {
+    "queries": 4266,
+    "real": 0.9633936614527885,
+    "random": 0.925
+   },
+   {
+    "queries": 4843,
+    "real": 0.9536483498484972,
+    "random": 0.9374
+   },
+   {
+    "queries": 5381,
+    "real": 0.9552862173450168,
+    "random": 0.9402
+   },
+   {
+    "queries": 5901,
+    "real": 0.9601998198345754,
+    "random": 0.9428
+   },
+   {
+    "queries": 6410,
+    "real": 0.9494717877323724,
+    "random": 0.9444
+   },
+   {
+    "queries": 6864,
+    "real": 0.9588076324625338,
+    "random": 0.9422
+   },
+   {
+    "queries": 7400,
+    "real": 0.9601179264597494,
+    "random": 0.945
+   },
+   {
+    "queries": 7942,
+    "real": 0.9595446728359676,
+    "random": 0.9496
+   },
+   {
+    "queries": 8485,
+    "real": 0.9677340103185652,
+    "random": 0.9476
+   },
+   {
+    "queries": 9030,
+    "real": 0.9520104823519777,
+    "random": 0.949
+   },
+   {
+    "queries": 9495,
+    "real": 0.9534026697240193,
+    "random": 0.9546
+   },
+   {
+    "queries": 10024,
+    "real": 0.9622471542052248,
+    "random": 0.951
+   },
+   {
+    "queries": 10572,
+    "real": 0.9620833674555729,
+    "random": 0.9474
+   },
+   {
+    "queries": 11098,
+    "real": 0.9690443043157808,
+    "random": 0.9508
+   },
+   {
+    "queries": 11638,
+    "real": 0.9716648923102121,
+    "random": 0.9452
+   },
+   {
+    "queries": 12239,
+    "real": 0.9556137908443207,
+    "random": 0.9528
+   },
+   {
+    "queries": 12778,
+    "real": 0.9652772090737859,
+    "random": 0.9506
+   },
+   {
+    "queries": 13345,
+    "real": 0.9675702235689133,
+    "random": 0.9572
+   },
+   {
+    "queries": 13944,
+    "real": 0.9693718778150847,
+    "random": 0.9526
+   },
+   {
+    "queries": 14483,
+    "real": 0.9716648923102121,
+    "random": 0.9528
+   },
+   {
+    "queries": 15004,
+    "real": 0.9747768405535993,
+    "random": 0.9554
+   },
+   {
+    "queries": 15517,
+    "real": 0.9687986241913029,
+    "random": 0.9544
+   },
+   {
+    "queries": 16059,
+    "real": 0.9681434771926951,
+    "random": 0.9574
+   },
+   {
+    "queries": 16604,
+    "real": 0.9760052411759889,
+    "random": 0.9592
+   },
+   {
+    "queries": 17120,
+    "real": 0.9708459585619523,
+    "random": 0.9598
+   },
+   {
+    "queries": 17695,
+    "real": 0.9740398001801654,
+    "random": 0.9604
+   },
+   {
+    "queries": 18241,
+    "real": 0.9739579068053394,
+    "random": 0.9582
+   },
+   {
+    "queries": 18784,
+    "real": 0.968471050691999,
+    "random": 0.959
+   },
+   {
+    "queries": 19396,
+    "real": 0.9666693964458275,
+    "random": 0.96
+   },
+   {
+    "queries": 19964,
+    "real": 0.9746949471787733,
+    "random": 0.9604
+   },
+   {
+    "queries": 20478,
+    "real": 0.9766603881745967,
+    "random": 0.9612
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.11306666666666666,
+  "adverse_random": 0.158,
+  "majority_real": 0.8869333333333334,
+  "majority_random": 0.842,
+  "queries_99_real": 4673,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9968,
+  "final_random": 0.9794,
+  "trace": [
+   {
+    "queries": 637,
+    "real": 0.9794666666666667,
+    "random": 0.9222
+   },
+   {
+    "queries": 1241,
+    "real": 0.9805333333333334,
+    "random": 0.947
+   },
+   {
+    "queries": 1867,
+    "real": 0.9812,
+    "random": 0.9526
+   },
+   {
+    "queries": 2412,
+    "real": 0.9825333333333334,
+    "random": 0.9554
+   },
+   {
+    "queries": 2931,
+    "real": 0.9828,
+    "random": 0.9608
+   },
+   {
+    "queries": 3498,
+    "real": 0.9828,
+    "random": 0.9646
+   },
+   {
+    "queries": 4043,
+    "real": 0.9878666666666667,
+    "random": 0.9654
+   },
+   {
+    "queries": 4673,
+    "real": 0.9901333333333333,
+    "random": 0.9684
+   },
+   {
+    "queries": 5252,
+    "real": 0.9908,
+    "random": 0.9696
+   },
+   {
+    "queries": 5889,
+    "real": 0.9917333333333334,
+    "random": 0.9738
+   },
+   {
+    "queries": 6530,
+    "real": 0.994,
+    "random": 0.975
+   },
+   {
+    "queries": 7059,
+    "real": 0.9945333333333334,
+    "random": 0.9738
+   },
+   {
+    "queries": 7606,
+    "real": 0.9941333333333333,
+    "random": 0.9748
+   },
+   {
+    "queries": 8172,
+    "real": 0.9941333333333333,
+    "random": 0.975
+   },
+   {
+    "queries": 8729,
+    "real": 0.9949333333333333,
+    "random": 0.9798
+   },
+   {
+    "queries": 9282,
+    "real": 0.9944,
+    "random": 0.9778
+   },
+   {
+    "queries": 9897,
+    "real": 0.9949333333333333,
+    "random": 0.977
+   },
+   {
+    "queries": 10521,
+    "real": 0.9942666666666666,
+    "random": 0.9772
+   },
+   {
+    "queries": 11161,
+    "real": 0.9961333333333333,
+    "random": 0.9768
+   },
+   {
+    "queries": 11784,
+    "real": 0.9937333333333334,
+    "random": 0.9752
+   },
+   {
+    "queries": 12453,
+    "real": 0.9950666666666667,
+    "random": 0.9782
+   },
+   {
+    "queries": 13020,
+    "real": 0.9949333333333333,
+    "random": 0.98
+   },
+   {
+    "queries": 13553,
+    "real": 0.9964,
+    "random": 0.981
+   },
+   {
+    "queries": 14097,
+    "real": 0.9966666666666667,
+    "random": 0.9796
+   },
+   {
+    "queries": 14725,
+    "real": 0.9964,
+    "random": 0.98
+   },
+   {
+    "queries": 15308,
+    "real": 0.9958666666666667,
+    "random": 0.9838
+   },
+   {
+    "queries": 15828,
+    "real": 0.9961333333333333,
+    "random": 0.9812
+   },
+   {
+    "queries": 16401,
+    "real": 0.9957333333333334,
+    "random": 0.9796
+   },
+   {
+    "queries": 17005,
+    "real": 0.9961333333333333,
+    "random": 0.9832
+   },
+   {
+    "queries": 17600,
+    "real": 0.9961333333333333,
+    "random": 0.9826
+   },
+   {
+    "queries": 18225,
+    "real": 0.9958666666666667,
+    "random": 0.9836
+   },
+   {
+    "queries": 18797,
+    "real": 0.9964,
+    "random": 0.9808
+   },
+   {
+    "queries": 19351,
+    "real": 0.996,
+    "random": 0.9818
+   },
+   {
+    "queries": 19918,
+    "real": 0.996,
+    "random": 0.9808
+   },
+   {
+    "queries": 20489,
+    "real": 0.9968,
+    "random": 0.9794
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.11306666666666666,
+  "adverse_random": 0.1714,
+  "majority_real": 0.8869333333333334,
+  "majority_random": 0.8286,
+  "queries_99_real": 6589,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9953333333333333,
+  "final_random": 0.9808,
+  "trace": [
+   {
+    "queries": 573,
+    "real": 0.9806666666666667,
+    "random": 0.9246
+   },
+   {
+    "queries": 1146,
+    "real": 0.9805333333333334,
+    "random": 0.9404
+   },
+   {
+    "queries": 1788,
+    "real": 0.9805333333333334,
+    "random": 0.9448
+   },
+   {
+    "queries": 2442,
+    "real": 0.9824,
+    "random": 0.9522
+   },
+   {
+    "queries": 3012,
+    "real": 0.9814666666666667,
+    "random": 0.9594
+   },
+   {
+    "queries": 3659,
+    "real": 0.9832,
+    "random": 0.9626
+   },
+   {
+    "queries": 4242,
+    "real": 0.9832,
+    "random": 0.964
+   },
+   {
+    "queries": 4764,
+    "real": 0.9830666666666666,
+    "random": 0.9624
+   },
+   {
+    "queries": 5396,
+    "real": 0.9848,
+    "random": 0.9676
+   },
+   {
+    "queries": 6027,
+    "real": 0.9861333333333333,
+    "random": 0.9668
+   },
+   {
+    "queries": 6589,
+    "real": 0.9916,
+    "random": 0.9666
+   },
+   {
+    "queries": 7190,
+    "real": 0.9914666666666667,
+    "random": 0.9702
+   },
+   {
+    "queries": 7714,
+    "real": 0.9941333333333333,
+    "random": 0.9678
+   },
+   {
+    "queries": 8305,
+    "real": 0.9941333333333333,
+    "random": 0.9722
+   },
+   {
+    "queries": 8946,
+    "real": 0.9945333333333334,
+    "random": 0.9732
+   },
+   {
+    "queries": 9582,
+    "real": 0.9956,
+    "random": 0.974
+   },
+   {
+    "queries": 10078,
+    "real": 0.9957333333333334,
+    "random": 0.9694
+   },
+   {
+    "queries": 10674,
+    "real": 0.9958666666666667,
+    "random": 0.9734
+   },
+   {
+    "queries": 11243,
+    "real": 0.9941333333333333,
+    "random": 0.9716
+   },
+   {
+    "queries": 11870,
+    "real": 0.9956,
+    "random": 0.974
+   },
+   {
+    "queries": 12464,
+    "real": 0.9948,
+    "random": 0.975
+   },
+   {
+    "queries": 13042,
+    "real": 0.9937333333333334,
+    "random": 0.9742
+   },
+   {
+    "queries": 13680,
+    "real": 0.9953333333333333,
+    "random": 0.9736
+   },
+   {
+    "queries": 14200,
+    "real": 0.9957333333333334,
+    "random": 0.9766
+   },
+   {
+    "queries": 14776,
+    "real": 0.9956,
+    "random": 0.9774
+   },
+   {
+    "queries": 15400,
+    "real": 0.9965333333333334,
+    "random": 0.9764
+   },
+   {
+    "queries": 15955,
+    "real": 0.9961333333333333,
+    "random": 0.9776
+   },
+   {
+    "queries": 16528,
+    "real": 0.996,
+    "random": 0.9784
+   },
+   {
+    "queries": 17148,
+    "real": 0.9948,
+    "random": 0.9782
+   },
+   {
+    "queries": 17671,
+    "real": 0.996,
+    "random": 0.9802
+   },
+   {
+    "queries": 18307,
+    "real": 0.9957333333333334,
+    "random": 0.98
+   },
+   {
+    "queries": 18907,
+    "real": 0.9957333333333334,
+    "random": 0.9798
+   },
+   {
+    "queries": 19474,
+    "real": 0.9958666666666667,
+    "random": 0.9792
+   },
+   {
+    "queries": 20124,
+    "real": 0.9953333333333333,
+    "random": 0.9808
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.11306666666666666,
+  "adverse_random": 0.1542,
+  "majority_real": 0.8869333333333334,
+  "majority_random": 0.8458,
+  "queries_99_real": 3112,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9958666666666667,
+  "final_random": 0.9816,
+  "trace": [
+   {
+    "queries": 596,
+    "real": 0.9805333333333334,
+    "random": 0.9348
+   },
+   {
+    "queries": 1258,
+    "real": 0.9817333333333333,
+    "random": 0.9536
+   },
+   {
+    "queries": 1887,
+    "real": 0.9824,
+    "random": 0.958
+   },
+   {
+    "queries": 2504,
+    "real": 0.9825333333333334,
+    "random": 0.9632
+   },
+   {
+    "queries": 3112,
+    "real": 0.9905333333333334,
+    "random": 0.9618
+   },
+   {
+    "queries": 3573,
+    "real": 0.9882666666666666,
+    "random": 0.9666
+   },
+   {
+    "queries": 4186,
+    "real": 0.9844,
+    "random": 0.9678
+   },
+   {
+    "queries": 4759,
+    "real": 0.9872,
+    "random": 0.9704
+   },
+   {
+    "queries": 5412,
+    "real": 0.9866666666666667,
+    "random": 0.9712
+   },
+   {
+    "queries": 6002,
+    "real": 0.9913333333333333,
+    "random": 0.9716
+   },
+   {
+    "queries": 6553,
+    "real": 0.9933333333333333,
+    "random": 0.9742
+   },
+   {
+    "queries": 7226,
+    "real": 0.9892,
+    "random": 0.9726
+   },
+   {
+    "queries": 7828,
+    "real": 0.9865333333333334,
+    "random": 0.9752
+   },
+   {
+    "queries": 8437,
+    "real": 0.9946666666666667,
+    "random": 0.975
+   },
+   {
+    "queries": 9078,
+    "real": 0.9905333333333334,
+    "random": 0.9752
+   },
+   {
+    "queries": 9636,
+    "real": 0.9938666666666667,
+    "random": 0.9744
+   },
+   {
+    "queries": 10253,
+    "real": 0.9917333333333334,
+    "random": 0.9744
+   },
+   {
+    "queries": 10783,
+    "real": 0.9941333333333333,
+    "random": 0.9764
+   },
+   {
+    "queries": 11324,
+    "real": 0.9877333333333334,
+    "random": 0.9746
+   },
+   {
+    "queries": 11945,
+    "real": 0.9926666666666667,
+    "random": 0.9778
+   },
+   {
+    "queries": 12581,
+    "real": 0.9916,
+    "random": 0.9768
+   },
+   {
+    "queries": 13197,
+    "real": 0.9917333333333334,
+    "random": 0.9788
+   },
+   {
+    "queries": 13793,
+    "real": 0.996,
+    "random": 0.9762
+   },
+   {
+    "queries": 14357,
+    "real": 0.9945333333333334,
+    "random": 0.9758
+   },
+   {
+    "queries": 14990,
+    "real": 0.9961333333333333,
+    "random": 0.9768
+   },
+   {
+    "queries": 15560,
+    "real": 0.9962666666666666,
+    "random": 0.9776
+   },
+   {
+    "queries": 16161,
+    "real": 0.9954666666666667,
+    "random": 0.9778
+   },
+   {
+    "queries": 16806,
+    "real": 0.9962666666666666,
+    "random": 0.9784
+   },
+   {
+    "queries": 17472,
+    "real": 0.9950666666666667,
+    "random": 0.9776
+   },
+   {
+    "queries": 18046,
+    "real": 0.996,
+    "random": 0.9776
+   },
+   {
+    "queries": 18599,
+    "real": 0.9954666666666667,
+    "random": 0.978
+   },
+   {
+    "queries": 19192,
+    "real": 0.9952,
+    "random": 0.9786
+   },
+   {
+    "queries": 19812,
+    "real": 0.9956,
+    "random": 0.98
+   },
+   {
+    "queries": 20377,
+    "real": 0.9958666666666667,
+    "random": 0.9816
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.11306666666666666,
+  "adverse_random": 0.158,
+  "majority_real": 0.8869333333333334,
+  "majority_random": 0.842,
+  "queries_99_real": 9907,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9930666666666667,
+  "final_random": 0.9836,
+  "trace": [
+   {
+    "queries": 637,
+    "real": 0.9794666666666667,
+    "random": 0.9222
+   },
+   {
+    "queries": 1166,
+    "real": 0.9812,
+    "random": 0.9466
+   },
+   {
+    "queries": 1677,
+    "real": 0.9816,
+    "random": 0.9558
+   },
+   {
+    "queries": 2212,
+    "real": 0.9830666666666666,
+    "random": 0.9602
+   },
+   {
+    "queries": 2757,
+    "real": 0.9829333333333333,
+    "random": 0.968
+   },
+   {
+    "queries": 3320,
+    "real": 0.9828,
+    "random": 0.971
+   },
+   {
+    "queries": 3849,
+    "real": 0.9833333333333333,
+    "random": 0.9694
+   },
+   {
+    "queries": 4374,
+    "real": 0.9830666666666666,
+    "random": 0.9742
+   },
+   {
+    "queries": 4907,
+    "real": 0.9833333333333333,
+    "random": 0.9738
+   },
+   {
+    "queries": 5404,
+    "real": 0.9832,
+    "random": 0.9744
+   },
+   {
+    "queries": 5933,
+    "real": 0.9836,
+    "random": 0.9744
+   },
+   {
+    "queries": 6441,
+    "real": 0.9832,
+    "random": 0.9744
+   },
+   {
+    "queries": 7019,
+    "real": 0.9832,
+    "random": 0.9762
+   },
+   {
+    "queries": 7578,
+    "real": 0.9845333333333334,
+    "random": 0.9762
+   },
+   {
+    "queries": 8175,
+    "real": 0.9858666666666667,
+    "random": 0.978
+   },
+   {
+    "queries": 8729,
+    "real": 0.9858666666666667,
+    "random": 0.9802
+   },
+   {
+    "queries": 9377,
+    "real": 0.9898666666666667,
+    "random": 0.9798
+   },
+   {
+    "queries": 9907,
+    "real": 0.9929333333333333,
+    "random": 0.9806
+   },
+   {
+    "queries": 10484,
+    "real": 0.9916,
+    "random": 0.9746
+   },
+   {
+    "queries": 11047,
+    "real": 0.9925333333333334,
+    "random": 0.9786
+   },
+   {
+    "queries": 11649,
+    "real": 0.9930666666666667,
+    "random": 0.9798
+   },
+   {
+    "queries": 12173,
+    "real": 0.9921333333333333,
+    "random": 0.9798
+   },
+   {
+    "queries": 12721,
+    "real": 0.9934666666666667,
+    "random": 0.9778
+   },
+   {
+    "queries": 13226,
+    "real": 0.9945333333333334,
+    "random": 0.9796
+   },
+   {
+    "queries": 13820,
+    "real": 0.9941333333333333,
+    "random": 0.9804
+   },
+   {
+    "queries": 14353,
+    "real": 0.9957333333333334,
+    "random": 0.9818
+   },
+   {
+    "queries": 14931,
+    "real": 0.9952,
+    "random": 0.983
+   },
+   {
+    "queries": 15432,
+    "real": 0.9952,
+    "random": 0.9814
+   },
+   {
+    "queries": 15940,
+    "real": 0.9934666666666667,
+    "random": 0.9794
+   },
+   {
+    "queries": 16494,
+    "real": 0.9946666666666667,
+    "random": 0.9812
+   },
+   {
+    "queries": 16926,
+    "real": 0.9956,
+    "random": 0.9814
+   },
+   {
+    "queries": 17432,
+    "real": 0.9954666666666667,
+    "random": 0.9818
+   },
+   {
+    "queries": 17997,
+    "real": 0.9964,
+    "random": 0.9826
+   },
+   {
+    "queries": 18472,
+    "real": 0.9953333333333333,
+    "random": 0.9816
+   },
+   {
+    "queries": 19066,
+    "real": 0.9934666666666667,
+    "random": 0.9828
+   },
+   {
+    "queries": 19638,
+    "real": 0.9952,
+    "random": 0.9832
+   },
+   {
+    "queries": 20184,
+    "real": 0.9930666666666667,
+    "random": 0.9836
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.11306666666666666,
+  "adverse_random": 0.1714,
+  "majority_real": 0.8869333333333334,
+  "majority_random": 0.8286,
+  "queries_99_real": 4473,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9964,
+  "final_random": 0.9812,
+  "trace": [
+   {
+    "queries": 573,
+    "real": 0.9806666666666667,
+    "random": 0.9246
+   },
+   {
+    "queries": 1130,
+    "real": 0.9796,
+    "random": 0.9366
+   },
+   {
+    "queries": 1637,
+    "real": 0.9812,
+    "random": 0.95
+   },
+   {
+    "queries": 2263,
+    "real": 0.9833333333333333,
+    "random": 0.959
+   },
+   {
+    "queries": 2769,
+    "real": 0.9841333333333333,
+    "random": 0.9626
+   },
+   {
+    "queries": 3338,
+    "real": 0.9864,
+    "random": 0.9616
+   },
+   {
+    "queries": 3944,
+    "real": 0.9884,
+    "random": 0.962
+   },
+   {
+    "queries": 4473,
+    "real": 0.9910666666666667,
+    "random": 0.9674
+   },
+   {
+    "queries": 5029,
+    "real": 0.9916,
+    "random": 0.967
+   },
+   {
+    "queries": 5555,
+    "real": 0.9933333333333333,
+    "random": 0.97
+   },
+   {
+    "queries": 6077,
+    "real": 0.9914666666666667,
+    "random": 0.9722
+   },
+   {
+    "queries": 6641,
+    "real": 0.9910666666666667,
+    "random": 0.969
+   },
+   {
+    "queries": 7217,
+    "real": 0.9904,
+    "random": 0.9726
+   },
+   {
+    "queries": 7752,
+    "real": 0.9928,
+    "random": 0.973
+   },
+   {
+    "queries": 8238,
+    "real": 0.9925333333333334,
+    "random": 0.9742
+   },
+   {
+    "queries": 8793,
+    "real": 0.9922666666666666,
+    "random": 0.9764
+   },
+   {
+    "queries": 9267,
+    "real": 0.9949333333333333,
+    "random": 0.9764
+   },
+   {
+    "queries": 9828,
+    "real": 0.9932,
+    "random": 0.9766
+   },
+   {
+    "queries": 10414,
+    "real": 0.9926666666666667,
+    "random": 0.978
+   },
+   {
+    "queries": 10947,
+    "real": 0.9925333333333334,
+    "random": 0.9766
+   },
+   {
+    "queries": 11425,
+    "real": 0.9928,
+    "random": 0.9778
+   },
+   {
+    "queries": 12002,
+    "real": 0.9941333333333333,
+    "random": 0.9764
+   },
+   {
+    "queries": 12641,
+    "real": 0.9934666666666667,
+    "random": 0.9788
+   },
+   {
+    "queries": 13247,
+    "real": 0.9925333333333334,
+    "random": 0.9788
+   },
+   {
+    "queries": 13790,
+    "real": 0.9933333333333333,
+    "random": 0.98
+   },
+   {
+    "queries": 14343,
+    "real": 0.9946666666666667,
+    "random": 0.9784
+   },
+   {
+    "queries": 14878,
+    "real": 0.9946666666666667,
+    "random": 0.9782
+   },
+   {
+    "queries": 15473,
+    "real": 0.9952,
+    "random": 0.9768
+   },
+   {
+    "queries": 15954,
+    "real": 0.9950666666666667,
+    "random": 0.9802
+   },
+   {
+    "queries": 16432,
+    "real": 0.9941333333333333,
+    "random": 0.98
+   },
+   {
+    "queries": 17049,
+    "real": 0.9965333333333334,
+    "random": 0.978
+   },
+   {
+    "queries": 17630,
+    "real": 0.9948,
+    "random": 0.9794
+   },
+   {
+    "queries": 18153,
+    "real": 0.9941333333333333,
+    "random": 0.9808
+   },
+   {
+    "queries": 18708,
+    "real": 0.9949333333333333,
+    "random": 0.983
+   },
+   {
+    "queries": 19252,
+    "real": 0.9958666666666667,
+    "random": 0.9806
+   },
+   {
+    "queries": 19787,
+    "real": 0.996,
+    "random": 0.9816
+   },
+   {
+    "queries": 20264,
+    "real": 0.9964,
+    "random": 0.9812
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 20,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.11306666666666666,
+  "adverse_random": 0.1542,
+  "majority_real": 0.8869333333333334,
+  "majority_random": 0.8458,
+  "queries_99_real": 4601,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9966666666666667,
+  "final_random": 0.9826,
+  "trace": [
+   {
+    "queries": 623,
+    "real": 0.9697333333333333,
+    "random": 0.9312
+   },
+   {
+    "queries": 1231,
+    "real": 0.9796,
+    "random": 0.9504
+   },
+   {
+    "queries": 1800,
+    "real": 0.9818666666666667,
+    "random": 0.9568
+   },
+   {
+    "queries": 2393,
+    "real": 0.9822666666666666,
+    "random": 0.9618
+   },
+   {
+    "queries": 2964,
+    "real": 0.9821333333333333,
+    "random": 0.963
+   },
+   {
+    "queries": 3451,
+    "real": 0.9829333333333333,
+    "random": 0.966
+   },
+   {
+    "queries": 3914,
+    "real": 0.9869333333333333,
+    "random": 0.9678
+   },
+   {
+    "queries": 4601,
+    "real": 0.9902666666666666,
+    "random": 0.964
+   },
+   {
+    "queries": 5126,
+    "real": 0.9910666666666667,
+    "random": 0.9696
+   },
+   {
+    "queries": 5683,
+    "real": 0.99,
+    "random": 0.973
+   },
+   {
+    "queries": 6335,
+    "real": 0.9898666666666667,
+    "random": 0.9748
+   },
+   {
+    "queries": 6841,
+    "real": 0.9894666666666667,
+    "random": 0.9762
+   },
+   {
+    "queries": 7352,
+    "real": 0.9913333333333333,
+    "random": 0.976
+   },
+   {
+    "queries": 7912,
+    "real": 0.9913333333333333,
+    "random": 0.9762
+   },
+   {
+    "queries": 8419,
+    "real": 0.9924,
+    "random": 0.977
+   },
+   {
+    "queries": 8959,
+    "real": 0.9949333333333333,
+    "random": 0.977
+   },
+   {
+    "queries": 9496,
+    "real": 0.9941333333333333,
+    "random": 0.9804
+   },
+   {
+    "queries": 10047,
+    "real": 0.9930666666666667,
+    "random": 0.9796
+   },
+   {
+    "queries": 10578,
+    "real": 0.9956,
+    "random": 0.9788
+   },
+   {
+    "queries": 11202,
+    "real": 0.9926666666666667,
+    "random": 0.9806
+   },
+   {
+    "queries": 11771,
+    "real": 0.9945333333333334,
+    "random": 0.9808
+   },
+   {
+    "queries": 12331,
+    "real": 0.9941333333333333,
+    "random": 0.9814
+   },
+   {
+    "queries": 12793,
+    "real": 0.9948,
+    "random": 0.9808
+   },
+   {
+    "queries": 13355,
+    "real": 0.9941333333333333,
+    "random": 0.9796
+   },
+   {
+    "queries": 13959,
+    "real": 0.996,
+    "random": 0.9786
+   },
+   {
+    "queries": 14557,
+    "real": 0.9957333333333334,
+    "random": 0.9814
+   },
+   {
+    "queries": 15131,
+    "real": 0.9952,
+    "random": 0.981
+   },
+   {
+    "queries": 15626,
+    "real": 0.9957333333333334,
+    "random": 0.9812
+   },
+   {
+    "queries": 16141,
+    "real": 0.9958666666666667,
+    "random": 0.982
+   },
+   {
+    "queries": 16742,
+    "real": 0.9965333333333334,
+    "random": 0.9822
+   },
+   {
+    "queries": 17329,
+    "real": 0.9966666666666667,
+    "random": 0.9804
+   },
+   {
+    "queries": 17839,
+    "real": 0.9961333333333333,
+    "random": 0.9814
+   },
+   {
+    "queries": 18422,
+    "real": 0.9953333333333333,
+    "random": 0.9836
+   },
+   {
+    "queries": 18905,
+    "real": 0.9962666666666666,
+    "random": 0.9832
+   },
+   {
+    "queries": 19497,
+    "real": 0.9969333333333333,
+    "random": 0.9826
+   },
+   {
+    "queries": 20071,
+    "real": 0.9966666666666667,
+    "random": 0.9826
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.12066666666666667,
+  "adverse_random": 0.186,
+  "majority_real": 0.8793333333333333,
+  "majority_random": 0.8140000000000001,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9774666666666667,
+  "final_random": 0.9252,
+  "trace": [
+   {
+    "queries": 667,
+    "real": 0.9308,
+    "random": 0.8284
+   },
+   {
+    "queries": 1297,
+    "real": 0.9330666666666667,
+    "random": 0.855
+   },
+   {
+    "queries": 1970,
+    "real": 0.9593333333333334,
+    "random": 0.871
+   },
+   {
+    "queries": 2540,
+    "real": 0.9634666666666667,
+    "random": 0.8808
+   },
+   {
+    "queries": 3096,
+    "real": 0.9642666666666667,
+    "random": 0.8814
+   },
+   {
+    "queries": 3635,
+    "real": 0.966,
+    "random": 0.888
+   },
+   {
+    "queries": 4197,
+    "real": 0.9609333333333333,
+    "random": 0.8908
+   },
+   {
+    "queries": 4934,
+    "real": 0.9652,
+    "random": 0.8962
+   },
+   {
+    "queries": 5552,
+    "real": 0.9649333333333333,
+    "random": 0.899
+   },
+   {
+    "queries": 6181,
+    "real": 0.97,
+    "random": 0.9068
+   },
+   {
+    "queries": 6846,
+    "real": 0.9702666666666667,
+    "random": 0.9074
+   },
+   {
+    "queries": 7451,
+    "real": 0.9726666666666667,
+    "random": 0.9098
+   },
+   {
+    "queries": 8015,
+    "real": 0.9722666666666666,
+    "random": 0.9106
+   },
+   {
+    "queries": 8614,
+    "real": 0.9742666666666666,
+    "random": 0.9102
+   },
+   {
+    "queries": 9212,
+    "real": 0.9754666666666667,
+    "random": 0.91
+   },
+   {
+    "queries": 9842,
+    "real": 0.9790666666666666,
+    "random": 0.919
+   },
+   {
+    "queries": 10555,
+    "real": 0.9752,
+    "random": 0.9118
+   },
+   {
+    "queries": 11259,
+    "real": 0.9729333333333333,
+    "random": 0.9082
+   },
+   {
+    "queries": 11918,
+    "real": 0.9741333333333333,
+    "random": 0.912
+   },
+   {
+    "queries": 12606,
+    "real": 0.9730666666666666,
+    "random": 0.9124
+   },
+   {
+    "queries": 13330,
+    "real": 0.9716,
+    "random": 0.9108
+   },
+   {
+    "queries": 13938,
+    "real": 0.9749333333333333,
+    "random": 0.9134
+   },
+   {
+    "queries": 14546,
+    "real": 0.9748,
+    "random": 0.9142
+   },
+   {
+    "queries": 15122,
+    "real": 0.9764,
+    "random": 0.9126
+   },
+   {
+    "queries": 15823,
+    "real": 0.9749333333333333,
+    "random": 0.9176
+   },
+   {
+    "queries": 16456,
+    "real": 0.9762666666666666,
+    "random": 0.915
+   },
+   {
+    "queries": 17061,
+    "real": 0.9745333333333334,
+    "random": 0.9172
+   },
+   {
+    "queries": 17710,
+    "real": 0.9786666666666667,
+    "random": 0.9202
+   },
+   {
+    "queries": 18380,
+    "real": 0.9750666666666666,
+    "random": 0.9188
+   },
+   {
+    "queries": 19029,
+    "real": 0.9756,
+    "random": 0.9196
+   },
+   {
+    "queries": 19715,
+    "real": 0.9769333333333333,
+    "random": 0.92
+   },
+   {
+    "queries": 20297,
+    "real": 0.9774666666666667,
+    "random": 0.9252
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.12066666666666667,
+  "adverse_random": 0.201,
+  "majority_real": 0.8793333333333333,
+  "majority_random": 0.7989999999999999,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9753333333333334,
+  "final_random": 0.924,
+  "trace": [
+   {
+    "queries": 639,
+    "real": 0.9437333333333333,
+    "random": 0.8128
+   },
+   {
+    "queries": 1243,
+    "real": 0.962,
+    "random": 0.8478
+   },
+   {
+    "queries": 1925,
+    "real": 0.9645333333333334,
+    "random": 0.8554
+   },
+   {
+    "queries": 2628,
+    "real": 0.9665333333333334,
+    "random": 0.8712
+   },
+   {
+    "queries": 3262,
+    "real": 0.9682666666666667,
+    "random": 0.8786
+   },
+   {
+    "queries": 3971,
+    "real": 0.9681333333333333,
+    "random": 0.8806
+   },
+   {
+    "queries": 4604,
+    "real": 0.9676,
+    "random": 0.879
+   },
+   {
+    "queries": 5214,
+    "real": 0.9698666666666667,
+    "random": 0.8854
+   },
+   {
+    "queries": 5854,
+    "real": 0.9689333333333333,
+    "random": 0.8898
+   },
+   {
+    "queries": 6524,
+    "real": 0.9729333333333333,
+    "random": 0.8902
+   },
+   {
+    "queries": 7122,
+    "real": 0.9757333333333333,
+    "random": 0.9028
+   },
+   {
+    "queries": 7715,
+    "real": 0.9757333333333333,
+    "random": 0.9082
+   },
+   {
+    "queries": 8252,
+    "real": 0.978,
+    "random": 0.9088
+   },
+   {
+    "queries": 8859,
+    "real": 0.9757333333333333,
+    "random": 0.9088
+   },
+   {
+    "queries": 9467,
+    "real": 0.9712,
+    "random": 0.9098
+   },
+   {
+    "queries": 10154,
+    "real": 0.9742666666666666,
+    "random": 0.9044
+   },
+   {
+    "queries": 10713,
+    "real": 0.9745333333333334,
+    "random": 0.9138
+   },
+   {
+    "queries": 11351,
+    "real": 0.9744,
+    "random": 0.908
+   },
+   {
+    "queries": 11952,
+    "real": 0.9768,
+    "random": 0.9128
+   },
+   {
+    "queries": 12660,
+    "real": 0.9762666666666666,
+    "random": 0.9146
+   },
+   {
+    "queries": 13323,
+    "real": 0.9712,
+    "random": 0.9192
+   },
+   {
+    "queries": 13942,
+    "real": 0.9749333333333333,
+    "random": 0.9176
+   },
+   {
+    "queries": 14568,
+    "real": 0.9758666666666667,
+    "random": 0.9124
+   },
+   {
+    "queries": 15159,
+    "real": 0.9758666666666667,
+    "random": 0.921
+   },
+   {
+    "queries": 15801,
+    "real": 0.976,
+    "random": 0.9202
+   },
+   {
+    "queries": 16505,
+    "real": 0.9750666666666666,
+    "random": 0.9208
+   },
+   {
+    "queries": 17092,
+    "real": 0.9762666666666666,
+    "random": 0.9214
+   },
+   {
+    "queries": 17676,
+    "real": 0.9737333333333333,
+    "random": 0.9176
+   },
+   {
+    "queries": 18393,
+    "real": 0.9749333333333333,
+    "random": 0.9236
+   },
+   {
+    "queries": 18967,
+    "real": 0.9797333333333333,
+    "random": 0.9236
+   },
+   {
+    "queries": 19619,
+    "real": 0.9785333333333334,
+    "random": 0.9222
+   },
+   {
+    "queries": 20295,
+    "real": 0.9753333333333334,
+    "random": 0.924
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.12066666666666667,
+  "adverse_random": 0.1976,
+  "majority_real": 0.8793333333333333,
+  "majority_random": 0.8024,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9752,
+  "final_random": 0.9222,
+  "trace": [
+   {
+    "queries": 627,
+    "real": 0.9148,
+    "random": 0.8184
+   },
+   {
+    "queries": 1298,
+    "real": 0.9532,
+    "random": 0.8388
+   },
+   {
+    "queries": 1922,
+    "real": 0.9616,
+    "random": 0.8482
+   },
+   {
+    "queries": 2598,
+    "real": 0.9708,
+    "random": 0.866
+   },
+   {
+    "queries": 3247,
+    "real": 0.9694666666666667,
+    "random": 0.8688
+   },
+   {
+    "queries": 3753,
+    "real": 0.9744,
+    "random": 0.8804
+   },
+   {
+    "queries": 4371,
+    "real": 0.9698666666666667,
+    "random": 0.8826
+   },
+   {
+    "queries": 5008,
+    "real": 0.9730666666666666,
+    "random": 0.8898
+   },
+   {
+    "queries": 5788,
+    "real": 0.9761333333333333,
+    "random": 0.8942
+   },
+   {
+    "queries": 6472,
+    "real": 0.9746666666666667,
+    "random": 0.8914
+   },
+   {
+    "queries": 7087,
+    "real": 0.9757333333333333,
+    "random": 0.8938
+   },
+   {
+    "queries": 7818,
+    "real": 0.9725333333333334,
+    "random": 0.9002
+   },
+   {
+    "queries": 8468,
+    "real": 0.9742666666666666,
+    "random": 0.904
+   },
+   {
+    "queries": 9094,
+    "real": 0.9762666666666666,
+    "random": 0.9056
+   },
+   {
+    "queries": 9733,
+    "real": 0.9768,
+    "random": 0.8984
+   },
+   {
+    "queries": 10313,
+    "real": 0.9722666666666666,
+    "random": 0.9034
+   },
+   {
+    "queries": 11009,
+    "real": 0.9770666666666666,
+    "random": 0.9018
+   },
+   {
+    "queries": 11575,
+    "real": 0.9744,
+    "random": 0.8952
+   },
+   {
+    "queries": 12169,
+    "real": 0.9718666666666667,
+    "random": 0.8996
+   },
+   {
+    "queries": 12827,
+    "real": 0.9764,
+    "random": 0.9098
+   },
+   {
+    "queries": 13497,
+    "real": 0.9736,
+    "random": 0.9058
+   },
+   {
+    "queries": 14194,
+    "real": 0.9746666666666667,
+    "random": 0.9126
+   },
+   {
+    "queries": 14803,
+    "real": 0.9756,
+    "random": 0.907
+   },
+   {
+    "queries": 15414,
+    "real": 0.9761333333333333,
+    "random": 0.9124
+   },
+   {
+    "queries": 16098,
+    "real": 0.9744,
+    "random": 0.9136
+   },
+   {
+    "queries": 16735,
+    "real": 0.9762666666666666,
+    "random": 0.9084
+   },
+   {
+    "queries": 17355,
+    "real": 0.9764,
+    "random": 0.9138
+   },
+   {
+    "queries": 18046,
+    "real": 0.9734666666666667,
+    "random": 0.9186
+   },
+   {
+    "queries": 18750,
+    "real": 0.9770666666666666,
+    "random": 0.9186
+   },
+   {
+    "queries": 19383,
+    "real": 0.9781333333333333,
+    "random": 0.9156
+   },
+   {
+    "queries": 19977,
+    "real": 0.9732,
+    "random": 0.9136
+   },
+   {
+    "queries": 20655,
+    "real": 0.9752,
+    "random": 0.9222
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.12066666666666667,
+  "adverse_random": 0.186,
+  "majority_real": 0.8793333333333333,
+  "majority_random": 0.8140000000000001,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9821333333333333,
+  "final_random": 0.9264,
+  "trace": [
+   {
+    "queries": 667,
+    "real": 0.9308,
+    "random": 0.8284
+   },
+   {
+    "queries": 1245,
+    "real": 0.9297333333333333,
+    "random": 0.8522
+   },
+   {
+    "queries": 1779,
+    "real": 0.958,
+    "random": 0.8718
+   },
+   {
+    "queries": 2331,
+    "real": 0.9598666666666666,
+    "random": 0.8816
+   },
+   {
+    "queries": 2962,
+    "real": 0.9662666666666667,
+    "random": 0.8928
+   },
+   {
+    "queries": 3639,
+    "real": 0.9682666666666667,
+    "random": 0.8912
+   },
+   {
+    "queries": 4164,
+    "real": 0.9684,
+    "random": 0.894
+   },
+   {
+    "queries": 4790,
+    "real": 0.9717333333333333,
+    "random": 0.9
+   },
+   {
+    "queries": 5220,
+    "real": 0.9754666666666667,
+    "random": 0.9048
+   },
+   {
+    "queries": 5824,
+    "real": 0.978,
+    "random": 0.9004
+   },
+   {
+    "queries": 6365,
+    "real": 0.9774666666666667,
+    "random": 0.9028
+   },
+   {
+    "queries": 7047,
+    "real": 0.9756,
+    "random": 0.9132
+   },
+   {
+    "queries": 7694,
+    "real": 0.9762666666666666,
+    "random": 0.9062
+   },
+   {
+    "queries": 8274,
+    "real": 0.9762666666666666,
+    "random": 0.9116
+   },
+   {
+    "queries": 8820,
+    "real": 0.9770666666666666,
+    "random": 0.9132
+   },
+   {
+    "queries": 9340,
+    "real": 0.9786666666666667,
+    "random": 0.9132
+   },
+   {
+    "queries": 9863,
+    "real": 0.9788,
+    "random": 0.918
+   },
+   {
+    "queries": 10469,
+    "real": 0.9764,
+    "random": 0.9174
+   },
+   {
+    "queries": 11037,
+    "real": 0.9806666666666667,
+    "random": 0.915
+   },
+   {
+    "queries": 11535,
+    "real": 0.9784,
+    "random": 0.912
+   },
+   {
+    "queries": 12104,
+    "real": 0.9796,
+    "random": 0.9132
+   },
+   {
+    "queries": 12626,
+    "real": 0.9764,
+    "random": 0.919
+   },
+   {
+    "queries": 13197,
+    "real": 0.9769333333333333,
+    "random": 0.9198
+   },
+   {
+    "queries": 13897,
+    "real": 0.9794666666666667,
+    "random": 0.919
+   },
+   {
+    "queries": 14336,
+    "real": 0.9778666666666667,
+    "random": 0.9236
+   },
+   {
+    "queries": 15008,
+    "real": 0.982,
+    "random": 0.9224
+   },
+   {
+    "queries": 15543,
+    "real": 0.9796,
+    "random": 0.925
+   },
+   {
+    "queries": 16107,
+    "real": 0.9778666666666667,
+    "random": 0.9254
+   },
+   {
+    "queries": 16766,
+    "real": 0.9797333333333333,
+    "random": 0.9314
+   },
+   {
+    "queries": 17431,
+    "real": 0.9812,
+    "random": 0.9278
+   },
+   {
+    "queries": 17939,
+    "real": 0.9812,
+    "random": 0.9314
+   },
+   {
+    "queries": 18541,
+    "real": 0.9790666666666666,
+    "random": 0.9276
+   },
+   {
+    "queries": 19202,
+    "real": 0.978,
+    "random": 0.9324
+   },
+   {
+    "queries": 19814,
+    "real": 0.9812,
+    "random": 0.928
+   },
+   {
+    "queries": 20414,
+    "real": 0.9821333333333333,
+    "random": 0.9264
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.12066666666666667,
+  "adverse_random": 0.201,
+  "majority_real": 0.8793333333333333,
+  "majority_random": 0.7989999999999999,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9816,
+  "final_random": 0.9228,
+  "trace": [
+   {
+    "queries": 646,
+    "real": 0.9429333333333333,
+    "random": 0.8256
+   },
+   {
+    "queries": 1191,
+    "real": 0.9541333333333334,
+    "random": 0.8446
+   },
+   {
+    "queries": 1783,
+    "real": 0.9577333333333333,
+    "random": 0.8646
+   },
+   {
+    "queries": 2352,
+    "real": 0.9654666666666667,
+    "random": 0.8756
+   },
+   {
+    "queries": 2889,
+    "real": 0.9646666666666667,
+    "random": 0.88
+   },
+   {
+    "queries": 3349,
+    "real": 0.9744,
+    "random": 0.8868
+   },
+   {
+    "queries": 3863,
+    "real": 0.9748,
+    "random": 0.89
+   },
+   {
+    "queries": 4431,
+    "real": 0.9741333333333333,
+    "random": 0.8988
+   },
+   {
+    "queries": 4947,
+    "real": 0.9753333333333334,
+    "random": 0.9014
+   },
+   {
+    "queries": 5587,
+    "real": 0.9745333333333334,
+    "random": 0.8954
+   },
+   {
+    "queries": 6101,
+    "real": 0.9689333333333333,
+    "random": 0.9024
+   },
+   {
+    "queries": 6678,
+    "real": 0.9754666666666667,
+    "random": 0.9036
+   },
+   {
+    "queries": 7168,
+    "real": 0.9746666666666667,
+    "random": 0.8982
+   },
+   {
+    "queries": 7721,
+    "real": 0.9754666666666667,
+    "random": 0.911
+   },
+   {
+    "queries": 8297,
+    "real": 0.972,
+    "random": 0.9108
+   },
+   {
+    "queries": 8774,
+    "real": 0.9750666666666666,
+    "random": 0.9132
+   },
+   {
+    "queries": 9308,
+    "real": 0.9762666666666666,
+    "random": 0.9154
+   },
+   {
+    "queries": 9851,
+    "real": 0.9754666666666667,
+    "random": 0.9186
+   },
+   {
+    "queries": 10473,
+    "real": 0.9789333333333333,
+    "random": 0.9178
+   },
+   {
+    "queries": 11062,
+    "real": 0.9769333333333333,
+    "random": 0.9182
+   },
+   {
+    "queries": 11681,
+    "real": 0.9729333333333333,
+    "random": 0.9166
+   },
+   {
+    "queries": 12210,
+    "real": 0.9766666666666667,
+    "random": 0.9148
+   },
+   {
+    "queries": 12804,
+    "real": 0.9777333333333333,
+    "random": 0.9168
+   },
+   {
+    "queries": 13404,
+    "real": 0.9774666666666667,
+    "random": 0.9218
+   },
+   {
+    "queries": 13983,
+    "real": 0.9785333333333334,
+    "random": 0.921
+   },
+   {
+    "queries": 14624,
+    "real": 0.9782666666666666,
+    "random": 0.9194
+   },
+   {
+    "queries": 15210,
+    "real": 0.9774666666666667,
+    "random": 0.9174
+   },
+   {
+    "queries": 15795,
+    "real": 0.9824,
+    "random": 0.9176
+   },
+   {
+    "queries": 16358,
+    "real": 0.98,
+    "random": 0.9224
+   },
+   {
+    "queries": 17040,
+    "real": 0.9804,
+    "random": 0.9234
+   },
+   {
+    "queries": 17789,
+    "real": 0.9796,
+    "random": 0.923
+   },
+   {
+    "queries": 18466,
+    "real": 0.9814666666666667,
+    "random": 0.9216
+   },
+   {
+    "queries": 18999,
+    "real": 0.9801333333333333,
+    "random": 0.9248
+   },
+   {
+    "queries": 19685,
+    "real": 0.9793333333333333,
+    "random": 0.9232
+   },
+   {
+    "queries": 20327,
+    "real": 0.9816,
+    "random": 0.9228
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "credit_default",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 23,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.12066666666666667,
+  "adverse_random": 0.1976,
+  "majority_real": 0.8793333333333333,
+  "majority_random": 0.8024,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9798666666666667,
+  "final_random": 0.9214,
+  "trace": [
+   {
+    "queries": 645,
+    "real": 0.9546666666666667,
+    "random": 0.821
+   },
+   {
+    "queries": 1232,
+    "real": 0.9590666666666666,
+    "random": 0.846
+   },
+   {
+    "queries": 1751,
+    "real": 0.9624,
+    "random": 0.8598
+   },
+   {
+    "queries": 2315,
+    "real": 0.9648,
+    "random": 0.87
+   },
+   {
+    "queries": 2881,
+    "real": 0.9674666666666667,
+    "random": 0.8736
+   },
+   {
+    "queries": 3403,
+    "real": 0.9658666666666667,
+    "random": 0.8798
+   },
+   {
+    "queries": 3963,
+    "real": 0.9672,
+    "random": 0.8834
+   },
+   {
+    "queries": 4741,
+    "real": 0.9686666666666667,
+    "random": 0.8866
+   },
+   {
+    "queries": 5404,
+    "real": 0.9706666666666667,
+    "random": 0.8958
+   },
+   {
+    "queries": 5986,
+    "real": 0.9728,
+    "random": 0.895
+   },
+   {
+    "queries": 6597,
+    "real": 0.9681333333333333,
+    "random": 0.8972
+   },
+   {
+    "queries": 7257,
+    "real": 0.9773333333333334,
+    "random": 0.8996
+   },
+   {
+    "queries": 7825,
+    "real": 0.976,
+    "random": 0.9026
+   },
+   {
+    "queries": 8435,
+    "real": 0.9801333333333333,
+    "random": 0.898
+   },
+   {
+    "queries": 9053,
+    "real": 0.9774666666666667,
+    "random": 0.9012
+   },
+   {
+    "queries": 9598,
+    "real": 0.9798666666666667,
+    "random": 0.9028
+   },
+   {
+    "queries": 10118,
+    "real": 0.9770666666666666,
+    "random": 0.9028
+   },
+   {
+    "queries": 10754,
+    "real": 0.9784,
+    "random": 0.9024
+   },
+   {
+    "queries": 11381,
+    "real": 0.9786666666666667,
+    "random": 0.9066
+   },
+   {
+    "queries": 11990,
+    "real": 0.9798666666666667,
+    "random": 0.9118
+   },
+   {
+    "queries": 12560,
+    "real": 0.9798666666666667,
+    "random": 0.9108
+   },
+   {
+    "queries": 13144,
+    "real": 0.9786666666666667,
+    "random": 0.9132
+   },
+   {
+    "queries": 13736,
+    "real": 0.9789333333333333,
+    "random": 0.912
+   },
+   {
+    "queries": 14406,
+    "real": 0.9785333333333334,
+    "random": 0.917
+   },
+   {
+    "queries": 14955,
+    "real": 0.9781333333333333,
+    "random": 0.9118
+   },
+   {
+    "queries": 15564,
+    "real": 0.9764,
+    "random": 0.9162
+   },
+   {
+    "queries": 16125,
+    "real": 0.9762666666666666,
+    "random": 0.9136
+   },
+   {
+    "queries": 16743,
+    "real": 0.9749333333333333,
+    "random": 0.9118
+   },
+   {
+    "queries": 17270,
+    "real": 0.9797333333333333,
+    "random": 0.9182
+   },
+   {
+    "queries": 17906,
+    "real": 0.9788,
+    "random": 0.9136
+   },
+   {
+    "queries": 18502,
+    "real": 0.9772,
+    "random": 0.912
+   },
+   {
+    "queries": 19071,
+    "real": 0.9758666666666667,
+    "random": 0.9192
+   },
+   {
+    "queries": 19617,
+    "real": 0.9793333333333333,
+    "random": 0.922
+   },
+   {
+    "queries": 20104,
+    "real": 0.9798666666666667,
+    "random": 0.9214
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.9424931434132531,
+  "adverse_random": 0.804,
+  "majority_real": 0.9424931434132531,
+  "majority_random": 0.804,
+  "queries_99_real": 6870,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9942493143413254,
+  "final_random": 0.9844,
+  "trace": [
+   {
+    "queries": 495,
+    "real": 0.9429355038485357,
+    "random": 0.8854
+   },
+   {
+    "queries": 1030,
+    "real": 0.968680881181987,
+    "random": 0.9266
+   },
+   {
+    "queries": 1516,
+    "real": 0.9782358665840927,
+    "random": 0.945
+   },
+   {
+    "queries": 2002,
+    "real": 0.980447668760506,
+    "random": 0.9556
+   },
+   {
+    "queries": 2504,
+    "real": 0.9832787755463152,
+    "random": 0.96
+   },
+   {
+    "queries": 2926,
+    "real": 0.9867291869415199,
+    "random": 0.9634
+   },
+   {
+    "queries": 3434,
+    "real": 0.9872600194638591,
+    "random": 0.9642
+   },
+   {
+    "queries": 3932,
+    "real": 0.9880562682473679,
+    "random": 0.9682
+   },
+   {
+    "queries": 4412,
+    "real": 0.987083075289746,
+    "random": 0.9696
+   },
+   {
+    "queries": 4905,
+    "real": 0.9873484915509156,
+    "random": 0.9724
+   },
+   {
+    "queries": 5422,
+    "real": 0.9875254357250287,
+    "random": 0.9722
+   },
+   {
+    "queries": 5827,
+    "real": 0.987083075289746,
+    "random": 0.975
+   },
+   {
+    "queries": 6353,
+    "real": 0.9871715473768026,
+    "random": 0.978
+   },
+   {
+    "queries": 6870,
+    "real": 0.9900026541626117,
+    "random": 0.9764
+   },
+   {
+    "queries": 7386,
+    "real": 0.9894718216402725,
+    "random": 0.9792
+   },
+   {
+    "queries": 7886,
+    "real": 0.9887640449438202,
+    "random": 0.9788
+   },
+   {
+    "queries": 8426,
+    "real": 0.9884101565955941,
+    "random": 0.9784
+   },
+   {
+    "queries": 9052,
+    "real": 0.9906219587720074,
+    "random": 0.9778
+   },
+   {
+    "queries": 9470,
+    "real": 0.9909758471202336,
+    "random": 0.98
+   },
+   {
+    "queries": 9956,
+    "real": 0.9915951517296293,
+    "random": 0.9806
+   },
+   {
+    "queries": 10428,
+    "real": 0.990887375033177,
+    "random": 0.9776
+   },
+   {
+    "queries": 11017,
+    "real": 0.9907989029461205,
+    "random": 0.9796
+   },
+   {
+    "queries": 11551,
+    "real": 0.9901795983367248,
+    "random": 0.9798
+   },
+   {
+    "queries": 12076,
+    "real": 0.9906219587720074,
+    "random": 0.9816
+   },
+   {
+    "queries": 12565,
+    "real": 0.990887375033177,
+    "random": 0.9816
+   },
+   {
+    "queries": 13053,
+    "real": 0.9913297354684597,
+    "random": 0.9828
+   },
+   {
+    "queries": 13574,
+    "real": 0.9930107051225339,
+    "random": 0.9842
+   },
+   {
+    "queries": 14057,
+    "real": 0.9937184818189861,
+    "random": 0.9836
+   },
+   {
+    "queries": 14536,
+    "real": 0.9923029284260816,
+    "random": 0.9842
+   },
+   {
+    "queries": 15120,
+    "real": 0.9897372379014421,
+    "random": 0.9842
+   },
+   {
+    "queries": 15571,
+    "real": 0.992214456339025,
+    "random": 0.9834
+   },
+   {
+    "queries": 16086,
+    "real": 0.9940723701672123,
+    "random": 0.9846
+   },
+   {
+    "queries": 16606,
+    "real": 0.9936300097319296,
+    "random": 0.9838
+   },
+   {
+    "queries": 17056,
+    "real": 0.9946032026895515,
+    "random": 0.9854
+   },
+   {
+    "queries": 17533,
+    "real": 0.9941608422542688,
+    "random": 0.9868
+   },
+   {
+    "queries": 18032,
+    "real": 0.9938069539060427,
+    "random": 0.9884
+   },
+   {
+    "queries": 18497,
+    "real": 0.9939838980801557,
+    "random": 0.9858
+   },
+   {
+    "queries": 19027,
+    "real": 0.994691674776608,
+    "random": 0.987
+   },
+   {
+    "queries": 19567,
+    "real": 0.9939838980801557,
+    "random": 0.9862
+   },
+   {
+    "queries": 20061,
+    "real": 0.9942493143413254,
+    "random": 0.9844
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.9424931434132531,
+  "adverse_random": 0.8176,
+  "majority_real": 0.9424931434132531,
+  "majority_random": 0.8176,
+  "queries_99_real": 8616,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9943377864283819,
+  "final_random": 0.9888,
+  "trace": [
+   {
+    "queries": 504,
+    "real": 0.9543484030788286,
+    "random": 0.8918
+   },
+   {
+    "queries": 988,
+    "real": 0.9648765814385561,
+    "random": 0.9352
+   },
+   {
+    "queries": 1492,
+    "real": 0.9744315668406618,
+    "random": 0.9454
+   },
+   {
+    "queries": 1917,
+    "real": 0.9771742015394144,
+    "random": 0.9546
+   },
+   {
+    "queries": 2395,
+    "real": 0.9816862779792975,
+    "random": 0.96
+   },
+   {
+    "queries": 2806,
+    "real": 0.9856675218968416,
+    "random": 0.9656
+   },
+   {
+    "queries": 3329,
+    "real": 0.9808900291957887,
+    "random": 0.9684
+   },
+   {
+    "queries": 3776,
+    "real": 0.9861098823321243,
+    "random": 0.9728
+   },
+   {
+    "queries": 4225,
+    "real": 0.9854905777227285,
+    "random": 0.9732
+   },
+   {
+    "queries": 4718,
+    "real": 0.9884986286826506,
+    "random": 0.9722
+   },
+   {
+    "queries": 5173,
+    "real": 0.9885871007697071,
+    "random": 0.9762
+   },
+   {
+    "queries": 5604,
+    "real": 0.9881447403344245,
+    "random": 0.9784
+   },
+   {
+    "queries": 6169,
+    "real": 0.9890294612049898,
+    "random": 0.9784
+   },
+   {
+    "queries": 6711,
+    "real": 0.9889409891179333,
+    "random": 0.9812
+   },
+   {
+    "queries": 7190,
+    "real": 0.9874369636379722,
+    "random": 0.9822
+   },
+   {
+    "queries": 7665,
+    "real": 0.9893833495532159,
+    "random": 0.9814
+   },
+   {
+    "queries": 8124,
+    "real": 0.989560293727329,
+    "random": 0.9828
+   },
+   {
+    "queries": 8616,
+    "real": 0.990887375033177,
+    "random": 0.9822
+   },
+   {
+    "queries": 9089,
+    "real": 0.9903565425108378,
+    "random": 0.9852
+   },
+   {
+    "queries": 9614,
+    "real": 0.990710430859064,
+    "random": 0.9822
+   },
+   {
+    "queries": 10052,
+    "real": 0.9907989029461205,
+    "random": 0.9818
+   },
+   {
+    "queries": 10525,
+    "real": 0.9934530655578165,
+    "random": 0.9826
+   },
+   {
+    "queries": 10977,
+    "real": 0.9890294612049898,
+    "random": 0.982
+   },
+   {
+    "queries": 11452,
+    "real": 0.9907989029461205,
+    "random": 0.981
+   },
+   {
+    "queries": 11870,
+    "real": 0.9909758471202336,
+    "random": 0.9846
+   },
+   {
+    "queries": 12417,
+    "real": 0.9912412633814032,
+    "random": 0.9838
+   },
+   {
+    "queries": 12817,
+    "real": 0.992214456339025,
+    "random": 0.983
+   },
+   {
+    "queries": 13300,
+    "real": 0.9927452888613643,
+    "random": 0.9844
+   },
+   {
+    "queries": 13737,
+    "real": 0.9938069539060427,
+    "random": 0.9822
+   },
+   {
+    "queries": 14244,
+    "real": 0.9937184818189861,
+    "random": 0.9856
+   },
+   {
+    "queries": 14706,
+    "real": 0.9939838980801557,
+    "random": 0.9836
+   },
+   {
+    "queries": 15253,
+    "real": 0.9944262585154384,
+    "random": 0.9856
+   },
+   {
+    "queries": 15766,
+    "real": 0.9921259842519685,
+    "random": 0.9846
+   },
+   {
+    "queries": 16291,
+    "real": 0.994691674776608,
+    "random": 0.9836
+   },
+   {
+    "queries": 16807,
+    "real": 0.9944262585154384,
+    "random": 0.9862
+   },
+   {
+    "queries": 17293,
+    "real": 0.9935415376448731,
+    "random": 0.9864
+   },
+   {
+    "queries": 17707,
+    "real": 0.9930991772095904,
+    "random": 0.9858
+   },
+   {
+    "queries": 18199,
+    "real": 0.9938954259930992,
+    "random": 0.9852
+   },
+   {
+    "queries": 18696,
+    "real": 0.994691674776608,
+    "random": 0.988
+   },
+   {
+    "queries": 19178,
+    "real": 0.9931876492966469,
+    "random": 0.9882
+   },
+   {
+    "queries": 19659,
+    "real": 0.9942493143413254,
+    "random": 0.9888
+   },
+   {
+    "queries": 20091,
+    "real": 0.9943377864283819,
+    "random": 0.9888
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.9424931434132531,
+  "adverse_random": 0.8,
+  "majority_real": 0.9424931434132531,
+  "majority_random": 0.8,
+  "queries_99_real": 11165,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.994514730602495,
+  "final_random": 0.988,
+  "trace": [
+   {
+    "queries": 438,
+    "real": 0.9175440148633106,
+    "random": 0.8842
+   },
+   {
+    "queries": 900,
+    "real": 0.9557639564717332,
+    "random": 0.931
+   },
+   {
+    "queries": 1306,
+    "real": 0.9793860037158276,
+    "random": 0.9394
+   },
+   {
+    "queries": 1748,
+    "real": 0.9770857294523578,
+    "random": 0.9528
+   },
+   {
+    "queries": 2238,
+    "real": 0.9792090595417146,
+    "random": 0.9612
+   },
+   {
+    "queries": 2799,
+    "real": 0.9811554454569583,
+    "random": 0.9668
+   },
+   {
+    "queries": 3287,
+    "real": 0.9793860037158276,
+    "random": 0.97
+   },
+   {
+    "queries": 3785,
+    "real": 0.9796514199769972,
+    "random": 0.972
+   },
+   {
+    "queries": 4281,
+    "real": 0.985402105635672,
+    "random": 0.9752
+   },
+   {
+    "queries": 4831,
+    "real": 0.9820401663275237,
+    "random": 0.976
+   },
+   {
+    "queries": 5268,
+    "real": 0.9848712731133328,
+    "random": 0.9752
+   },
+   {
+    "queries": 5851,
+    "real": 0.9866407148544634,
+    "random": 0.9754
+   },
+   {
+    "queries": 6303,
+    "real": 0.9876139078120852,
+    "random": 0.9784
+   },
+   {
+    "queries": 6872,
+    "real": 0.9890294612049898,
+    "random": 0.9782
+   },
+   {
+    "queries": 7355,
+    "real": 0.9880562682473679,
+    "random": 0.9792
+   },
+   {
+    "queries": 7813,
+    "real": 0.9888525170308767,
+    "random": 0.983
+   },
+   {
+    "queries": 8303,
+    "real": 0.9896487658143855,
+    "random": 0.9812
+   },
+   {
+    "queries": 8754,
+    "real": 0.9892948774661594,
+    "random": 0.9804
+   },
+   {
+    "queries": 9245,
+    "real": 0.9890294612049898,
+    "random": 0.9816
+   },
+   {
+    "queries": 9734,
+    "real": 0.9898257099884986,
+    "random": 0.9824
+   },
+   {
+    "queries": 10191,
+    "real": 0.9889409891179333,
+    "random": 0.9798
+   },
+   {
+    "queries": 10680,
+    "real": 0.9897372379014421,
+    "random": 0.9824
+   },
+   {
+    "queries": 11165,
+    "real": 0.9913297354684597,
+    "random": 0.981
+   },
+   {
+    "queries": 11652,
+    "real": 0.990887375033177,
+    "random": 0.9806
+   },
+   {
+    "queries": 12168,
+    "real": 0.9923029284260816,
+    "random": 0.9816
+   },
+   {
+    "queries": 12615,
+    "real": 0.9912412633814032,
+    "random": 0.9826
+   },
+   {
+    "queries": 13101,
+    "real": 0.9931876492966469,
+    "random": 0.9826
+   },
+   {
+    "queries": 13591,
+    "real": 0.990710430859064,
+    "random": 0.9844
+   },
+   {
+    "queries": 14036,
+    "real": 0.9928337609484208,
+    "random": 0.9832
+   },
+   {
+    "queries": 14540,
+    "real": 0.9926568167743077,
+    "random": 0.984
+   },
+   {
+    "queries": 15017,
+    "real": 0.9925683446872512,
+    "random": 0.9824
+   },
+   {
+    "queries": 15449,
+    "real": 0.9929222330354773,
+    "random": 0.9852
+   },
+   {
+    "queries": 16020,
+    "real": 0.992214456339025,
+    "random": 0.984
+   },
+   {
+    "queries": 16584,
+    "real": 0.9924798726001947,
+    "random": 0.9852
+   },
+   {
+    "queries": 17085,
+    "real": 0.9934530655578165,
+    "random": 0.984
+   },
+   {
+    "queries": 17575,
+    "real": 0.9934530655578165,
+    "random": 0.9842
+   },
+   {
+    "queries": 18053,
+    "real": 0.9937184818189861,
+    "random": 0.9854
+   },
+   {
+    "queries": 18559,
+    "real": 0.9935415376448731,
+    "random": 0.9848
+   },
+   {
+    "queries": 19010,
+    "real": 0.9923029284260816,
+    "random": 0.986
+   },
+   {
+    "queries": 19504,
+    "real": 0.9924798726001947,
+    "random": 0.9868
+   },
+   {
+    "queries": 19981,
+    "real": 0.9944262585154384,
+    "random": 0.987
+   },
+   {
+    "queries": 20509,
+    "real": 0.994514730602495,
+    "random": 0.988
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.9424931434132531,
+  "adverse_random": 0.804,
+  "majority_real": 0.9424931434132531,
+  "majority_random": 0.804,
+  "queries_99_real": 7431,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9940723701672123,
+  "final_random": 0.9864,
+  "trace": [
+   {
+    "queries": 528,
+    "real": 0.9441741130673272,
+    "random": 0.8806
+   },
+   {
+    "queries": 973,
+    "real": 0.9647881093514996,
+    "random": 0.9274
+   },
+   {
+    "queries": 1460,
+    "real": 0.9798283641511103,
+    "random": 0.9446
+   },
+   {
+    "queries": 1992,
+    "real": 0.9809785012828452,
+    "random": 0.9544
+   },
+   {
+    "queries": 2537,
+    "real": 0.9833672476333717,
+    "random": 0.9594
+   },
+   {
+    "queries": 3115,
+    "real": 0.9816862779792975,
+    "random": 0.962
+   },
+   {
+    "queries": 3528,
+    "real": 0.9809785012828452,
+    "random": 0.9664
+   },
+   {
+    "queries": 4004,
+    "real": 0.9823940546757498,
+    "random": 0.97
+   },
+   {
+    "queries": 4502,
+    "real": 0.9851366893745024,
+    "random": 0.9714
+   },
+   {
+    "queries": 4931,
+    "real": 0.985402105635672,
+    "random": 0.9734
+   },
+   {
+    "queries": 5367,
+    "real": 0.9867291869415199,
+    "random": 0.9742
+   },
+   {
+    "queries": 5902,
+    "real": 0.9875254357250287,
+    "random": 0.975
+   },
+   {
+    "queries": 6407,
+    "real": 0.986906131115633,
+    "random": 0.9752
+   },
+   {
+    "queries": 6930,
+    "real": 0.9885871007697071,
+    "random": 0.9744
+   },
+   {
+    "queries": 7431,
+    "real": 0.9903565425108378,
+    "random": 0.9756
+   },
+   {
+    "queries": 7896,
+    "real": 0.9900026541626117,
+    "random": 0.9776
+   },
+   {
+    "queries": 8367,
+    "real": 0.9887640449438202,
+    "random": 0.9774
+   },
+   {
+    "queries": 8800,
+    "real": 0.9900911262496682,
+    "random": 0.9782
+   },
+   {
+    "queries": 9212,
+    "real": 0.9909758471202336,
+    "random": 0.9796
+   },
+   {
+    "queries": 9729,
+    "real": 0.9916836238166858,
+    "random": 0.98
+   },
+   {
+    "queries": 10301,
+    "real": 0.9890294612049898,
+    "random": 0.9774
+   },
+   {
+    "queries": 10770,
+    "real": 0.9894718216402725,
+    "random": 0.9786
+   },
+   {
+    "queries": 11269,
+    "real": 0.9903565425108378,
+    "random": 0.981
+   },
+   {
+    "queries": 11779,
+    "real": 0.9911527912943466,
+    "random": 0.9808
+   },
+   {
+    "queries": 12269,
+    "real": 0.9917720959037424,
+    "random": 0.9808
+   },
+   {
+    "queries": 12714,
+    "real": 0.9923029284260816,
+    "random": 0.98
+   },
+   {
+    "queries": 13253,
+    "real": 0.9927452888613643,
+    "random": 0.9818
+   },
+   {
+    "queries": 13780,
+    "real": 0.9923914005131381,
+    "random": 0.9816
+   },
+   {
+    "queries": 14269,
+    "real": 0.992037512164912,
+    "random": 0.981
+   },
+   {
+    "queries": 14769,
+    "real": 0.9921259842519685,
+    "random": 0.9814
+   },
+   {
+    "queries": 15211,
+    "real": 0.9930991772095904,
+    "random": 0.9828
+   },
+   {
+    "queries": 15695,
+    "real": 0.9929222330354773,
+    "random": 0.9816
+   },
+   {
+    "queries": 16209,
+    "real": 0.992214456339025,
+    "random": 0.9836
+   },
+   {
+    "queries": 16749,
+    "real": 0.9919490400778554,
+    "random": 0.9842
+   },
+   {
+    "queries": 17230,
+    "real": 0.9930991772095904,
+    "random": 0.9832
+   },
+   {
+    "queries": 17700,
+    "real": 0.9916836238166858,
+    "random": 0.9832
+   },
+   {
+    "queries": 18241,
+    "real": 0.9930991772095904,
+    "random": 0.985
+   },
+   {
+    "queries": 18795,
+    "real": 0.9940723701672123,
+    "random": 0.9862
+   },
+   {
+    "queries": 19264,
+    "real": 0.9932761213837035,
+    "random": 0.9854
+   },
+   {
+    "queries": 19746,
+    "real": 0.9943377864283819,
+    "random": 0.9868
+   },
+   {
+    "queries": 20260,
+    "real": 0.9940723701672123,
+    "random": 0.9864
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.9424931434132531,
+  "adverse_random": 0.8176,
+  "majority_real": 0.9424931434132531,
+  "majority_random": 0.8176,
+  "queries_99_real": 4803,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9931876492966469,
+  "final_random": 0.9868,
+  "trace": [
+   {
+    "queries": 498,
+    "real": 0.9629301955233124,
+    "random": 0.8926
+   },
+   {
+    "queries": 969,
+    "real": 0.9740776784924357,
+    "random": 0.9296
+   },
+   {
+    "queries": 1410,
+    "real": 0.9710696275325135,
+    "random": 0.9474
+   },
+   {
+    "queries": 1897,
+    "real": 0.9737237901442095,
+    "random": 0.9554
+   },
+   {
+    "queries": 2376,
+    "real": 0.9786782270193753,
+    "random": 0.963
+   },
+   {
+    "queries": 2844,
+    "real": 0.9824825267628063,
+    "random": 0.9666
+   },
+   {
+    "queries": 3293,
+    "real": 0.9879677961603114,
+    "random": 0.9656
+   },
+   {
+    "queries": 3764,
+    "real": 0.9890294612049898,
+    "random": 0.971
+   },
+   {
+    "queries": 4236,
+    "real": 0.9888525170308767,
+    "random": 0.9754
+   },
+   {
+    "queries": 4803,
+    "real": 0.9903565425108378,
+    "random": 0.9742
+   },
+   {
+    "queries": 5238,
+    "real": 0.9907989029461205,
+    "random": 0.976
+   },
+   {
+    "queries": 5789,
+    "real": 0.9911527912943466,
+    "random": 0.9788
+   },
+   {
+    "queries": 6350,
+    "real": 0.9888525170308767,
+    "random": 0.9802
+   },
+   {
+    "queries": 6852,
+    "real": 0.9909758471202336,
+    "random": 0.9806
+   },
+   {
+    "queries": 7342,
+    "real": 0.9911527912943466,
+    "random": 0.9804
+   },
+   {
+    "queries": 7833,
+    "real": 0.99336459347076,
+    "random": 0.9834
+   },
+   {
+    "queries": 8303,
+    "real": 0.992214456339025,
+    "random": 0.9816
+   },
+   {
+    "queries": 8784,
+    "real": 0.994691674776608,
+    "random": 0.9844
+   },
+   {
+    "queries": 9253,
+    "real": 0.9938069539060427,
+    "random": 0.9836
+   },
+   {
+    "queries": 9772,
+    "real": 0.9930991772095904,
+    "random": 0.9848
+   },
+   {
+    "queries": 10181,
+    "real": 0.9925683446872512,
+    "random": 0.984
+   },
+   {
+    "queries": 10634,
+    "real": 0.992037512164912,
+    "random": 0.9832
+   },
+   {
+    "queries": 11188,
+    "real": 0.9939838980801557,
+    "random": 0.9842
+   },
+   {
+    "queries": 11679,
+    "real": 0.9930107051225339,
+    "random": 0.986
+   },
+   {
+    "queries": 12167,
+    "real": 0.9913297354684597,
+    "random": 0.9854
+   },
+   {
+    "queries": 12655,
+    "real": 0.9934530655578165,
+    "random": 0.9856
+   },
+   {
+    "queries": 13153,
+    "real": 0.9928337609484208,
+    "random": 0.9846
+   },
+   {
+    "queries": 13613,
+    "real": 0.9936300097319296,
+    "random": 0.9848
+   },
+   {
+    "queries": 14167,
+    "real": 0.9915951517296293,
+    "random": 0.9848
+   },
+   {
+    "queries": 14636,
+    "real": 0.9924798726001947,
+    "random": 0.9858
+   },
+   {
+    "queries": 15101,
+    "real": 0.9923914005131381,
+    "random": 0.9844
+   },
+   {
+    "queries": 15611,
+    "real": 0.9923914005131381,
+    "random": 0.9838
+   },
+   {
+    "queries": 16076,
+    "real": 0.9919490400778554,
+    "random": 0.9856
+   },
+   {
+    "queries": 16554,
+    "real": 0.9915951517296293,
+    "random": 0.9852
+   },
+   {
+    "queries": 17079,
+    "real": 0.9934530655578165,
+    "random": 0.9866
+   },
+   {
+    "queries": 17642,
+    "real": 0.9924798726001947,
+    "random": 0.9866
+   },
+   {
+    "queries": 18144,
+    "real": 0.9934530655578165,
+    "random": 0.9868
+   },
+   {
+    "queries": 18659,
+    "real": 0.9932761213837035,
+    "random": 0.9876
+   },
+   {
+    "queries": 19228,
+    "real": 0.99336459347076,
+    "random": 0.985
+   },
+   {
+    "queries": 19757,
+    "real": 0.9930991772095904,
+    "random": 0.9858
+   },
+   {
+    "queries": 20220,
+    "real": 0.9931876492966469,
+    "random": 0.9868
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 10,
+  "depth": 4,
+  "features_used": 12,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.9424931434132531,
+  "adverse_random": 0.8,
+  "majority_real": 0.9424931434132531,
+  "majority_random": 0.8,
+  "queries_99_real": 6398,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9954879235601168,
+  "final_random": 0.9858,
+  "trace": [
+   {
+    "queries": 430,
+    "real": 0.9557639564717332,
+    "random": 0.8938
+   },
+   {
+    "queries": 919,
+    "real": 0.9649650535256127,
+    "random": 0.9296
+   },
+   {
+    "queries": 1453,
+    "real": 0.9739892064053791,
+    "random": 0.935
+   },
+   {
+    "queries": 1943,
+    "real": 0.9818632221534106,
+    "random": 0.9572
+   },
+   {
+    "queries": 2385,
+    "real": 0.982747943023976,
+    "random": 0.9612
+   },
+   {
+    "queries": 2844,
+    "real": 0.9831018313722021,
+    "random": 0.9676
+   },
+   {
+    "queries": 3394,
+    "real": 0.9837211359815978,
+    "random": 0.967
+   },
+   {
+    "queries": 3924,
+    "real": 0.9877023798991418,
+    "random": 0.9726
+   },
+   {
+    "queries": 4416,
+    "real": 0.9860214102450677,
+    "random": 0.974
+   },
+   {
+    "queries": 4929,
+    "real": 0.9884101565955941,
+    "random": 0.9766
+   },
+   {
+    "queries": 5440,
+    "real": 0.9897372379014421,
+    "random": 0.9772
+   },
+   {
+    "queries": 5935,
+    "real": 0.988233212421481,
+    "random": 0.9742
+   },
+   {
+    "queries": 6398,
+    "real": 0.9901795983367248,
+    "random": 0.979
+   },
+   {
+    "queries": 6903,
+    "real": 0.9910643192072901,
+    "random": 0.9788
+   },
+   {
+    "queries": 7402,
+    "real": 0.9910643192072901,
+    "random": 0.9786
+   },
+   {
+    "queries": 7905,
+    "real": 0.9907989029461205,
+    "random": 0.979
+   },
+   {
+    "queries": 8383,
+    "real": 0.9918605679907989,
+    "random": 0.9804
+   },
+   {
+    "queries": 8807,
+    "real": 0.9929222330354773,
+    "random": 0.9818
+   },
+   {
+    "queries": 9312,
+    "real": 0.9912412633814032,
+    "random": 0.9808
+   },
+   {
+    "queries": 9809,
+    "real": 0.9919490400778554,
+    "random": 0.9818
+   },
+   {
+    "queries": 10326,
+    "real": 0.9915951517296293,
+    "random": 0.983
+   },
+   {
+    "queries": 10815,
+    "real": 0.9917720959037424,
+    "random": 0.9824
+   },
+   {
+    "queries": 11253,
+    "real": 0.9912412633814032,
+    "random": 0.983
+   },
+   {
+    "queries": 11742,
+    "real": 0.9929222330354773,
+    "random": 0.982
+   },
+   {
+    "queries": 12233,
+    "real": 0.9934530655578165,
+    "random": 0.983
+   },
+   {
+    "queries": 12759,
+    "real": 0.9925683446872512,
+    "random": 0.983
+   },
+   {
+    "queries": 13169,
+    "real": 0.9940723701672123,
+    "random": 0.985
+   },
+   {
+    "queries": 13665,
+    "real": 0.9930991772095904,
+    "random": 0.9854
+   },
+   {
+    "queries": 14144,
+    "real": 0.9934530655578165,
+    "random": 0.9866
+   },
+   {
+    "queries": 14708,
+    "real": 0.9921259842519685,
+    "random": 0.9852
+   },
+   {
+    "queries": 15140,
+    "real": 0.9927452888613643,
+    "random": 0.986
+   },
+   {
+    "queries": 15537,
+    "real": 0.9936300097319296,
+    "random": 0.9872
+   },
+   {
+    "queries": 16067,
+    "real": 0.9925683446872512,
+    "random": 0.9856
+   },
+   {
+    "queries": 16542,
+    "real": 0.9925683446872512,
+    "random": 0.9858
+   },
+   {
+    "queries": 17026,
+    "real": 0.9938954259930992,
+    "random": 0.9862
+   },
+   {
+    "queries": 17485,
+    "real": 0.9947801468636646,
+    "random": 0.9858
+   },
+   {
+    "queries": 18058,
+    "real": 0.9940723701672123,
+    "random": 0.9852
+   },
+   {
+    "queries": 18595,
+    "real": 0.994691674776608,
+    "random": 0.985
+   },
+   {
+    "queries": 19053,
+    "real": 0.9943377864283819,
+    "random": 0.9862
+   },
+   {
+    "queries": 19460,
+    "real": 0.9944262585154384,
+    "random": 0.9872
+   },
+   {
+    "queries": 20022,
+    "real": 0.9954879235601168,
+    "random": 0.9858
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.9137397151198797,
+  "adverse_random": 0.6778,
+  "majority_real": 0.9137397151198797,
+  "majority_random": 0.6778,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9754047597982837,
+  "final_random": 0.9566,
+  "trace": [
+   {
+    "queries": 587,
+    "real": 0.8971069627532513,
+    "random": 0.8624
+   },
+   {
+    "queries": 1118,
+    "real": 0.9372732902769176,
+    "random": 0.8834
+   },
+   {
+    "queries": 1636,
+    "real": 0.9488631336813236,
+    "random": 0.893
+   },
+   {
+    "queries": 2178,
+    "real": 0.9485092453330974,
+    "random": 0.8992
+   },
+   {
+    "queries": 2681,
+    "real": 0.9534636822082633,
+    "random": 0.9086
+   },
+   {
+    "queries": 3251,
+    "real": 0.9471821640272494,
+    "random": 0.9154
+   },
+   {
+    "queries": 3853,
+    "real": 0.9560293727329028,
+    "random": 0.9182
+   },
+   {
+    "queries": 4365,
+    "real": 0.9575333982128639,
+    "random": 0.9226
+   },
+   {
+    "queries": 5023,
+    "real": 0.9587720074316554,
+    "random": 0.9292
+   },
+   {
+    "queries": 5650,
+    "real": 0.968680881181987,
+    "random": 0.9304
+   },
+   {
+    "queries": 6171,
+    "real": 0.9602760329116163,
+    "random": 0.932
+   },
+   {
+    "queries": 6681,
+    "real": 0.9641688047421039,
+    "random": 0.9386
+   },
+   {
+    "queries": 7273,
+    "real": 0.9650535256126692,
+    "random": 0.937
+   },
+   {
+    "queries": 7819,
+    "real": 0.9682385207467045,
+    "random": 0.943
+   },
+   {
+    "queries": 8321,
+    "real": 0.9692117137043262,
+    "random": 0.9446
+   },
+   {
+    "queries": 8841,
+    "real": 0.9712465717066265,
+    "random": 0.944
+   },
+   {
+    "queries": 9300,
+    "real": 0.9667344952667434,
+    "random": 0.9476
+   },
+   {
+    "queries": 9957,
+    "real": 0.9702733787490047,
+    "random": 0.9476
+   },
+   {
+    "queries": 10485,
+    "real": 0.9701849066619481,
+    "random": 0.947
+   },
+   {
+    "queries": 10984,
+    "real": 0.9727505971865876,
+    "random": 0.9482
+   },
+   {
+    "queries": 11499,
+    "real": 0.9687693532690436,
+    "random": 0.9488
+   },
+   {
+    "queries": 11985,
+    "real": 0.970007962487835,
+    "random": 0.9468
+   },
+   {
+    "queries": 12503,
+    "real": 0.9729275413607007,
+    "random": 0.9544
+   },
+   {
+    "queries": 12994,
+    "real": 0.9759355923206229,
+    "random": 0.9502
+   },
+   {
+    "queries": 13581,
+    "real": 0.9705387950101743,
+    "random": 0.95
+   },
+   {
+    "queries": 14122,
+    "real": 0.9716889321419092,
+    "random": 0.9572
+   },
+   {
+    "queries": 14664,
+    "real": 0.9718658763160223,
+    "random": 0.955
+   },
+   {
+    "queries": 15180,
+    "real": 0.9754932318853402,
+    "random": 0.9548
+   },
+   {
+    "queries": 15664,
+    "real": 0.9739007343183226,
+    "random": 0.954
+   },
+   {
+    "queries": 16256,
+    "real": 0.9731929576218703,
+    "random": 0.958
+   },
+   {
+    "queries": 16756,
+    "real": 0.9752278156241706,
+    "random": 0.9578
+   },
+   {
+    "queries": 17282,
+    "real": 0.976112536494736,
+    "random": 0.9542
+   },
+   {
+    "queries": 17786,
+    "real": 0.9777050340617535,
+    "random": 0.9584
+   },
+   {
+    "queries": 18225,
+    "real": 0.9754932318853402,
+    "random": 0.9556
+   },
+   {
+    "queries": 18806,
+    "real": 0.9760240644076794,
+    "random": 0.9586
+   },
+   {
+    "queries": 19354,
+    "real": 0.9754932318853402,
+    "random": 0.9596
+   },
+   {
+    "queries": 19934,
+    "real": 0.9769087852782448,
+    "random": 0.9574
+   },
+   {
+    "queries": 20480,
+    "real": 0.9754047597982837,
+    "random": 0.9566
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.9137397151198797,
+  "adverse_random": 0.6946,
+  "majority_real": 0.9137397151198797,
+  "majority_random": 0.6946,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9807130850216756,
+  "final_random": 0.9616,
+  "trace": [
+   {
+    "queries": 561,
+    "real": 0.9310802441829603,
+    "random": 0.8456
+   },
+   {
+    "queries": 1125,
+    "real": 0.940812173759179,
+    "random": 0.8858
+   },
+   {
+    "queries": 1527,
+    "real": 0.9501902149871716,
+    "random": 0.908
+   },
+   {
+    "queries": 1938,
+    "real": 0.95788728656109,
+    "random": 0.9116
+   },
+   {
+    "queries": 2464,
+    "real": 0.9654958860479519,
+    "random": 0.9174
+   },
+   {
+    "queries": 2948,
+    "real": 0.9659382464832346,
+    "random": 0.9238
+   },
+   {
+    "queries": 3472,
+    "real": 0.9596567283022206,
+    "random": 0.9252
+   },
+   {
+    "queries": 4005,
+    "real": 0.9621339467398036,
+    "random": 0.9248
+   },
+   {
+    "queries": 4549,
+    "real": 0.9707157391842873,
+    "random": 0.9308
+   },
+   {
+    "queries": 5012,
+    "real": 0.9636379722197647,
+    "random": 0.9324
+   },
+   {
+    "queries": 5549,
+    "real": 0.9634610280456516,
+    "random": 0.934
+   },
+   {
+    "queries": 6001,
+    "real": 0.9648765814385561,
+    "random": 0.9392
+   },
+   {
+    "queries": 6589,
+    "real": 0.9689462974431566,
+    "random": 0.9426
+   },
+   {
+    "queries": 7142,
+    "real": 0.9689462974431566,
+    "random": 0.9436
+   },
+   {
+    "queries": 7613,
+    "real": 0.9746085110147749,
+    "random": 0.9488
+   },
+   {
+    "queries": 8215,
+    "real": 0.9731044855348138,
+    "random": 0.9468
+   },
+   {
+    "queries": 8791,
+    "real": 0.9764664248429621,
+    "random": 0.9474
+   },
+   {
+    "queries": 9384,
+    "real": 0.9754932318853402,
+    "random": 0.95
+   },
+   {
+    "queries": 9863,
+    "real": 0.9768203131911882,
+    "random": 0.9502
+   },
+   {
+    "queries": 10397,
+    "real": 0.9757586481465098,
+    "random": 0.9498
+   },
+   {
+    "queries": 10950,
+    "real": 0.9740776784924357,
+    "random": 0.9466
+   },
+   {
+    "queries": 11620,
+    "real": 0.977439617800584,
+    "random": 0.9468
+   },
+   {
+    "queries": 12073,
+    "real": 0.9781473944970361,
+    "random": 0.9478
+   },
+   {
+    "queries": 12524,
+    "real": 0.979120587454658,
+    "random": 0.9488
+   },
+   {
+    "queries": 13038,
+    "real": 0.9812439175440149,
+    "random": 0.9508
+   },
+   {
+    "queries": 13619,
+    "real": 0.9777050340617535,
+    "random": 0.951
+   },
+   {
+    "queries": 14117,
+    "real": 0.976289480668849,
+    "random": 0.9546
+   },
+   {
+    "queries": 14616,
+    "real": 0.9782358665840927,
+    "random": 0.9542
+   },
+   {
+    "queries": 15101,
+    "real": 0.973635318057153,
+    "random": 0.955
+   },
+   {
+    "queries": 15601,
+    "real": 0.9768203131911882,
+    "random": 0.952
+   },
+   {
+    "queries": 16147,
+    "real": 0.9755817039723967,
+    "random": 0.956
+   },
+   {
+    "queries": 16700,
+    "real": 0.9764664248429621,
+    "random": 0.95
+   },
+   {
+    "queries": 17090,
+    "real": 0.9771742015394144,
+    "random": 0.9564
+   },
+   {
+    "queries": 17587,
+    "real": 0.9777050340617535,
+    "random": 0.9574
+   },
+   {
+    "queries": 18068,
+    "real": 0.9777050340617535,
+    "random": 0.9552
+   },
+   {
+    "queries": 18603,
+    "real": 0.9805361408475626,
+    "random": 0.9538
+   },
+   {
+    "queries": 19193,
+    "real": 0.9767318411041317,
+    "random": 0.96
+   },
+   {
+    "queries": 19671,
+    "real": 0.978943643280545,
+    "random": 0.9556
+   },
+   {
+    "queries": 20260,
+    "real": 0.9807130850216756,
+    "random": 0.9616
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "label",
+  "reasons": 0,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.9137397151198797,
+  "adverse_random": 0.6808,
+  "majority_real": 0.9137397151198797,
+  "majority_random": 0.6808,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9728390692736442,
+  "final_random": 0.9508,
+  "trace": [
+   {
+    "queries": 545,
+    "real": 0.8582677165354331,
+    "random": 0.8444
+   },
+   {
+    "queries": 1163,
+    "real": 0.9221445633902504,
+    "random": 0.8792
+   },
+   {
+    "queries": 1662,
+    "real": 0.9399274528886137,
+    "random": 0.8936
+   },
+   {
+    "queries": 2193,
+    "real": 0.946120498982571,
+    "random": 0.8992
+   },
+   {
+    "queries": 2719,
+    "real": 0.9528443775988675,
+    "random": 0.903
+   },
+   {
+    "queries": 3340,
+    "real": 0.9603645049986729,
+    "random": 0.9112
+   },
+   {
+    "queries": 3778,
+    "real": 0.9610722816951252,
+    "random": 0.9154
+   },
+   {
+    "queries": 4441,
+    "real": 0.9575333982128639,
+    "random": 0.9188
+   },
+   {
+    "queries": 4951,
+    "real": 0.9602760329116163,
+    "random": 0.9242
+   },
+   {
+    "queries": 5563,
+    "real": 0.9674422719631957,
+    "random": 0.9238
+   },
+   {
+    "queries": 5977,
+    "real": 0.9690347695302132,
+    "random": 0.9284
+   },
+   {
+    "queries": 6537,
+    "real": 0.9707157391842873,
+    "random": 0.929
+   },
+   {
+    "queries": 6960,
+    "real": 0.9713350437936831,
+    "random": 0.9322
+   },
+   {
+    "queries": 7454,
+    "real": 0.9729275413607007,
+    "random": 0.9344
+   },
+   {
+    "queries": 8028,
+    "real": 0.9728390692736442,
+    "random": 0.9364
+   },
+   {
+    "queries": 8475,
+    "real": 0.9733699017959834,
+    "random": 0.9434
+   },
+   {
+    "queries": 8984,
+    "real": 0.9735468459700964,
+    "random": 0.9388
+   },
+   {
+    "queries": 9502,
+    "real": 0.9701849066619481,
+    "random": 0.9342
+   },
+   {
+    "queries": 10074,
+    "real": 0.9760240644076794,
+    "random": 0.9336
+   },
+   {
+    "queries": 10556,
+    "real": 0.974962399363001,
+    "random": 0.933
+   },
+   {
+    "queries": 11011,
+    "real": 0.97779350614881,
+    "random": 0.94
+   },
+   {
+    "queries": 11538,
+    "real": 0.9772626736264709,
+    "random": 0.942
+   },
+   {
+    "queries": 12067,
+    "real": 0.9743430947536053,
+    "random": 0.9408
+   },
+   {
+    "queries": 12563,
+    "real": 0.9747854551888879,
+    "random": 0.9402
+   },
+   {
+    "queries": 13014,
+    "real": 0.976289480668849,
+    "random": 0.943
+   },
+   {
+    "queries": 13590,
+    "real": 0.9716889321419092,
+    "random": 0.9452
+   },
+   {
+    "queries": 14228,
+    "real": 0.9727505971865876,
+    "random": 0.941
+   },
+   {
+    "queries": 14767,
+    "real": 0.974962399363001,
+    "random": 0.9402
+   },
+   {
+    "queries": 15193,
+    "real": 0.9741661505794922,
+    "random": 0.9398
+   },
+   {
+    "queries": 15679,
+    "real": 0.9731044855348138,
+    "random": 0.9476
+   },
+   {
+    "queries": 16083,
+    "real": 0.9712465717066265,
+    "random": 0.9428
+   },
+   {
+    "queries": 16626,
+    "real": 0.970007962487835,
+    "random": 0.946
+   },
+   {
+    "queries": 17161,
+    "real": 0.9677076882243653,
+    "random": 0.944
+   },
+   {
+    "queries": 17716,
+    "real": 0.9719543484030788,
+    "random": 0.9476
+   },
+   {
+    "queries": 18303,
+    "real": 0.9727505971865876,
+    "random": 0.9464
+   },
+   {
+    "queries": 18881,
+    "real": 0.9727505971865876,
+    "random": 0.9458
+   },
+   {
+    "queries": 19413,
+    "real": 0.974962399363001,
+    "random": 0.9512
+   },
+   {
+    "queries": 19922,
+    "real": 0.9725736530124746,
+    "random": 0.9508
+   },
+   {
+    "queries": 20381,
+    "real": 0.9728390692736442,
+    "random": 0.9508
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 0,
+  "attacker": "edges",
+  "adverse_real": 0.9137397151198797,
+  "adverse_random": 0.6778,
+  "majority_real": 0.9137397151198797,
+  "majority_random": 0.6778,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9810669733699018,
+  "final_random": 0.9578,
+  "trace": [
+   {
+    "queries": 545,
+    "real": 0.8918871096169159,
+    "random": 0.843
+   },
+   {
+    "queries": 1196,
+    "real": 0.9094045828541095,
+    "random": 0.8874
+   },
+   {
+    "queries": 1665,
+    "real": 0.9451473060249491,
+    "random": 0.8992
+   },
+   {
+    "queries": 2151,
+    "real": 0.962045474652747,
+    "random": 0.9076
+   },
+   {
+    "queries": 2599,
+    "real": 0.9622224188268601,
+    "random": 0.9076
+   },
+   {
+    "queries": 3078,
+    "real": 0.96452269309033,
+    "random": 0.9158
+   },
+   {
+    "queries": 3561,
+    "real": 0.9644342210032735,
+    "random": 0.919
+   },
+   {
+    "queries": 4022,
+    "real": 0.9629301955233124,
+    "random": 0.9226
+   },
+   {
+    "queries": 4550,
+    "real": 0.9662921348314607,
+    "random": 0.9254
+   },
+   {
+    "queries": 5005,
+    "real": 0.9704503229231177,
+    "random": 0.93
+   },
+   {
+    "queries": 5534,
+    "real": 0.9699194904007785,
+    "random": 0.9306
+   },
+   {
+    "queries": 6043,
+    "real": 0.968680881181987,
+    "random": 0.9344
+   },
+   {
+    "queries": 6613,
+    "real": 0.970007962487835,
+    "random": 0.9408
+   },
+   {
+    "queries": 7118,
+    "real": 0.9740776784924357,
+    "random": 0.9346
+   },
+   {
+    "queries": 7587,
+    "real": 0.9689462974431566,
+    "random": 0.9364
+   },
+   {
+    "queries": 8062,
+    "real": 0.9734583738830399,
+    "random": 0.94
+   },
+   {
+    "queries": 8587,
+    "real": 0.9757586481465098,
+    "random": 0.9402
+   },
+   {
+    "queries": 9157,
+    "real": 0.977439617800584,
+    "random": 0.9432
+   },
+   {
+    "queries": 9590,
+    "real": 0.9745200389277183,
+    "random": 0.944
+   },
+   {
+    "queries": 10155,
+    "real": 0.973812262231266,
+    "random": 0.9368
+   },
+   {
+    "queries": 10693,
+    "real": 0.9734583738830399,
+    "random": 0.9388
+   },
+   {
+    "queries": 11197,
+    "real": 0.973812262231266,
+    "random": 0.9436
+   },
+   {
+    "queries": 11681,
+    "real": 0.973812262231266,
+    "random": 0.9482
+   },
+   {
+    "queries": 12254,
+    "real": 0.9766433690170752,
+    "random": 0.9458
+   },
+   {
+    "queries": 12742,
+    "real": 0.9765548969300186,
+    "random": 0.9478
+   },
+   {
+    "queries": 13196,
+    "real": 0.9775280898876404,
+    "random": 0.9502
+   },
+   {
+    "queries": 13657,
+    "real": 0.979120587454658,
+    "random": 0.9484
+   },
+   {
+    "queries": 14209,
+    "real": 0.9767318411041317,
+    "random": 0.951
+   },
+   {
+    "queries": 14709,
+    "real": 0.9754047597982837,
+    "random": 0.9514
+   },
+   {
+    "queries": 15186,
+    "real": 0.9758471202335663,
+    "random": 0.9536
+   },
+   {
+    "queries": 15643,
+    "real": 0.9757586481465098,
+    "random": 0.9496
+   },
+   {
+    "queries": 16180,
+    "real": 0.9793860037158276,
+    "random": 0.9566
+   },
+   {
+    "queries": 16584,
+    "real": 0.9796514199769972,
+    "random": 0.9532
+   },
+   {
+    "queries": 17065,
+    "real": 0.9792975316287711,
+    "random": 0.9538
+   },
+   {
+    "queries": 17587,
+    "real": 0.9797398920640538,
+    "random": 0.9558
+   },
+   {
+    "queries": 18072,
+    "real": 0.9775280898876404,
+    "random": 0.9564
+   },
+   {
+    "queries": 18517,
+    "real": 0.9782358665840927,
+    "random": 0.9596
+   },
+   {
+    "queries": 19051,
+    "real": 0.9785012828452623,
+    "random": 0.9594
+   },
+   {
+    "queries": 19423,
+    "real": 0.9788551711934884,
+    "random": 0.9578
+   },
+   {
+    "queries": 19919,
+    "real": 0.9798283641511103,
+    "random": 0.9588
+   },
+   {
+    "queries": 20386,
+    "real": 0.9810669733699018,
+    "random": 0.9578
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 1,
+  "attacker": "edges",
+  "adverse_real": 0.9137397151198797,
+  "adverse_random": 0.6946,
+  "majority_real": 0.9137397151198797,
+  "majority_random": 0.6946,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9753162877112271,
+  "final_random": 0.956,
+  "trace": [
+   {
+    "queries": 499,
+    "real": 0.9401928691497833,
+    "random": 0.8392
+   },
+   {
+    "queries": 1037,
+    "real": 0.9413430062815182,
+    "random": 0.8812
+   },
+   {
+    "queries": 1556,
+    "real": 0.9567371494293551,
+    "random": 0.901
+   },
+   {
+    "queries": 2042,
+    "real": 0.9562947889940724,
+    "random": 0.908
+   },
+   {
+    "queries": 2484,
+    "real": 0.9593913120410511,
+    "random": 0.9124
+   },
+   {
+    "queries": 3077,
+    "real": 0.9577103423869769,
+    "random": 0.9186
+   },
+   {
+    "queries": 3582,
+    "real": 0.9654074139608954,
+    "random": 0.9258
+   },
+   {
+    "queries": 4039,
+    "real": 0.9682385207467045,
+    "random": 0.929
+   },
+   {
+    "queries": 4514,
+    "real": 0.9716889321419092,
+    "random": 0.9348
+   },
+   {
+    "queries": 5015,
+    "real": 0.9670883836149695,
+    "random": 0.9368
+   },
+   {
+    "queries": 5477,
+    "real": 0.9669114394408564,
+    "random": 0.9382
+   },
+   {
+    "queries": 5997,
+    "real": 0.967176855702026,
+    "random": 0.94
+   },
+   {
+    "queries": 6506,
+    "real": 0.9728390692736442,
+    "random": 0.937
+   },
+   {
+    "queries": 6976,
+    "real": 0.9757586481465098,
+    "random": 0.937
+   },
+   {
+    "queries": 7369,
+    "real": 0.9712465717066265,
+    "random": 0.9428
+   },
+   {
+    "queries": 7866,
+    "real": 0.9742546226665487,
+    "random": 0.9442
+   },
+   {
+    "queries": 8433,
+    "real": 0.9775280898876404,
+    "random": 0.9438
+   },
+   {
+    "queries": 8976,
+    "real": 0.9755817039723967,
+    "random": 0.9488
+   },
+   {
+    "queries": 9521,
+    "real": 0.9787666991064319,
+    "random": 0.9524
+   },
+   {
+    "queries": 9958,
+    "real": 0.978943643280545,
+    "random": 0.951
+   },
+   {
+    "queries": 10452,
+    "real": 0.9732814297089268,
+    "random": 0.9486
+   },
+   {
+    "queries": 10905,
+    "real": 0.9725736530124746,
+    "random": 0.9438
+   },
+   {
+    "queries": 11375,
+    "real": 0.973812262231266,
+    "random": 0.9494
+   },
+   {
+    "queries": 11888,
+    "real": 0.9707157391842873,
+    "random": 0.9466
+   },
+   {
+    "queries": 12468,
+    "real": 0.9726621250995311,
+    "random": 0.946
+   },
+   {
+    "queries": 12967,
+    "real": 0.9720428204901354,
+    "random": 0.9474
+   },
+   {
+    "queries": 13420,
+    "real": 0.9725736530124746,
+    "random": 0.9478
+   },
+   {
+    "queries": 13899,
+    "real": 0.9744315668406618,
+    "random": 0.9502
+   },
+   {
+    "queries": 14542,
+    "real": 0.972485180925418,
+    "random": 0.9486
+   },
+   {
+    "queries": 15072,
+    "real": 0.9716004600548527,
+    "random": 0.9504
+   },
+   {
+    "queries": 15589,
+    "real": 0.9739007343183226,
+    "random": 0.9514
+   },
+   {
+    "queries": 16033,
+    "real": 0.9751393435371141,
+    "random": 0.9548
+   },
+   {
+    "queries": 16543,
+    "real": 0.9728390692736442,
+    "random": 0.9508
+   },
+   {
+    "queries": 17026,
+    "real": 0.9731929576218703,
+    "random": 0.9548
+   },
+   {
+    "queries": 17439,
+    "real": 0.9715119879677961,
+    "random": 0.9552
+   },
+   {
+    "queries": 18039,
+    "real": 0.974962399363001,
+    "random": 0.9552
+   },
+   {
+    "queries": 18519,
+    "real": 0.97115809961957,
+    "random": 0.9512
+   },
+   {
+    "queries": 19088,
+    "real": 0.9731929576218703,
+    "random": 0.9576
+   },
+   {
+    "queries": 19652,
+    "real": 0.9728390692736442,
+    "random": 0.9572
+   },
+   {
+    "queries": 20139,
+    "real": 0.9753162877112271,
+    "random": 0.956
+   }
+  ],
+  "threshold": 0.0
+ },
+ {
+  "dataset": "bank_marketing",
+  "trees": 30,
+  "depth": 4,
+  "features_used": 16,
+  "attack": "label",
+  "reasons": 4,
+  "seed": 2,
+  "attacker": "edges",
+  "adverse_real": 0.9137397151198797,
+  "adverse_random": 0.6808,
+  "majority_real": 0.9137397151198797,
+  "majority_random": 0.6808,
+  "queries_99_real": null,
+  "queries_999_real": null,
+  "queries_99_random": null,
+  "queries_999_random": null,
+  "queries_all_real": null,
+  "queries_all_random": null,
+  "final_real": 0.9750508714500575,
+  "final_random": 0.9492,
+  "trace": [
+   {
+    "queries": 534,
+    "real": 0.8593293815801115,
+    "random": 0.84
+   },
+   {
+    "queries": 998,
+    "real": 0.9275413607006989,
+    "random": 0.872
+   },
+   {
+    "queries": 1611,
+    "real": 0.9457666106343449,
+    "random": 0.8922
+   },
+   {
+    "queries": 2126,
+    "real": 0.9493939662036628,
+    "random": 0.9024
+   },
+   {
+    "queries": 2673,
+    "real": 0.9568256215164116,
+    "random": 0.9048
+   },
+   {
+    "queries": 3237,
+    "real": 0.9610722816951252,
+    "random": 0.911
+   },
+   {
+    "queries": 3739,
+    "real": 0.960718393346899,
+    "random": 0.9132
+   },
+   {
+    "queries": 4274,
+    "real": 0.9647881093514996,
+    "random": 0.9174
+   },
+   {
+    "queries": 4691,
+    "real": 0.9690347695302132,
+    "random": 0.9188
+   },
+   {
+    "queries": 5217,
+    "real": 0.9670883836149695,
+    "random": 0.923
+   },
+   {
+    "queries": 5700,
+    "real": 0.9687693532690436,
+    "random": 0.9248
+   },
+   {
+    "queries": 6214,
+    "real": 0.9677961603114218,
+    "random": 0.9286
+   },
+   {
+    "queries": 6750,
+    "real": 0.9732814297089268,
+    "random": 0.9308
+   },
+   {
+    "queries": 7293,
+    "real": 0.9726621250995311,
+    "random": 0.9318
+   },
+   {
+    "queries": 7749,
+    "real": 0.9741661505794922,
+    "random": 0.9338
+   },
+   {
+    "queries": 8253,
+    "real": 0.9763779527559056,
+    "random": 0.9318
+   },
+   {
+    "queries": 8726,
+    "real": 0.9720428204901354,
+    "random": 0.9384
+   },
+   {
+    "queries": 9315,
+    "real": 0.9723967088383615,
+    "random": 0.9412
+   },
+   {
+    "queries": 9953,
+    "real": 0.9734583738830399,
+    "random": 0.937
+   },
+   {
+    "queries": 10482,
+    "real": 0.9756701760594533,
+    "random": 0.9372
+   },
+   {
+    "queries": 11061,
+    "real": 0.9743430947536053,
+    "random": 0.9438
+   },
+   {
+    "queries": 11532,
+    "real": 0.9786782270193753,
+    "random": 0.9398
+   },
+   {
+    "queries": 11977,
+    "real": 0.9779704503229231,
+    "random": 0.937
+   },
+   {
+    "queries": 12425,
+    "real": 0.9775280898876404,
+    "random": 0.9406
+   },
+   {
+    "queries": 12827,
+    "real": 0.9771742015394144,
+    "random": 0.94
+   },
+   {
+    "queries": 13333,
+    "real": 0.974962399363001,
+    "random": 0.942
+   },
+   {
+    "queries": 13849,
+    "real": 0.9769972573653013,
+    "random": 0.941
+   },
+   {
+    "queries": 14399,
+    "real": 0.9759355923206229,
+    "random": 0.9452
+   },
+   {
+    "queries": 14849,
+    "real": 0.9766433690170752,
+    "random": 0.942
+   },
+   {
+    "queries": 15333,
+    "real": 0.9759355923206229,
+    "random": 0.948
+   },
+   {
+    "queries": 15843,
+    "real": 0.9766433690170752,
+    "random": 0.9474
+   },
+   {
+    "queries": 16285,
+    "real": 0.9752278156241706,
+    "random": 0.9484
+   },
+   {
+    "queries": 16707,
+    "real": 0.9748739272759445,
+    "random": 0.9476
+   },
+   {
+    "queries": 17209,
+    "real": 0.9776165619746969,
+    "random": 0.9484
+   },
+   {
+    "queries": 17658,
+    "real": 0.9750508714500575,
+    "random": 0.9486
+   },
+   {
+    "queries": 18190,
+    "real": 0.9794744758028842,
+    "random": 0.9488
+   },
+   {
+    "queries": 18675,
+    "real": 0.9766433690170752,
+    "random": 0.9466
+   },
+   {
+    "queries": 19183,
+    "real": 0.9768203131911882,
+    "random": 0.9502
+   },
+   {
+    "queries": 19637,
+    "real": 0.9754047597982837,
+    "random": 0.9492
+   },
+   {
+    "queries": 20107,
+    "real": 0.9750508714500575,
+    "random": 0.9492
+   }
+  ],
+  "threshold": 0.0
+ }
+]

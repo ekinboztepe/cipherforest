@@ -67,9 +67,10 @@ def unsure(copy: HistGradientBoostingClassifier | None, x: np.ndarray, codes: np
 
 
 def attack(
-    model: QuantizedModel, adverse_above: bool, reasons: int, x_real: np.ndarray, seed: int, edges: bool = True
+    model: QuantizedModel, adverse_above: bool, reasons: int, x_real: np.ndarray, seed: int, edges: bool = True,
+    threshold: float = 0.5,
 ) -> dict[str, object]:
-    server = decision_oracle(plaintext_oracle(model), adverse_above, reasons)
+    server = decision_oracle(plaintext_oracle(model), adverse_above, reasons, threshold)
     counter = Counted(server)
     rng = np.random.default_rng(seed)
     quantizer = model.quantizer
