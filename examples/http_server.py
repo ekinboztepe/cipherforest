@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import sys
+import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -71,7 +72,11 @@ def ask(args: argparse.Namespace) -> None:
     key_id = post(f"{args.url}/keys", client.evaluation_keys()).decode()
     rows = np.loadtxt(args.rows, delimiter=",", ndmin=2)
     for row in rows:
-        score, shap = client.decrypt(post(f"{args.url}/run/{key_id}", client.encrypt(row)))
+        try:
+            answer = post(f"{args.url}/run/{key_id}", client.encrypt(row))
+        except urllib.error.HTTPError as error:
+            raise SystemExit(f"server said {error.code}: {error.read().decode()}") from None
+        score, shap = client.decrypt(answer)
         top = "" if shap is None else "  top features " + ", ".join(map(str, np.argsort(-np.abs(shap))[:3]))
         print(f"score {score:.4f}{top}")
 
