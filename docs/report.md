@@ -17,14 +17,17 @@ and one lookup per feature the tree uses. Input encoding is exact and the only e
 is fixed-point rounding of the outputs, bounded by T/(2s) for T trees at scale s.
 On five tabular datasets a CatBoost model of 30 trees of depth 4 matches a
 100-tree random forest's AUC and is served with about 230 bootstraps per request.
-On one rented server, with the same Concrete version and settings, our distilled
-models with SHAP ran 3.4 to 4.7 times faster than Concrete-ML's XGBoost without SHAP
-on the three largest datasets, and slower on the smallest. We then measure the other
+With the same Concrete version and settings, on the same 4 desktop cores, that model
+with SHAP ran 2.9 to 3.6 times faster than Concrete-ML's XGBoost of the same shape
+without SHAP on four of five datasets (1.5 to 1.9 times on the smallest); on a rented
+server our earlier distilled models ran 3.4 to 4.7 times faster than its depth-6 trees. We then measure the other
 side: a client that can query the server copies a model of this size exactly in
 about 700 to 2500 queries, and none of the defences we tried (output noise, coarser
 outputs, hidden or uniform quantiser edges, approve/decline answers) raises that
-past a few thousand queries at a price an honest client would accept. A per-client
-request budget is what remains. To our knowledge this is the first open-source
+past a few thousand queries at a price an honest client would accept. The 30-tree
+CatBoost model takes 65K to 262K queries to copy exactly even with its structure
+given away, but a copy that agrees with 99% of its decisions still takes 16K to 65K.
+A per-client request budget is what remains. To our knowledge this is the first open-source
 implementation of encrypted exact SHAP for tree ensembles.
 
 ## 1. Setting
@@ -219,7 +222,16 @@ attacker's cost, and its cost under FHE:
   copy agrees with 99% of real decisions after 1600 to 3600 queries, and the reasons
   help it little.
 
-[TO FILL from catboost_attack_bench: the same attacks on CatBoost 10 and 30 x depth 4.]
+**A bigger model.** All of the above is for a 3-tree model. On the CatBoost model we
+recommend (depth 4, 30 trees) the exact attacker gives up in its first round: the
+interaction graph has maximal cliques of up to 7 features, whose grids hold millions of
+cells. A stronger attacker handed every threshold and every tree's feature set for
+free, fitting one table per tree by sparse least squares, needs 65K to 262K queries
+for a copy exact on 99% of real inputs, against 700 to 2200 for the 3-tree model. The
+decisions are a different matter: that attacker agrees with 99% of them after 16K to
+65K queries, and the approve/decline attacker, which needs no structure, with about
+97% after 20K. So model size raised the price of an exact copy by two orders of
+magnitude, more than any output defence did, but not the price of a useful one.
 
 What the server can still do is count: it sees every request and the evaluation key
 it came with, and a new key costs the client an upload of hundreds of MB.
