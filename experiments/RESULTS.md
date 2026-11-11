@@ -539,6 +539,52 @@ the SHAP circuit's bootstrap count (depth + used features per tree).
 - So distil only what CatBoost cannot replace, a model you are handed rather than
   one you train; then use the teacher-fitted tables above for its explanations.
 
+## CatBoost served directly against Concrete-ML (`catboost_cml_bench.py`)
+
+The server benchmark above timed our distilled student. This times the model we now
+recommend, CatBoost at depth 4 imported with `from_catboost`, against Concrete-ML's
+XGBClassifier, on the desktop (Ryzen 5 3600), one job at a time in the same
+container (`docker/concrete-ml.Dockerfile`, Concrete 2.10), each pinned to the same 4
+CPUs (`--cpuset-cpus 0-3`) with 5 GB. Same settings for both (`SAFE`, which is
+Concrete-ML's). Seed 0, 20 requests per job; the median is over all 20, and the first
+request, the slowest, is in the max. Every encrypted answer of ours equalled
+`cipherforest.explain` bit for bit, and every XGB answer its own simulation. XGB at
+depth 4 is the same shape as ours; depth 6 is what the server benchmark used.
+
+| data | T | AUC CatBoost / XGB D4 / XGB D6 | CatBoost, SHAP | CatBoost, score | XGB D4 | XGB D6 | XGB D4 / CatBoost SHAP | XGB D6 / CatBoost SHAP |
+|---|---|---|---|---|---|---|---|---|
+| Adult | 10 | 0.909 / 0.905 / 0.912 | 2.22 s | 2.14 s | 7.64 s | 19.6 s | 3.4x | 8.8x |
+| Taiwan | 10 | 0.770 / 0.764 / 0.767 | 2.10 s | 2.06 s | 7.15 s | 21.4 s | 3.4x | 10.2x |
+| Bank | 10 | 0.903 / 0.909 / 0.918 | 2.28 s | 2.12 s | 7.20 s | 22.9 s | 3.2x | 10.1x |
+| German credit | 10 | 0.818 / 0.809 / 0.815 | 2.35 s | 2.17 s | 6.71 s | 13.9 s | 2.9x | 5.9x |
+| Breast cancer | 10 | 0.978 / 0.978 / 0.978 | 2.53 s | 2.34 s | 4.68 s | 4.71 s | 1.8x | 1.9x |
+| Adult | 30 | 0.921 / 0.918 / 0.919 | 4.85 s | 4.66 s | 17.6 s | 50.0 s | 3.6x | 10.3x |
+| Taiwan | 30 | 0.773 / 0.768 / 0.766 | 6.01 s | 5.49 s | 17.3 s | 55.5 s | 2.9x | 9.2x |
+| Bank | 30 | 0.927 / 0.924 / 0.932 | 5.79 s | 5.36 s | 17.7 s | 62.0 s | 3.1x | 10.7x |
+| German credit | 30 | 0.811 / 0.822 / 0.798 | 5.37 s | 4.89 s | 15.7 s | 34.5 s | 2.9x | 6.4x |
+| Breast cancer | 30 | 0.988 / 0.985 / 0.985 | 6.32 s | 5.82 s | 9.46 s | 9.88 s | 1.5x | 1.6x |
+
+PBS per request at T=30: CatBoost 208 to 239 with SHAP and 150 without, XGB 4080 at
+depth 4 (2460 on Breast cancer) and 10560 to 16230 at depth 6. Compressed evaluation
+keys: ours 216 to 279 MB, XGB 74 MB. Keygen on the client: ours 8 to 13 s, XGB 2.5 s.
+The first request of ours took 5 to 10 s, the rest about the median; XGB's first was
+no slower than the rest.
+
+- With SHAP, CatBoost served directly is 2.9x to 3.6x faster than Concrete-ML's trees
+  of the same shape on four of five datasets, and 6x to 11x faster than its depth-6
+  trees. Breast cancer stays the exception, 1.5x to 1.9x, as on the server: there
+  Concrete-ML's trees are small.
+- Unlike the distilled student, this model does not lose on accuracy: its AUC is
+  within 0.012 of the better XGB on every dataset at T=30, and above both on three.
+  One seed, so differences under about 0.01 mean nothing.
+- The explanation costs 2% to 10% over the score alone here, less than on the
+  distilled student (about 20%): depth-4 trees use few features each.
+- Concrete-ML's keys are still 3x to 4x smaller and its keygen 3x to 5x faster.
+- One machine, one seed, 4 CPUs of a desktop. The server benchmark's ratios
+  (distilled student, EPYC) were of the same order: 3.4x to 4.7x against depth 6.
+  Here the depth-6 gap is two to three times that, so the ratio depends on the machine, and
+  we report both rather than pick one.
+
 ## Explanations fitted to the teacher (`align_bench.py`)
 
 The student's exact SHAP values explain the student. When it stands in for a
@@ -618,10 +664,8 @@ each through the exported files on Adult, Docker on the desktop (4 CPUs, Ryzen 5
   bootstraps add 16%: the comparison runs on 4 bits after flooring the difference,
   which keeps its sign exact. Its keys are larger
   (1.5 to 2.7 GB expanded), because that last bootstrap needs its own parameters.
-- Against Concrete-ML on the same output, the prediction alone, we did not time the
-  two on one machine. From server_bench (3.4x to 4.7x with SHAP on the three large
-  datasets) and the 1.2x above, expect roughly 4x to 6x there; on Breast cancer
-  at T=30 Concrete-ML stays faster.
+- Against Concrete-ML on the same output, the prediction alone, see the CatBoost
+  section above: timed there on one machine, for CatBoost rather than this student.
 
 ## Label-only answers (`label_bench.py`)
 

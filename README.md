@@ -101,7 +101,13 @@ same Concrete version and settings, over five datasets and up to five seeds, at 
   3 to 5 times smaller, and at 30 trees its AUC is higher than our distilled student's
   on all five, by 0.005 to 0.057. CatBoost served directly (depth 4, 30 trees) closes
   that: from 0.004 below to 0.013 above Concrete-ML's XGBoost, with a smaller circuit
-  than the distilled 30 trees. We have not timed it against Concrete-ML on the server.
+  than the distilled 30 trees.
+
+Timed on the desktop instead (Ryzen 5 3600, both pinned to the same 4 CPUs, one seed,
+20 requests), CatBoost at depth 4 with SHAP against Concrete-ML's XGBoost without it:
+2.9 to 3.6 times faster than trees of the same shape and 6 to 11 times faster than
+depth 6 on four datasets, 1.5 to 1.9 times on Breast cancer. At 30 trees a request
+takes 4.9 to 6.3 s, and the explanation adds 2% to 10% to the score alone.
 
 Those ratios hold for that machine only; see the tables in
 [experiments/RESULTS.md](experiments/RESULTS.md).
