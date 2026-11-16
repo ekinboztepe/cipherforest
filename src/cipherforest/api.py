@@ -20,12 +20,15 @@ from cipherforest.align import align_tables
 from cipherforest.catboost_json import load_catboost_json, probe_categories
 from cipherforest.distill import distill_ensemble
 from cipherforest.oblivious import FloatArray, ObliviousEnsemble
-from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_model
+from cipherforest.quantize import OUTPUT_BITS, FeatureQuantizer, QuantizedModel, quantize_model
 from cipherforest.shap_table import build_shap_table
 
 
 def from_ensemble(
-    ensemble: ObliviousEnsemble, quantizer: FeatureQuantizer, background: FloatArray, output_bits: int = 8
+    ensemble: ObliviousEnsemble,
+    quantizer: FeatureQuantizer,
+    background: FloatArray,
+    output_bits: int = OUTPUT_BITS,
 ) -> QuantizedModel:
     """Exact interventional SHAP tables against `background`, then integer outputs.
 
@@ -38,7 +41,7 @@ def from_ensemble(
 
 
 def from_catboost(
-    model: Any, background: object, x_train: object = None, n_bins: int = 32, output_bits: int = 8
+    model: Any, background: object, x_train: object = None, n_bins: int = 32, output_bits: int = OUTPUT_BITS
 ) -> QuantizedModel:
     """A CatBoost model (or the text of model.save_model(..., format="json")), served as is.
 
@@ -89,7 +92,7 @@ def distill(
     n_trees: int = 3,
     n_bins: int = 32,
     background: int | FloatArray = 100,
-    output_bits: int = 8,
+    output_bits: int = OUTPUT_BITS,
     seed: int = 0,
     teacher_shap: tuple[FloatArray, FloatArray] | None = None,
     ridge: float = 1.0,

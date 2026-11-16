@@ -22,6 +22,13 @@ from cipherforest.oblivious import BoolArray, FloatArray, IntArray, ObliviousEns
 from cipherforest.shap_table import ShapTable
 
 
+# Width of each SHAP output. Each tree adds up to 1 / (2 * scale) to the prediction; at
+# 8 bits that reached 0.1 in probability with 30 trees, at 12 under 0.005. The SHAP
+# circuit costs the same at 8 and 12 bits (its parameters follow the comparisons);
+# score and decision circuits cost up to a quarter more (RESULTS.md, Output precision).
+OUTPUT_BITS = 12
+
+
 @dataclass(frozen=True)
 class FeatureQuantizer:
     """Edges per feature, and where a missing value (NaN) goes.
@@ -233,7 +240,7 @@ def quantize_model(
     ensemble: ObliviousEnsemble,
     tables: Sequence[ShapTable],
     quantizer: FeatureQuantizer,
-    output_bits: int = 8,
+    output_bits: int = OUTPUT_BITS,
 ) -> QuantizedModel:
     """Picks the largest scale for which every summed output provably fits in output_bits."""
     limit = (1 << (output_bits - 1)) - 1
