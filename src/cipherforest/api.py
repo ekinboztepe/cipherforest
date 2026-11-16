@@ -32,7 +32,8 @@ def from_ensemble(
     Every split must sit on one of the quantiser's edges. The background set is the
     reference SHAP compares against; 100 training rows are usual.
     """
-    tables = [build_shap_table(tree, np.asarray(background, dtype=np.float64)) for tree in ensemble.trees]
+    background = quantizer.fill(np.asarray(background, dtype=np.float64))
+    tables = [build_shap_table(tree, background) for tree in ensemble.trees]
     return quantize_model(ensemble, tables, quantizer, output_bits)
 
 
@@ -41,7 +42,8 @@ def from_catboost(
 ) -> QuantizedModel:
     """A CatBoost model (or the text of model.save_model(..., format="json")), served as is.
 
-    Symmetric trees, one output, numeric features without NaNs. The prediction is
+    Symmetric trees, one output, numeric features; NaN follows the model's nan_mode
+    (Min or Max). The prediction is
     CatBoost's raw score, the log-odds for a classifier. With x_train, n_bins
     training quantiles are added to the edges, so client.json does not list only
     the model's own thresholds.
@@ -84,14 +86,16 @@ def distill(
     """
     x_train = np.asarray(x_train, dtype=np.float64)
     quantizer = FeatureQuantizer.fit(x_train, n_bins)
+    x_train = quantizer.fill(x_train)  # missing values below every edge, as CatBoost's default
     ensemble = distill_ensemble(x_train, np.asarray(target, dtype=np.float64), depth, n_trees, quantizer.edges)
     if isinstance(background, int):
         rng = np.random.default_rng(seed)
         background = x_train[rng.choice(len(x_train), size=min(background, len(x_train)), replace=False)]
     if teacher_shap is None:
         return from_ensemble(ensemble, quantizer, background, output_bits)
-    tables = [build_shap_table(tree, np.asarray(background, dtype=np.float64)) for tree in ensemble.trees]
-    tables = align_tables(ensemble, tables, teacher_shap[0], teacher_shap[1], ridge=ridge)
+    background = quantizer.fill(np.asarray(background, dtype=np.float64))
+    tables = [build_shap_table(tree, background) for tree in ensemble.trees]
+    tables = align_tables(ensemble, tables, quantizer.fill(teacher_shap[0]), teacher_shap[1], ridge=ridge)
     return quantize_model(ensemble, tables, quantizer, output_bits)
 
 

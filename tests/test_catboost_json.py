@@ -131,12 +131,6 @@ def test_rejects_what_it_cannot_serve_exactly(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="single-output"):
         load_catboost_json(text)
 
-    with_nans = x.copy()
-    with_nans[::7, 0] = np.nan
-    _, text = fit_and_load(tmp_path, with_nans, y, depth=3, iterations=2)
-    with pytest.raises(ValueError, match="NaN"):
-        load_catboost_json(text)
-
     pool = catboost.Pool([[str(i % 3), *row] for i, row in enumerate(x.tolist())], y, cat_features=[0])
     model = catboost.CatBoostClassifier(depth=3, iterations=2, verbose=0, allow_writing_files=False).fit(pool)
     model.save_model(str(tmp_path / "cat.json"), format="json")

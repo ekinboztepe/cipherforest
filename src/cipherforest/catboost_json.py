@@ -5,7 +5,9 @@ maps to an ObliviousTree (its first split is the lowest leaf-index bit), and the
 ensemble reproduces CatBoost's raw score, the log-odds for a classifier.
 
 Only what the encrypted pipeline can serve exactly is accepted: symmetric trees,
-one output, numeric features without NaNs. Anything else is rejected.
+one output, numeric features. Anything else is rejected. Missing values follow the
+model's nan_mode: "Min" sends NaN below every border, "Max" above, and the
+quantiser encodes them the same way.
 
 CatBoost compares inputs as float32 against float32 borders. Inputs that are exact
 float32 values route exactly like CatBoost; a float64 input lying between a border
@@ -39,14 +41,18 @@ def load_catboost_json(
         raise ValueError("only numeric features are supported")
 
     floats = info["float_features"]
-    if any(f["has_nans"] for f in floats):
-        raise ValueError("features with NaNs are not supported")
     n_features = max(f["flat_feature_index"] for f in floats) + 1
     borders: list[FloatArray] = [np.empty(0) for _ in range(n_features)]
+    nan_high = [False] * n_features
     flat_index: dict[int, int] = {}
     for f in floats:
         flat_index[f["feature_index"]] = f["flat_feature_index"]
-        borders[f["flat_feature_index"]] = np.asarray(f["borders"], dtype=np.float64)
+        borders[f["flat_feature_index"]] = np.asarray(f.get("borders", []), dtype=np.float64)
+        treatment = f.get("nan_value_treatment", "AsIs")
+        if treatment == "AsTrue":
+            nan_high[f["flat_feature_index"]] = True
+        elif f["has_nans"] and treatment != "AsFalse":
+            raise ValueError(f"feature {f['flat_feature_index']}: nan_mode must be Min or Max, not {treatment}")
 
     scale, biases = doc["scale_and_bias"]
     if len(biases) != 1:
@@ -72,4 +78,5 @@ def load_catboost_json(
         if extra_edges.n_features != n_features:
             raise ValueError(f"extra_edges has {extra_edges.n_features} features, the model {n_features}")
         borders = [np.union1d(b, e) for b, e in zip(borders, extra_edges.edges)]
-    return ObliviousEnsemble(trees=trees, bias=float(biases[0])), FeatureQuantizer(tuple(borders))
+    quantizer = FeatureQuantizer(tuple(borders), tuple(nan_high) if any(nan_high) else ())
+    return ObliviousEnsemble(trees=trees, bias=float(biases[0])), quantizer
