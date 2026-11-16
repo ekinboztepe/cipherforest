@@ -87,9 +87,14 @@ number of edges below it. Every threshold of the model is one of these edges, sa
 e_k, so x > e_k exactly when the code is above k. Encoding loses nothing for the
 model's decisions. For CatBoost the edges are the model's own borders plus 32
 training quantiles per feature (so `client.json` does not list only the thresholds);
-for distillation the splits are chosen among 32 quantile edges.
+for distillation the splits are chosen among 32 quantile edges. A missing value is
+encoded below or above every edge, as the model's nan_mode sends it. A categorical
+feature is encoded as the position of its category in the list seen in training
+(anything else gets one more code), and a categorical split, one-hot or CTR, becomes a
+table of one bit per code, read from CatBoost itself; the client learns the category
+names, not their statistics.
 
-**Per tree.** D encrypted comparisons, one PBS each, give the bits; their weighted sum
+**Per tree.** D encrypted comparisons (or lookups of a category's bit), one PBS each, give the bits; their weighted sum
 is the leaf index, with no PBS. Then one PBS per feature the tree uses looks up that
 feature's column of the SHAP table at that index, and a clear 0/1 matrix adds the
 results into the output vector. So a request costs the sum over trees of
@@ -100,12 +105,17 @@ construction.
 **Outputs.** Table entries are integers at a scale s. Rounding each tree's table so
 that every leaf's row keeps its rounded total moves each tree's contribution to the
 prediction by at most 1/(2s), so the prediction is off by at most T/(2s); s is the
-largest scale for which every partial sum provably fits the output width (8 bits by
+largest scale for which every partial sum provably fits the output width (12 bits by
 default), and the circuit is told that width rather than inferring it from sample
 inputs, so no input can wrap around. Two smaller outputs drop the explanation:
 "score" looks up each leaf's total once per tree (depth + 1 PBS) and returns the sum;
 "decision" also compares it with a clear cut and returns one bit, as an approve or
 decline service would.
+
+The output width matters more than AUC shows. At 8 bits a 30-tree CatBoost model's
+served probability was up to 0.11 away from CatBoost's on test rows, at 12 bits under
+0.005, and the SHAP circuit's cost did not change: its parameters follow the input
+comparisons, not the table outputs.
 
 **Error probability.** Every PBS fails with a small probability. Concrete's default
 allows about 1e-5 per lookup; with a few hundred lookups the compiler reports a
@@ -256,9 +266,11 @@ is specific to encrypted serving, where the server cannot see or rate-limit by i
 
 ## 7. Limits
 
-- Oblivious trees only, numeric features without missing values, binary or
-  regression outputs. Depth beyond 6 makes the per-leaf tables large; we have not
-  split them.
+- Oblivious trees only, binary or regression outputs; CTRs over combinations of
+  categorical features are refused. Depth beyond 6 makes the per-leaf tables large; we
+  have not split them.
+- A retrained model of the same shape keeps the clients' keys (no new upload); a
+  deeper one, or one that switches to categorical features, needs new keys.
 - Each client sends 215 to 396 MB of compressed evaluation keys once, and the server
   holds them expanded, about 1 to 1.5 GB per client.
 - All timings are from two kinds of machine (a desktop Ryzen 5 3600 in Docker, and
