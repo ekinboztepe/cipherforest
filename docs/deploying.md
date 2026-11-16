@@ -74,6 +74,9 @@ and we know of no maintained Python implementation.
   expanded, about 1 to 1.5 GB per client (2 to 2.7 GB for the decision output). Load
   them once per client, not per request.
 - A request is under 1 KB in, a few hundred bytes out.
+- One request spreads over the cores by itself: CatBoost depth 4 x 30 took 13 s on one
+  logical CPU of a desktop, 7.7 s on two, 5.6 s on four and no less on six. Beyond
+  that, add workers, each with its own copy of the clients' keys in memory.
 
 ## 7. Retrain without new keys
 
