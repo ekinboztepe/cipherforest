@@ -941,6 +941,24 @@ without the mark, and one trained on the test split.
   rows (up to 0.04%) do land in a trap.
 - So this is a finding, not a feature: trap leaves are not in the package.
 
+## Cores per request
+
+CatBoost depth 4 x 30 on Adult, 12-bit outputs, `SAFE`, 10 requests, median server time,
+the container pinned to the given logical CPUs of the desktop (Ryzen 5 3600, 6 cores,
+12 threads; WSL2 limited to 6 logical CPUs):
+
+| logical CPUs | 1 | 2 | 4 | 6 |
+|---|---|---|---|---|
+| server run | 13.1 s | 7.7 s | 5.6 s | 5.7 s |
+
+Concrete already spreads a request over the cores (`loop_parallelize`, on by default):
+with it off, 4 CPUs took 13.2 s, and its dataflow mode (`dataflow_parallelize=True`)
+took 14.7 s, so neither is worth changing. Two single-CPU workers side by side took
+14.8 s each, 0.136 requests per second against 0.129 for one worker on both CPUs:
+for throughput, splitting cores between workers barely helps here. Which logical CPUs
+share a physical core is not visible from WSL, so "4 CPUs" in the desktop tables of
+this file may be as few as 2 physical cores.
+
 ## Published numbers, not measured here
 
 Other work on SHAP for private tree models. Different models, threat models and
