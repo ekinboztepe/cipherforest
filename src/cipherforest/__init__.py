@@ -11,7 +11,7 @@ from typing import Any
 from cipherforest.api import distill, explain, from_catboost, from_ensemble
 from cipherforest.quantize import FeatureQuantizer, QuantizedModel
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 _FHE = {
     "compile_model": "cipherforest.circuit",
