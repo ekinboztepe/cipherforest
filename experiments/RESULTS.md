@@ -620,6 +620,37 @@ A first version that also split the numeric levels of such trees one by one took
   `cat_features` and missing values, is served as it is, exactly, without retraining
   on recoded data, and the client sends its categories as they are.
 
+## Retraining without new keys (`key_reuse_bench.py`)
+
+A client uploads 215 to 280 MB of evaluation keys, and a model retrained every month
+would make every client do it again. `compile_model(..., same_keys_as=old
+client.json)` compiles the new model within the old deployment's keyset (Concrete's
+keyset restriction); the server keeps the evaluation keys it holds and the client its
+secret key (`Client.load(..., keys=old.secret_keys())`).
+
+Old deployment: CatBoost depth 4 x 30 on Adult, trained on half of the training split.
+Each new model was compiled within its keys, served with the old evaluation keys and
+decrypted with the old secret key, 10 requests, every answer equal to `explain`; and
+compiled freely for comparison. Concrete 2.11, desktop, 4 CPUs.
+
+| new model | fits the old keys | server run, old keys / new keys |
+|---|---|---|
+| retrained on the other half, other seed | yes | 5.99 s / 5.88 s |
+| 60 trees instead of 30 | yes | 11.5 s / 11.7 s |
+| prediction-only output | yes | 5.32 s / 5.36 s |
+| depth 6 instead of 4 | no | |
+| categorical features instead of ordinal codes | no | |
+
+- The usual case, retraining the same shape on new data, keeps every client's keys at
+  no cost: the restricted circuit's complexity estimate is the same as the free one's.
+- Concrete 2.11 compiled the depth-6 and categorical models "within" the old keyset
+  but chose other keys anyway, and running them with the old keys crashed the server
+  (a segmentation fault in a keyswitch). `compile_model` therefore compares the two
+  keysets and raises a ValueError unless they are identical.
+- Concrete's single-parameter strategy (`mono`) made the categorical model fit too,
+  but every request about twice as slow (11.8 s against 6.0 s for the retrained
+  model), so it is not the default.
+
 ## Explanations fitted to the teacher (`align_bench.py`)
 
 The student's exact SHAP values explain the student. When it stands in for a
