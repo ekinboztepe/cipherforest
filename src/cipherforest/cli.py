@@ -18,7 +18,7 @@ from pathlib import Path
 import numpy as np
 
 from cipherforest.api import explain, from_catboost
-from cipherforest.quantize import QuantizedModel
+from cipherforest.quantize import OUTPUT_BITS, QuantizedModel
 
 
 def _is_header(line: str) -> bool:
@@ -138,7 +138,8 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--out", type=Path, default=Path("model.json"))
     p.add_argument("--background", type=int, default=100, help="training rows SHAP compares against")
     p.add_argument("--bins", type=int, default=32, help="training quantiles added to the edges")
-    p.add_argument("--output-bits", type=int, default=8)
+    p.add_argument("--output-bits", type=int, default=OUTPUT_BITS,
+                   help="width of each output; 8 makes score and decision circuits faster and less precise")
     p.add_argument("--seed", type=int, default=0)
     p.set_defaults(run=prepare)
 

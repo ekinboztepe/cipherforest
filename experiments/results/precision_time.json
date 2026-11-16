@@ -1,0 +1,68 @@
+[
+ {
+  "dataset": "adult",
+  "output_bits": 8,
+  "output": "shap",
+  "requests": 20,
+  "pbs_count": 208,
+  "complexity": 70503838604.0,
+  "evaluation_keys_mb": 270.7197570800781,
+  "server_run_s_median": 5.614766690499891,
+  "server_run_s_max": 9.634386589000314
+ },
+ {
+  "dataset": "adult",
+  "output_bits": 8,
+  "output": "score",
+  "requests": 20,
+  "pbs_count": 150,
+  "complexity": 50290349262.0,
+  "evaluation_keys_mb": 270.7197570800781,
+  "server_run_s_median": 5.240202893500282,
+  "server_run_s_max": 9.328557494999586
+ },
+ {
+  "dataset": "adult",
+  "output_bits": 10,
+  "output": "shap",
+  "requests": 20,
+  "pbs_count": 208,
+  "complexity": 70503838604.0,
+  "evaluation_keys_mb": 270.7197570800781,
+  "server_run_s_median": 5.8218237259998205,
+  "server_run_s_max": 9.951253492999967
+ },
+ {
+  "dataset": "adult",
+  "output_bits": 10,
+  "output": "score",
+  "requests": 20,
+  "pbs_count": 150,
+  "complexity": 50290349262.0,
+  "evaluation_keys_mb": 270.7197570800781,
+  "server_run_s_median": 5.301529378000396,
+  "server_run_s_max": 9.425999151000724
+ },
+ {
+  "dataset": "adult",
+  "output_bits": 12,
+  "output": "shap",
+  "requests": 20,
+  "pbs_count": 208,
+  "complexity": 70503838604.0,
+  "evaluation_keys_mb": 270.7197570800781,
+  "server_run_s_median": 5.66609907999964,
+  "server_run_s_max": 10.17976993100001
+ },
+ {
+  "dataset": "adult",
+  "output_bits": 12,
+  "output": "score",
+  "requests": 20,
+  "pbs_count": 150,
+  "complexity": 53434848462.0,
+  "evaluation_keys_mb": 324.0322570800781,
+  "server_run_s_median": 5.898188269499769,
+  "server_run_s_max": 10.474602645999767
+ }
+]
