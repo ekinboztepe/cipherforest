@@ -3,6 +3,19 @@
 Encrypted inference for tree models that returns the prediction *and* its exact
 SHAP explanation. The server never sees the input, the prediction or the explanation.
 
+- **Your CatBoost model as it is.** Numeric and categorical features, missing values;
+  the encrypted model routes every input exactly as CatBoost does, and its probability
+  stays within 0.005 of CatBoost's.
+- **Exact SHAP in the same request**, at most a tenth slower than the prediction alone.
+- **One server, no trusted hardware, no second party.** About 5 to 6 s per request for
+  30 trees of depth 4 on 4 desktop cores; 2.9 to 3.6 times faster than Concrete-ML's own
+  trees of the same shape, which return no explanation, on four of our five benchmarks.
+- **Retrain without asking clients for new keys**, as long as the model keeps its shape.
+- **Measured leakage.** How fast clients can copy the model from its answers, which
+  defences help and which do not, all in [experiments/RESULTS.md](experiments/RESULTS.md).
+- **No code needed** to go from a saved CatBoost model to server and client files:
+  `cipherforest prepare`, `cipherforest compile`.
+
 ## How it works
 
 1. Take an ensemble of oblivious trees, as CatBoost trains them, or distil another
