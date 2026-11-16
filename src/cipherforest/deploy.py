@@ -51,7 +51,7 @@ class ClientBundle:
         return json.dumps(
             {
                 "client_specs": base64.b64encode(self.client_specs).decode("ascii"),
-                "edges": [e.tolist() for e in self.quantizer.edges],
+                **self.quantizer.to_doc(),
                 "scale": self.scale,
                 "base_value": self.base_value,
                 "active_features": self.active_features.tolist(),
@@ -65,7 +65,7 @@ class ClientBundle:
         doc = json.loads(text)
         return cls(
             client_specs=base64.b64decode(doc["client_specs"]),
-            quantizer=FeatureQuantizer(tuple(np.asarray(e, dtype=np.float64) for e in doc["edges"])),
+            quantizer=FeatureQuantizer.from_doc(doc),
             scale=float(doc["scale"]),
             base_value=float(doc["base_value"]),
             active_features=np.asarray(doc["active_features"], dtype=np.int64),

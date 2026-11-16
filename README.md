@@ -29,7 +29,8 @@ Concrete needs numpy below 2. Install everything in one command, as above; addin
 CatBoost or pandas later on its own can pull numpy 2 and break the encrypted part.
 
 A CatBoost model with symmetric trees (CatBoost's default), one output and numeric
-features is served as it is:
+features is served as it is. Missing values (NaN) go where the model's `nan_mode` sends
+them, below or above every border, and route exactly as in CatBoost:
 
 ```python
 import cipherforest

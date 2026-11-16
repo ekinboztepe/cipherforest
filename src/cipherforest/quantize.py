@@ -24,13 +24,42 @@ from cipherforest.shap_table import ShapTable
 
 @dataclass(frozen=True)
 class FeatureQuantizer:
+    """Edges per feature, and where a missing value (NaN) goes.
+
+    By default NaN is below every edge (code 0), as in CatBoost's nan_mode="Min";
+    nan_high[f] puts it above every edge instead ("Max"). Either way a missing value
+    routes exactly as in the float model, and the client encodes it like any other.
+    """
+
     edges: tuple[FloatArray, ...]  # strictly increasing, one array per feature
+    nan_high: tuple[bool, ...] = ()  # empty means all low
 
     @classmethod
     def fit(cls, x: FloatArray, n_bins: int) -> FeatureQuantizer:
-        """Distinct inner n_bins-quantiles of each training column."""
+        """Distinct inner n_bins-quantiles of each training column, ignoring NaNs."""
         qs = np.linspace(0.0, 1.0, n_bins + 1)[1:-1]
-        return cls(tuple(np.unique(np.quantile(x[:, f], qs)) for f in range(x.shape[1])))
+        columns = [x[:, f][~np.isnan(x[:, f])] for f in range(x.shape[1])]
+        return cls(tuple(np.unique(np.quantile(c, qs)) if c.size else np.empty(0) for c in columns))
+
+    def fill(self, x: FloatArray) -> FloatArray:
+        """NaN replaced by -inf or +inf, which the float model and the codes treat alike."""
+        x = np.array(x, dtype=np.float64)
+        missing = np.isnan(x)
+        if missing.any():
+            high = np.asarray(self.nan_high or (False,) * self.n_features)
+            x[missing] = np.where(np.broadcast_to(high, x.shape)[missing], np.inf, -np.inf)
+        return x
+
+    def to_doc(self) -> dict[str, object]:
+        doc: dict[str, object] = {"edges": [e.tolist() for e in self.edges]}
+        if any(self.nan_high):
+            doc["nan_high"] = list(self.nan_high)
+        return doc
+
+    @classmethod
+    def from_doc(cls, doc: dict[str, object]) -> FeatureQuantizer:
+        edges = tuple(np.asarray(e, dtype=np.float64) for e in doc["edges"])  # type: ignore[union-attr]
+        return cls(edges, tuple(bool(v) for v in doc.get("nan_high", ())))  # type: ignore[union-attr]
 
     @property
     def n_features(self) -> int:
@@ -42,6 +71,7 @@ class FeatureQuantizer:
         return max(int(e.size).bit_length() for e in self.edges)
 
     def transform(self, x: FloatArray) -> IntArray:
+        x = self.fill(x)
         codes = [np.searchsorted(e, x[:, f], side="left") for f, e in enumerate(self.edges)]
         return np.column_stack(codes).astype(np.int64)
 
@@ -97,7 +127,7 @@ class QuantizedModel:
     def to_json(self) -> str:
         return json.dumps(
             {
-                "edges": [e.tolist() for e in self.quantizer.edges],
+                **self.quantizer.to_doc(),
                 "trees": [
                     {
                         "features": t.features.tolist(),
@@ -130,7 +160,7 @@ class QuantizedModel:
             for t in doc["trees"]
         )
         return cls(
-            quantizer=FeatureQuantizer(tuple(np.asarray(e, dtype=np.float64) for e in doc["edges"])),
+            quantizer=FeatureQuantizer.from_doc(doc),
             trees=trees,
             scale=float(doc["scale"]),
             base_value=float(doc["base_value"]),

@@ -64,3 +64,13 @@ def test_compile_writes_files_a_client_can_use(files, tmp_path: Path) -> None:
     score, _ = client.decrypt(server.run(client.encrypt(x[0]), keys))
     want, _ = cipherforest.explain(cipherforest.QuantizedModel.from_json(out.read_text()), x[:1])
     assert abs(score - want[0]) < 1e-9
+
+
+def test_csv_with_empty_fields_reads_them_as_missing(tmp_path: Path) -> None:
+    from cipherforest.cli import load_rows
+
+    path = tmp_path / "rows.csv"
+    path.write_text("a,b,c\n1,,3\nnan,2,NA\n")
+    rows = load_rows(path)
+    np.testing.assert_array_equal(np.isnan(rows), [[False, True, False], [True, False, True]])
+    assert rows[0, 0] == 1 and rows[1, 1] == 2

@@ -4,8 +4,9 @@
     cipherforest explain model.json --data x_test.csv                     # any OS
     cipherforest compile model.json --out artifacts                       # Linux or macOS
 
-Data files are numeric .csv (an optional header row is skipped) or .npy, one row
-per sample, columns in the order the model was trained on.
+Data files are numeric .csv (an optional header row is skipped, empty fields are
+missing values) or .npy, one row per sample, columns in the order the model was
+trained on.
 """
 
 from __future__ import annotations
@@ -20,19 +21,29 @@ from cipherforest.api import explain, from_catboost
 from cipherforest.quantize import QuantizedModel
 
 
+def _is_header(line: str) -> bool:
+    for field in line.split(","):
+        field = field.strip()
+        if field and field.lower() not in ("nan", "na"):
+            try:
+                float(field)
+            except ValueError:
+                return True
+    return False
+
+
 def load_rows(path: Path) -> np.ndarray:
+    """Empty fields and "nan" are missing values."""
     if path.suffix == ".npy":
         rows = np.load(path)
     else:
-        try:
-            rows = np.loadtxt(path, delimiter=",", ndmin=2)
-        except ValueError:
-            rows = np.loadtxt(path, delimiter=",", ndmin=2, skiprows=1)
+        with path.open() as f:
+            header = _is_header(f.readline())
+        rows = np.genfromtxt(path, delimiter=",", skip_header=int(header), missing_values=("", "NA"),
+                             filling_values=np.nan, ndmin=2)
     rows = np.asarray(rows, dtype=np.float64)
     if rows.ndim != 2:
         raise SystemExit(f"{path}: expected one row per sample")
-    if np.isnan(rows).any():
-        raise SystemExit(f"{path}: missing values are not supported")
     return rows
 
 
