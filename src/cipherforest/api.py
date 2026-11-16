@@ -17,7 +17,7 @@ from typing import Any
 import numpy as np
 
 from cipherforest.align import align_tables
-from cipherforest.catboost_json import load_catboost_json
+from cipherforest.catboost_json import load_catboost_json, probe_categories
 from cipherforest.distill import distill_ensemble
 from cipherforest.oblivious import FloatArray, ObliviousEnsemble
 from cipherforest.quantize import FeatureQuantizer, QuantizedModel, quantize_model
@@ -32,31 +32,53 @@ def from_ensemble(
     Every split must sit on one of the quantiser's edges. The background set is the
     reference SHAP compares against; 100 training rows are usual.
     """
-    background = quantizer.fill(np.asarray(background, dtype=np.float64))
+    background = quantizer.fill(background)
     tables = [build_shap_table(tree, background) for tree in ensemble.trees]
     return quantize_model(ensemble, tables, quantizer, output_bits)
 
 
 def from_catboost(
-    model: Any, background: FloatArray, x_train: FloatArray | None = None, n_bins: int = 32, output_bits: int = 8
+    model: Any, background: object, x_train: object = None, n_bins: int = 32, output_bits: int = 8
 ) -> QuantizedModel:
     """A CatBoost model (or the text of model.save_model(..., format="json")), served as is.
 
-    Symmetric trees, one output, numeric features; NaN follows the model's nan_mode
-    (Min or Max). The prediction is
-    CatBoost's raw score, the log-odds for a classifier. With x_train, n_bins
-    training quantiles are added to the edges, so client.json does not list only
-    the model's own thresholds.
+    Symmetric trees, one output, numeric and categorical features; NaN follows the
+    model's nan_mode (Min or Max). The prediction is CatBoost's raw score, the
+    log-odds for a classifier. With x_train, n_bins training quantiles are added to
+    the edges, so client.json does not list only the model's own thresholds.
+
+    Categorical features need the model object and x_train: the categories seen in
+    x_train are the ones the client can name, any other value is "unseen", and the
+    split bits are read from CatBoost (catboost_json.probe_categories). Rows may then
+    be lists, object arrays or DataFrames, with categories as strings or integers.
     """
+    categories = None
+    cat: list[int] = []
     if isinstance(model, str):
         text = model
     else:
+        cat = [int(i) for i in model.get_cat_feature_indices()]
+        if cat and x_train is None:
+            raise ValueError("a model with categorical features needs x_train")
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "model.json"
-            model.save_model(str(path), format="json")
+            if cat:
+                from catboost import Pool
+
+                rows = np.array(x_train, dtype=object, ndmin=2)
+                for f in cat:
+                    rows[:, f] = [str(v) for v in rows[:, f]]
+                model.save_model(str(path), format="json", pool=Pool(rows.tolist(), cat_features=cat))
+                categories = probe_categories(model, rows)
+            else:
+                model.save_model(str(path), format="json")
             text = path.read_text()
-    padding = None if x_train is None else FeatureQuantizer.fit(np.asarray(x_train, dtype=np.float64), n_bins)
-    ensemble, quantizer = load_catboost_json(text, extra_edges=padding)
+    padding = None
+    if x_train is not None:
+        numeric = np.array(x_train, dtype=object, ndmin=2)
+        numeric[:, cat] = 0.0
+        padding = FeatureQuantizer.fit(numeric.astype(np.float64), n_bins)
+    ensemble, quantizer = load_catboost_json(text, extra_edges=padding, categories=categories)
     return from_ensemble(ensemble, quantizer, background, output_bits)
 
 
@@ -101,4 +123,4 @@ def distill(
 
 def explain(model: QuantizedModel, x: FloatArray) -> tuple[FloatArray, FloatArray]:
     """(predictions, SHAP values) in the clear, bit for bit what an encrypted run returns."""
-    return model.decode(model.simulate(model.quantizer.transform(np.atleast_2d(np.asarray(x, dtype=np.float64)))))
+    return model.decode(model.simulate(model.quantizer.transform(np.array(x, dtype=object, ndmin=2))))

@@ -164,7 +164,7 @@ class Client:
         return self._client.evaluation_keys.serialize()
 
     def encrypt(self, x: FloatArray) -> bytes:
-        codes = self._bundle.quantizer.transform(np.atleast_2d(x))[0]
+        codes = self._bundle.quantizer.transform(np.array(x, dtype=object, ndmin=2))[0]
         if self._bundle.server_noise:
             return self._client.encrypt(codes, None)[0].serialize()
         return self._client.encrypt(codes).serialize()

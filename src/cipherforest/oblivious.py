@@ -23,11 +23,22 @@ def bits_to_index(bits: BoolArray) -> IntArray:
     return bits.astype(np.int64) @ weights
 
 
+def level_bits(x: FloatArray, features: IntArray, thresholds: FloatArray, sets: tuple[BoolArray | None, ...]) -> BoolArray:
+    """(n, D) bits: a threshold test per level, or a category code looked up in that level's set."""
+    bits = x[:, features] > thresholds
+    for m, table in enumerate(sets):
+        if table is not None:
+            bits[:, m] = table[x[:, features[m]].astype(np.int64)]
+    return bits
+
+
 @dataclass(frozen=True)
 class ObliviousTree:
     features: IntArray  # (D,), a feature may appear on several levels
     thresholds: FloatArray  # (D,), bit m is x[features[m]] > thresholds[m]
     leaf_values: FloatArray  # (2**D,)
+    # categorical levels: sets[m][c] is the bit of category code c; empty or None means a threshold
+    sets: tuple[BoolArray | None, ...] = ()
 
     def __post_init__(self) -> None:
         depth = self.features.shape[0]
@@ -41,7 +52,7 @@ class ObliviousTree:
         return int(self.features.shape[0])
 
     def bits(self, x: FloatArray) -> BoolArray:
-        return x[:, self.features] > self.thresholds
+        return level_bits(x, self.features, self.thresholds, self.sets)
 
     def leaf_index(self, x: FloatArray) -> IntArray:
         return bits_to_index(self.bits(x))

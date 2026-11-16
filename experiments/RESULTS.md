@@ -585,6 +585,41 @@ no slower than the rest.
   Here the depth-6 gap is two to three times that, so the ratio depends on the machine, and
   we report both rather than pick one.
 
+## Categorical features as CatBoost handles them (`categorical_bench.py`)
+
+So far every dataset reached CatBoost through `datasets._to_matrix`, which turns a
+category into its alphabetical position and fills missing numbers with the median.
+`from_catboost` now also takes models trained with `cat_features`: a one-hot or CTR
+split reads one feature's category, so it becomes a set (the bit of each category
+seen in training, plus one for anything unseen). The bits are read from CatBoost's
+own `calc_leaf_indexes`, not re-derived from its hashing and counters, and the client
+only learns the list of categories. Missing numbers stay NaN and follow `nan_mode`.
+CTRs over combinations of features are rejected (`max_ctr_complexity=1`).
+
+CatBoost depth 4 x 30 trees, both ways, seeds 0 to 2. AUC of the served integer model;
+on every test row its score was within the output rounding bound of CatBoost's own.
+
+| data | AUC ordinal codes | AUC categorical | categorical levels | PBS ordinal / categorical |
+|---|---|---|---|---|
+| Adult | 0.921 | 0.922 | 38% | 210 / 214 |
+| Bank marketing | 0.925 | 0.924 | 44% | 226 / 228 |
+| German credit | 0.785 | 0.778 | 68% | 235 / 224 |
+
+German credit's three seeds spread over 0.72 to 0.82 either way; the means do not
+differ beyond that.
+
+Encrypted, Adult seed 0, 20 requests on the desktop (4 CPUs, Concrete 2.10, `SAFE`),
+every answer equal to `explain`: 5.66 s per request with ordinal codes, 6.76 s with
+categories, 19% more for 5% more bootstraps. A categorical level is a general lookup
+where a numeric one is a comparison with a constant, which Concrete does more cheaply.
+A first version that also split the numeric levels of such trees one by one took
+6.96 s.
+
+- Accuracy does not move: trees find much the same splits either way on these data.
+- What changes is who can use it. A CatBoost model trained the usual way, with
+  `cat_features` and missing values, is served as it is, exactly, without retraining
+  on recoded data, and the client sends its categories as they are.
+
 ## Explanations fitted to the teacher (`align_bench.py`)
 
 The student's exact SHAP values explain the student. When it stands in for a

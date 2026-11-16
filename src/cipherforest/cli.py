@@ -4,9 +4,9 @@
     cipherforest explain model.json --data x_test.csv                     # any OS
     cipherforest compile model.json --out artifacts                       # Linux or macOS
 
-Data files are numeric .csv (an optional header row is skipped, empty fields are
-missing values) or .npy, one row per sample, columns in the order the model was
-trained on.
+Data files are .csv (an optional header row is skipped, empty fields are missing
+values, categorical columns are read as text) or .npy, one row per sample, columns
+in the order the model was trained on.
 """
 
 from __future__ import annotations
@@ -32,19 +32,37 @@ def _is_header(line: str) -> bool:
     return False
 
 
-def load_rows(path: Path) -> np.ndarray:
-    """Empty fields and "nan" are missing values."""
+def load_rows(path: Path, categorical: frozenset[int] = frozenset()) -> np.ndarray:
+    """Empty fields, "nan" and "NA" are missing values; categorical columns stay strings."""
     if path.suffix == ".npy":
-        rows = np.load(path)
+        rows = np.load(path, allow_pickle=bool(categorical))
+    elif categorical:
+        import csv
+
+        with path.open(newline="") as f:
+            lines = [line for line in csv.reader(f) if line]
+        if lines and _is_header(",".join(v for i, v in enumerate(lines[0]) if i not in categorical)):
+            lines = lines[1:]
+
+        def number(v: str) -> float:
+            return float("nan") if v.strip() in ("", "NA") else float(v)
+
+        rows = np.array([[v if i in categorical else number(v) for i, v in enumerate(line)] for line in lines],
+                        dtype=object)
+        return rows
     else:
         with path.open() as f:
             header = _is_header(f.readline())
         rows = np.genfromtxt(path, delimiter=",", skip_header=int(header), missing_values=("", "NA"),
                              filling_values=np.nan, ndmin=2)
-    rows = np.asarray(rows, dtype=np.float64)
+    rows = np.asarray(rows, dtype=object if categorical else np.float64)
     if rows.ndim != 2:
         raise SystemExit(f"{path}: expected one row per sample")
     return rows
+
+
+def categorical_columns(model: QuantizedModel) -> frozenset[int]:
+    return frozenset(f for f, c in enumerate(model.quantizer.categories) if c is not None)
 
 
 def load_catboost(path: Path) -> tuple[object, object]:
@@ -65,8 +83,9 @@ def bootstraps(model: QuantizedModel) -> int:
 
 
 def prepare(args: argparse.Namespace) -> None:
-    x_train = load_rows(args.train)
     source, catboost = load_catboost(args.model)
+    cat = frozenset(int(i) for i in catboost.get_cat_feature_indices()) if catboost is not None else frozenset()
+    x_train = load_rows(args.train, cat)
     rng = np.random.default_rng(args.seed)
     background = x_train[rng.choice(len(x_train), size=min(args.background, len(x_train)), replace=False)]
     model = from_catboost(source, background=background, x_train=x_train, n_bins=args.bins, output_bits=args.output_bits)
@@ -79,7 +98,10 @@ def prepare(args: argparse.Namespace) -> None:
     if catboost is not None:
         sample = x_train[: min(1000, len(x_train))]
         score, _ = explain(model, sample)
-        raw = np.asarray(catboost.predict(sample, prediction_type="RawFormulaVal"), dtype=np.float64)
+        from catboost import Pool
+
+        pool = Pool(sample.tolist(), cat_features=sorted(cat)) if cat else sample
+        raw = np.asarray(catboost.predict(pool, prediction_type="RawFormulaVal"), dtype=np.float64)
         print(f"largest difference from CatBoost's raw score on {len(sample)} training rows: "
               f"{np.abs(score - raw).max():.2g} (bound {len(model.trees) / (2 * model.scale):.2g})")
     print(f"wrote {args.out}")
@@ -87,7 +109,7 @@ def prepare(args: argparse.Namespace) -> None:
 
 def explain_rows(args: argparse.Namespace) -> None:
     model = QuantizedModel.from_json(args.model.read_text())
-    score, shap = explain(model, load_rows(args.data))
+    score, shap = explain(model, load_rows(args.data, categorical_columns(model)))
     out = sys.stdout
     out.write(",".join(["score", *(f"shap_{i}" for i in range(shap.shape[1]))]) + "\n")
     for s, row in zip(score, shap, strict=True):

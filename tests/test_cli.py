@@ -74,3 +74,24 @@ def test_csv_with_empty_fields_reads_them_as_missing(tmp_path: Path) -> None:
     rows = load_rows(path)
     np.testing.assert_array_equal(np.isnan(rows), [[False, True, False], [True, False, True]])
     assert rows[0, 0] == 1 and rows[1, 1] == 2
+
+
+def test_prepare_and_explain_a_model_with_categories(tmp_path: Path, capsys) -> None:
+    rng = np.random.default_rng(3)
+    city = rng.choice(["ankara", "izmir", "van"], 300)
+    income = rng.normal(size=300)
+    y = ((city == "van") ^ (income > 0)).astype(int)
+    rows = [[c, float(v)] for c, v in zip(city, income)]
+    cb = catboost.CatBoostClassifier(iterations=4, depth=2, verbose=0, cat_features=[0], one_hot_max_size=1,
+                                     max_ctr_complexity=1, allow_writing_files=False).fit(rows, y)
+    cb.save_model(str(tmp_path / "m.cbm"))
+    train = tmp_path / "train.csv"
+    train.write_text("city,income\n" + "".join(f"{c},{v}\n" for c, v in rows))
+    main(["prepare", str(tmp_path / "m.cbm"), "--train", str(train), "--out", str(tmp_path / "model.json")])
+    out = capsys.readouterr().out
+    difference = float(out.split("training rows: ")[1].split(" ")[0])
+    bound = float(out.split("(bound ")[1].split(")")[0])
+    assert difference <= bound
+    (tmp_path / "rows.csv").write_text("van,0.5\nistanbul,\n")
+    main(["explain", str(tmp_path / "model.json"), "--data", str(tmp_path / "rows.csv")])
+    assert len(capsys.readouterr().out.splitlines()) == 3

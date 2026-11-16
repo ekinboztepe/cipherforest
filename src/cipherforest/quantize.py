@@ -18,7 +18,7 @@ from dataclasses import dataclass, replace
 
 import numpy as np
 
-from cipherforest.oblivious import FloatArray, IntArray, ObliviousEnsemble, bits_to_index
+from cipherforest.oblivious import BoolArray, FloatArray, IntArray, ObliviousEnsemble, bits_to_index, level_bits
 from cipherforest.shap_table import ShapTable
 
 
@@ -33,6 +33,24 @@ class FeatureQuantizer:
 
     edges: tuple[FloatArray, ...]  # strictly increasing, one array per feature
     nan_high: tuple[bool, ...] = ()  # empty means all low
+    # categorical features: the known categories; a value encodes as its position,
+    # anything else as len(categories). Edges are then 0.5, 1.5, ... so codes pass through.
+    categories: tuple[tuple[str, ...] | None, ...] = ()
+
+    def encode(self, x: object) -> FloatArray:
+        """Rows as floats, categories replaced by their codes."""
+        if not any(c is not None for c in self.categories):
+            return np.asarray(x, dtype=np.float64)
+        rows = np.array(x, dtype=object, ndmin=2)
+        out = np.empty(rows.shape, dtype=np.float64)
+        for f in range(rows.shape[1]):
+            known = self.categories[f] if f < len(self.categories) else None
+            if known is None:
+                out[:, f] = rows[:, f].astype(np.float64)
+            else:
+                index = {c: i for i, c in enumerate(known)}
+                out[:, f] = [index.get(str(v), len(known)) for v in rows[:, f]]
+        return out
 
     @classmethod
     def fit(cls, x: FloatArray, n_bins: int) -> FeatureQuantizer:
@@ -43,7 +61,7 @@ class FeatureQuantizer:
 
     def fill(self, x: FloatArray) -> FloatArray:
         """NaN replaced by -inf or +inf, which the float model and the codes treat alike."""
-        x = np.array(x, dtype=np.float64)
+        x = np.array(self.encode(x), dtype=np.float64)
         missing = np.isnan(x)
         if missing.any():
             high = np.asarray(self.nan_high or (False,) * self.n_features)
@@ -54,12 +72,15 @@ class FeatureQuantizer:
         doc: dict[str, object] = {"edges": [e.tolist() for e in self.edges]}
         if any(self.nan_high):
             doc["nan_high"] = list(self.nan_high)
+        if any(c is not None for c in self.categories):
+            doc["categories"] = [None if c is None else list(c) for c in self.categories]
         return doc
 
     @classmethod
     def from_doc(cls, doc: dict[str, object]) -> FeatureQuantizer:
         edges = tuple(np.asarray(e, dtype=np.float64) for e in doc["edges"])  # type: ignore[union-attr]
-        return cls(edges, tuple(bool(v) for v in doc.get("nan_high", ())))  # type: ignore[union-attr]
+        categories = tuple(None if c is None else tuple(c) for c in doc.get("categories", ()))  # type: ignore[union-attr]
+        return cls(edges, tuple(bool(v) for v in doc.get("nan_high", ())), categories)  # type: ignore[union-attr]
 
     @property
     def n_features(self) -> int:
@@ -89,9 +110,10 @@ class QuantizedTree:
     thresholds: IntArray  # (D,), bit m is code[features[m]] > thresholds[m]
     players: IntArray  # (k,) global feature of each SHAP column
     shap: IntArray  # (2**D, k) scaled and rounded
+    sets: tuple[BoolArray | None, ...] = ()  # categorical levels, as in ObliviousTree
 
     def leaf_index(self, codes: IntArray) -> IntArray:
-        return bits_to_index(codes[:, self.features] > self.thresholds)
+        return bits_to_index(level_bits(codes, self.features, self.thresholds, self.sets))
 
 
 @dataclass(frozen=True)
@@ -134,6 +156,7 @@ class QuantizedModel:
                         "thresholds": t.thresholds.tolist(),
                         "players": t.players.tolist(),
                         "shap": t.shap.tolist(),
+                        **({"sets": [None if s is None else s.astype(int).tolist() for s in t.sets]} if t.sets else {}),
                     }
                     for t in self.trees
                 ],
@@ -156,6 +179,7 @@ class QuantizedModel:
                 thresholds=ints(t["thresholds"]),
                 players=ints(t["players"]),
                 shap=ints(t["shap"]).reshape(-1, len(t["players"])),
+                sets=tuple(None if s is None else np.asarray(s, dtype=bool) for s in t.get("sets", ())),
             )
             for t in doc["trees"]
         )
@@ -227,13 +251,16 @@ def quantize_model(
     trees = []
     for tree, table in zip(ensemble.trees, tables, strict=True):
         totals = np.rint((tree.leaf_values - table.expected_value) * scale).astype(np.int64)
-        thresholds = [quantizer.threshold_index(int(f), float(t)) for f, t in zip(tree.features, tree.thresholds)]
+        sets = tree.sets or (None,) * tree.depth
+        thresholds = [0 if s is not None else quantizer.threshold_index(int(f), float(t))
+                      for f, t, s in zip(tree.features, tree.thresholds, sets, strict=True)]
         trees.append(
             QuantizedTree(
                 features=tree.features.copy(),
                 thresholds=np.array(thresholds, dtype=np.int64),
                 players=table.players.copy(),
                 shap=_sum_preserving_round(table.values * scale, totals),
+                sets=tree.sets,
             )
         )
     base_value = ensemble.bias + sum(table.expected_value for table in tables)

@@ -41,4 +41,4 @@ jobs:
       # the command line, from the installed entry point down to an encrypted run
       - run: uv pip install --python /tmp/pkg/bin/python pytest
       - run: /tmp/pkg/bin/cipherforest --help
-      - run: /tmp/pkg/bin/python -m pytest -q -p no:cacheprovider tests/test_cli.py
+      - run: /tmp/pkg/bin/python -m pytest -q -p no:cacheprovider tests/test_cli.py tests/test_categorical.py tests/test_missing.py
