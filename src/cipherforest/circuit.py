@@ -22,8 +22,11 @@ Concrete only ships Linux and macOS wheels. On Windows use docker/Dockerfile.
 
 from __future__ import annotations
 
+import base64
+import json
 from collections.abc import Callable
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -181,6 +184,10 @@ def noisy_inputs(model: QuantizedModel, noise_bound: int, n: int, seed: int = 0)
     return cases
 
 
+def _keyset(specs: fhe.ClientSpecs) -> object:
+    return json.loads(specs.program_info.get_keyset_info().get_restriction().to_json())
+
+
 def compile_model(
     model: QuantizedModel,
     inputset_size: int = 64,
@@ -188,13 +195,32 @@ def compile_model(
     configuration: fhe.Configuration | None = None,
     output: str = "shap",
     cut: int | None = None,
+    same_keys_as: Path | None = None,
 ) -> CompiledModel:
     """configuration=None means SAFE; pass fhe.Configuration() for Concrete's defaults.
 
     output is "shap" (prediction and explanation), "score" (prediction only) or
     "decision" (one bit: score > cut; see QuantizedModel.cut_for).
+
+    same_keys_as is the client.json of an earlier deployment. The circuit is then
+    compiled for that deployment's keyset, so clients keep their keys and the server
+    the evaluation keys it already holds: a retrained model needs no new key upload.
+    Raises ValueError if no parameters within that keyset fit this model.
     """
     configuration = SAFE if configuration is None else configuration
+    if same_keys_as is not None:
+        specs = base64.b64decode(json.loads(Path(same_keys_as).read_text())["client_specs"])
+        restriction = fhe.ClientSpecs.deserialize(specs).program_info.get_keyset_info().get_restriction()
+        try:
+            compiled = compile_model(model, inputset_size, noise_bound, configuration.fork(keyset_restriction=restriction),
+                                     output, cut)
+        except RuntimeError as error:
+            raise ValueError(f"this model does not fit the keys of {same_keys_as}: {error}") from error
+        # Concrete may still pick other keys (seen with 2.11), and running such a circuit with
+        # the old keys crashes the server, so the keysets must match exactly
+        if _keyset(compiled.circuit.client.specs) != json.loads(restriction.to_json()):
+            raise ValueError(f"this model needs other keys than {same_keys_as}; clients must send new ones")
+        return compiled
     if output != "shap":
         compiler = fhe.Compiler(circuit_function(model, output=output, cut=cut), {"codes": "encrypted"})
         circuit = compiler.compile(representative_inputs(model, inputset_size), configuration)

@@ -150,15 +150,25 @@ def laplace_noise(b: float, bound: int, size: int, rng: np.random.Generator) -> 
 
 
 class Client:
-    def __init__(self, bundle: ClientBundle, secret_seed: int | None = None) -> None:
+    """keys: bytes from secret_keys() of an earlier client, to keep the same keys for a new
+    model compiled with compile_model(..., same_keys_as=...). Otherwise new keys."""
+
+    def __init__(self, bundle: ClientBundle, secret_seed: int | None = None, keys: bytes | None = None) -> None:
         # secret_seed makes keys reproducible; tests only
         self._bundle = bundle
         self._client = fhe.Client(fhe.ClientSpecs.deserialize(bundle.client_specs))
-        self._client.keys.generate(secret_seed=secret_seed)
+        if keys is None:
+            self._client.keys.generate(secret_seed=secret_seed)
+        else:
+            self._client.keys.load_from_bytes(keys)
 
     @classmethod
-    def load(cls, path: Path, secret_seed: int | None = None) -> Client:
-        return cls(ClientBundle.from_json(path.read_text()), secret_seed=secret_seed)
+    def load(cls, path: Path, secret_seed: int | None = None, keys: bytes | None = None) -> Client:
+        return cls(ClientBundle.from_json(path.read_text()), secret_seed=secret_seed, keys=keys)
+
+    def secret_keys(self) -> bytes:
+        """The whole keyset, secret key included: store it on the client, never send it."""
+        return self._client.keys.serialize()
 
     def evaluation_keys(self) -> bytes:
         return self._client.evaluation_keys.serialize()
