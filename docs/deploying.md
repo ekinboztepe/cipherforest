@@ -65,7 +65,29 @@ determined attacker.
   them once per client, not per request.
 - A request is under 1 KB in, a few hundred bytes out.
 
-## 7. Install in one go
+## 7. Retrain without new keys
+
+A retrained model would normally need new keys from every client. Compile it for the
+keys already deployed instead, and keep the client's secret keys between versions:
+
+```python
+compiled = cipherforest.compile_model(new_model, same_keys_as=Path("v1/client.json"))
+cipherforest.export(compiled, new_model, Path("v2"))
+
+# client: keep v1's keys (they hold the secret key, never send them)
+stored = old_client.secret_keys()
+client = cipherforest.Client.load(Path("v2/client.json"), keys=stored)
+# server: v2/server.zip answers with the evaluation keys it already holds for this client
+```
+
+On Adult this worked for a model retrained on other data with the same shape, for one
+with twice the trees and for the score-only output, every answer exact and no slower
+than the same model compiled freely. A model that needs other parameters (deeper
+trees, or categorical features where there were none) is refused with a ValueError,
+and its clients must send new keys. Keep the shape fixed between versions to stay
+within the keys.
+
+## 8. Install in one go
 
 Concrete needs numpy below 2 and, in fresh environments, setuptools. Install
 everything in one command so the resolver respects that:
@@ -77,7 +99,7 @@ pip install "cipherforest[fhe,catboost]"
 Adding CatBoost, pandas or similar later on its own can pull numpy 2 and break the
 encrypted part. Concrete has no Windows wheels; use `docker/Dockerfile` there.
 
-## 8. Know what is not covered
+## 9. Know what is not covered
 
 A malicious server, side channels beyond timing and access patterns, membership
 inference from SHAP values, and commercial use of Concrete without Zama's patent
