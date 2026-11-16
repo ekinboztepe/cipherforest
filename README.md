@@ -28,9 +28,11 @@ Not on PyPI yet: until then, `pip install "cipherforest[catboost] @ git+https://
 Concrete needs numpy below 2. Install everything in one command, as above; adding
 CatBoost or pandas later on its own can pull numpy 2 and break the encrypted part.
 
-A CatBoost model with symmetric trees (CatBoost's default), one output and numeric
-features is served as it is. Missing values (NaN) go where the model's `nan_mode` sends
-them, below or above every border, and route exactly as in CatBoost:
+A CatBoost model with symmetric trees (CatBoost's default) and one output is served as
+it is. Missing values (NaN) go where the model's `nan_mode` sends them. Categorical
+features work too (`cat_features`, one-hot or CTR splits, `max_ctr_complexity=1`): pass
+the model object and `x_train`, and rows may hold categories as strings. Either way the
+encrypted model routes exactly as CatBoost does:
 
 ```python
 import cipherforest

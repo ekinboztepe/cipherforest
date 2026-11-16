@@ -1,0 +1,38 @@
+[
+ {
+  "dataset": "adult",
+  "kind": "ordinal",
+  "requests": 20,
+  "pbs": 208,
+  "server_run_s_median": 5.637662548500089,
+  "server_run_s_max": 9.673042205000002,
+  "circuit": "vectorised"
+ },
+ {
+  "dataset": "adult",
+  "kind": "categorical",
+  "requests": 20,
+  "pbs": 218,
+  "server_run_s_median": 6.958156962500084,
+  "server_run_s_max": 14.418997505000107,
+  "circuit": "per-level"
+ },
+ {
+  "dataset": "adult",
+  "kind": "categorical",
+  "requests": 20,
+  "pbs": 218,
+  "server_run_s_median": 6.761045114499893,
+  "server_run_s_max": 18.019838500000105,
+  "circuit": "vectorised, categorical levels apart"
+ },
+ {
+  "dataset": "adult",
+  "kind": "ordinal",
+  "requests": 20,
+  "pbs": 208,
+  "server_run_s_median": 5.660094481500096,
+  "server_run_s_max": 9.375912411999934,
+  "circuit": "vectorised, categorical levels apart"
+ }
+]

@@ -29,6 +29,25 @@ def load_dataset(name: str) -> tuple[np.ndarray, np.ndarray]:
     if name == "breast_cancer":
         data = load_breast_cancer()
         return data.data.astype(np.float64), data.target.astype(np.int64)
+    frame, y = _openml(name)
+    return _to_matrix(frame), y
+
+
+def load_raw(name: str) -> tuple[np.ndarray, list[int], np.ndarray]:
+    """Rows as an object array: categories as strings ("missing" when absent), numbers with NaN kept."""
+    frame, y = _openml(name)
+    columns, categorical = [], []
+    for i, name_ in enumerate(frame.columns):
+        col = frame[name_]
+        if isinstance(col.dtype, pd.CategoricalDtype) or col.dtype == object:
+            categorical.append(i)
+            columns.append(col.astype(object).where(col.notna(), "missing").astype(str).to_numpy(dtype=object))
+        else:
+            columns.append(col.to_numpy(dtype=np.float64).astype(object))
+    return np.column_stack(columns), categorical, y
+
+
+def _openml(name: str) -> tuple[pd.DataFrame, np.ndarray]:
     try:
         bunch = fetch_openml(data_id=OPENML_IDS[name], as_frame=True, data_home=str(DATA_HOME), parser="auto")
     except TypeError:
@@ -36,4 +55,4 @@ def load_dataset(name: str) -> tuple[np.ndarray, np.ndarray]:
         bunch = fetch_openml(data_id=OPENML_IDS[name], as_frame=True, data_home=str(DATA_HOME), parser="liac-arff")
     target = bunch.target.astype(str)
     positive = sorted(target.unique())[-1]
-    return _to_matrix(bunch.data), (target == positive).to_numpy(dtype=np.int64)
+    return bunch.data, (target == positive).to_numpy(dtype=np.int64)
