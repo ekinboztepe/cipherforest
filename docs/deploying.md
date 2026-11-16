@@ -52,11 +52,21 @@ keys = server.load_keys(uploaded_key_bytes)
 server.run(ciphertext, keys)   # raises BudgetExceeded past 1000 for these keys
 ```
 
-With the quantiser edges, an approve/decline copy reaches 96% to 98% agreement after
-1000 queries and 99% after 1600 to 3600. Pick the budget from that curve, and tie keys
-to an account: a fresh key pair is a fresh budget, so the budget only holds as well as
-the sign-up does. A key upload is hundreds of MB, which helps but does not stop a
-determined attacker.
+With the quantiser edges, an approve/decline copy of a 3-tree model reaches 96% to 98%
+agreement after 1000 queries and 99% after 1600 to 3600; for CatBoost depth 4 x 30 it is
+about 97% after 20000 (RESULTS.md, "Copying the CatBoost model"). Pick the budget from
+those curves, and tie keys to an account: a fresh key pair is a fresh budget, so the
+budget only holds as well as the sign-up does. A key upload is hundreds of MB, which
+helps but does not stop a determined attacker.
+
+Tying keys to accounts tells the server whose keys are whose. Where that matters, the
+issuance can be anonymous: the account holder gets a fixed number of key-registration
+tokens per period from an issuer that knows who they are, and redeems one with each key
+upload. With anonymous rate-limited credentials (ARC, an IETF Privacy Pass draft) the
+server can check that a token is valid and unspent but not which account it came from,
+so it limits requests per account (tokens times budget) without learning which keys
+belong to whom. This is a design, not code in this package: ARC's draft has expired
+and we know of no maintained Python implementation.
 
 ## 6. Plan memory and bandwidth
 
