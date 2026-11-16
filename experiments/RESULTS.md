@@ -899,6 +899,48 @@ thrown away.
   model size, not any output defence, is what moved the exact-copy cost by two orders
   of magnitude.
 
+## Trap leaves: proving a copy is one (`watermark_bench.py`)
+
+Map makers add streets that do not exist so that a copied map gives itself away. The
+copying results above say a client can copy the decisions of even the 30-tree model;
+can the owner at least prove that a suspect model is a copy? Watermarking tree
+ensembles is not new (Calzavara et al., arXiv 2410.04570, for random forests, by
+misclassifying a trigger set); this variant hides the mark where real data never go.
+
+CatBoost depth 4 x 30, seed 0. The owner takes leaves that no training row reaches but
+some input can (their comparisons do not contradict each other) and adds s * 4 in
+log-odds to each, s a secret random sign. A trigger is a training row changed just
+enough to reach that leaf. A suspect's decisions on the triggers are compared with s;
+the p-value is the chance of that many matches if the suspect's decisions had nothing
+to do with s.
+
+| | Adult | Taiwan | Bank marketing |
+|---|---|---|---|
+| trap leaves available (all used) | 20 | 30 | 15 |
+| test rows that land in a trap | 0.008% | 0.04% | 0.02% |
+| test decisions changed | 0.25% | 0.13% | 0.06% |
+| watermarked model: matches, p | 20/20, 1e-6 | 28/30, 4e-7 | 15/15, 3e-5 |
+| 12 unrelated models: lowest p | 0.25 | 0.02 | 0.30 |
+| tables copy, 16K / 65K / 262K queries: p | 2e-5 / 2e-5 / 1e-6 | 7e-4 / 4e-6 / 4e-7 | 0.15 / 5e-4 / 3e-5 |
+| learned copy, uniform queries, same budgets: p | 6e-3 / 2e-4 / 2e-4 | 7e-4 / 4e-6 / 4e-7 | 0.02 / 5e-4 / 3e-5 |
+| learned copy, real rows (5K, 20K, all): p | 0.87 / 0.75 / 0.59 | 0.05 / 0.05 / 0.05 | 0.70 / 0.94 / 0.70 |
+| ... that copy's agreement with the server on test decisions | 0.979 / 0.991 / 0.993 | 0.981 / 0.986 / 0.985 | 0.975 / 0.982 / 0.985 |
+
+The unrelated models are CatBoost with seeds 1 to 10 on the same data, the same model
+without the mark, and one trained on the test split.
+
+- Copies made the way our attackers make them, from uniform random queries, carry the
+  mark: from 65K queries on every dataset the match is beyond chance (p 5e-4 or lower),
+  while no unrelated model got below 0.02.
+- A copier with real data does not. Its queries never reach the traps, its copy agrees
+  with 97.5% to 99.3% of the server's real decisions, and its matches on the triggers are
+  at chance. Since that is also the cheapest useful copy, the mark proves little against
+  the attacker that matters most.
+- It is not free either: the mark widens the outputs, the scale falls by a third to a
+  half, and the coarser rounding flips 0.06% to 0.25% of test decisions; a few real
+  rows (up to 0.04%) do land in a trap.
+- So this is a finding, not a feature: trap leaves are not in the package.
+
 ## Published numbers, not measured here
 
 Other work on SHAP for private tree models. Different models, threat models and

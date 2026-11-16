@@ -1,0 +1,626 @@
+[
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "watermarked model",
+  "agreement": 1.0,
+  "p_value": 9.5367431640625e-07,
+  "test_rows_in_traps": 8.189337482597658e-05,
+  "test_decisions_changed": 0.0024568012447792973,
+  "scale_clean": 267.01378192811086,
+  "scale_marked": 168.12106908704234
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "same model, no mark",
+  "agreement": 0.6,
+  "p_value": 0.2517223358154297
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 1,
+  "agreement": 0.6,
+  "p_value": 0.2517223358154297
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 2,
+  "agreement": 0.45,
+  "p_value": 0.7482776641845703
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 3,
+  "agreement": 0.55,
+  "p_value": 0.41190147399902344
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 4,
+  "agreement": 0.55,
+  "p_value": 0.41190147399902344
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 5,
+  "agreement": 0.6,
+  "p_value": 0.2517223358154297
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 6,
+  "agreement": 0.5,
+  "p_value": 0.5880985260009766
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 7,
+  "agreement": 0.5,
+  "p_value": 0.5880985260009766
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 8,
+  "agreement": 0.55,
+  "p_value": 0.41190147399902344
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 9,
+  "agreement": 0.5,
+  "p_value": 0.5880985260009766
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other seed",
+  "seed": 10,
+  "agreement": 0.55,
+  "p_value": 0.41190147399902344
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "unrelated, other data",
+  "agreement": 0.5,
+  "p_value": 0.5880985260009766
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: tables",
+  "queries": 16384,
+  "agreement": 0.95,
+  "p_value": 2.002716064453125e-05,
+  "copy_decisions_on_test": 0.9478339202358529
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: learner, uniform",
+  "queries": 16384,
+  "agreement": 0.8,
+  "p_value": 0.005908966064453125,
+  "copy_decisions_on_test": 0.9443943984931619
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: tables",
+  "queries": 65536,
+  "agreement": 0.95,
+  "p_value": 2.002716064453125e-05,
+  "copy_decisions_on_test": 0.9994267463762182
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: learner, uniform",
+  "queries": 65536,
+  "agreement": 0.9,
+  "p_value": 0.00020122528076171875,
+  "copy_decisions_on_test": 0.9742035869298173
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: tables",
+  "queries": 262144,
+  "agreement": 1.0,
+  "p_value": 9.5367431640625e-07,
+  "copy_decisions_on_test": 1.0
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: learner, uniform",
+  "queries": 262144,
+  "agreement": 0.9,
+  "p_value": 0.00020122528076171875,
+  "copy_decisions_on_test": 0.9723200393088199
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: learner, real",
+  "queries": 5000,
+  "agreement": 0.4,
+  "p_value": 0.8684120178222656,
+  "copy_decisions_on_test": 0.9792809761690279
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: learner, real",
+  "queries": 20000,
+  "agreement": 0.45,
+  "p_value": 0.7482776641845703,
+  "copy_decisions_on_test": 0.9905003685201867
+ },
+ {
+  "dataset": "adult",
+  "traps": 20,
+  "trap_leaves_available": 20,
+  "suspect": "copy: learner, real",
+  "queries": 36631,
+  "agreement": 0.5,
+  "p_value": 0.5880985260009766,
+  "copy_decisions_on_test": 0.9926295962656622
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "watermarked model",
+  "agreement": 0.9333333333333333,
+  "p_value": 4.33996319770813e-07,
+  "test_rows_in_traps": 0.0004,
+  "test_decisions_changed": 0.0013333333333333333,
+  "scale_clean": 388.94234693522674,
+  "scale_marked": 194.86675501374643
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "same model, no mark",
+  "agreement": 0.6333333333333333,
+  "p_value": 0.10024421103298667
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 1,
+  "agreement": 0.6,
+  "p_value": 0.18079730402678257
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 2,
+  "agreement": 0.6666666666666666,
+  "p_value": 0.049368573352694525
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 3,
+  "agreement": 0.5666666666666667,
+  "p_value": 0.2923323558643461
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 4,
+  "agreement": 0.6333333333333333,
+  "p_value": 0.10024421103298667
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 5,
+  "agreement": 0.6,
+  "p_value": 0.18079730402678257
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 6,
+  "agreement": 0.6,
+  "p_value": 0.18079730402678257
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 7,
+  "agreement": 0.5666666666666667,
+  "p_value": 0.2923323558643461
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 8,
+  "agreement": 0.7,
+  "p_value": 0.021386972628533847
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 9,
+  "agreement": 0.6,
+  "p_value": 0.18079730402678257
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other seed",
+  "seed": 10,
+  "agreement": 0.6333333333333333,
+  "p_value": 0.10024421103298667
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "unrelated, other data",
+  "agreement": 0.6333333333333333,
+  "p_value": 0.10024421103298667
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: tables",
+  "queries": 16384,
+  "agreement": 0.8,
+  "p_value": 0.0007154531776905061,
+  "copy_decisions_on_test": 0.9634666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: learner, uniform",
+  "queries": 16384,
+  "agreement": 0.8,
+  "p_value": 0.0007154531776905061,
+  "copy_decisions_on_test": 0.9758666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: tables",
+  "queries": 65536,
+  "agreement": 0.9,
+  "p_value": 4.215165972709656e-06,
+  "copy_decisions_on_test": 0.9978666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: learner, uniform",
+  "queries": 65536,
+  "agreement": 0.9,
+  "p_value": 4.215165972709656e-06,
+  "copy_decisions_on_test": 0.9797333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: tables",
+  "queries": 262144,
+  "agreement": 0.9333333333333333,
+  "p_value": 4.33996319770813e-07,
+  "copy_decisions_on_test": 0.9989333333333333
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: learner, uniform",
+  "queries": 262144,
+  "agreement": 0.9333333333333333,
+  "p_value": 4.33996319770813e-07,
+  "copy_decisions_on_test": 0.9846666666666667
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: learner, real",
+  "queries": 5000,
+  "agreement": 0.6666666666666666,
+  "p_value": 0.049368573352694525,
+  "copy_decisions_on_test": 0.9812
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: learner, real",
+  "queries": 20000,
+  "agreement": 0.6666666666666666,
+  "p_value": 0.049368573352694525,
+  "copy_decisions_on_test": 0.9856
+ },
+ {
+  "dataset": "credit_default",
+  "traps": 30,
+  "trap_leaves_available": 30,
+  "suspect": "copy: learner, real",
+  "queries": 22500,
+  "agreement": 0.6666666666666666,
+  "p_value": 0.049368573352694525,
+  "copy_decisions_on_test": 0.9845333333333334
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "watermarked model",
+  "agreement": 1.0,
+  "p_value": 3.0517578125e-05,
+  "test_rows_in_traps": 0.00017694417411306734,
+  "test_decisions_changed": 0.0006193046093957357,
+  "scale_clean": 225.289416719684,
+  "scale_marked": 150.3282274878517
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "same model, no mark",
+  "agreement": 0.5333333333333333,
+  "p_value": 0.4999999999999999
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 1,
+  "agreement": 0.4666666666666667,
+  "p_value": 0.696380615234375
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 2,
+  "agreement": 0.4666666666666667,
+  "p_value": 0.696380615234375
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 3,
+  "agreement": 0.6,
+  "p_value": 0.30361938476562494
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 4,
+  "agreement": 0.5333333333333333,
+  "p_value": 0.4999999999999999
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 5,
+  "agreement": 0.5333333333333333,
+  "p_value": 0.4999999999999999
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 6,
+  "agreement": 0.5333333333333333,
+  "p_value": 0.4999999999999999
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 7,
+  "agreement": 0.5333333333333333,
+  "p_value": 0.4999999999999999
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 8,
+  "agreement": 0.5333333333333333,
+  "p_value": 0.4999999999999999
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 9,
+  "agreement": 0.5333333333333333,
+  "p_value": 0.4999999999999999
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other seed",
+  "seed": 10,
+  "agreement": 0.6,
+  "p_value": 0.30361938476562494
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "unrelated, other data",
+  "agreement": 0.6,
+  "p_value": 0.30361938476562494
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: tables",
+  "queries": 16384,
+  "agreement": 0.6666666666666666,
+  "p_value": 0.15087890624999997,
+  "copy_decisions_on_test": 0.968503937007874
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: learner, uniform",
+  "queries": 16384,
+  "agreement": 0.8,
+  "p_value": 0.017578125,
+  "copy_decisions_on_test": 0.9729275413607007
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: tables",
+  "queries": 65536,
+  "agreement": 0.9333333333333333,
+  "p_value": 0.00048828125,
+  "copy_decisions_on_test": 0.9891179332920463
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: learner, uniform",
+  "queries": 65536,
+  "agreement": 0.9333333333333333,
+  "p_value": 0.00048828125,
+  "copy_decisions_on_test": 0.9769087852782448
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: tables",
+  "queries": 262144,
+  "agreement": 1.0,
+  "p_value": 3.0517578125e-05,
+  "copy_decisions_on_test": 0.9995576395647173
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: learner, uniform",
+  "queries": 262144,
+  "agreement": 1.0,
+  "p_value": 3.0517578125e-05,
+  "copy_decisions_on_test": 0.9832787755463152
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: learner, real",
+  "queries": 5000,
+  "agreement": 0.4666666666666667,
+  "p_value": 0.696380615234375,
+  "copy_decisions_on_test": 0.9748739272759445
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: learner, real",
+  "queries": 20000,
+  "agreement": 0.3333333333333333,
+  "p_value": 0.940765380859375,
+  "copy_decisions_on_test": 0.9822171105016367
+ },
+ {
+  "dataset": "bank_marketing",
+  "traps": 15,
+  "trap_leaves_available": 15,
+  "suspect": "copy: learner, real",
+  "queries": 33908,
+  "agreement": 0.4666666666666667,
+  "p_value": 0.696380615234375,
+  "copy_decisions_on_test": 0.9845173847651066
+ }
+]
