@@ -1,0 +1,152 @@
+[
+ {
+  "dataset": "adult",
+  "output_bits": 8,
+  "auc_float": 0.9211446325163329,
+  "auc": 0.9210341598391716,
+  "bound": 0.9860010227481378,
+  "max_error_logodds": 0.3106411221899794,
+  "max_error_probability": 0.06041272702992129,
+  "mean_error_probability": 0.006523634868936456
+ },
+ {
+  "dataset": "adult",
+  "output_bits": 10,
+  "auc_float": 0.9211446325163329,
+  "auc": 0.9210792552391535,
+  "bound": 0.22875223727756794,
+  "max_error_logodds": 0.064345164914553,
+  "max_error_probability": 0.011862439582973006,
+  "mean_error_probability": 0.0013273460756553607
+ },
+ {
+  "dataset": "adult",
+  "output_bits": 12,
+  "auc_float": 0.9211446325163329,
+  "auc": 0.9211243506391351,
+  "bound": 0.05617687555932415,
+  "max_error_logodds": 0.020078345516078233,
+  "max_error_probability": 0.003899455292712517,
+  "mean_error_probability": 0.0005649783563998702
+ },
+ {
+  "dataset": "credit_default",
+  "output_bits": 8,
+  "auc_float": 0.7726422901278083,
+  "auc": 0.772514687232559,
+  "bound": 0.6660827720395123,
+  "max_error_logodds": 0.25359345969568503,
+  "max_error_probability": 0.04515779827802091,
+  "mean_error_probability": 0.00820179838590845
+ },
+ {
+  "dataset": "credit_default",
+  "output_bits": 10,
+  "auc_float": 0.7726422901278083,
+  "auc": 0.7726500814893863,
+  "bound": 0.15656925717263434,
+  "max_error_logodds": 0.05439573416116983,
+  "max_error_probability": 0.012463906934124913,
+  "mean_error_probability": 0.0020497809383497193
+ },
+ {
+  "dataset": "credit_default",
+  "output_bits": 12,
+  "auc_float": 0.7726422901278083,
+  "auc": 0.772612414642022,
+  "bound": 0.038566127134770575,
+  "max_error_logodds": 0.01426201589935916,
+  "max_error_probability": 0.002191995671774638,
+  "mean_error_probability": 0.00029915161911911334
+ },
+ {
+  "dataset": "bank_marketing",
+  "output_bits": 8,
+  "auc_float": 0.927944941076396,
+  "auc": 0.9272420170184167,
+  "bound": 1.2502436677579487,
+  "max_error_logodds": 0.4436947392425814,
+  "max_error_probability": 0.1083707460194927,
+  "mean_error_probability": 0.0058569414972095175
+ },
+ {
+  "dataset": "bank_marketing",
+  "output_bits": 10,
+  "auc_float": 0.927944941076396,
+  "auc": 0.9278180737046379,
+  "bound": 0.2744437319468668,
+  "max_error_logodds": 0.09682032947158303,
+  "max_error_probability": 0.0204309153881318,
+  "mean_error_probability": 0.001784209049234923
+ },
+ {
+  "dataset": "bank_marketing",
+  "output_bits": 12,
+  "auc_float": 0.927944941076396,
+  "auc": 0.9279314509974397,
+  "bound": 0.06658102372675467,
+  "max_error_logodds": 0.021876243306963028,
+  "max_error_probability": 0.004161540192402835,
+  "mean_error_probability": 0.0003054440158645867
+ },
+ {
+  "dataset": "breast_cancer",
+  "output_bits": 8,
+  "auc_float": 0.9886792452830189,
+  "auc": 0.9880503144654089,
+  "bound": 0.3967646015749524,
+  "max_error_logodds": 0.20238996475121507,
+  "max_error_probability": 0.020319997638491127,
+  "mean_error_probability": 0.0010124358426933976
+ },
+ {
+  "dataset": "breast_cancer",
+  "output_bits": 10,
+  "auc_float": 0.9886792452830189,
+  "auc": 0.9883647798742139,
+  "bound": 0.09265760156540805,
+  "max_error_logodds": 0.191144341313362,
+  "max_error_probability": 0.004110336939965653,
+  "mean_error_probability": 0.0002854410558851378
+ },
+ {
+  "dataset": "breast_cancer",
+  "output_bits": 12,
+  "auc_float": 0.9886792452830189,
+  "auc": 0.9885744234800838,
+  "bound": 0.02278913028191921,
+  "max_error_logodds": 0.1946377648775366,
+  "max_error_probability": 0.001779189260152192,
+  "mean_error_probability": 7.267387087478189e-05
+ },
+ {
+  "dataset": "credit_g",
+  "output_bits": 8,
+  "auc_float": 0.8107428571428571,
+  "auc": 0.8105904761904763,
+  "bound": 0.4546588495748072,
+  "max_error_logodds": 0.14007200928937236,
+  "max_error_probability": 0.028850858432370896,
+  "mean_error_probability": 0.007048452019660914
+ },
+ {
+  "dataset": "credit_g",
+  "output_bits": 10,
+  "auc_float": 0.8107428571428571,
+  "auc": 0.8106666666666665,
+  "bound": 0.10266490151689196,
+  "max_error_logodds": 0.030482337139735804,
+  "max_error_probability": 0.006562774393300719,
+  "mean_error_probability": 0.0013579537683751234
+ },
+ {
+  "dataset": "credit_g",
+  "output_bits": 12,
+  "auc_float": 0.8107428571428571,
+  "auc": 0.8104761904761905,
+  "bound": 0.025059936590737405,
+  "max_error_logodds": 0.005994173874063008,
+  "max_error_probability": 0.0014763623268915227,
+  "mean_error_probability": 0.00030321369369024347
+ }
+]

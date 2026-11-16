@@ -651,6 +651,44 @@ compiled freely for comparison. Concrete 2.11, desktop, 4 CPUs.
   but every request about twice as slow (11.8 s against 6.0 s for the retrained
   model), so it is not the default.
 
+## Output precision (`precision_bench.py`)
+
+Every SHAP value is rounded to `output_bits` and each tree can move the prediction by
+up to 1/(2s). AUC hides this, because rounding rarely reorders rows, but the probability
+a client reads can be off. CatBoost depth 4 x 30, seed 0, largest error over the test
+split against CatBoost's own score:
+
+| data | probability error at 8 / 10 / 12 bits | log-odds error at 8 / 10 / 12 bits |
+|---|---|---|
+| Adult | 0.060 / 0.012 / 0.004 | 0.31 / 0.06 / 0.02 |
+| Taiwan | 0.045 / 0.012 / 0.002 | 0.25 / 0.05 / 0.01 |
+| Bank marketing | 0.108 / 0.020 / 0.004 | 0.44 / 0.10 / 0.02 |
+| Breast cancer | 0.020 / 0.004 / 0.002 | 0.20 / 0.19 / 0.20 |
+| German credit | 0.029 / 0.007 / 0.001 | 0.14 / 0.03 / 0.01 |
+
+(Breast cancer's log-odds error stays at 0.2 because its scores reach about 10, where
+the scale is set by the largest SHAP values; in probability that is nothing.)
+
+Encrypted on Adult, 20 requests each, desktop, 4 CPUs:
+
+| output | 8 bits | 10 bits | 12 bits |
+|---|---|---|---|
+| SHAP | 5.61 s, 271 MB | 5.82 s, 271 MB | 5.67 s, 271 MB |
+| score | 5.24 s, 271 MB | 5.30 s, 271 MB | 5.90 s, 324 MB |
+
+Concrete's complexity estimate for the SHAP circuit was the same at 8 and 12 bits on
+every model we compiled (distilled depth 6 at 3 and 30 trees, CatBoost depth 4 at 30
+and 100, depth 6 at 30): its parameters follow the input comparisons, not the table
+outputs. Score and decision circuits rose by 0% to 26% and needed 20% to 45% larger
+server keys.
+
+- At 8 bits a client could read a probability 0.11 off CatBoost's. The default is now
+  12 bits: under 0.005 everywhere above, and the SHAP output costs nothing for it.
+- `output_bits=8` remains for score and decision deployments that need every
+  millisecond and can live with the error.
+- Earlier sections were measured at 8 bits; their AUC figures would barely move, their
+  error figures would shrink.
+
 ## Explanations fitted to the teacher (`align_bench.py`)
 
 The student's exact SHAP values explain the student. When it stands in for a
