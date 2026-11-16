@@ -1,6 +1,7 @@
 """Compiles a QuantizedModel into a TFHE circuit with Concrete.
 
-Per tree: D bootstraps for the comparisons, a free weighted sum for the leaf
+Per tree: D bootstraps for the comparisons (or, on a categorical level, a lookup of
+the category code's bit: the same cost), a free weighted sum for the leaf
 index, one bootstrapped lookup per SHAP player on that same index, and a free
 scatter-add (clear 0/1 matrix) into the output vector. The server never computes
 the prediction; the client gets it as base + sum(SHAP).
@@ -68,6 +69,25 @@ def score_bound(model: QuantizedModel) -> int:
     return int(sum(np.abs(tree.shap.sum(axis=1)).max() for tree in model.trees))
 
 
+def _leaf_index(codes: Any, features: IntArray, thresholds: IntArray, weights: IntArray, sets: tuple, scalar: bool) -> Any:
+    """Encrypted leaf index: one bootstrap per level, a comparison or a lookup of a category's bit.
+
+    Numeric levels stay one vectorised comparison; categorical ones are looked up apart.
+    """
+    numeric = [m for m in range(len(features)) if not sets or sets[m] is None]
+    index = 0
+    if numeric and not scalar:
+        index = np.sum((codes[features[numeric]] > thresholds[numeric]) * weights[numeric])
+    elif numeric:
+        index = sum((codes[int(features[m])] > int(thresholds[m])) * int(weights[m]) for m in numeric)
+    for m in range(len(features)):
+        if sets and sets[m] is not None:
+            values = np.asarray(sets[m], dtype=np.int64)
+            bit = fhe.univariate(lambda c, v=values: np.take(v, np.minimum(c, v.size - 1)))(codes[int(features[m])])
+            index = index + bit * int(weights[m])
+    return index
+
+
 def circuit_function(model: QuantizedModel, noise: bool = False, output: str = "shap", cut: int | None = None) -> Callable[..., Any]:
     if output not in OUTPUTS:
         raise ValueError(f"output must be one of {OUTPUTS}, not {output!r}")
@@ -86,7 +106,7 @@ def circuit_function(model: QuantizedModel, noise: bool = False, output: str = "
         tables = fhe.LookupTable([fhe.LookupTable([int(v) for v in column]) for column in tree.shap.T])
         scatter = np.zeros((tree.players.size, active.size), dtype=np.int64)
         scatter[np.arange(tree.players.size), [slot[int(p)] for p in tree.players]] = 1
-        plan.append((tree.features, tree.thresholds, weights, tables, scatter))
+        plan.append((tree.features, tree.thresholds, weights, tree.sets, tables, scatter))
 
     # Concrete cannot lower the vectorised comparison on inputs this wide; one
     # comparison at a time works, but needs larger keys on narrow inputs
@@ -94,11 +114,8 @@ def circuit_function(model: QuantizedModel, noise: bool = False, output: str = "
 
     def run(codes: Any) -> Any:
         total = None
-        for features, thresholds, weights, tables, scatter in plan:
-            if scalar:
-                index = sum((codes[int(f)] > int(t)) * int(w) for f, t, w in zip(features, thresholds, weights, strict=True))
-            else:
-                index = np.sum((codes[features] > thresholds) * weights)
+        for features, thresholds, weights, sets, tables, scatter in plan:
+            index = _leaf_index(codes, features, thresholds, weights, sets, scalar)
             fanned = index + np.zeros(scatter.shape[0], dtype=np.int64)  # one copy per player table
             contribution = tables[fanned] @ scatter
             total = contribution if total is None else total + contribution
@@ -119,16 +136,13 @@ def _score_function(model: QuantizedModel, output: str, cut: int | None) -> Call
     plan = []
     for tree in model.trees:
         weights = np.left_shift(1, np.arange(tree.features.size, dtype=np.int64))
-        plan.append((tree.features, tree.thresholds, weights, fhe.LookupTable([int(v) for v in tree.shap.sum(axis=1)])))
+        plan.append((tree.features, tree.thresholds, weights, tree.sets, fhe.LookupTable([int(v) for v in tree.shap.sum(axis=1)])))
     scalar = model.quantizer.input_bits > 11
 
     def run(codes: Any) -> Any:
         score = None
-        for features, thresholds, weights, table in plan:
-            if scalar:
-                index = sum((codes[int(f)] > int(t)) * int(w) for f, t, w in zip(features, thresholds, weights, strict=True))
-            else:
-                index = np.sum((codes[features] > thresholds) * weights)
+        for features, thresholds, weights, sets, table in plan:
+            index = _leaf_index(codes, features, thresholds, weights, sets, scalar)
             score = table[index] if score is None else score + table[index]
             score = fhe.hint(score, can_store=np.array([-bound, bound]))
         if cut is None:

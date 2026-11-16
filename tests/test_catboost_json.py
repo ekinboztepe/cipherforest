@@ -134,5 +134,5 @@ def test_rejects_what_it_cannot_serve_exactly(tmp_path: Path) -> None:
     pool = catboost.Pool([[str(i % 3), *row] for i, row in enumerate(x.tolist())], y, cat_features=[0])
     model = catboost.CatBoostClassifier(depth=3, iterations=2, verbose=0, allow_writing_files=False).fit(pool)
     model.save_model(str(tmp_path / "cat.json"), format="json")
-    with pytest.raises(ValueError, match="numeric"):
+    with pytest.raises(ValueError, match="categorical"):
         load_catboost_json((tmp_path / "cat.json").read_text())
