@@ -35,13 +35,24 @@ request, 8 vCPU EPYC 9655P, SHAP output: about 0.7 s at 3 trees, 1.9 s at 10, 5.
 Taking the explanation or the score away does not stop a client from copying the
 model; it makes copying a few times dearer (RESULTS.md, Label-only answers).
 
-## 4. Keep the safe settings
+## 4. Decide whether the splits may be public
+
+`compile_model(model, public_splits=True)` puts every split's feature and threshold into
+`client.json`; the client computes the comparisons and the server only looks up the
+leaf tables, which stay secret. On Adult (CatBoost depth 4 x 30) a request with SHAP
+took 1.2 s instead of 5.8 s, with 48 MB of keys instead of 271 MB. The client then knows
+the model's structure: with it, an exact copy took our attacker 65K to 262K queries.
+On the 3-tree models clients found every threshold in a few hundred to a few thousand
+queries anyway (not measured at 30 trees), and copying the decisions costs about the
+same either way. Consider it unless the structure itself must stay private.
+
+## 5. Keep the safe settings
 
 `compile_model` uses `cipherforest.SAFE` (p_error 2^-40 per bootstrap). Concrete's own
 default decrypts wrong about once in 300 to 3000 requests. Do not pass a configuration
 unless you mean to trade that.
 
-## 5. Budget each client
+## 6. Budget each client
 
 The server cannot see inputs or answers, but it can count requests per set of
 evaluation keys:
@@ -70,7 +81,7 @@ so it limits requests per account (tokens times budget) without learning which k
 belong to whom. This is a design, not code in this package: ARC's draft has expired
 and we know of no maintained Python implementation.
 
-## 6. Plan memory and bandwidth
+## 7. Plan memory and bandwidth
 
 - Each client uploads 215 to 396 MB of compressed keys once; the server holds them
   expanded, about 2 GB per client once it has answered them (more for the decision
@@ -90,7 +101,7 @@ and we know of no maintained Python implementation.
   logical CPU of a desktop, 7.7 s on two, 5.6 s on four and no less on six. Beyond
   that, add workers, each with its own copy of the clients' keys in memory.
 
-## 7. Retrain without new keys
+## 8. Retrain without new keys
 
 A retrained model would normally need new keys from every client. Compile it for the
 keys already deployed instead, and keep the client's secret keys between versions:
@@ -112,7 +123,7 @@ trees, or categorical features where there were none) is refused with a ValueErr
 and its clients must send new keys. Keep the shape fixed between versions to stay
 within the keys.
 
-## 8. Install in one go
+## 9. Install in one go
 
 Concrete needs numpy below 2 and, in fresh environments, setuptools. Install
 everything in one command so the resolver respects that:
@@ -138,7 +149,7 @@ with a categorical feature and missing values went through `cipherforest prepare
 `explain` and `compile`, and the HTTP example answered three encrypted requests, one
 with an unseen category and one with a missing value, each equal to `explain`.
 
-## 9. Know what is not covered
+## 10. Know what is not covered
 
 A malicious server, side channels beyond timing and access patterns, membership
 inference from SHAP values, and commercial use of Concrete without Zama's patent

@@ -25,7 +25,7 @@ from __future__ import annotations
 import base64
 import json
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
@@ -96,6 +96,23 @@ def category_bits(model: QuantizedModel | MultiClassModel) -> tuple[list[tuple[i
                 tables.append((int(tree.features[m]), table))
             where[(i, m)] = seen[key]
     return tables, where
+
+
+def with_public_splits(model: QuantizedModel | MultiClassModel) -> QuantizedModel | MultiClassModel:
+    """The same model with every numeric level written as a set (code > k), so the client
+    computes all comparison bits, as it does for categories. See compile_model."""
+    if isinstance(model, MultiClassModel):
+        return MultiClassModel(tuple(with_public_splits(m) for m in model.classes))  # type: ignore[misc]
+    edges = model.quantizer.edges
+    trees = []
+    for tree in model.trees:
+        sets = tree.sets or (None,) * tree.features.size
+        sets = tuple(
+            s if s is not None else np.arange(edges[int(f)].size + 1) > int(k)
+            for f, k, s in zip(tree.features, tree.thresholds, sets, strict=True)
+        )
+        trees.append(replace(tree, sets=sets))
+    return replace(model, trees=tuple(trees))
 
 
 def _columns(model: QuantizedModel | MultiClassModel, i: int) -> tuple[int | None, ...]:
@@ -299,6 +316,7 @@ def compile_model(
     output: str = "shap",
     cut: int | None = None,
     same_keys_as: Path | None = None,
+    public_splits: bool = False,
 ) -> CompiledModel:
     """configuration=None means SAFE; pass fhe.Configuration() for Concrete's defaults.
 
@@ -310,14 +328,22 @@ def compile_model(
     compiled for that deployment's keyset, so clients keep their keys and the server
     the evaluation keys it already holds: a retrained model needs no new key upload.
     Raises ValueError if no parameters within that keyset fit this model.
+
+    public_splits=True puts every split's feature and threshold in client.json and lets
+    the client compute the comparison bits, as it does for categories: the server then
+    only looks up the tables, which stay secret with the leaf values. Faster, but the
+    client sees the model's whole structure; RESULTS.md (Public splits) has the cost on
+    both sides.
     """
     configuration = SAFE if configuration is None else configuration
+    if public_splits:
+        model = with_public_splits(model)
     if same_keys_as is not None:
         specs = base64.b64decode(json.loads(Path(same_keys_as).read_text())["client_specs"])
         restriction = fhe.ClientSpecs.deserialize(specs).program_info.get_keyset_info().get_restriction()
         try:
             compiled = compile_model(model, inputset_size, noise_bound, configuration.fork(keyset_restriction=restriction),
-                                     output, cut)
+                                     output, cut)  # model already has public splits if asked
         except RuntimeError as error:
             raise ValueError(f"this model does not fit the keys of {same_keys_as}: {error}") from error
         # Concrete may still pick other keys (seen with 2.11), and running such a circuit with

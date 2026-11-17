@@ -157,3 +157,20 @@ def test_budget_survives_a_restart(tmp_path: Path) -> None:
     second.run(client.encrypt(x[0]), keys)
     with pytest.raises(BudgetExceeded):
         second.run(client.encrypt(x[0]), keys)
+
+
+@pytest.mark.fhe
+def test_public_splits_give_the_same_answers(tmp_path: Path) -> None:
+    rng = np.random.default_rng(7)
+    x = rng.normal(size=(300, 3))
+    model = cipherforest.distill(x, (x[:, 0] + x[:, 1] > 0).astype(int), depth=3, n_trees=2, n_bins=8, background=30)
+    compiled = compile_model(model, public_splits=True)
+    assert compiled.circuit.programmable_bootstrap_count == sum(t.players.size for t in model.trees)
+    export(compiled, model, tmp_path)
+    server = Server(tmp_path / SERVER_FILE)
+    client = Client.load(tmp_path / CLIENT_FILE)
+    keys = server.load_keys(client.evaluation_keys())
+    want_pred, want_shap = cipherforest.explain(model, x[:3])
+    for row, p, s in zip(x[:3], want_pred, want_shap, strict=True):
+        pred, shap = client.decrypt(server.run(client.encrypt(row), keys))
+        assert abs(pred - p) < 1e-9 and np.allclose(shap, s)
