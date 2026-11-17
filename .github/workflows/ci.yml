@@ -8,11 +8,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v10.3.2
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python }}
       - run: uv sync --locked
       # no concrete-python here, so the fhe tests skip themselves
       - run: uv run pytest -q
