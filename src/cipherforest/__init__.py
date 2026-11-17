@@ -23,7 +23,10 @@ _FHE = {
     "BudgetExceeded": "cipherforest.deploy",
 }
 
-__all__ = ["FeatureQuantizer", "MultiClassModel", "QuantizedModel", "model_from_json", "distill", "explain", "from_catboost", "from_ensemble", *_FHE]
+__all__ = [
+    "FeatureQuantizer", "MultiClassModel", "QuantizedModel", "model_from_json",
+    "distill", "explain", "from_catboost", "from_ensemble", *_FHE,
+]
 
 
 def __getattr__(name: str) -> Any:
