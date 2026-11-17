@@ -22,7 +22,10 @@ Client.decrypt then gives (prediction, None) or (1.0 or 0.0, None).
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
+import threading
+from collections import OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -113,6 +116,58 @@ class Server:
         if noise is not None:
             args.append(np.asarray(noise, dtype=np.int64))  # clear, no Value needed
         return self._server.run(*args, evaluation_keys=evaluation_keys).serialize()
+
+
+class KeyStore:
+    """Clients' evaluation keys on disk, only the most recently used few in memory.
+
+    A loaded keyset holds about 270 MB, and after its first request about 2 GB (CatBoost
+    depth 4 x 30), so a server cannot keep many clients loaded. add() writes the uploaded
+    bytes to directory/<id>.keys and returns the id; get() loads them when needed and
+    keeps the max_loaded most recent. A client loaded again pays the load (about 2 s)
+    and a slower first request (about 5 s more), as on its first visit. Keys on disk
+    survive a restart; with a BudgetedServer, the request counts do not.
+    """
+
+    def __init__(self, server: Server, directory: Path, max_loaded: int = 2) -> None:
+        self.server = server
+        self.directory = Path(directory)
+        self.directory.mkdir(parents=True, exist_ok=True)
+        self.max_loaded = max_loaded
+        self._loaded: OrderedDict[str, fhe.EvaluationKeys] = OrderedDict()
+        self._lock = threading.Lock()
+
+    def _path(self, key_id: str) -> Path:
+        if not key_id.isalnum():
+            raise KeyError(key_id)
+        return self.directory / f"{key_id}.keys"
+
+    def add(self, evaluation_keys: bytes) -> str:
+        key_id = hashlib.sha256(evaluation_keys).hexdigest()[:32]
+        path = self._path(key_id)
+        if not path.exists():
+            tmp = path.with_suffix(".part")
+            tmp.write_bytes(evaluation_keys)
+            tmp.replace(path)
+        return key_id
+
+    def __contains__(self, key_id: object) -> bool:
+        return isinstance(key_id, str) and key_id.isalnum() and self._path(key_id).exists()
+
+    @property
+    def loaded(self) -> list[str]:
+        return list(self._loaded)
+
+    def get(self, key_id: str) -> fhe.EvaluationKeys:
+        with self._lock:
+            if key_id in self._loaded:
+                self._loaded.move_to_end(key_id)
+                return self._loaded[key_id]
+            keys = self.server.load_keys(self._path(key_id).read_bytes())
+            self._loaded[key_id] = keys
+            while len(self._loaded) > self.max_loaded:
+                self._loaded.popitem(last=False)
+            return keys
 
 
 class BudgetExceeded(RuntimeError):

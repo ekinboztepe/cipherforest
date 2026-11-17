@@ -7,6 +7,7 @@ import pytest
 
 pytest.importorskip("concrete.fhe")
 
+import cipherforest  # noqa: E402
 from cipherforest.circuit import compile_model  # noqa: E402
 from cipherforest.deploy import (  # noqa: E402
     CLIENT_FILE,
@@ -115,3 +116,26 @@ def test_budget_counts_requests_per_set_of_keys(tmp_path: Path) -> None:
     again = server.load_keys(alice.evaluation_keys())
     with pytest.raises(BudgetExceeded):
         server.run(alice.encrypt(x[0]), again)
+
+
+@pytest.mark.fhe
+def test_key_store_keeps_few_loaded_and_survives_a_restart(tmp_path: Path) -> None:
+    from cipherforest.deploy import KeyStore
+
+    rng = np.random.default_rng(5)
+    x = rng.normal(size=(300, 3))
+    model = cipherforest.distill(x, (x[:, 0] > 0).astype(int), depth=2, n_trees=1, n_bins=4, background=30)
+    export(compile_model(model), model, tmp_path / "art")
+    server = Server(tmp_path / "art" / "server.zip")
+    store = KeyStore(server, tmp_path / "keys", max_loaded=1)
+    clients = [Client.load(tmp_path / "art" / "client.json") for _ in range(2)]
+    ids = [store.add(c.evaluation_keys()) for c in clients]
+    want, _ = cipherforest.explain(model, x[:1])
+    for client, key_id in [*zip(clients, ids), *zip(clients, ids)]:  # each evicts the other
+        got, _ = client.decrypt(server.run(client.encrypt(x[0]), store.get(key_id)))
+        assert abs(got - want[0]) < 1e-9
+        assert store.loaded == [key_id]
+    again = KeyStore(server, tmp_path / "keys")
+    assert ids[0] in again and "../etc" not in again
+    got, _ = clients[0].decrypt(server.run(clients[0].encrypt(x[0]), again.get(ids[0])))
+    assert abs(got - want[0]) < 1e-9
