@@ -15,6 +15,8 @@
 - Outputs are 12 bits by default instead of 8: the served probability of a 30-tree
   model stays within 0.005 of CatBoost's instead of up to 0.11, at no cost for the
   SHAP output. Pass `output_bits=8` for faster score and decision circuits.
+- `BudgetedServer(..., state=path)` keeps request counts across restarts, and counts
+  under a lock so concurrent requests cannot overrun a budget.
 - `KeyStore`: clients' keys on disk, only the most recently used few in memory
   (about 2 GB each once used).
 - Command line: `cipherforest prepare | explain | compile`.

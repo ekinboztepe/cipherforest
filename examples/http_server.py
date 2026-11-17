@@ -12,8 +12,7 @@ SECURITY.md recommends against copying the model by queries.
 
 This is a sketch for a trusted network. A real deployment adds TLS, client
 authentication (the budget is per set of keys, so it counts only if getting new
-keys costs the client something), limits on upload size, and request counts that
-survive a restart.
+keys costs the client something) and limits on upload size.
 """
 
 from __future__ import annotations
@@ -31,7 +30,7 @@ import cipherforest
 
 
 def serve(args: argparse.Namespace) -> None:
-    server = cipherforest.BudgetedServer(args.server_zip, budget=args.budget)
+    server = cipherforest.BudgetedServer(args.server_zip, budget=args.budget, state=args.keys / "used.json")
     keys = cipherforest.KeyStore(server, args.keys, max_loaded=args.loaded)
 
     class Handler(BaseHTTPRequestHandler):
