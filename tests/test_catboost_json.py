@@ -1,9 +1,8 @@
 """Imported CatBoost models against CatBoost itself and against the shap package."""
 
+import json
 from math import factorial
 from pathlib import Path
-
-import json
 
 import numpy as np
 import pytest
