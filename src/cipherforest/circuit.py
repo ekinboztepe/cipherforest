@@ -56,10 +56,13 @@ class CompiledModel:
     cut: int | None = None  # decision: 1 means score > cut
     classes: int = 0  # a MultiClassModel's class count; its outputs are (classes, A) or (classes,)
     category_bits: tuple[tuple[int, tuple[int, ...]], ...] = ()  # (feature, bit per code), sent by the client
+    # added to every output so it is never negative: Concrete takes an output's sign from the
+    # inputset, and a negative value of an output typed unsigned decrypts wrong
+    offset: int = 0
 
     def expand(self, outputs: IntArray) -> IntArray:
         """(n, A) circuit outputs -> (n, d), zeros for features no tree tests."""
-        outputs = np.atleast_2d(outputs)
+        outputs = np.atleast_2d(outputs) - self.offset
         full = np.zeros((outputs.shape[0], self.n_features), dtype=np.int64)
         full[:, self.active_features] = outputs
         return full
@@ -141,7 +144,18 @@ def _leaf_index(codes: Any, features: IntArray, thresholds: IntArray, weights: I
     return index
 
 
-def circuit_function(model: QuantizedModel, noise: bool = False, output: str = "shap", cut: int | None = None) -> Callable[..., Any]:
+def output_offset(model: QuantizedModel | MultiClassModel, output: str, noise_bound: int = 0) -> int:
+    """What the circuit adds to its outputs so they are never negative (0 for a decision)."""
+    if output == "decision":
+        return 0
+    models = model.classes if isinstance(model, MultiClassModel) else (model,)
+    if output == "score":
+        return max(score_bound(m) for m in models)
+    return max((1 << (m.output_bits - 1)) - 1 for m in models) + noise_bound
+
+
+def circuit_function(model: QuantizedModel, noise: bool = False, output: str = "shap", cut: int | None = None,
+                     noise_bound: int = 0) -> Callable[..., Any]:
     if output not in OUTPUTS:
         raise ValueError(f"output must be one of {OUTPUTS}, not {output!r}")
     if output != "shap" and noise:
@@ -165,7 +179,9 @@ def circuit_function(model: QuantizedModel, noise: bool = False, output: str = "
     # comparison at a time works, but needs larger keys on narrow inputs
     scalar = model.quantizer.input_bits > 11
 
-    def run(codes: Any) -> Any:
+    offset = limit + noise_bound
+
+    def summed(codes: Any) -> Any:
         total = None
         for features, thresholds, weights, sets, tables, scatter in plan:
             index = _leaf_index(codes, features, thresholds, weights, sets, scalar)
@@ -176,8 +192,11 @@ def circuit_function(model: QuantizedModel, noise: bool = False, output: str = "
                 total = fhe.hint(total, can_store=np.array([-limit, limit]))
         return total
 
+    def run(codes: Any) -> Any:
+        return fhe.hint(summed(codes) + offset, can_store=np.array([0, 2 * offset]))
+
     def noisy(codes: Any, noise: Any) -> Any:
-        return run(codes) + noise
+        return summed(codes) + noise + offset
 
     return noisy if noise else run
 
@@ -186,6 +205,12 @@ def _score_function(model: QuantizedModel, output: str, cut: int | None) -> Call
     bound = score_bound(model)
     reach = bound + abs(cut or 0) + 1  # |score - (cut + 1)|
     drop = max(0, reach.bit_length() + 1 - DECISION_BITS)
+    # decision: score > cut  <=>  score + shift >= cut + 1 + shift, a multiple of 2**drop; with
+    # shift >= bound + |cut| + 1 both sides are non-negative, so flooring to that multiple keeps
+    # the answer and the comparison needs only the top bits
+    step = 1 << drop
+    shift = reach + (-(cut or 0) - 1 - reach) % step
+    target = (cut or 0) + 1 + shift
     plan = []
     for i, tree in enumerate(model.trees):
         weights = np.left_shift(1, np.arange(tree.features.size, dtype=np.int64))
@@ -200,13 +225,13 @@ def _score_function(model: QuantizedModel, output: str, cut: int | None) -> Call
             score = table[index] if score is None else score + table[index]
             score = fhe.hint(score, can_store=np.array([-bound, bound]))
         if cut is None:
-            return score
-        # score > cut  <=>  diff >= 0. Flooring diff to a multiple of 2**k keeps its sign,
-        # so the comparison only needs the top bits: a narrow bootstrap, not a wide one.
-        diff = fhe.hint(score - (cut + 1), can_store=np.array([-reach, reach]))
+            return fhe.hint(score + bound, can_store=np.array([0, 2 * bound]))
+        shifted = fhe.hint(score + shift, can_store=np.array([0, bound + shift]))
         if drop:
-            diff = fhe.truncate_bit_pattern(diff, lsbs_to_remove=drop)
-        return diff >= 0
+            # Concrete sizes every node from the inputset, so the truncated value needs its own hint
+            shifted = fhe.hint(fhe.truncate_bit_pattern(shifted, lsbs_to_remove=drop),
+                               can_store=np.array([0, bound + shift]))
+        return shifted >= target
 
     return run
 
@@ -235,6 +260,7 @@ def _classes_function(model: MultiClassModel, output: str) -> Callable[..., Any]
         scatter[np.arange(tree.players.size), [slot[int(p)] for p in tree.players]] = 1
         plan.append((tree.features, tree.thresholds, weights, _columns(model, i), per_class, scatter))
     limits = [(1 << (m.output_bits - 1)) - 1 if output == "shap" else score_bound(m) for m in model.classes]
+    offset = max(limits)
 
     def run(codes: Any) -> Any:
         totals: list[Any] = [None] * len(model.classes)
@@ -245,9 +271,10 @@ def _classes_function(model: MultiClassModel, output: str) -> Callable[..., Any]
                 part = table[fanned] @ scatter if output == "shap" else table[index]
                 totals[k] = part if totals[k] is None else totals[k] + part
                 totals[k] = fhe.hint(totals[k], can_store=np.array([-limits[k], limits[k]]))
+        shifted = [fhe.hint(total + offset, can_store=np.array([0, 2 * offset])) for total in totals]
         if output == "score":
-            return fhe.array(totals)
-        return np.concatenate(tuple(totals))  # (classes * A,), class-major
+            return fhe.array(shifted)
+        return np.concatenate(tuple(shifted))  # (classes * A,), class-major
 
     return run
 
@@ -358,12 +385,13 @@ def compile_model(
         circuit = compiler.compile(representative_inputs(model, inputset_size), configuration)
         return CompiledModel(circuit=circuit, active_features=active_features(model.classes[0]),
                              n_features=model.quantizer.n_features, output=output, classes=len(model.classes),
-                             category_bits=_bits_spec(model))
+                             category_bits=_bits_spec(model), offset=output_offset(model, output))
     if output != "shap":
         compiler = fhe.Compiler(circuit_function(model, output=output, cut=cut), {"codes": "encrypted"})
         circuit = compiler.compile(representative_inputs(model, inputset_size), configuration)
     elif noise_bound:
-        compiler = fhe.Compiler(circuit_function(model, noise=True), {"codes": "encrypted", "noise": "clear"})
+        compiler = fhe.Compiler(circuit_function(model, noise=True, noise_bound=noise_bound),
+                                {"codes": "encrypted", "noise": "clear"})
         circuit = compiler.compile(noisy_inputs(model, noise_bound, inputset_size), configuration)
     else:
         compiler = fhe.Compiler(circuit_function(model), {"codes": "encrypted"})
@@ -376,4 +404,5 @@ def compile_model(
         output=output,
         cut=cut,
         category_bits=_bits_spec(model),
+        offset=output_offset(model, output, noise_bound),
     )
