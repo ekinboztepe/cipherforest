@@ -5,19 +5,20 @@
 
 The server holds no secret: it sees evaluation keys and ciphertexts, never an
 input or an answer. A client uploads its evaluation keys once (POST /keys, hundreds
-of MB) and gets an id, then sends one ciphertext per request (POST /run/<id>).
+of MB) and gets an id, then sends one ciphertext per request (POST /run/<id>). Keys
+are kept on disk (KeyStore) and only the most recently used few are loaded.
 BudgetedServer answers each set of keys a fixed number of times, the defence
 SECURITY.md recommends against copying the model by queries.
 
 This is a sketch for a trusted network. A real deployment adds TLS, client
 authentication (the budget is per set of keys, so it counts only if getting new
-keys costs the client something), limits on upload size, and keys kept on disk.
+keys costs the client something), limits on upload size, and request counts that
+survive a restart.
 """
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import sys
 import urllib.error
 import urllib.request
@@ -31,7 +32,7 @@ import cipherforest
 
 def serve(args: argparse.Namespace) -> None:
     server = cipherforest.BudgetedServer(args.server_zip, budget=args.budget)
-    keys: dict[str, object] = {}
+    keys = cipherforest.KeyStore(server, args.keys, max_loaded=args.loaded)
 
     class Handler(BaseHTTPRequestHandler):
         def body(self) -> bytes:
@@ -45,13 +46,10 @@ def serve(args: argparse.Namespace) -> None:
 
         def do_POST(self) -> None:  # noqa: N802
             if self.path == "/keys":
-                data = self.body()
-                key_id = hashlib.sha256(data).hexdigest()[:16]
-                keys.setdefault(key_id, server.load_keys(data))
-                self.reply(200, key_id.encode())
+                self.reply(200, keys.add(self.body()).encode())
             elif self.path.startswith("/run/") and self.path[5:] in keys:
                 try:
-                    self.reply(200, server.run(self.body(), keys[self.path[5:]]))
+                    self.reply(200, server.run(self.body(), keys.get(self.path[5:])))
                 except cipherforest.BudgetExceeded:
                     self.reply(429, b"request budget used up for these keys")
             else:
@@ -87,6 +85,8 @@ def main(argv: list[str] | None = None) -> None:
     p = commands.add_parser("serve")
     p.add_argument("server_zip", type=Path)
     p.add_argument("--budget", type=int, default=500)
+    p.add_argument("--keys", type=Path, default=Path("keys"), help="where uploaded evaluation keys are kept")
+    p.add_argument("--loaded", type=int, default=2, help="clients whose keys stay in memory (about 2 GB each)")
     p.add_argument("--host", default="127.0.0.1")
     p.add_argument("--port", type=int, default=8000)
     p.set_defaults(run=serve)
