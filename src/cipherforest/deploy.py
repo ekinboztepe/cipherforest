@@ -31,7 +31,7 @@ from concrete import fhe
 
 from cipherforest.circuit import CompiledModel
 from cipherforest.oblivious import FloatArray, IntArray
-from cipherforest.quantize import FeatureQuantizer, QuantizedModel
+from cipherforest.quantize import FeatureQuantizer, MultiClassModel, QuantizedModel
 
 SERVER_FILE = "server.zip"
 CLIENT_FILE = "client.json"
@@ -46,6 +46,9 @@ class ClientBundle:
     active_features: IntArray
     server_noise: bool = False
     output: str = "shap"
+    # multiclass: one scale and base value per class, and decrypt returns arrays
+    scales: tuple[float, ...] = ()
+    base_values: tuple[float, ...] = ()
 
     def to_json(self) -> str:
         return json.dumps(
@@ -57,6 +60,7 @@ class ClientBundle:
                 "active_features": self.active_features.tolist(),
                 "server_noise": self.server_noise,
                 "output": self.output,
+                **({"scales": list(self.scales), "base_values": list(self.base_values)} if self.scales else {}),
             }
         )
 
@@ -71,20 +75,26 @@ class ClientBundle:
             active_features=np.asarray(doc["active_features"], dtype=np.int64),
             server_noise=bool(doc.get("server_noise", False)),
             output=str(doc.get("output", "shap")),
+            scales=tuple(float(v) for v in doc.get("scales", ())),
+            base_values=tuple(float(v) for v in doc.get("base_values", ())),
         )
 
 
-def export(compiled: CompiledModel, model: QuantizedModel, directory: Path) -> None:
+def export(compiled: CompiledModel, model: QuantizedModel | MultiClassModel, directory: Path) -> None:
     directory.mkdir(parents=True, exist_ok=True)
     compiled.circuit.server.save(str(directory / SERVER_FILE))
+    multi = isinstance(model, MultiClassModel)
+    first = model.classes[0] if multi else model
     bundle = ClientBundle(
         client_specs=compiled.circuit.client.specs.serialize(),
         quantizer=model.quantizer,
-        scale=model.scale,
-        base_value=model.base_value,
+        scale=first.scale,
+        base_value=first.base_value,
         active_features=compiled.active_features,
         server_noise=compiled.noise_bound > 0,
         output=compiled.output,
+        scales=tuple(m.scale for m in model.classes) if multi else (),
+        base_values=tuple(m.base_value for m in model.classes) if multi else (),
     )
     (directory / CLIENT_FILE).write_text(bundle.to_json())
 
@@ -179,8 +189,18 @@ class Client:
             return self._client.encrypt(codes, None)[0].serialize()
         return self._client.encrypt(codes).serialize()
 
-    def decrypt(self, result: bytes) -> tuple[float, FloatArray | None]:
-        outputs = np.atleast_1d(np.asarray(self._client.decrypt(fhe.Value.deserialize(result)), dtype=np.int64))
+    def decrypt(self, result: bytes) -> tuple[float | FloatArray, FloatArray | None]:
+        """(prediction, SHAP vector); for a multiclass model (scores per class, (classes, features))."""
+        outputs = np.asarray(self._client.decrypt(fhe.Value.deserialize(result)), dtype=np.int64)
+        bundle = self._bundle
+        if bundle.scales:
+            scales, bases = np.array(bundle.scales), np.array(bundle.base_values)
+            if bundle.output == "score":
+                return bases + outputs.reshape(-1) / scales, None
+            shap = np.zeros((len(scales), bundle.quantizer.n_features))
+            shap[:, bundle.active_features] = outputs.reshape(len(scales), -1) / scales[:, None]
+            return bases + shap.sum(axis=1), shap
+        outputs = np.atleast_1d(outputs)
         if self._bundle.output == "decision":
             return float(outputs[0]), None
         if self._bundle.output == "score":

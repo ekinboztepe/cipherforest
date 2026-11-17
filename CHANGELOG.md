@@ -6,6 +6,9 @@
   splits, `max_ctr_complexity=1`) are served exactly. The client sends categories as
   they are and learns only their names.
 - Missing values: NaN routes as the model's `nan_mode` (Min or Max) says.
+- Multiclass models (`MultiClassModel`): one encrypted pass returns every class's score
+  and SHAP values, the comparisons shared across classes (about 2.2 times faster than a
+  model per class on Covertype's 7 classes). Regression models are tested too.
 - Retraining without new keys: `compile_model(..., same_keys_as=old client.json)` and
   `Client.load(..., keys=old.secret_keys())`. A model that would need other keys is
   refused instead of crashing the server.

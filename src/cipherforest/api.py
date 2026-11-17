@@ -17,10 +17,10 @@ from typing import Any
 import numpy as np
 
 from cipherforest.align import align_tables
-from cipherforest.catboost_json import load_catboost_json, probe_categories
+from cipherforest.catboost_json import load_catboost_classes, probe_categories
 from cipherforest.distill import distill_ensemble
 from cipherforest.oblivious import FloatArray, ObliviousEnsemble
-from cipherforest.quantize import OUTPUT_BITS, FeatureQuantizer, QuantizedModel, quantize_model
+from cipherforest.quantize import OUTPUT_BITS, FeatureQuantizer, MultiClassModel, QuantizedModel, quantize_model
 from cipherforest.shap_table import build_shap_table
 
 
@@ -45,9 +45,10 @@ def from_catboost(
 ) -> QuantizedModel:
     """A CatBoost model (or the text of model.save_model(..., format="json")), served as is.
 
-    Symmetric trees, one output, numeric and categorical features; NaN follows the
+    Symmetric trees, numeric and categorical features; NaN follows the
     model's nan_mode (Min or Max). The prediction is CatBoost's raw score, the
-    log-odds for a classifier. With x_train, n_bins training quantiles are added to
+    log-odds for a classifier. A multiclass model gives a MultiClassModel, one raw
+    score per class. With x_train, n_bins training quantiles are added to
     the edges, so client.json does not list only the model's own thresholds.
 
     Categorical features need the model object and x_train: the categories seen in
@@ -81,8 +82,9 @@ def from_catboost(
         numeric = np.array(x_train, dtype=object, ndmin=2)
         numeric[:, cat] = 0.0
         padding = FeatureQuantizer.fit(numeric.astype(np.float64), n_bins)
-    ensemble, quantizer = load_catboost_json(text, extra_edges=padding, categories=categories)
-    return from_ensemble(ensemble, quantizer, background, output_bits)
+    ensembles, quantizer = load_catboost_classes(text, extra_edges=padding, categories=categories)
+    models = [from_ensemble(e, quantizer, background, output_bits) for e in ensembles]
+    return models[0] if len(models) == 1 else MultiClassModel(tuple(models))
 
 
 def distill(
@@ -124,6 +126,14 @@ def distill(
     return quantize_model(ensemble, tables, quantizer, output_bits)
 
 
-def explain(model: QuantizedModel, x: FloatArray) -> tuple[FloatArray, FloatArray]:
-    """(predictions, SHAP values) in the clear, bit for bit what an encrypted run returns."""
-    return model.decode(model.simulate(model.quantizer.transform(np.array(x, dtype=object, ndmin=2))))
+def explain(model: QuantizedModel | MultiClassModel, x: object) -> tuple[FloatArray, FloatArray]:
+    """(predictions, SHAP values) in the clear, bit for bit what an encrypted run returns.
+
+    For a MultiClassModel, (n, classes) raw scores and (n, classes, features) SHAP values.
+    """
+    rows = np.array(x, dtype=object, ndmin=2)
+    if isinstance(model, MultiClassModel):
+        codes = model.quantizer.transform(rows)
+        parts = [m.decode(m.simulate(codes)) for m in model.classes]
+        return np.stack([p for p, _ in parts], axis=1), np.stack([s for _, s in parts], axis=1)
+    return model.decode(model.simulate(model.quantizer.transform(rows)))

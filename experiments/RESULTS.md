@@ -689,6 +689,29 @@ server keys.
 - Earlier sections were measured at 8 bits; their AUC figures would barely move, their
   error figures would shrink.
 
+## Multiclass models (`multiclass_bench.py`)
+
+A multiclass CatBoost model keeps one leaf value per class but shares every split, so
+`MultiClassModel` compares once per tree and looks up once per class. Covertype (7
+cover types, 54 features), 20000 rows sampled with seed 0, a quarter held out, CatBoost
+MultiClass depth 4 x 30.
+
+- Accuracy: CatBoost 0.734, the served model 0.734; the served class (argmax of the
+  class scores) was CatBoost's on 99.82% of test rows, and the largest probability error
+  after softmax 0.006.
+- Bootstraps per request with SHAP: 876, against 1596 for seven separate models.
+
+Encrypted, 10 requests, every answer equal to `explain`, desktop, 4 CPUs:
+
+| | all 7 classes in one pass | one class alone | 7 separate models (7 x one class) |
+|---|---|---|---|
+| SHAP output | 24.5 s | 7.5 s | about 53 s |
+| score output | 22.9 s | 7.5 s | about 52 s |
+
+Keys are 229 MB (SHAP) and 284 MB (score) either way. Sharing the comparisons makes
+one pass for all classes about 2.2 times faster than a model per class. The score
+output saves little here: with seven tables per tree, the lookups that remain dominate.
+
 ## Explanations fitted to the teacher (`align_bench.py`)
 
 The student's exact SHAP values explain the student. When it stands in for a
