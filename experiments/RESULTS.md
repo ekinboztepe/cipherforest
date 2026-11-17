@@ -982,6 +982,21 @@ for throughput, splitting cores between workers barely helps here. Which logical
 share a physical core is not visible from WSL, so "4 CPUs" in the desktop tables of
 this file may be as few as 2 physical cores.
 
+## Memory per client (`KeyStore`)
+
+CatBoost depth 4 x 30 on Adult, desktop, 4 CPUs. Loading a client's compressed
+evaluation keys (271 MB) took 1.5 to 1.9 s and added about 270 MB to the server's
+memory; the first request with them took 10.8 s instead of 5.6 s and added about 1.7 GB
+more, Concrete expanding the keys. So each client kept in memory costs about 2 GB, which
+also explains the slow first request in every table above.
+
+`KeyStore` keeps uploaded keys on disk and loads only the most recently used few. With
+one loaded and three clients asking in turn, twice round, every answer correct, the
+server stayed at 2.85 GB throughout (1.4 GB before any keys); each client, evicted
+since its last request, waited 2.3 to 10.5 s for its keys and 8.8 to 9.8 s for its
+answer. Without eviction the three would need about 7 GB, more than this machine's
+container had.
+
 ## Published numbers, not measured here
 
 Other work on SHAP for private tree models. Different models, threat models and

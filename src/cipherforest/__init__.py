@@ -21,6 +21,7 @@ _FHE = {
     "Server": "cipherforest.deploy",
     "BudgetedServer": "cipherforest.deploy",
     "BudgetExceeded": "cipherforest.deploy",
+    "KeyStore": "cipherforest.deploy",
 }
 
 __all__ = [
