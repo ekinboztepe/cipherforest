@@ -22,6 +22,8 @@ cipherforest = "cipherforest.cli:main"
 
 [project.urls]
 Repository = "https://github.com/ekinboztepe/cipherforest"
+Changelog = "https://github.com/ekinboztepe/cipherforest/blob/main/CHANGELOG.md"
+Results = "https://github.com/ekinboztepe/cipherforest/blob/main/experiments/RESULTS.md"
 
 [project.optional-dependencies]
 # Concrete has no Windows wheels; use docker/Dockerfile there
