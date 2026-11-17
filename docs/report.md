@@ -184,6 +184,15 @@ for the distilled student, so these ratios belong to the machine they were measu
 on. Concrete-ML keeps its smaller keys (74 MB against 216 to 279 MB) and faster key
 generation (2.5 s against 8 to 13 s).
 
+**Public splits.** Clients find the thresholds of a small model in a few hundred to a
+few thousand queries (Section 5), so keeping them secret mostly costs the server its
+comparisons. As an option, the owner can put every split's feature and threshold in
+`client.json`; the client computes the comparison bits and the server only looks up the
+tables, which stay secret. On Adult (CatBoost depth 4 x 30) a request with SHAP then took
+1.23 s instead of 5.83 s, with 48 MB of keys instead of 271 MB: about 14 times faster
+than Concrete-ML's trees of the same shape, which return no explanation and need 74 MB.
+What the client gains is the structure, which Section 5 prices.
+
 A multiclass model shares its splits across classes, so the circuit compares once per
 tree and looks up once per class. On Covertype (7 classes, depth 4 x 30) one request
 returned every class's score and SHAP values in 24.5 s, against about 53 s for seven
@@ -249,7 +258,9 @@ for a copy exact on 99% of real inputs, against 700 to 2200 for the 3-tree model
 decisions are a different matter: that attacker agrees with 99% of them after 16K to
 65K queries, and the approve/decline attacker, which needs no structure, with about
 97% after 20K. So model size raised the price of an exact copy by two orders of
-magnitude, more than any output defence did, but not the price of a useful one.
+magnitude, more than any output defence did, but not the price of a useful one. With
+public splits the client starts where that least-squares attacker started, so the
+exact copy is the 65K-to-262K-query one; the decisions cost about the same either way.
 
 What the server can still do is count: it sees every request and the evaluation key
 it came with, and a new key costs the client an upload of hundreds of MB.
