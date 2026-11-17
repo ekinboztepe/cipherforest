@@ -55,6 +55,7 @@ class CompiledModel:
     output: str = "shap"
     cut: int | None = None  # decision: 1 means score > cut
     classes: int = 0  # a MultiClassModel's class count; its outputs are (classes, A) or (classes,)
+    category_bits: tuple[tuple[int, tuple[int, ...]], ...] = ()  # (feature, bit per code), sent by the client
 
     def expand(self, outputs: IntArray) -> IntArray:
         """(n, A) circuit outputs -> (n, d), zeros for features no tree tests."""
@@ -73,22 +74,53 @@ def score_bound(model: QuantizedModel) -> int:
     return int(sum(np.abs(tree.shap.sum(axis=1)).max() for tree in model.trees))
 
 
-def _leaf_index(codes: Any, features: IntArray, thresholds: IntArray, weights: IntArray, sets: tuple, scalar: bool) -> Any:
-    """Encrypted leaf index: one bootstrap per level, a comparison or a lookup of a category's bit.
+def category_bits(model: QuantizedModel | MultiClassModel) -> tuple[list[tuple[int, IntArray]], dict[tuple[int, int], int]]:
+    """The distinct categorical splits, as (feature, bit per category code), and which tree level reads which.
 
-    Numeric levels stay one vectorised comparison; categorical ones are looked up apart.
+    The client computes these bits itself and sends them encrypted after the codes, so
+    a categorical level costs no bootstrap and a feature with thousands of categories
+    does not widen the circuit's inputs. They tell the client which categories each
+    split groups together, which it could learn anyway with one query per category.
     """
-    numeric = [m for m in range(len(features)) if not sets or sets[m] is None]
+    tables: list[tuple[int, IntArray]] = []
+    where: dict[tuple[int, int], int] = {}
+    seen: dict[tuple[int, bytes], int] = {}
+    for i, tree in enumerate(model.trees):
+        for m, s in enumerate(tree.sets):
+            if s is None:
+                continue
+            table = np.asarray(s, dtype=np.int64)
+            key = (int(tree.features[m]), table.tobytes())
+            if key not in seen:
+                seen[key] = len(tables)
+                tables.append((int(tree.features[m]), table))
+            where[(i, m)] = seen[key]
+    return tables, where
+
+
+def _columns(model: QuantizedModel | MultiClassModel, i: int) -> tuple[int | None, ...]:
+    """Per level of tree i: the input column holding its categorical bit, or None."""
+    tree = model.trees[i]
+    if not tree.sets:
+        return ()
+    _, where = category_bits(model)
+    n = model.quantizer.n_features
+    return tuple(None if s is None else n + where[(i, m)] for m, s in enumerate(tree.sets))
+
+
+def _leaf_index(codes: Any, features: IntArray, thresholds: IntArray, weights: IntArray, columns: tuple,
+                scalar: bool) -> Any:
+    """Encrypted leaf index: a comparison (one bootstrap) per numeric level, and per categorical
+    level the bit the client sent (no bootstrap). Numeric levels stay one vectorised comparison."""
+    numeric = [m for m in range(len(features)) if not columns or columns[m] is None]
     index = 0
     if numeric and not scalar:
         index = np.sum((codes[features[numeric]] > thresholds[numeric]) * weights[numeric])
     elif numeric:
         index = sum((codes[int(features[m])] > int(thresholds[m])) * int(weights[m]) for m in numeric)
     for m in range(len(features)):
-        if sets and sets[m] is not None:
-            values = np.asarray(sets[m], dtype=np.int64)
-            bit = fhe.univariate(lambda c, v=values: np.take(v, np.minimum(c, v.size - 1)))(codes[int(features[m])])
-            index = index + bit * int(weights[m])
+        if columns and columns[m] is not None:
+            index = index + codes[columns[m]] * int(weights[m])
     return index
 
 
@@ -105,12 +137,12 @@ def circuit_function(model: QuantizedModel, noise: bool = False, output: str = "
     limit = (1 << (model.output_bits - 1)) - 1
     slot = {int(f): i for i, f in enumerate(active)}
     plan = []
-    for tree in model.trees:
+    for i, tree in enumerate(model.trees):
         weights = np.left_shift(1, np.arange(tree.features.size, dtype=np.int64))
         tables = fhe.LookupTable([fhe.LookupTable([int(v) for v in column]) for column in tree.shap.T])
         scatter = np.zeros((tree.players.size, active.size), dtype=np.int64)
         scatter[np.arange(tree.players.size), [slot[int(p)] for p in tree.players]] = 1
-        plan.append((tree.features, tree.thresholds, weights, tree.sets, tables, scatter))
+        plan.append((tree.features, tree.thresholds, weights, _columns(model, i), tables, scatter))
 
     # Concrete cannot lower the vectorised comparison on inputs this wide; one
     # comparison at a time works, but needs larger keys on narrow inputs
@@ -138,9 +170,10 @@ def _score_function(model: QuantizedModel, output: str, cut: int | None) -> Call
     reach = bound + abs(cut or 0) + 1  # |score - (cut + 1)|
     drop = max(0, reach.bit_length() + 1 - DECISION_BITS)
     plan = []
-    for tree in model.trees:
+    for i, tree in enumerate(model.trees):
         weights = np.left_shift(1, np.arange(tree.features.size, dtype=np.int64))
-        plan.append((tree.features, tree.thresholds, weights, tree.sets, fhe.LookupTable([int(v) for v in tree.shap.sum(axis=1)])))
+        table = fhe.LookupTable([int(v) for v in tree.shap.sum(axis=1)])
+        plan.append((tree.features, tree.thresholds, weights, _columns(model, i), table))
     scalar = model.quantizer.input_bits > 11
 
     def run(codes: Any) -> Any:
@@ -183,7 +216,7 @@ def _classes_function(model: MultiClassModel, output: str) -> Callable[..., Any]
                 per_class.append(fhe.LookupTable([fhe.LookupTable([int(v) for v in column]) for column in shap.T]))
         scatter = np.zeros((tree.players.size, active.size), dtype=np.int64)
         scatter[np.arange(tree.players.size), [slot[int(p)] for p in tree.players]] = 1
-        plan.append((tree.features, tree.thresholds, weights, tree.sets, per_class, scatter))
+        plan.append((tree.features, tree.thresholds, weights, _columns(model, i), per_class, scatter))
     limits = [(1 << (m.output_bits - 1)) - 1 if output == "shap" else score_bound(m) for m in model.classes]
 
     def run(codes: Any) -> Any:
@@ -202,9 +235,33 @@ def _classes_function(model: MultiClassModel, output: str) -> Callable[..., Any]
     return run
 
 
+def input_upper(model: QuantizedModel | MultiClassModel) -> IntArray:
+    """Largest value of each circuit input: the codes, 0 for categorical features (their
+    bits come after), then 1 for each categorical bit."""
+    quantizer = model.quantizer
+    upper = np.array([e.size for e in quantizer.edges], dtype=np.int64)
+    tables, _ = category_bits(model)
+    for f, _table in tables:
+        upper[f] = 0
+    return np.concatenate([upper, np.ones(len(tables), dtype=np.int64)])
+
+
+def circuit_inputs(model: QuantizedModel | MultiClassModel, codes: IntArray) -> IntArray:
+    """(n, features) codes -> what the client encrypts: categorical codes replaced by their bits."""
+    codes = np.atleast_2d(codes)
+    tables, _ = category_bits(model)
+    if not tables:
+        return codes
+    bits = np.column_stack([table[codes[:, f]] for f, table in tables])
+    out = codes.copy()
+    for f, _table in tables:
+        out[:, f] = 0
+    return np.concatenate([out, bits], axis=1)
+
+
 def representative_inputs(model: QuantizedModel, n: int, seed: int = 0) -> list[IntArray]:
-    """All-min and all-max codes plus random ones, so Concrete sizes every bit width right."""
-    upper = np.array([e.size for e in model.quantizer.edges], dtype=np.int64)
+    """All-min and all-max inputs plus random ones, so Concrete sizes every bit width right."""
+    upper = input_upper(model)
     rng = np.random.default_rng(seed)
     return [np.zeros_like(upper), upper.copy()] + [rng.integers(0, upper + 1) for _ in range(n)]
 
@@ -221,9 +278,13 @@ def noisy_inputs(model: QuantizedModel, noise_bound: int, n: int, seed: int = 0)
     codes = representative_inputs(model, n, seed)
     cases = [(c, rng.integers(-noise_bound, noise_bound + 1, size=active.size)) for c in codes]
     widest = (1 << (model.output_bits - 1)) - 1 + noise_bound
-    clean = model.simulate(codes[0][None])[0, active]
+    clean = model.simulate(codes[0][None, : model.quantizer.n_features])[0, active]
     cases += [(codes[0], sign * widest - clean) for sign in (1, -1)]
     return cases
+
+
+def _bits_spec(model: QuantizedModel | MultiClassModel) -> tuple[tuple[int, tuple[int, ...]], ...]:
+    return tuple((f, tuple(int(v) for v in table)) for f, table in category_bits(model)[0])
 
 
 def _keyset(specs: fhe.ClientSpecs) -> object:
@@ -268,9 +329,10 @@ def compile_model(
         if noise_bound or cut is not None:
             raise ValueError("server noise and decisions are not implemented for multiclass models")
         compiler = fhe.Compiler(_classes_function(model, output), {"codes": "encrypted"})
-        circuit = compiler.compile(representative_inputs(model.classes[0], inputset_size), configuration)
+        circuit = compiler.compile(representative_inputs(model, inputset_size), configuration)
         return CompiledModel(circuit=circuit, active_features=active_features(model.classes[0]),
-                             n_features=model.quantizer.n_features, output=output, classes=len(model.classes))
+                             n_features=model.quantizer.n_features, output=output, classes=len(model.classes),
+                             category_bits=_bits_spec(model))
     if output != "shap":
         compiler = fhe.Compiler(circuit_function(model, output=output, cut=cut), {"codes": "encrypted"})
         circuit = compiler.compile(representative_inputs(model, inputset_size), configuration)
@@ -287,4 +349,5 @@ def compile_model(
         noise_bound=noise_bound,
         output=output,
         cut=cut,
+        category_bits=_bits_spec(model),
     )
