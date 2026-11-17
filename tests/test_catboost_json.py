@@ -1,5 +1,6 @@
 """Imported CatBoost models against CatBoost itself and against the shap package."""
 
+import json
 from math import factorial
 from pathlib import Path
 
@@ -136,3 +137,19 @@ def test_rejects_what_it_cannot_serve_exactly(tmp_path: Path) -> None:
     model.save_model(str(tmp_path / "cat.json"), format="json")
     with pytest.raises(ValueError, match="categorical"):
         load_catboost_json((tmp_path / "cat.json").read_text())
+
+
+def test_a_tree_without_splits_goes_into_the_bias() -> None:
+    doc = {
+        "features_info": {"float_features": [{"feature_index": 0, "flat_feature_index": 0, "has_nans": False,
+                                              "borders": [0.5]}]},
+        "oblivious_trees": [
+            {"splits": None, "leaf_values": [0.25]},
+            {"splits": [{"border": 0.5, "float_feature_index": 0, "split_index": 0, "split_type": "FloatFeature"}],
+             "leaf_values": [-1.0, 1.0]},
+        ],
+        "scale_and_bias": [2.0, [0.5]],
+    }
+    ensemble, _ = load_catboost_json(json.dumps(doc))
+    assert len(ensemble.trees) == 1
+    np.testing.assert_allclose(ensemble.predict(np.array([[0.0], [1.0]])), [0.5 + 0.5 - 2.0, 0.5 + 0.5 + 2.0])
