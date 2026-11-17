@@ -1,0 +1,49 @@
+{
+ "clear": {
+  "classes": 7,
+  "accuracy_catboost": 0.734,
+  "accuracy_served": 0.7342,
+  "same_class_as_catboost": 0.9982,
+  "max_probability_error": 0.005867002839396784,
+  "pbs_shared": 876,
+  "pbs_one_model_per_class": 1596
+ },
+ "encrypted": [
+  {
+   "served": "all classes",
+   "output": "shap",
+   "requests": 10,
+   "pbs_count": 876,
+   "complexity": 342084851172.0,
+   "evaluation_keys_mb": 228.87560272216797,
+   "server_run_s_median": 24.54263126799924
+  },
+  {
+   "served": "one class",
+   "output": "shap",
+   "requests": 10,
+   "pbs_count": 228,
+   "complexity": 102967824636.0,
+   "evaluation_keys_mb": 228.87560272216797,
+   "server_run_s_median": 7.5479739529992
+  },
+  {
+   "served": "all classes",
+   "output": "score",
+   "requests": 10,
+   "pbs_count": 330,
+   "complexity": 163392254250.0,
+   "evaluation_keys_mb": 284.0631103515625,
+   "server_run_s_median": 22.91884272199968
+  },
+  {
+   "served": "one class",
+   "output": "score",
+   "requests": 10,
+   "pbs_count": 150,
+   "complexity": 77440310790.0,
+   "evaluation_keys_mb": 284.0631103515625,
+   "server_run_s_median": 7.471720651000396
+  }
+ ]
+}

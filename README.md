@@ -3,7 +3,8 @@
 Encrypted inference for tree models that returns the prediction *and* its exact
 SHAP explanation. The server never sees the input, the prediction or the explanation.
 
-- **Your CatBoost model as it is.** Numeric and categorical features, missing values;
+- **Your CatBoost model as it is.** Binary, multiclass or regression; numeric and
+  categorical features, missing values;
   the encrypted model routes every input exactly as CatBoost does, and its probability
   stays within 0.005 of CatBoost's.
 - **Exact SHAP in the same request**, at most a tenth slower than the prediction alone.
