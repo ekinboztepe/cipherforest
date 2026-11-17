@@ -608,17 +608,46 @@ on every test row its score was within the output rounding bound of CatBoost's o
 German credit's three seeds spread over 0.72 to 0.82 either way; the means do not
 differ beyond that.
 
-Encrypted, Adult seed 0, 20 requests on the desktop (4 CPUs, Concrete 2.10, `SAFE`),
-every answer equal to `explain`: 5.66 s per request with ordinal codes, 6.76 s with
-categories, 19% more for 5% more bootstraps. A categorical level is a general lookup
-where a numeric one is a comparison with a constant, which Concrete does more cheaply.
-A first version that also split the numeric levels of such trees one by one took
-6.96 s.
+Encrypted, Adult seed 0, 20 requests on the desktop (4 CPUs, `SAFE`), every answer
+equal to `explain`: 5.66 s per request with ordinal codes. With categories, looking up
+each category's bit in the circuit took 6.76 s (6.96 s in a first version that also
+split the numeric levels of such trees one by one); since the client sends the bits
+itself (next section) it takes 5.35 s.
 
 - Accuracy does not move: trees find much the same splits either way on these data.
 - What changes is who can use it. A CatBoost model trained the usual way, with
   `cat_features` and missing values, is served as it is, exactly, without retraining
   on recoded data, and the client sends its categories as they are.
+
+## Many categories
+
+A categorical split's bit depends only on the category, so the client can compute it.
+In the first version the client sent the category's code and the circuit looked its bit
+up, one bootstrap per categorical level, with the code as wide as the number of
+categories. Now the client sends the bits, one encrypted 0 or 1 per distinct categorical
+split, and the circuit only adds them into the leaf index: no bootstrap, and the number
+of categories no longer sets the input width. `client.json` then holds, per split, which
+categories go which way. The client could learn that anyway, by asking once with each
+category, so hiding it protected nothing (see SECURITY.md).
+
+Synthetic data, 20000 rows: a categorical feature whose categories have random target
+rates, plus a number; CatBoost depth 4 x 30 with CTR splits. Compile estimates, then
+11 encrypted requests on the desktop (4 CPUs), one with an unseen category, every
+answer equal to `explain` and within 0.008 of CatBoost:
+
+| categories | circuit looks the bit up: complexity, server keys | client sends the bits: complexity, server keys | server run | evaluation keys sent |
+|---|---|---|---|---|
+| 10 | 7.2e10, 5.3 GB | 8.3e10, 3.8 GB | | |
+| 100 | 6.7e10, 3.5 GB | 3.8e10, 1.7 GB | | |
+| 1000 | 9.2e11, 31.6 GB | 7.9e10, 2.9 GB | 12.6 s | 546 MB |
+| 3000 | no parameters found | 8.8e10, 2.4 GB | 14.6 s | 599 MB |
+
+- A feature with thousands of categories, such as a postcode, went from impossible on
+  this machine to about 13 to 15 s per request.
+- `client.json` grows with the categories (146 KB at 1000, 405 KB at 3000).
+- The 1000- and 3000-category models are slower than Adult's (5.4 s) for about the same
+  bootstrap count; each sends about 100 to 180 extra encrypted bits, and their keys are
+  twice the size. Not investigated further.
 
 ## Retraining without new keys (`key_reuse_bench.py`)
 

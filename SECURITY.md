@@ -19,7 +19,12 @@ numbers come from [experiments/RESULTS.md](experiments/RESULTS.md).
 | Client | the decrypted output; from `client.json` the quantiser edges, the features the model uses, the scale and base value | the thresholds and tables, directly |
 
 The edges are per-feature quantiles of the training data unless the owner chose
-otherwise, so `client.json` reveals the marginal distribution of each feature.
+otherwise, so `client.json` reveals the marginal distribution of each feature. For a
+categorical feature it lists the categories seen in training and, for every split on
+it, which categories go which way, since the client computes those bits itself. That
+grouping reflects the model's target statistics per category; a client could learn it
+anyway with one query per category, so keeping it in the server would cost bootstraps
+and protect nothing.
 
 **The client learns the model from its answers.** With the edges known, a copy of
 the prediction and SHAP outputs takes about 700 to 2200 queries, and of the

@@ -34,5 +34,14 @@
   "server_run_s_median": 5.660094481500096,
   "server_run_s_max": 9.375912411999934,
   "circuit": "vectorised, categorical levels apart"
+ },
+ {
+  "dataset": "adult",
+  "kind": "categorical",
+  "requests": 20,
+  "pbs": 218,
+  "server_run_s_median": 5.3539705470002446,
+  "server_run_s_max": 11.126644162999582,
+  "circuit": "categorical bits sent by the client"
  }
 ]
