@@ -181,6 +181,11 @@ for the distilled student, so these ratios belong to the machine they were measu
 on. Concrete-ML keeps its smaller keys (74 MB against 216 to 279 MB) and faster key
 generation (2.5 s against 8 to 13 s).
 
+A multiclass model shares its splits across classes, so the circuit compares once per
+tree and looks up once per class. On Covertype (7 classes, depth 4 x 30) one request
+returned every class's score and SHAP values in 24.5 s, against about 53 s for seven
+separate models, and the served class was CatBoost's on 99.8% of test rows.
+
 The explanation itself is cheap: on Adult at 30 trees, the SHAP output took 17.1 s
 on 4 desktop cores against 13.9 s for the score alone, about a quarter more.
 
@@ -266,7 +271,7 @@ is specific to encrypted serving, where the server cannot see or rate-limit by i
 
 ## 7. Limits
 
-- Oblivious trees only, binary or regression outputs; CTRs over combinations of
+- Oblivious trees only; CTRs over combinations of
   categorical features are refused. Depth beyond 6 makes the per-leaf tables large; we
   have not split them.
 - A retrained model of the same shape keeps the clients' keys (no new upload); a
