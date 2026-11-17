@@ -44,14 +44,14 @@ def test_regression_matches_catboost() -> None:
 
 
 @pytest.mark.fhe
-@pytest.mark.parametrize("output", ["shap", "score"])
-def test_encrypted_multiclass(tmp_path, output: str) -> None:
+@pytest.mark.parametrize(("output", "public"), [("shap", False), ("score", False), ("shap", True)])
+def test_encrypted_multiclass(tmp_path, output: str, public: bool) -> None:
     pytest.importorskip("concrete")
     x, y = data(2, n=400)
     cb = catboost.CatBoostClassifier(iterations=3, depth=3, verbose=0, random_seed=0, loss_function="MultiClass",
                                      allow_writing_files=False).fit(x, y)
     model = cipherforest.from_catboost(cb, background=x[:40], x_train=x)
-    cipherforest.export(cipherforest.compile_model(model, output=output), model, tmp_path)
+    cipherforest.export(cipherforest.compile_model(model, output=output, public_splits=public), model, tmp_path)
     server = cipherforest.Server(tmp_path / "server.zip")
     client = cipherforest.Client.load(tmp_path / "client.json")
     keys = server.load_keys(client.evaluation_keys())
