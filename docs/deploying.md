@@ -47,10 +47,12 @@ The server cannot see inputs or answers, but it can count requests per set of
 evaluation keys:
 
 ```python
-server = cipherforest.BudgetedServer(Path("server.zip"), budget=1000)
+server = cipherforest.BudgetedServer(Path("server.zip"), budget=1000, state=Path("used.json"))
 keys = server.load_keys(uploaded_key_bytes)
 server.run(ciphertext, keys)   # raises BudgetExceeded past 1000 for these keys
 ```
+
+Give it a `state` file, or a restart hands every client a fresh budget.
 
 With the quantiser edges, an approve/decline copy of a 3-tree model reaches 96% to 98%
 agreement after 1000 queries and 99% after 1600 to 3600; for CatBoost depth 4 x 30 it is

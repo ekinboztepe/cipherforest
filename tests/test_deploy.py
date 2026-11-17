@@ -139,3 +139,21 @@ def test_key_store_keeps_few_loaded_and_survives_a_restart(tmp_path: Path) -> No
     assert ids[0] in again and "../etc" not in again
     got, _ = clients[0].decrypt(server.run(clients[0].encrypt(x[0]), again.get(ids[0])))
     assert abs(got - want[0]) < 1e-9
+
+
+@pytest.mark.fhe
+def test_budget_survives_a_restart(tmp_path: Path) -> None:
+    rng = np.random.default_rng(6)
+    x = rng.normal(size=(300, 3))
+    model = cipherforest.distill(x, (x[:, 0] > 0).astype(int), depth=2, n_trees=1, n_bins=4, background=30)
+    export(compile_model(model), model, tmp_path)
+    client = Client.load(tmp_path / CLIENT_FILE)
+    uploaded = client.evaluation_keys()
+    first = BudgetedServer(tmp_path / SERVER_FILE, budget=2, state=tmp_path / "used.json")
+    keys = first.load_keys(uploaded)
+    first.run(client.encrypt(x[0]), keys)
+    second = BudgetedServer(tmp_path / SERVER_FILE, budget=2, state=tmp_path / "used.json")
+    keys = second.load_keys(uploaded)
+    second.run(client.encrypt(x[0]), keys)
+    with pytest.raises(BudgetExceeded):
+        second.run(client.encrypt(x[0]), keys)
