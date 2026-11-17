@@ -18,7 +18,7 @@ from pathlib import Path
 import numpy as np
 
 from cipherforest.api import explain, from_catboost
-from cipherforest.quantize import OUTPUT_BITS, QuantizedModel
+from cipherforest.quantize import OUTPUT_BITS, MultiClassModel, QuantizedModel, model_from_json
 
 
 def _is_header(line: str) -> bool:
@@ -78,8 +78,15 @@ def load_catboost(path: Path) -> tuple[object, object]:
     return model, model
 
 
-def bootstraps(model: QuantizedModel) -> int:
-    return int(sum(t.features.size + t.players.size for t in model.trees))
+def bootstraps(model: QuantizedModel | MultiClassModel) -> int:
+    """Per request with the SHAP output: comparisons once, lookups once per class."""
+    classes = len(model.classes) if isinstance(model, MultiClassModel) else 1
+    return int(sum(t.features.size + classes * t.players.size for t in model.trees))
+
+
+def rounding_bound(model: QuantizedModel | MultiClassModel) -> float:
+    models = model.classes if isinstance(model, MultiClassModel) else (model,)
+    return max(len(m.trees) / (2 * m.scale) for m in models)
 
 
 def prepare(args: argparse.Namespace) -> None:
@@ -93,7 +100,8 @@ def prepare(args: argparse.Namespace) -> None:
 
     depths = sorted({t.features.size for t in model.trees})
     used = sorted({int(f) for t in model.trees for f in t.features})
-    print(f"{len(model.trees)} trees of depth {'/'.join(map(str, depths))}, {len(used)} of "
+    classes = f", {len(model.classes)} classes" if isinstance(model, MultiClassModel) else ""
+    print(f"{len(model.trees)} trees of depth {'/'.join(map(str, depths))}{classes}, {len(used)} of "
           f"{model.quantizer.n_features} features used, about {bootstraps(model)} bootstraps per request")
     if catboost is not None:
         sample = x_train[: min(1000, len(x_train))]
@@ -103,17 +111,22 @@ def prepare(args: argparse.Namespace) -> None:
         pool = Pool(sample.tolist(), cat_features=sorted(cat)) if cat else sample
         raw = np.asarray(catboost.predict(pool, prediction_type="RawFormulaVal"), dtype=np.float64)
         print(f"largest difference from CatBoost's raw score on {len(sample)} training rows: "
-              f"{np.abs(score - raw).max():.2g} (bound {len(model.trees) / (2 * model.scale):.2g})")
+              f"{np.abs(score - raw).max():.2g} (bound {rounding_bound(model):.2g})")
     print(f"wrote {args.out}")
 
 
 def explain_rows(args: argparse.Namespace) -> None:
-    model = QuantizedModel.from_json(args.model.read_text())
+    model = model_from_json(args.model.read_text())
     score, shap = explain(model, load_rows(args.data, categorical_columns(model)))
+    if score.ndim == 1:
+        score, shap = score[:, None], shap[:, None, :]
+    classes = score.shape[1]
+    suffix = [f"_{k}" if classes > 1 else "" for k in range(classes)]
+    header = [f"score{s}" for s in suffix] + [f"shap{s}_{i}" for s in suffix for i in range(shap.shape[2])]
     out = sys.stdout
-    out.write(",".join(["score", *(f"shap_{i}" for i in range(shap.shape[1]))]) + "\n")
+    out.write(",".join(header) + "\n")
     for s, row in zip(score, shap, strict=True):
-        out.write(",".join(f"{v:.6g}" for v in (s, *row)) + "\n")
+        out.write(",".join(f"{v:.6g}" for v in (*s, *row.ravel())) + "\n")
 
 
 def compile_files(args: argparse.Namespace) -> None:
@@ -122,7 +135,9 @@ def compile_files(args: argparse.Namespace) -> None:
         from cipherforest.deploy import export
     except ImportError as error:
         raise SystemExit(f"compile needs concrete-python (Linux or macOS): {error}") from error
-    model = QuantizedModel.from_json(args.model.read_text())
+    model = model_from_json(args.model.read_text())
+    if isinstance(model, MultiClassModel) and args.output == "decision":
+        raise SystemExit("a multiclass model has shap and score outputs only")
     cut = model.cut_for(args.threshold) if args.output == "decision" else None
     export(compile_model(model, output=args.output, cut=cut), model, args.out)
     print(f"wrote {args.out / 'server.zip'} for the server and {args.out / 'client.json'} for clients")

@@ -95,3 +95,19 @@ def test_prepare_and_explain_a_model_with_categories(tmp_path: Path, capsys) -> 
     (tmp_path / "rows.csv").write_text("van,0.5\nistanbul,\n")
     main(["explain", str(tmp_path / "model.json"), "--data", str(tmp_path / "rows.csv")])
     assert len(capsys.readouterr().out.splitlines()) == 3
+
+
+def test_explain_a_multiclass_model(tmp_path: Path, capsys) -> None:
+    rng = np.random.default_rng(4)
+    x = rng.normal(size=(300, 3))
+    y = (x[:, 0] > 0).astype(int) + (x[:, 1] > 0).astype(int)
+    cb = catboost.CatBoostClassifier(iterations=3, depth=2, verbose=0, loss_function="MultiClass",
+                                     allow_writing_files=False).fit(x, y)
+    cb.save_model(str(tmp_path / "m.cbm"))
+    np.save(tmp_path / "train.npy", x)
+    main(["prepare", str(tmp_path / "m.cbm"), "--train", str(tmp_path / "train.npy"), "--out", str(tmp_path / "m.json")])
+    assert "3 classes" in capsys.readouterr().out
+    np.save(tmp_path / "rows.npy", x[:2])
+    main(["explain", str(tmp_path / "m.json"), "--data", str(tmp_path / "rows.npy")])
+    lines = capsys.readouterr().out.splitlines()
+    assert lines[0].startswith("score_0,score_1,score_2,shap_0_0") and len(lines) == 3
