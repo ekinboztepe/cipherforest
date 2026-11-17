@@ -126,7 +126,7 @@ class KeyStore:
     bytes to directory/<id>.keys and returns the id; get() loads them when needed and
     keeps the max_loaded most recent. A client loaded again pays the load (about 2 s)
     and a slower first request (about 5 s more), as on its first visit. Keys on disk
-    survive a restart; with a BudgetedServer, the request counts do not.
+    survive a restart; so do a BudgetedServer's request counts if it has a state file.
     """
 
     def __init__(self, server: Server, directory: Path, max_loaded: int = 2) -> None:
@@ -182,30 +182,42 @@ class BudgetedServer(Server):
     Copying the model takes thousands of requests (RESULTS.md, Label-only answers),
     so a budget is the defence that remains. Keys are told apart by a SHA-256 of
     their bytes; `used` maps that fingerprint to the requests answered so far.
+
+    With `state`, the counts are kept in that JSON file and read back on start, so a
+    restart does not hand every client a fresh budget. A request is counted before it
+    runs, under a lock, so concurrent requests cannot overrun the budget.
     """
 
-    def __init__(self, path: Path, budget: int) -> None:
+    def __init__(self, path: Path, budget: int, state: Path | None = None) -> None:
         super().__init__(path)
         self.budget = budget
+        self.state = None if state is None else Path(state)
         self.used: dict[str, int] = {}
+        if self.state is not None and self.state.exists():
+            self.used = {str(k): int(v) for k, v in json.loads(self.state.read_text()).items()}
         self._fingerprint: dict[int, str] = {}
+        self._lock = threading.Lock()
 
     def load_keys(self, evaluation_keys: bytes) -> fhe.EvaluationKeys:  # type: ignore[override]
-        import hashlib
-
         keys = Server.load_keys(evaluation_keys)
         fingerprint = hashlib.sha256(evaluation_keys).hexdigest()
-        self._fingerprint[id(keys)] = fingerprint
-        self.used.setdefault(fingerprint, 0)
+        with self._lock:
+            self._fingerprint[id(keys)] = fingerprint
+            self.used.setdefault(fingerprint, 0)
         return keys
 
     def run(self, ciphertext: bytes, evaluation_keys: fhe.EvaluationKeys, noise: IntArray | None = None) -> bytes:
-        fingerprint = self._fingerprint.get(id(evaluation_keys))
-        if fingerprint is None:
-            raise KeyError("load these keys with this server's load_keys first")
-        if self.used[fingerprint] >= self.budget:
-            raise BudgetExceeded(f"these keys have used their {self.budget} requests")
-        self.used[fingerprint] += 1
+        with self._lock:
+            fingerprint = self._fingerprint.get(id(evaluation_keys))
+            if fingerprint is None:
+                raise KeyError("load these keys with this server's load_keys first")
+            if self.used[fingerprint] >= self.budget:
+                raise BudgetExceeded(f"these keys have used their {self.budget} requests")
+            self.used[fingerprint] += 1
+            if self.state is not None:
+                tmp = self.state.with_suffix(".part")
+                tmp.write_text(json.dumps(self.used))
+                tmp.replace(self.state)
         return super().run(ciphertext, evaluation_keys, noise)
 
 
