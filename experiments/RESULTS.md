@@ -1059,6 +1059,42 @@ since its last request, waited 2.3 to 10.5 s for its keys and 8.8 to 9.8 s for i
 answer. Without eviction the three would need about 7 GB, more than this machine's
 container had.
 
+## 0.3 on a rented server (`server_v3_bench.py`)
+
+cipherforest 0.3.0 installed from PyPI, nothing from the repository but this script,
+next to Concrete-ML 1.9.0 in the same environment (so both on Concrete 2.10), on a
+Runpod cpu3c pod: 8 vCPU, AMD EPYC 9655, EU-RO-1. CatBoost depth 4 x 30, seed 0, 20
+requests per job, every answer checked (ours against `explain`, Concrete-ML against its
+simulation). Our jobs ran twice: with 0.3.0, then with the fix below. Medians per
+request; where there are two figures, they are the two runs.
+
+| data | AUC CatBoost / XGB D4 / XGB D6 | public splits, SHAP | public, score | secret splits, SHAP | XGB D4 | XGB D6 |
+|---|---|---|---|---|---|---|
+| Adult | 0.921 / 0.918 / 0.919 | 0.74, 0.57 s | 0.42, 0.42 s | 2.39, 3.54 s | 6.69 s | 18.8 s |
+| Taiwan | 0.773 / 0.768 / 0.766 | 0.75, 0.56 s | 0.55, 0.56 s | 2.80, 4.15 s | 6.04 s | 18.7 s |
+| Bank | 0.928 / 0.924 / 0.932 | 0.71, 0.69 s | wrong, 0.42 s | 4.15, 2.81 s | 6.72 s | 21.1 s |
+
+Evaluation keys: 48 MB with public splits (72 MB for Taiwan's score circuit), 271 to
+273 MB with secret ones, 74 MB for Concrete-ML.
+
+- With SHAP, public splits answered in 0.56 to 0.75 s: 8 to 12 times faster than
+  Concrete-ML's trees of the same shape and 25 to 33 times faster than its depth-6
+  trees, both without an explanation.
+- Secret splits: 1.5 to 2.8 times faster than XGB depth 4 and 4.5 to 7.9 times faster
+  than depth 6. The same job varied by up to 1.5 times between the two runs on this
+  shared host, so the ranges are wide.
+- **A bug, found here.** With 0.3.0, Bank marketing's public-splits score circuit
+  decrypted its first answer to 141.0 instead of -4.43. Concrete takes every node's sign
+  and width from the inputset, and `fhe.hint` sets only the width: this inputset
+  happened to give only positive scores, so the output was typed unsigned and -499
+  came back as 2^14 - 499. Secret splits had been right only because their inputset
+  happened to include a negative score, and the decision output had the same flaw.
+  Fixed in 0.3.1: every output carries an offset that keeps it non-negative and the
+  client subtracts, the decision compares a shifted non-negative value, and a test
+  compiles a model from inputs that score only positive while others score negative.
+  The second run is with that fix; all its answers were right.
+- Cost of the session: about one hour of the pod, $0.24.
+
 ## Published numbers, not measured here
 
 Other work on SHAP for private tree models. Different models, threat models and
