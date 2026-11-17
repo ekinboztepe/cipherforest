@@ -41,7 +41,9 @@ pip install "cipherforest[catboost,fhe]"    # plus the encrypted parts, Linux or
 ```
 
 Not on PyPI yet: until then, `pip install "cipherforest[catboost] @ git+https://github.com/ekinboztepe/cipherforest"`.
-Concrete needs numpy below 2. Install everything in one command, as above; adding
+On a machine without a GPU, install CPU torch first (`pip install torch --index-url
+https://download.pytorch.org/whl/cpu`): Concrete pulls torch, and the default wheel brings
+2 GB of CUDA. Concrete needs numpy below 2. Install everything in one command, as above; adding
 CatBoost or pandas later on its own can pull numpy 2 and break the encrypted part.
 
 A CatBoost model with symmetric trees (CatBoost's default) and one output is served as

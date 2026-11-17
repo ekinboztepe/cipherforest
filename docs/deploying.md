@@ -112,6 +112,20 @@ pip install "cipherforest[fhe,catboost]"
 Adding CatBoost, pandas or similar later on its own can pull numpy 2 and break the
 encrypted part. Concrete has no Windows wheels; use `docker/Dockerfile` there.
 
+Concrete depends on torch, and pip's default torch wheel brings about 2 GB of CUDA
+libraries that the encrypted part never uses. On a server without a GPU, install the
+CPU build first:
+
+```
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install "cipherforest[fhe,catboost]"
+```
+
+Checked from a clean `python:3.11-slim` container with only the wheel: a CatBoost model
+with a categorical feature and missing values went through `cipherforest prepare`,
+`explain` and `compile`, and the HTTP example answered three encrypted requests, one
+with an unseen category and one with a missing value, each equal to `explain`.
+
 ## 9. Know what is not covered
 
 A malicious server, side channels beyond timing and access patterns, membership
