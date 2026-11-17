@@ -119,41 +119,25 @@ on the desktop), and the decision costs the same as the score.
 
 ## Numbers
 
-Random forest teacher (100 trees) distilled to 3 oblivious trees of depth 6.
-Desktop (Ryzen 5 3600, 16 GB), Concrete 2.11 in a WSL2 VM; details in [experiments/RESULTS.md](experiments/RESULTS.md).
-Measured with Concrete's default settings, which are no longer ours (see Limits): the
-current default is 2 to 3 times slower and sends smaller keys.
+CatBoost depth 4 x 30 on Adult, as the package now serves it (12-bit outputs,
+Concrete-ML's error settings), against Concrete-ML 1.9's own XGBoost on the same
+desktop: Ryzen 5 3600, both pinned to the same 4 logical CPUs, 20 requests, every
+encrypted answer checked against the clear one.
 
-|                              | Adult             | Taiwan credit default |
-|------------------------------|-------------------|-----------------------|
-| AUC teacher / encrypted model | 0.918 / 0.897    | 0.774 / 0.763         |
-| server time per request (median) | 0.69 s        | 0.61 s                |
-| client encrypt / decrypt     | 6.7 ms / 1.9 ms   | 7.0 ms / 2.0 ms       |
-| evaluation keys (sent once)  | 566 MB            | 335 MB                |
-| max error vs plaintext model | 0.005             | 0.004                 |
+| | AUC | server time per request | evaluation keys (sent once) | returns |
+|---|---|---|---|---|
+| cipherforest, secret splits | 0.921 | 5.8 s | 271 MB | prediction + exact SHAP |
+| cipherforest, public splits | 0.921 | 1.2 s | 48 MB | prediction + exact SHAP |
+| Concrete-ML XGBoost, depth 4 x 30 | 0.918 | 17.6 s | 74 MB | prediction |
+| Concrete-ML XGBoost, depth 6 x 30 | 0.919 | 50.0 s | 74 MB | prediction |
 
-Every encrypted result was checked against the plaintext integer model: bit-exact.
-
-Against Concrete-ML's own XGBoost, on one rented 8 vCPU server (EPYC 9655P) with the
-same Concrete version and settings, over five datasets and up to five seeds, at 3 to
-30 trees:
-
-- 3.4 to 4.7 times faster on the three largest datasets, 2.3 to 3 times on German credit.
-- On Breast cancer the gap closes: 1.6 times at 3 trees, and at 30 trees Concrete-ML
-  is the faster one (0.7).
-- This also returns SHAP. Concrete-ML's trees are prediction only, but its keys are
-  3 to 5 times smaller, and at 30 trees its AUC is higher than our distilled student's
-  on all five, by 0.005 to 0.057. CatBoost served directly (depth 4, 30 trees) closes
-  that: from 0.004 below to 0.013 above Concrete-ML's XGBoost, with a smaller circuit
-  than the distilled 30 trees.
-
-Timed on the desktop instead (Ryzen 5 3600, both pinned to the same 4 CPUs, one seed,
-20 requests), CatBoost at depth 4 with SHAP against Concrete-ML's XGBoost without it:
-2.9 to 3.6 times faster than trees of the same shape and 6 to 11 times faster than
-depth 6 on four datasets, 1.5 to 1.9 times on Breast cancer. At 30 trees a request
-takes 4.9 to 6.3 s, and the explanation adds 2% to 10% to the score alone.
-
-Those ratios hold for that machine only; see the tables in
+The served probability stays within 0.005 of CatBoost's. On four of five benchmark
+datasets the secret-splits model is 2.9 to 3.6 times faster than Concrete-ML's trees of
+the same shape, and 1.5 to 1.9 times on Breast cancer, where Concrete-ML's trees are
+small. An earlier comparison on a rented EPYC server, with distilled models, gave 3.4 to
+4.7 times against depth 6; ratios move with the machine. Multiclass (7 classes, all
+scores and SHAP in one request): 24.5 s. A feature with 1000 categories: 12.6 s. All
+tables, and what each number does and does not show, are in
 [experiments/RESULTS.md](experiments/RESULTS.md).
 
 ## Running
