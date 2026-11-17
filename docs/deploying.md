@@ -71,8 +71,18 @@ and we know of no maintained Python implementation.
 ## 6. Plan memory and bandwidth
 
 - Each client uploads 215 to 396 MB of compressed keys once; the server holds them
-  expanded, about 1 to 1.5 GB per client (2 to 2.7 GB for the decision output). Load
-  them once per client, not per request.
+  expanded, about 2 GB per client once it has answered them (more for the decision
+  output). Load them once per client, not per request.
+- With more clients than memory, keep keys on disk and only a few loaded:
+
+  ```python
+  store = cipherforest.KeyStore(server, Path("keys"), max_loaded=2)
+  key_id = store.add(uploaded_key_bytes)          # on upload
+  server.run(ciphertext, store.get(key_id))        # per request
+  ```
+
+  A client whose keys were evicted waits about 2 s to load them and about 4 s more on
+  that request (CatBoost depth 4 x 30).
 - A request is under 1 KB in, a few hundred bytes out.
 - One request spreads over the cores by itself: CatBoost depth 4 x 30 took 13 s on one
   logical CPU of a desktop, 7.7 s on two, 5.6 s on four and no less on six. Beyond
