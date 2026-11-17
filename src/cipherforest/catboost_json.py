@@ -125,9 +125,13 @@ def load_catboost_classes(
 
     known, cat_bits = categories or ({}, {})
     trees: list[list[ObliviousTree]] = [[] for _ in range(n_outputs)]
+    bias = np.asarray(biases, dtype=np.float64)
     for i, t in enumerate(doc["oblivious_trees"]):
-        splits = t["splits"]
+        splits = t["splits"] or []
         leaf_values = np.asarray(t["leaf_values"], dtype=np.float64)
+        if not splits:  # CatBoost may grow a tree with no split at all: a constant, part of the bias
+            bias += scale * leaf_values.reshape(n_outputs)
+            continue
         if leaf_values.size != n_outputs << len(splits):
             raise ValueError(f"tree {i} has {leaf_values.size} leaf values, expected {n_outputs << len(splits)}")
         leaf_values = leaf_values.reshape(1 << len(splits), n_outputs)  # leaf-major, one column per output
@@ -172,7 +176,7 @@ def load_catboost_classes(
     quantizer = FeatureQuantizer(
         tuple(borders), tuple(nan_high) if any(nan_high) else (), tuple(categorical) if known else ()
     )
-    return [ObliviousEnsemble(trees=trees[k], bias=float(biases[k])) for k in range(n_outputs)], quantizer
+    return [ObliviousEnsemble(trees=trees[k], bias=float(bias[k])) for k in range(n_outputs)], quantizer
 
 
 def _ctr_feature(cat_bits: CategoryBits, tree: int, level: int) -> int:
