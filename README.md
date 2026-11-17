@@ -16,7 +16,7 @@ SHAP explanation. The server never sees the input, the prediction or the explana
   request with SHAP and 48 MB of keys for the same model.
 - **Retrain without asking clients for new keys**, as long as the model keeps its shape.
 - **Measured leakage.** How fast clients can copy the model from its answers, which
-  defences help and which do not, all in [experiments/RESULTS.md](experiments/RESULTS.md).
+  defences help and which do not, all in [experiments/RESULTS.md](https://github.com/ekinboztepe/cipherforest/blob/main/experiments/RESULTS.md).
 - **No code needed** to go from a saved CatBoost model to server and client files:
   `cipherforest prepare`, `cipherforest compile`.
 
@@ -43,7 +43,6 @@ pip install "cipherforest[catboost]"        # model preparation, any OS
 pip install "cipherforest[catboost,fhe]"    # plus the encrypted parts, Linux or macOS
 ```
 
-Not on PyPI yet: until then, `pip install "cipherforest[catboost] @ git+https://github.com/ekinboztepe/cipherforest"`.
 On a machine without a GPU, install CPU torch first (`pip install torch --index-url
 https://download.pytorch.org/whl/cpu`): Concrete pulls torch, and the default wheel brings
 2 GB of CUDA. Concrete needs numpy below 2. Install everything in one command, as above; adding
@@ -82,7 +81,7 @@ model = cipherforest.distill(x_train, teacher.predict_proba(x_train)[:, 1], dept
 `x_train` adds training quantiles to the edges, so `client.json` does not list only
 the model's own thresholds. Imported SHAP values match brute-force Shapley values
 computed from CatBoost's own predictions to 1e-9, and `shap.TreeExplainer` to 1e-6
-(shap works in float32 there). A full run is in [examples/quickstart.py](examples/quickstart.py).
+(shap works in float32 there). A full run is in [examples/quickstart.py](https://github.com/ekinboztepe/cipherforest/blob/main/examples/quickstart.py).
 
 ### Command line
 
@@ -98,9 +97,9 @@ cipherforest compile model.json --out artifacts                       # Linux or
 largest difference from CatBoost's own score. `compile` takes `--output score` or
 `--output decision --threshold T` (see below).
 
-Other examples: [examples/http_server.py](examples/http_server.py) is a small HTTP
+Other examples: [examples/http_server.py](https://github.com/ekinboztepe/cipherforest/blob/main/examples/http_server.py) is a small HTTP
 server and client for encrypted requests with a request budget per set of keys, and
-[examples/distill_other_model.py](examples/distill_other_model.py) serves a
+[examples/distill_other_model.py](https://github.com/ekinboztepe/cipherforest/blob/main/examples/distill_other_model.py) serves a
 scikit-learn gradient boosting model through a distilled copy whose explanation
 tables follow the original's SHAP values.
 
@@ -138,7 +137,7 @@ small. An earlier comparison on a rented EPYC server, with distilled models, gav
 4.7 times against depth 6; ratios move with the machine. Multiclass (7 classes, all
 scores and SHAP in one request): 24.5 s. A feature with 1000 categories: 12.6 s. All
 tables, and what each number does and does not show, are in
-[experiments/RESULTS.md](experiments/RESULTS.md).
+[experiments/RESULTS.md](https://github.com/ekinboztepe/cipherforest/blob/main/experiments/RESULTS.md).
 
 ## Running
 
@@ -162,7 +161,7 @@ Concrete has no Windows wheels, hence the image.
   it, prediction and SHAP, in about 700 to 2200 queries on the benchmarks here;
   about 1000 to 2500 without SHAP outputs. The copies are exact, apart from some
   that stop early and get about 1% of inputs wrong
-  ([experiments/RESULTS.md](experiments/RESULTS.md)). None of the defences we
+  ([experiments/RESULTS.md](https://github.com/ekinboztepe/cipherforest/blob/main/experiments/RESULTS.md)). None of the defences we
   measured stops this. Noise on the outputs is averaged away by least squares.
   Hiding the edges behind server-side quantisation costs the client a few
   thousand more queries, and it recovers every edge the model uses bit for bit,
@@ -176,7 +175,7 @@ Concrete has no Windows wheels, hence the image.
 
 Treat the deployed model as extractable by its clients. An approve/decline server
 slows copying to a few thousand queries but does not stop it, and `BudgetedServer`
-caps the requests per set of evaluation keys. [docs/deploying.md](docs/deploying.md)
+caps the requests per set of evaluation keys. [docs/deploying.md](https://github.com/ekinboztepe/cipherforest/blob/main/docs/deploying.md)
 walks through choosing the output, the budget and the settings.
 
 ## Limits
@@ -220,7 +219,7 @@ one server, the comparison above), RCC-PDTE ([code](https://github.com/RasoulAM/
 BFV, one server), SortingHat (TFHE), SilentWood (BFV, client-aided, no public code)
 and MPC protocols such as Mostree and Kangaroo that need several servers.
 
-See [SECURITY.md](SECURITY.md) for the threat model, parameters and failure probability.
+See [SECURITY.md](https://github.com/ekinboztepe/cipherforest/blob/main/SECURITY.md) for the threat model, parameters and failure probability.
 
 ## Layout
 
