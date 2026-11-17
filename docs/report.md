@@ -91,8 +91,11 @@ for distillation the splits are chosen among 32 quantile edges. A missing value 
 encoded below or above every edge, as the model's nan_mode sends it. A categorical
 feature is encoded as the position of its category in the list seen in training
 (anything else gets one more code), and a categorical split, one-hot or CTR, becomes a
-table of one bit per code, read from CatBoost itself; the client learns the category
-names, not their statistics.
+table of one bit per code, read from CatBoost itself. The client computes those bits
+and sends them encrypted, so a categorical level costs no bootstrap and a feature with
+thousands of categories does not widen the inputs (1000 categories: 12.6 s per request
+instead of 31.6 GB of server keys). It thereby learns which categories each split
+groups together, which one query per category would tell it anyway.
 
 **Per tree.** D encrypted comparisons (or lookups of a category's bit), one PBS each, give the bits; their weighted sum
 is the leaf index, with no PBS. Then one PBS per feature the tree uses looks up that
