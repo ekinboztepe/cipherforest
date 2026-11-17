@@ -130,6 +130,11 @@ encrypted answer checked against the clear one.
 | Concrete-ML XGBoost, depth 4 x 30 | 0.918 | 17.6 s | 74 MB | prediction |
 | Concrete-ML XGBoost, depth 6 x 30 | 0.919 | 50.0 s | 74 MB | prediction |
 
+On a rented 8 vCPU server (EPYC 9655), with 0.3 installed from PyPI, the same model
+answered in 0.56 to 0.75 s with public splits and 2.4 to 4.2 s with secret ones, against
+6.0 to 6.7 s for Concrete-ML's depth-4 trees and 18.7 to 21.1 s for its depth-6 trees,
+on Adult, Taiwan credit default and Bank marketing.
+
 The served probability stays within 0.005 of CatBoost's. On four of five benchmark
 datasets the secret-splits model is 2.9 to 3.6 times faster than Concrete-ML's trees of
 the same shape, and 1.5 to 1.9 times on Breast cancer, where Concrete-ML's trees are
