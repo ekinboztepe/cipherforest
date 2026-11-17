@@ -52,6 +52,8 @@ class ClientBundle:
     # multiclass: one scale and base value per class, and decrypt returns arrays
     scales: tuple[float, ...] = ()
     base_values: tuple[float, ...] = ()
+    # categorical splits the client evaluates itself: (feature, bit per category code)
+    category_bits: tuple[tuple[int, tuple[int, ...]], ...] = ()
 
     def to_json(self) -> str:
         return json.dumps(
@@ -64,6 +66,7 @@ class ClientBundle:
                 "server_noise": self.server_noise,
                 "output": self.output,
                 **({"scales": list(self.scales), "base_values": list(self.base_values)} if self.scales else {}),
+                **({"category_bits": [[f, list(b)] for f, b in self.category_bits]} if self.category_bits else {}),
             }
         )
 
@@ -80,6 +83,7 @@ class ClientBundle:
             output=str(doc.get("output", "shap")),
             scales=tuple(float(v) for v in doc.get("scales", ())),
             base_values=tuple(float(v) for v in doc.get("base_values", ())),
+            category_bits=tuple((int(f), tuple(int(v) for v in b)) for f, b in doc.get("category_bits", ())),
         )
 
 
@@ -98,6 +102,7 @@ def export(compiled: CompiledModel, model: QuantizedModel | MultiClassModel, dir
         output=compiled.output,
         scales=tuple(m.scale for m in model.classes) if multi else (),
         base_values=tuple(m.base_value for m in model.classes) if multi else (),
+        category_bits=compiled.category_bits,
     )
     (directory / CLIENT_FILE).write_text(bundle.to_json())
 
@@ -252,6 +257,12 @@ class Client:
 
     def encrypt(self, x: FloatArray) -> bytes:
         codes = self._bundle.quantizer.transform(np.array(x, dtype=object, ndmin=2))[0]
+        if self._bundle.category_bits:
+            bits = [table[codes[f]] for f, table in self._bundle.category_bits]
+            codes = codes.copy()
+            for f, _table in self._bundle.category_bits:
+                codes[f] = 0
+            codes = np.concatenate([codes, np.asarray(bits, dtype=np.int64)])
         if self._bundle.server_noise:
             return self._client.encrypt(codes, None)[0].serialize()
         return self._client.encrypt(codes).serialize()

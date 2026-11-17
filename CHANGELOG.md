@@ -4,7 +4,7 @@
 
 - Categorical features: CatBoost models trained with `cat_features` (one-hot and CTR
   splits, `max_ctr_complexity=1`) are served exactly. The client sends categories as
-  they are and learns only their names.
+  they are and computes each split's bit itself (see SECURITY.md for what that reveals).
 - Missing values: NaN routes as the model's `nan_mode` (Min or Max) says.
 - Multiclass models (`MultiClassModel`): one encrypted pass returns every class's score
   and SHAP values, the comparisons shared across classes (about 2.2 times faster than a
