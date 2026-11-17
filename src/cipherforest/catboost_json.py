@@ -72,6 +72,18 @@ def load_catboost_json(
     extra_edges: FeatureQuantizer | None = None,
     categories: tuple[dict[int, tuple[str, ...]], CategoryBits] | None = None,
 ) -> tuple[ObliviousEnsemble, FeatureQuantizer]:
+    """A single-output model; see load_catboost_classes for multiclass ones."""
+    ensembles, quantizer = load_catboost_classes(text, extra_edges, categories)
+    if len(ensembles) != 1:
+        raise ValueError(f"only single-output models are supported here, this one has {len(ensembles)} outputs")
+    return ensembles[0], quantizer
+
+
+def load_catboost_classes(
+    text: str,
+    extra_edges: FeatureQuantizer | None = None,
+    categories: tuple[dict[int, tuple[str, ...]], CategoryBits] | None = None,
+) -> tuple[list[ObliviousEnsemble], FeatureQuantizer]:
     """The quantiser edges are the model's borders, merged with extra_edges if given.
 
     The JSON keeps only the borders the trees use, so without extra_edges the
@@ -109,16 +121,16 @@ def load_catboost_json(
     cat_flat = {c["feature_index"]: c["flat_feature_index"] for c in cats}
 
     scale, biases = doc["scale_and_bias"]
-    if len(biases) != 1:
-        raise ValueError(f"only single-output models are supported, this one has {len(biases)} outputs")
+    n_outputs = len(biases)
 
     known, cat_bits = categories or ({}, {})
-    trees = []
+    trees: list[list[ObliviousTree]] = [[] for _ in range(n_outputs)]
     for i, t in enumerate(doc["oblivious_trees"]):
         splits = t["splits"]
         leaf_values = np.asarray(t["leaf_values"], dtype=np.float64)
-        if leaf_values.size != 1 << len(splits):
-            raise ValueError("only single-output models are supported")
+        if leaf_values.size != n_outputs << len(splits):
+            raise ValueError(f"tree {i} has {leaf_values.size} leaf values, expected {n_outputs << len(splits)}")
+        leaf_values = leaf_values.reshape(1 << len(splits), n_outputs)  # leaf-major, one column per output
         features, thresholds, sets = [], [], []
         for m, s in enumerate(splits):
             kind = s["split_type"]
@@ -139,14 +151,15 @@ def load_catboost_json(
             features.append(f)
             thresholds.append(0.0)
             sets.append(column.astype(bool))
-        trees.append(
-            ObliviousTree(
-                features=np.array(features, dtype=np.int64),
-                thresholds=np.array(thresholds, dtype=np.float64),
-                leaf_values=scale * leaf_values,
-                sets=tuple(sets) if any(s is not None for s in sets) else (),
+        for k in range(n_outputs):
+            trees[k].append(
+                ObliviousTree(
+                    features=np.array(features, dtype=np.int64),
+                    thresholds=np.array(thresholds, dtype=np.float64),
+                    leaf_values=scale * leaf_values[:, k],
+                    sets=tuple(sets) if any(s is not None for s in sets) else (),
+                )
             )
-        )
 
     if extra_edges is not None:
         if extra_edges.n_features != n_features:
@@ -159,7 +172,7 @@ def load_catboost_json(
     quantizer = FeatureQuantizer(
         tuple(borders), tuple(nan_high) if any(nan_high) else (), tuple(categorical) if known else ()
     )
-    return ObliviousEnsemble(trees=trees, bias=float(biases[0])), quantizer
+    return [ObliviousEnsemble(trees=trees[k], bias=float(biases[k])) for k in range(n_outputs)], quantizer
 
 
 def _ctr_feature(cat_bits: CategoryBits, tree: int, level: int) -> int:

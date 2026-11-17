@@ -199,6 +199,45 @@ class QuantizedModel:
         )
 
 
+@dataclass(frozen=True)
+class MultiClassModel:
+    """One QuantizedModel per class, all on the same quantiser and the same splits.
+
+    A multiclass CatBoost model shares every split across classes and keeps one leaf
+    value per class, so the circuit compares once per tree and looks up once per
+    class. Each class has its own scale and base value; its score is that class's raw
+    score (softmax them for probabilities) and its SHAP values explain it.
+    """
+
+    classes: tuple[QuantizedModel, ...]
+
+    def __post_init__(self) -> None:
+        first = self.classes[0]
+        for other in self.classes[1:]:
+            for a, b in zip(first.trees, other.trees, strict=True):
+                if not (np.array_equal(a.features, b.features) and np.array_equal(a.thresholds, b.thresholds)
+                        and len(a.sets) == len(b.sets)):
+                    raise ValueError("every class must share the same splits")
+
+    @property
+    def quantizer(self) -> FeatureQuantizer:
+        return self.classes[0].quantizer
+
+    @property
+    def trees(self) -> tuple[QuantizedTree, ...]:
+        return self.classes[0].trees
+
+    def to_json(self) -> str:
+        return json.dumps({"classes": [json.loads(m.to_json()) for m in self.classes]})
+
+
+def model_from_json(text: str) -> QuantizedModel | MultiClassModel:
+    doc = json.loads(text)
+    if "classes" in doc:
+        return MultiClassModel(tuple(QuantizedModel.from_json(json.dumps(m)) for m in doc["classes"]))
+    return QuantizedModel.from_json(text)
+
+
 def to_grid(model: QuantizedModel, low: FloatArray, high: FloatArray, bits: int) -> QuantizedModel:
     """The same model on a public grid of 2**bits even cells per feature, edges hidden.
 

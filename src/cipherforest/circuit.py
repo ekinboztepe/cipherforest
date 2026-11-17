@@ -33,7 +33,7 @@ import numpy as np
 from concrete import fhe
 
 from cipherforest.oblivious import IntArray
-from cipherforest.quantize import QuantizedModel
+from cipherforest.quantize import MultiClassModel, QuantizedModel
 
 
 # Concrete's own default allows about 1e-5 error per lookup, so with a few hundred
@@ -54,6 +54,7 @@ class CompiledModel:
     noise_bound: int = 0  # the clear noise argument, if any, lies in [-bound, bound]
     output: str = "shap"
     cut: int | None = None  # decision: 1 means score > cut
+    classes: int = 0  # a MultiClassModel's class count; its outputs are (classes, A) or (classes,)
 
     def expand(self, outputs: IntArray) -> IntArray:
         """(n, A) circuit outputs -> (n, d), zeros for features no tree tests."""
@@ -160,6 +161,47 @@ def _score_function(model: QuantizedModel, output: str, cut: int | None) -> Call
     return run
 
 
+def _classes_function(model: MultiClassModel, output: str) -> Callable[..., Any]:
+    """Every class from one pass: each tree's leaf index once, then one lookup per class.
+
+    The comparisons, the costly part, are shared; only the table lookups repeat per class.
+    """
+    if output not in ("shap", "score"):
+        raise ValueError("a multiclass model has shap and score outputs only")
+    active = active_features(model.classes[0])
+    slot = {int(f): i for i, f in enumerate(active)}
+    scalar = model.quantizer.input_bits > 11
+    plan = []
+    for i, tree in enumerate(model.trees):
+        weights = np.left_shift(1, np.arange(tree.features.size, dtype=np.int64))
+        per_class = []
+        for m in model.classes:
+            shap = m.trees[i].shap
+            if output == "score":
+                per_class.append(fhe.LookupTable([int(v) for v in shap.sum(axis=1)]))
+            else:
+                per_class.append(fhe.LookupTable([fhe.LookupTable([int(v) for v in column]) for column in shap.T]))
+        scatter = np.zeros((tree.players.size, active.size), dtype=np.int64)
+        scatter[np.arange(tree.players.size), [slot[int(p)] for p in tree.players]] = 1
+        plan.append((tree.features, tree.thresholds, weights, tree.sets, per_class, scatter))
+    limits = [(1 << (m.output_bits - 1)) - 1 if output == "shap" else score_bound(m) for m in model.classes]
+
+    def run(codes: Any) -> Any:
+        totals: list[Any] = [None] * len(model.classes)
+        for features, thresholds, weights, sets, per_class, scatter in plan:
+            index = _leaf_index(codes, features, thresholds, weights, sets, scalar)
+            fanned = index + np.zeros(scatter.shape[0], dtype=np.int64) if output == "shap" else index
+            for k, table in enumerate(per_class):
+                part = table[fanned] @ scatter if output == "shap" else table[index]
+                totals[k] = part if totals[k] is None else totals[k] + part
+                totals[k] = fhe.hint(totals[k], can_store=np.array([-limits[k], limits[k]]))
+        if output == "score":
+            return fhe.array(totals)
+        return np.concatenate(tuple(totals))  # (classes * A,), class-major
+
+    return run
+
+
 def representative_inputs(model: QuantizedModel, n: int, seed: int = 0) -> list[IntArray]:
     """All-min and all-max codes plus random ones, so Concrete sizes every bit width right."""
     upper = np.array([e.size for e in model.quantizer.edges], dtype=np.int64)
@@ -189,7 +231,7 @@ def _keyset(specs: fhe.ClientSpecs) -> object:
 
 
 def compile_model(
-    model: QuantizedModel,
+    model: QuantizedModel | MultiClassModel,
     inputset_size: int = 64,
     noise_bound: int = 0,
     configuration: fhe.Configuration | None = None,
@@ -200,7 +242,8 @@ def compile_model(
     """configuration=None means SAFE; pass fhe.Configuration() for Concrete's defaults.
 
     output is "shap" (prediction and explanation), "score" (prediction only) or
-    "decision" (one bit: score > cut; see QuantizedModel.cut_for).
+    "decision" (one bit: score > cut; see QuantizedModel.cut_for). A MultiClassModel
+    takes "shap" or "score" and returns every class from one pass.
 
     same_keys_as is the client.json of an earlier deployment. The circuit is then
     compiled for that deployment's keyset, so clients keep their keys and the server
@@ -221,6 +264,13 @@ def compile_model(
         if _keyset(compiled.circuit.client.specs) != json.loads(restriction.to_json()):
             raise ValueError(f"this model needs other keys than {same_keys_as}; clients must send new ones")
         return compiled
+    if isinstance(model, MultiClassModel):
+        if noise_bound or cut is not None:
+            raise ValueError("server noise and decisions are not implemented for multiclass models")
+        compiler = fhe.Compiler(_classes_function(model, output), {"codes": "encrypted"})
+        circuit = compiler.compile(representative_inputs(model.classes[0], inputset_size), configuration)
+        return CompiledModel(circuit=circuit, active_features=active_features(model.classes[0]),
+                             n_features=model.quantizer.n_features, output=output, classes=len(model.classes))
     if output != "shap":
         compiler = fhe.Compiler(circuit_function(model, output=output, cut=cut), {"codes": "encrypted"})
         circuit = compiler.compile(representative_inputs(model, inputset_size), configuration)

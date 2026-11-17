@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import Any
 
 from cipherforest.api import distill, explain, from_catboost, from_ensemble
-from cipherforest.quantize import FeatureQuantizer, QuantizedModel
+from cipherforest.quantize import FeatureQuantizer, MultiClassModel, QuantizedModel, model_from_json
 
 __version__ = "0.3.0"
 
@@ -23,7 +23,7 @@ _FHE = {
     "BudgetExceeded": "cipherforest.deploy",
 }
 
-__all__ = ["FeatureQuantizer", "QuantizedModel", "distill", "explain", "from_catboost", "from_ensemble", *_FHE]
+__all__ = ["FeatureQuantizer", "MultiClassModel", "QuantizedModel", "model_from_json", "distill", "explain", "from_catboost", "from_ensemble", *_FHE]
 
 
 def __getattr__(name: str) -> Any:
