@@ -54,6 +54,7 @@ class ClientBundle:
     base_values: tuple[float, ...] = ()
     # categorical splits the client evaluates itself: (feature, bit per category code)
     category_bits: tuple[tuple[int, tuple[int, ...]], ...] = ()
+    offset: int = 0  # subtracted from every decrypted output (CompiledModel.offset)
 
     def to_json(self) -> str:
         return json.dumps(
@@ -67,6 +68,7 @@ class ClientBundle:
                 "output": self.output,
                 **({"scales": list(self.scales), "base_values": list(self.base_values)} if self.scales else {}),
                 **({"category_bits": [[f, list(b)] for f, b in self.category_bits]} if self.category_bits else {}),
+                **({"offset": self.offset} if self.offset else {}),
             }
         )
 
@@ -84,6 +86,7 @@ class ClientBundle:
             scales=tuple(float(v) for v in doc.get("scales", ())),
             base_values=tuple(float(v) for v in doc.get("base_values", ())),
             category_bits=tuple((int(f), tuple(int(v) for v in b)) for f, b in doc.get("category_bits", ())),
+            offset=int(doc.get("offset", 0)),
         )
 
 
@@ -103,6 +106,7 @@ def export(compiled: CompiledModel, model: QuantizedModel | MultiClassModel, dir
         scales=tuple(m.scale for m in model.classes) if multi else (),
         base_values=tuple(m.base_value for m in model.classes) if multi else (),
         category_bits=compiled.category_bits,
+        offset=compiled.offset,
     )
     (directory / CLIENT_FILE).write_text(bundle.to_json())
 
@@ -271,6 +275,7 @@ class Client:
         """(prediction, SHAP vector); for a multiclass model (scores per class, (classes, features))."""
         outputs = np.asarray(self._client.decrypt(fhe.Value.deserialize(result)), dtype=np.int64)
         bundle = self._bundle
+        outputs = outputs - bundle.offset
         if bundle.scales:
             scales, bases = np.array(bundle.scales), np.array(bundle.base_values)
             if bundle.output == "score":

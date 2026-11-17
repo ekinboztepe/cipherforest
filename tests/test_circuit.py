@@ -114,7 +114,7 @@ def test_score_and_decision_circuits_match_reference(output: str) -> None:
     compiled = compile_model(model, output=output, cut=cut)
     want = score if cut is None else (score > cut).astype(np.int64)
     for row, w in zip(codes, want, strict=True):
-        assert int(compiled.circuit.simulate(row)) == w
+        assert int(compiled.circuit.simulate(row)) - compiled.offset == w
 
 
 def test_score_is_the_sum_of_shap_and_the_cut_matches_the_float_threshold() -> None:
@@ -134,7 +134,7 @@ def test_encrypted_decision() -> None:
     compiled = compile_model(model, output="decision", cut=cut)
     compiled.circuit.keygen()
     for row, w in zip(codes, model.score(codes) > cut, strict=True):
-        assert int(compiled.circuit.encrypt_run_decrypt(row)) == int(w)
+        assert int(compiled.circuit.encrypt_run_decrypt(row)) - compiled.offset == int(w)
 
 
 def test_outputs_are_sized_for_every_input_not_just_the_inputset() -> None:
@@ -143,3 +143,31 @@ def test_outputs_are_sized_for_every_input_not_just_the_inputset() -> None:
     limit = (1 << (model.output_bits - 1)) - 1
     widths = [n.output.dtype.bit_width for n in compiled.circuit.graph.ordered_outputs()]
     assert min(widths) >= limit.bit_length() + 1  # signed
+
+
+@pytest.mark.parametrize("output", ["shap", "score", "decision"])
+@pytest.mark.parametrize("public", [False, True])
+def test_negative_outputs_the_inputset_never_shows(output: str, public: bool) -> None:
+    # all-low and all-high inputs score +2, mixed ones -2: an inputset of the extremes only
+    # once made Concrete type the output unsigned, and -2 decrypted as 2**k - 2
+    from cipherforest.api import from_ensemble
+    from cipherforest.oblivious import ObliviousEnsemble, ObliviousTree
+    from cipherforest.quantize import FeatureQuantizer
+
+    trees = [ObliviousTree(np.array([0]), np.array([0.0]), np.array([3.0, -1.0])),
+             ObliviousTree(np.array([1]), np.array([0.0]), np.array([-1.0, 3.0]))]
+    quantizer = FeatureQuantizer((np.array([0.0]), np.array([0.0])))
+    model = from_ensemble(ObliviousEnsemble(trees), quantizer, np.array([[-1.0, -1.0], [1.0, 1.0]]))
+    codes = np.array([[0, 0], [1, 1], [1, 0], [0, 1]])
+    cut = model.cut_for(model.base_value) if output == "decision" else None
+    compiled = compile_model(model, inputset_size=0, output=output, cut=cut, public_splits=public)
+    from cipherforest.circuit import circuit_inputs, with_public_splits
+
+    inputs = circuit_inputs(with_public_splits(model) if public else model, codes)
+    got = [np.asarray(compiled.circuit.simulate(row)) for row in inputs]
+    if output == "shap":
+        np.testing.assert_array_equal(compiled.expand(np.array(got)), model.simulate(codes))
+    elif output == "score":
+        np.testing.assert_array_equal(np.array(got).ravel() - compiled.offset, model.score(codes))
+    else:
+        np.testing.assert_array_equal(np.array(got).ravel(), model.score(codes) > cut)
