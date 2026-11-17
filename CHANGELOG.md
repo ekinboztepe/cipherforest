@@ -17,6 +17,12 @@
   SHAP output. Pass `output_bits=8` for faster score and decision circuits.
 - `BudgetedServer(..., state=path)` keeps request counts across restarts, and counts
   under a lock so concurrent requests cannot overrun a budget.
+- `compile_model(..., public_splits=True)`: the client computes the comparison bits from
+  thresholds in client.json, the server only looks up the secret tables; 4.7 times faster
+  with SHAP and 5.6 times smaller keys on Adult (30 trees), at the price of revealing the
+  structure.
+- Categorical split bits are computed by the client: 1000 categories went from 31.6 GB of
+  server keys to 2.9 GB and 12.6 s per request.
 - `KeyStore`: clients' keys on disk, only the most recently used few in memory
   (about 2 GB each once used).
 - Command line: `cipherforest prepare | explain | compile`.

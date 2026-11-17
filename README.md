@@ -11,6 +11,9 @@ SHAP explanation. The server never sees the input, the prediction or the explana
 - **One server, no trusted hardware, no second party.** About 5 to 6 s per request for
   30 trees of depth 4 on 4 desktop cores; 2.9 to 3.6 times faster than Concrete-ML's own
   trees of the same shape, which return no explanation, on four of our five benchmarks.
+- **A faster mode if the splits may be public**: `public_splits=True` keeps the leaf
+  values and SHAP tables secret and lets the client compute the comparisons; 1.2 s per
+  request with SHAP and 48 MB of keys for the same model.
 - **Retrain without asking clients for new keys**, as long as the model keeps its shape.
 - **Measured leakage.** How fast clients can copy the model from its answers, which
   defences help and which do not, all in [experiments/RESULTS.md](experiments/RESULTS.md).

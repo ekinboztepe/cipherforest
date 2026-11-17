@@ -649,6 +649,39 @@ answer equal to `explain` and within 0.008 of CatBoost:
   bootstrap count; each sends about 100 to 180 extra encrypted bits, and their keys are
   twice the size. Not investigated further.
 
+## Public splits
+
+The extraction results say a client finds every threshold of the 3-tree models in a few
+hundred to a few thousand queries, bit for bit, even with the edges hidden (not checked
+at 30 trees). So keeping the splits secret mostly costs the server comparisons. `compile_model(..., public_splits=True)` writes each
+split's feature and threshold into `client.json` and lets the client compute the
+comparison bits, as for categories; the server only looks up the SHAP tables, which stay
+secret with the leaf values.
+
+CatBoost depth 4 x 30 on Adult, seed 0, 20 requests, desktop (4 CPUs), 12-bit outputs,
+every answer equal to `explain`. The client sends 80 encrypted bits, one per distinct
+split:
+
+| output | splits | bootstraps | server run | first request | evaluation keys |
+|---|---|---|---|---|---|
+| SHAP | secret | 208 | 5.83 s | 10.1 s | 271 MB |
+| SHAP | public | 88 | 1.23 s | 1.96 s | 48 MB |
+| score | secret | 150 | 6.12 s | 10.5 s | 324 MB |
+| score | public | 30 | 0.90 s | 1.70 s | 48 MB |
+
+What it gives away: the model's structure, which is what the least-squares attacker of
+"Copying the CatBoost model" was handed for free. With it, that attacker needed 65K to
+262K queries for an exact copy and 16K to 65K for a copy agreeing with 99% of the
+decisions; without it, the approve/decline attacker reached about 97% of decisions in
+20K. So public splits make an exact copy reachable at that cost, and change little for
+a copy of the decisions, which was the cheap one already.
+
+- With the SHAP output, public splits are 4.7 times faster than secret ones and their
+  keys 5.6 times smaller; the score output 6.8 times faster.
+- Against Concrete-ML's own trees of the same shape on the same machine (17.6 s, 74 MB
+  keys, no explanation), that is 14 times faster with SHAP, with smaller keys.
+- Not the default: it is the owner's call whether the structure may be seen.
+
 ## Retraining without new keys (`key_reuse_bench.py`)
 
 A client uploads 215 to 280 MB of evaluation keys, and a model retrained every month

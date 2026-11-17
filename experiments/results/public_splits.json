@@ -1,0 +1,50 @@
+[
+ {
+  "dataset": "adult",
+  "output": "shap",
+  "splits": "secret",
+  "requests": 20,
+  "pbs_count": 208,
+  "complexity": 70503838604.0,
+  "evaluation_keys_mb": 270.72,
+  "client_bits": 0,
+  "server_run_s_median": 5.834,
+  "first_s": 10.107
+ },
+ {
+  "dataset": "adult",
+  "output": "shap",
+  "splits": "public",
+  "requests": 20,
+  "pbs_count": 88,
+  "complexity": 12508378872.0,
+  "evaluation_keys_mb": 48.27,
+  "client_bits": 80,
+  "server_run_s_median": 1.233,
+  "first_s": 1.959
+ },
+ {
+  "dataset": "adult",
+  "output": "score",
+  "splits": "secret",
+  "requests": 20,
+  "pbs_count": 150,
+  "complexity": 53434848462.0,
+  "evaluation_keys_mb": 324.03,
+  "client_bits": 0,
+  "server_run_s_median": 6.121,
+  "first_s": 10.544
+ },
+ {
+  "dataset": "adult",
+  "output": "score",
+  "splits": "public",
+  "requests": 20,
+  "pbs_count": 30,
+  "complexity": 4264220070.0,
+  "evaluation_keys_mb": 48.27,
+  "client_bits": 80,
+  "server_run_s_median": 0.905,
+  "first_s": 1.703
+ }
+]
