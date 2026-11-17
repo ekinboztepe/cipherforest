@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.1
+
+- Fix: a score, SHAP or decision output could decrypt wrong when the values seen while
+  compiling were never negative. Concrete takes each output's sign from those values,
+  so a negative answer came back as 2**k minus it (seen on Bank marketing with public
+  splits and the score output). Every output now carries an offset that keeps it
+  non-negative; the client subtracts it. Recompile and re-export models compiled with
+  0.3.0; client.json files without an offset still decode as before.
+- Measured 0.3 from PyPI on a rented 8 vCPU server against Concrete-ML
+  (experiments/RESULTS.md, "0.3 on a rented server").
+
 ## 0.3.0
 
 - Categorical features: CatBoost models trained with `cat_features` (one-hot and CTR
