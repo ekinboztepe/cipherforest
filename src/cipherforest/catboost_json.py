@@ -12,8 +12,8 @@ above, and the quantiser encodes them the same way.
 A categorical split, one-hot or CTR, is a function of one feature's category, so
 it becomes a set: the bit of every known category, plus one for any unseen
 category. The bits are read from CatBoost itself (probe_categories), which saves
-re-implementing its hashing and counters, and the client only learns the list of
-categories, not their statistics. CTRs over combinations of features are rejected
+re-implementing its hashing and counters. The client computes the bits itself
+(circuit.category_bits). CTRs over combinations of features are rejected
 (train with max_ctr_complexity=1).
 
 CatBoost compares inputs as float32 against float32 borders. Inputs that are exact

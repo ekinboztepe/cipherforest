@@ -592,8 +592,8 @@ category into its alphabetical position and fills missing numbers with the media
 `from_catboost` now also takes models trained with `cat_features`: a one-hot or CTR
 split reads one feature's category, so it becomes a set (the bit of each category
 seen in training, plus one for anything unseen). The bits are read from CatBoost's
-own `calc_leaf_indexes`, not re-derived from its hashing and counters, and the client
-only learns the list of categories. Missing numbers stay NaN and follow `nan_mode`.
+own `calc_leaf_indexes`, not re-derived from its hashing and counters (what the client
+learns about them: Many categories, below). Missing numbers stay NaN and follow `nan_mode`.
 CTRs over combinations of features are rejected (`max_ctr_complexity=1`).
 
 CatBoost depth 4 x 30 trees, both ways, seeds 0 to 2. AUC of the served integer model;
