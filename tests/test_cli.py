@@ -57,7 +57,7 @@ def test_compile_writes_files_a_client_can_use(files, tmp_path: Path) -> None:
     model, train, x, _ = files
     out = tmp_path / "model.json"
     main(["prepare", str(model), "--train", str(train), "--out", str(out)])
-    main(["compile", str(out), "--out", str(tmp_path / "artifacts"), "--output", "score"])
+    main(["compile", str(out), "--out", str(tmp_path / "artifacts"), "--output", "score", "--public-splits"])
     server = cipherforest.Server(tmp_path / "artifacts" / "server.zip")
     client = cipherforest.Client.load(tmp_path / "artifacts" / "client.json")
     keys = server.load_keys(client.evaluation_keys())

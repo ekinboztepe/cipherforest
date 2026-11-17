@@ -139,7 +139,7 @@ def compile_files(args: argparse.Namespace) -> None:
     if isinstance(model, MultiClassModel) and args.output == "decision":
         raise SystemExit("a multiclass model has shap and score outputs only")
     cut = model.cut_for(args.threshold) if args.output == "decision" else None
-    export(compile_model(model, output=args.output, cut=cut), model, args.out)
+    export(compile_model(model, output=args.output, cut=cut, public_splits=args.public_splits), model, args.out)
     print(f"wrote {args.out / 'server.zip'} for the server and {args.out / 'client.json'} for clients")
 
 
@@ -169,6 +169,8 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--output", choices=("shap", "score", "decision"), default="shap")
     p.add_argument("--threshold", type=float, default=0.0,
                    help="decision only: approve when the raw score (log-odds for a classifier) is above this")
+    p.add_argument("--public-splits", action="store_true",
+                   help="put the thresholds in client.json and let clients compare: faster, reveals the structure")
     p.set_defaults(run=compile_files)
 
     args = parser.parse_args(argv)
