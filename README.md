@@ -1,3 +1,5 @@
+<a href="https://github.com/ekinboztepe"><img src=".github/sigil.svg" width="72" align="right" alt="cipherforest sigil, 0x3C7EE7E77E3C183C"></a>
+
 # cipherforest
 
 Encrypted inference for tree models that returns the prediction *and* its exact

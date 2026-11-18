@@ -1,0 +1,17 @@
+{
+  "name": "cipherforest",
+  "hex": "0x3C7EE7E77E3C183C",
+  "rows": [
+    "..####..",
+    ".######.",
+    "###..###",
+    "###..###",
+    ".######.",
+    "..####..",
+    "...##...",
+    "..####.."
+  ],
+  "color": "#3fb950",
+  "style": "led",
+  "tagline": "Encrypted tree-model inference that returns the prediction and its exact SHAP explanation."
+}
